@@ -5,7 +5,7 @@ Showcase canônico (keynote interativo) do **Icons.ai · Discovery Health** — 
 Segue a skill global `/showcase`: scroll-snap horizontal, chrome canônico (logo `icons.ai`, dock Sair·BR·PT·EN·«Aa»·áudio, setas juntas inf-esq, numeração inf-dir, marca centro-footer, progress-bar topo), tema dark, zero dependências de UI, zero backend em runtime.
 
 - **Stack:** Next.js 15 + React 19 + TypeScript strict, `output: 'standalone'`
-- **basePath:** `/discoveryHealthShowcase` (rota final `icon.iconsai.ai/discoveryHealthShowcase`)
+- **basePath:** `/discoveryHealth` (rota final `iconsai.ai/discoveryHealth`)
 - **Porta dev:** `3103`
 - **Accent:** `#10b981` (emerald)
 
@@ -14,7 +14,7 @@ Segue a skill global `/showcase`: scroll-snap horizontal, chrome canônico (logo
 ```bash
 npm install
 npm run dev
-# http://localhost:3103/discoveryHealthShowcase
+# http://localhost:3103/discoveryHealth
 ```
 
 ## Deploy
@@ -25,8 +25,8 @@ npm run dev
 
 Pipeline 8-fases anti-deploy-fantasma: stamp `BUILD_ID` → `next build` → rsync `.next/standalone` + `.next/static` + `public/` com `--delete` → systemd restart → valida HTTP 200 + `build-info.txt`.
 
-- systemd unit `iconsai-discovery-health-showcase`
-- Caddy `icon.iconsai.ai/discoveryHealthShowcase/*` → `127.0.0.1:3103/discoveryHealthShowcase/*`
+- Server apex `192.81.212.31` (domínio `iconsai.ai`), systemd unit `iconsai-bg-health` (porta 3103)
+- Caddy `iconsai.ai/discoveryHealth/*` → `127.0.0.1:3103/discoveryHealth/*`
 
 ## Slides
 
