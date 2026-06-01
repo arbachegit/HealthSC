@@ -83,7 +83,7 @@ function SlideFrame({ children }: { children: ReactNode }) {
       band.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
     const natural = content.offsetHeight // altura de layout — imune ao transform
     if (natural <= 0 || available <= 0) return
-    const target = available * 0.9
+    const target = available * 0.95
     const next = natural > target ? Math.max(0.15, target / natural) : 1
     if (Math.abs(next - scaleRef.current) > 0.004) {
       scaleRef.current = next

@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    Discovery Health — Showcase canônico (skill /showcase).
-   Tema DARK · accent emerald · chrome canônico · motor scroll-snap.
+   Tema CINZA CLARO · accent emerald · chrome canônico (variante clara)
+   · motor scroll-snap · conteúdo preenche o palco.
    ═══════════════════════════════════════════════════════════ */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,24 +16,26 @@ html, body { height: 100%; }
   --font-display: var(--font-fraunces), 'Plus Jakarta Sans', Georgia, serif;
   --font-serif: var(--font-fraunces), Georgia, serif;
 
-  /* Paleta dark + accent emerald (Discovery Health) */
+  /* Paleta CINZA CLARO + accent emerald (Discovery Health) */
   --accent: #10b981;
   --accent-2: #14b8a6;
-  --bg: #05070d;
-  --bg2: #0c1018;
-  --text: #eaf0f6;
-  --white: #f0f0f0;
-  --gray: #8a8f98;
-  --dim: #2a2e37;
-  --border: rgba(148, 163, 184, 0.18);
+  --bg: #e4e7ec;          /* palco cinza claro */
+  --bg2: #eef1f5;
+  --ink: #1a1d23;         /* texto/ênfase escuro (no claro) */
+  --text: #1a1d23;
+  --white: #1a1d23;       /* "ênfase" no tema claro = escuro (logo-cons/contador/nome herdam) */
+  --gray: #5b626d;        /* muted escuro */
+  --dim: #aab0b8;
+  --border: rgba(15, 23, 42, 0.12);
+  --surface: rgba(255, 255, 255, 0.82);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
   font-family: var(--font-sans);
   background:
-    radial-gradient(ellipse 80% 50% at 18% 12%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 60%),
-    radial-gradient(ellipse 70% 40% at 82% 88%, color-mix(in srgb, var(--accent-2) 5%, transparent), transparent 60%),
+    radial-gradient(ellipse 80% 50% at 18% 12%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 60%),
+    radial-gradient(ellipse 70% 40% at 82% 88%, color-mix(in srgb, var(--accent-2) 6%, transparent), transparent 60%),
     var(--bg);
   color: var(--text);
   overflow: hidden;
@@ -63,7 +66,8 @@ body {
   position: relative;
 }
 
-/* PALCO — reserva EXATA das faixas §3.1 (HEADER/FOOTER invioláveis) */
+/* PALCO — reserva EXATA das faixas §3.1 (HEADER/FOOTER invioláveis).
+   Margens laterais enxutas (2.4vw) para o conteúdo servir o palco. */
 .slide-band {
   width: 100%;
   height: 100%;
@@ -74,12 +78,12 @@ body {
   align-items: center;
   padding-top: max(9vh, 76px);
   padding-bottom: max(11vh, 88px);
-  padding-left: 4vw;
-  padding-right: 4vw;
+  padding-left: 2.4vw;
+  padding-right: 2.4vw;
 }
 .slide-fit {
   width: 100%;
-  max-width: 1180px;
+  max-width: 1520px;
   transform-origin: center center;
   will-change: transform;
 }
@@ -100,6 +104,8 @@ body {
 .logo-i { font-family: var(--font-logo-i); font-size: 1.55em; color: #f97316; -webkit-text-fill-color: #f97316; }
 .logo-cons { font-weight: 800; color: #ffffff; -webkit-text-fill-color: #ffffff; }
 .logo-ai { font-weight: 800; color: #ef4444; -webkit-text-fill-color: #ef4444; }
+/* Variante CLARA (§18.1): em fundo claro o "cons" é escuro. i laranja / .ai vermelho não mudam. */
+.theme-light .logo-cons { color: #111111; -webkit-text-fill-color: #111111; }
 
 /* ═══════════════════ HEADER centro — nome do projeto ═══════════════════ */
 .slide-head {
@@ -113,7 +119,7 @@ body {
 }
 .slide-head__name {
   font-family: var(--font-logo); font-weight: 800; font-size: clamp(.95rem, 2vw, 1.25rem);
-  letter-spacing: -.01em; color: var(--white); line-height: 1.05;
+  letter-spacing: -.01em; color: var(--ink); line-height: 1.05;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw;
 }
 .slide-head__name::after {
@@ -129,25 +135,26 @@ body {
   transition: width .6s var(--ease-out);
 }
 
-/* ═══════════════════ DOCK (header DIR) ═══════════════════ */
+/* ═══════════════════ DOCK (header DIR) — variante clara ═══════════════════ */
 .slide-dock {
   position: fixed; top: 3vh; right: 4vw; z-index: 110;
   display: flex; align-items: center; gap: .5rem;
 }
 .exit-btn {
   display: inline-flex; align-items: center; gap: .35rem; height: 46px; padding: 0 .85rem;
-  border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(8,12,22,.55);
+  border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,.8);
   backdrop-filter: blur(12px); color: var(--gray); font-family: var(--font-mono);
   font-size: .68rem; letter-spacing: .06em; text-decoration: none; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15,23,42,.06);
   transition: border-color .25s, color .25s, background .25s;
 }
-.exit-btn:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.exit-btn:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, white); }
 .exit-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
 .lang-switch {
   display: inline-flex; align-items: center; gap: 2px; height: 46px; padding: 4px;
-  border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(8,12,22,.55);
-  backdrop-filter: blur(12px);
+  border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,.8);
+  backdrop-filter: blur(12px); box-shadow: 0 2px 8px rgba(15,23,42,.06);
 }
 .lang-btn {
   height: 38px; min-width: 38px; padding: 0 .55rem; border: 0; border-radius: 999px;
@@ -155,41 +162,42 @@ body {
   font-size: .68rem; letter-spacing: .08em; font-weight: 600; cursor: pointer;
   transition: color .2s, background .2s;
 }
-.lang-btn:hover { color: var(--white); }
-.lang-btn[data-active="true"] { color: var(--bg); background: var(--accent); }
+.lang-btn:hover { color: var(--ink); }
+.lang-btn[data-active="true"] { color: #ffffff; background: var(--accent); }
 
 .reading-btn, .audio-btn {
   width: 46px; height: 46px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.18); background: rgba(8,12,22,.55);
+  border: 1px solid var(--border); background: rgba(255,255,255,.8);
   backdrop-filter: blur(12px); color: var(--gray); cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15,23,42,.06);
   display: inline-flex; align-items: center; justify-content: center;
   transition: border-color .25s, color .25s, background .25s;
 }
 .reading-btn { font-family: var(--font-serif); font-size: 1.05rem; }
 .reading-btn:hover, .audio-btn:hover { border-color: var(--accent); color: var(--accent); }
 .reading-btn[data-active="true"], .audio-btn[data-active="true"] {
-  border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, white);
 }
 .audio-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .audio-btn svg polygon { fill: currentColor; stroke: currentColor; }
 
-/* ═══════════════════ Painel de leitura «Aa» ═══════════════════ */
+/* ═══════════════════ Painel de leitura «Aa» — variante clara ═══════════════════ */
 .reading-panel {
   position: fixed; z-index: 130; right: max(1.5rem, env(safe-area-inset-right)); top: 5.5rem;
   width: min(440px, calc(100vw - 3rem)); max-height: 60vh; overflow-y: auto;
   padding: 1.5rem 1.6rem; border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
-  background: rgba(8,12,22,.92); backdrop-filter: blur(18px);
-  box-shadow: 0 18px 50px rgba(0,0,0,.6);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  background: rgba(255,255,255,.97); backdrop-filter: blur(18px);
+  box-shadow: 0 18px 50px rgba(15,23,42,.18);
 }
 .reading-close {
   position: absolute; top: .6rem; right: .8rem; background: none; border: none;
   color: var(--gray); font-size: 1.4rem; line-height: 1; cursor: pointer;
 }
-.reading-close:hover { color: var(--white); }
-.reading-text { font-family: var(--font-sans); font-size: 1.02rem; line-height: 1.6; color: var(--white); margin: 0; }
+.reading-close:hover { color: var(--ink); }
+.reading-text { font-family: var(--font-sans); font-size: 1.02rem; line-height: 1.6; color: var(--ink); margin: 0; }
 
-/* ═══════════════════ Setas (JUNTAS, inferior-ESQ) ═══════════════════ */
+/* ═══════════════════ Setas (JUNTAS, inferior-ESQ) — variante clara ═══════════════════ */
 .slide-nav {
   position: fixed; left: 4vw; bottom: 3vh; z-index: 1000;
   display: flex; gap: .6rem; pointer-events: auto;
@@ -197,20 +205,20 @@ body {
 .slide-nav__btn {
   width: 52px; height: 52px; border-radius: 50%;
   border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  background: rgba(8,12,22,.78);
+  background: rgba(255,255,255,.92);
   backdrop-filter: blur(12px) saturate(140%);
   color: var(--accent); cursor: pointer; padding: 0;
   display: flex; align-items: center; justify-content: center;
   transition: all .25s ease;
-  box-shadow: 0 8px 24px rgba(0,0,0,.55), 0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent), 0 0 24px color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow: 0 8px 22px rgba(15,23,42,.16), 0 0 0 1px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 .slide-nav__btn:hover:not(:disabled) {
-  border-color: var(--accent); color: #fff; background: color-mix(in srgb, var(--accent) 18%, transparent);
-  box-shadow: 0 10px 28px rgba(0,0,0,.6), 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 0 36px color-mix(in srgb, var(--accent) 40%, transparent);
+  border-color: var(--accent); color: #fff; background: var(--accent);
+  box-shadow: 0 10px 28px rgba(16,185,129,.32), 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
   transform: translateY(-1px);
 }
 .slide-nav__btn:active { transform: scale(.92); }
-.slide-nav__btn:disabled { cursor: not-allowed; border-color: rgba(255,255,255,.15); color: rgba(255,255,255,.3); box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+.slide-nav__btn:disabled { cursor: not-allowed; border-color: rgba(15,23,42,.14); color: rgba(15,23,42,.28); box-shadow: 0 2px 8px rgba(15,23,42,.08); }
 .slide-nav__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ═══════════════════ Numeração (inferior-DIR) ═══════════════════ */
@@ -219,7 +227,7 @@ body {
   font-family: var(--font-mono); font-size: .72rem; letter-spacing: .15em;
   color: var(--gray);
 }
-.slide-counter span { color: var(--white); font-weight: 600; }
+.slide-counter span { color: var(--ink); font-weight: 600; }
 
 /* ═══════════════════ Footer centro — marca + legal ═══════════════════ */
 .slide-foot {
@@ -234,6 +242,7 @@ body {
 
 /* ═══════════════════ Mobile ═══════════════════ */
 @media (max-width: 768px) {
+  .slide-band { padding-left: 3vw; padding-right: 3vw; }
   .slide-nav { left: 4vw; bottom: 2vh; gap: .5rem; }
   .slide-counter { bottom: 2vh; right: 4vw; font-size: .6rem; }
   .progress-bar { height: 3px; }

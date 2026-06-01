@@ -15,7 +15,7 @@ SERVER="root@192.81.212.31"
 APP_DIR="/opt/bg-health"
 SERVICE="iconsai-bg-health"
 DOMAIN="iconsai.ai"
-BASEPATH="/discoveryHealth"
+BASEPATH="/discoveryhealth"
 PORT="3103"
 LOCAL_DIR="$(cd "$(dirname "$0")" && pwd)"
 

@@ -29,7 +29,7 @@ const fraunces = Fraunces({
 })
 
 export const metadata: Metadata = {
-  title: 'Discovery Health',
+  title: 'DiscoveryHealth',
   description: 'Anamnese guiada, auto-exames, triagem clínica, gestão financeira e antifraude num único fluxo.',
 }
 
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="pt-BR"
       className={`${jakarta.variable} ${baskerville.variable} ${mono.variable} ${fraunces.variable}`}
     >
-      <body>{children}</body>
+      <body className="theme-light">{children}</body>
     </html>
   )
 }

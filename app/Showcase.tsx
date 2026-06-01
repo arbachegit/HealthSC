@@ -1419,7 +1419,7 @@ export function Showcase() {
   return (
     <SlideEngine
       slides={SLIDES}
-      projectName="Discovery Health"
+      projectName="DiscoveryHealth"
       kicker="Medicina inteligente · Clinical OS"
     />
   )
