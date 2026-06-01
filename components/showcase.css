@@ -101,12 +101,13 @@
 .dh-wordmark {
   font-family: var(--font-sans);
   font-weight: 900;
-  font-size: clamp(48px, 9vw, 124px);
-  line-height: 1.18;
+  font-size: clamp(38px, 5.2vw, 78px);
+  line-height: 1.12;
   letter-spacing: -0.025em;
   margin: 0;
   padding-bottom: max(0.15em, 4px);
   overflow: visible;
+  overflow-wrap: anywhere;
   background: linear-gradient(120deg,
     #10b981 0%,
     #14b8a6 50%,

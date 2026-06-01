@@ -5,7 +5,7 @@
  */
 import { chromium } from 'playwright-core'
 
-const URL = process.env.URL || 'http://localhost:3103/discoveryHealthShowcase'
+const URL = process.env.URL || 'http://localhost:3103/discoveryhealth'
 const VIEWPORTS = [
   { w: 1440, h: 800 }, { w: 1280, h: 620 }, { w: 1280, h: 560 },
   { w: 390, h: 844 }, { w: 390, h: 740 }, { w: 390, h: 667 },
