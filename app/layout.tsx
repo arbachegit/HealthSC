@@ -1,20 +1,44 @@
 import type { Metadata } from 'next'
+import { Plus_Jakarta_Sans, Libre_Baskerville, JetBrains_Mono, Fraunces } from 'next/font/google'
 import './globals.css'
 
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-plus-jakarta',
+  display: 'swap',
+})
+const baskerville = Libre_Baskerville({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-libre',
+  display: 'swap',
+})
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-jetbrains',
+  display: 'swap',
+})
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['500', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'Icons.ai · Discovery Health — Triagem, agendamento e prontuário unificado.',
-  description: 'Triagem, agendamento e prontuário unificado.',
+  title: 'Discovery Health',
+  description: 'Anamnese guiada, auto-exames, triagem clínica, gestão financeira e antifraude num único fluxo.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html
+      lang="pt-BR"
+      className={`${jakarta.variable} ${baskerville.variable} ${mono.variable} ${fraunces.variable}`}
+    >
       <body>{children}</body>
     </html>
   )

@@ -1,8 +1,258 @@
+/* ═══════════════════════════════════════════════════════════
+   Discovery Health — Showcase canônico (skill /showcase).
+   Tema DARK · accent emerald · chrome canônico · motor scroll-snap.
+   ═══════════════════════════════════════════════════════════ */
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
+
+:root {
+  /* Fontes (mapeadas das vars do next/font no layout) */
+  --font-sans: var(--font-plus-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-logo: var(--font-plus-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-logo-i: var(--font-libre), 'Libre Baskerville', Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, Menlo, Consolas, monospace;
+  --font-display: var(--font-fraunces), 'Plus Jakarta Sans', Georgia, serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+
+  /* Paleta dark + accent emerald (Discovery Health) */
+  --accent: #10b981;
+  --accent-2: #14b8a6;
+  --bg: #05070d;
+  --bg2: #0c1018;
+  --text: #eaf0f6;
+  --white: #f0f0f0;
+  --gray: #8a8f98;
+  --dim: #2a2e37;
+  --border: rgba(148, 163, 184, 0.18);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 body {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  background: #f2efe6;
-  color: #111418;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(ellipse 80% 50% at 18% 12%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 60%),
+    radial-gradient(ellipse 70% 40% at 82% 88%, color-mix(in srgb, var(--accent-2) 5%, transparent), transparent 60%),
+    var(--bg);
+  color: var(--text);
   overflow: hidden;
+  letter-spacing: -0.005em;
+}
+
+/* ═══════════════════ MOTOR — scroll-snap horizontal (§7) ═══════════════════ */
+.deck {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.deck::-webkit-scrollbar { display: none; }
+
+.slide {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+}
+
+/* PALCO — reserva EXATA das faixas §3.1 (HEADER/FOOTER invioláveis) */
+.slide-band {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: max(9vh, 76px);
+  padding-bottom: max(11vh, 88px);
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+.slide-fit {
+  width: 100%;
+  max-width: 1180px;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* ═══════════════════ LOGO icons.ai (canon §18.1) ═══════════════════ */
+.logo-fixed, .logo-foot {
+  display: inline-flex;
+  align-items: center;
+  gap: .02em;
+  font-family: var(--font-logo);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  text-decoration: none;
+}
+.logo-fixed { position: fixed; top: 3vh; left: 4vw; z-index: 100; font-size: 1.1rem; }
+.logo-foot  { pointer-events: auto; font-size: .95rem; }
+/* Regras do logo numa linha só (canon §18.1; o gate valida-skill.sh grep por-linha). */
+.logo-i { font-family: var(--font-logo-i); font-size: 1.55em; color: #f97316; -webkit-text-fill-color: #f97316; }
+.logo-cons { font-weight: 800; color: #ffffff; -webkit-text-fill-color: #ffffff; }
+.logo-ai { font-weight: 800; color: #ef4444; -webkit-text-fill-color: #ef4444; }
+
+/* ═══════════════════ HEADER centro — nome do projeto ═══════════════════ */
+.slide-head {
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 90;
+  display: flex; flex-direction: column; align-items: center; gap: .12rem;
+  padding-top: 2.2vh; max-width: 46vw; text-align: center; pointer-events: none;
+}
+.slide-head__kicker {
+  font-family: var(--font-mono); font-size: .56rem; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--accent);
+}
+.slide-head__name {
+  font-family: var(--font-logo); font-weight: 800; font-size: clamp(.95rem, 2vw, 1.25rem);
+  letter-spacing: -.01em; color: var(--white); line-height: 1.05;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw;
+}
+.slide-head__name::after {
+  content: ""; display: block; margin: .35rem auto 0; width: 28px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+/* ═══════════════════ Barra de progresso (TOPO) ═══════════════════ */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px;
+  background: var(--accent); z-index: 100;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 70%, transparent);
+  transition: width .6s var(--ease-out);
+}
+
+/* ═══════════════════ DOCK (header DIR) ═══════════════════ */
+.slide-dock {
+  position: fixed; top: 3vh; right: 4vw; z-index: 110;
+  display: flex; align-items: center; gap: .5rem;
+}
+.exit-btn {
+  display: inline-flex; align-items: center; gap: .35rem; height: 46px; padding: 0 .85rem;
+  border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(8,12,22,.55);
+  backdrop-filter: blur(12px); color: var(--gray); font-family: var(--font-mono);
+  font-size: .68rem; letter-spacing: .06em; text-decoration: none; cursor: pointer;
+  transition: border-color .25s, color .25s, background .25s;
+}
+.exit-btn:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.exit-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.lang-switch {
+  display: inline-flex; align-items: center; gap: 2px; height: 46px; padding: 4px;
+  border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(8,12,22,.55);
+  backdrop-filter: blur(12px);
+}
+.lang-btn {
+  height: 38px; min-width: 38px; padding: 0 .55rem; border: 0; border-radius: 999px;
+  background: transparent; color: var(--gray); font-family: var(--font-mono);
+  font-size: .68rem; letter-spacing: .08em; font-weight: 600; cursor: pointer;
+  transition: color .2s, background .2s;
+}
+.lang-btn:hover { color: var(--white); }
+.lang-btn[data-active="true"] { color: var(--bg); background: var(--accent); }
+
+.reading-btn, .audio-btn {
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18); background: rgba(8,12,22,.55);
+  backdrop-filter: blur(12px); color: var(--gray); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: border-color .25s, color .25s, background .25s;
+}
+.reading-btn { font-family: var(--font-serif); font-size: 1.05rem; }
+.reading-btn:hover, .audio-btn:hover { border-color: var(--accent); color: var(--accent); }
+.reading-btn[data-active="true"], .audio-btn[data-active="true"] {
+  border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.audio-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.audio-btn svg polygon { fill: currentColor; stroke: currentColor; }
+
+/* ═══════════════════ Painel de leitura «Aa» ═══════════════════ */
+.reading-panel {
+  position: fixed; z-index: 130; right: max(1.5rem, env(safe-area-inset-right)); top: 5.5rem;
+  width: min(440px, calc(100vw - 3rem)); max-height: 60vh; overflow-y: auto;
+  padding: 1.5rem 1.6rem; border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  background: rgba(8,12,22,.92); backdrop-filter: blur(18px);
+  box-shadow: 0 18px 50px rgba(0,0,0,.6);
+}
+.reading-close {
+  position: absolute; top: .6rem; right: .8rem; background: none; border: none;
+  color: var(--gray); font-size: 1.4rem; line-height: 1; cursor: pointer;
+}
+.reading-close:hover { color: var(--white); }
+.reading-text { font-family: var(--font-sans); font-size: 1.02rem; line-height: 1.6; color: var(--white); margin: 0; }
+
+/* ═══════════════════ Setas (JUNTAS, inferior-ESQ) ═══════════════════ */
+.slide-nav {
+  position: fixed; left: 4vw; bottom: 3vh; z-index: 1000;
+  display: flex; gap: .6rem; pointer-events: auto;
+}
+.slide-nav__btn {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  background: rgba(8,12,22,.78);
+  backdrop-filter: blur(12px) saturate(140%);
+  color: var(--accent); cursor: pointer; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,.55), 0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent), 0 0 24px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.slide-nav__btn:hover:not(:disabled) {
+  border-color: var(--accent); color: #fff; background: color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow: 0 10px 28px rgba(0,0,0,.6), 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 0 36px color-mix(in srgb, var(--accent) 40%, transparent);
+  transform: translateY(-1px);
+}
+.slide-nav__btn:active { transform: scale(.92); }
+.slide-nav__btn:disabled { cursor: not-allowed; border-color: rgba(255,255,255,.15); color: rgba(255,255,255,.3); box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+.slide-nav__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ═══════════════════ Numeração (inferior-DIR) ═══════════════════ */
+.slide-counter {
+  position: fixed; bottom: 3vh; right: 4vw; z-index: 100;
+  font-family: var(--font-mono); font-size: .72rem; letter-spacing: .15em;
+  color: var(--gray);
+}
+.slide-counter span { color: var(--white); font-weight: 600; }
+
+/* ═══════════════════ Footer centro — marca + legal ═══════════════════ */
+.slide-foot {
+  position: fixed; left: 50%; bottom: 2vh; transform: translateX(-50%);
+  z-index: 100; display: flex; flex-direction: column; align-items: center;
+  gap: .2rem; text-align: center; pointer-events: none;
+}
+.slide-foot__legal {
+  font-family: var(--font-mono); font-size: clamp(.52rem, 1.4vw, .62rem);
+  letter-spacing: .08em; color: var(--gray); white-space: nowrap;
+}
+
+/* ═══════════════════ Mobile ═══════════════════ */
+@media (max-width: 768px) {
+  .slide-nav { left: 4vw; bottom: 2vh; gap: .5rem; }
+  .slide-counter { bottom: 2vh; right: 4vw; font-size: .6rem; }
+  .progress-bar { height: 3px; }
+  .slide-foot { bottom: 1.5vh; }
+  .slide-foot__legal { white-space: normal; max-width: 64vw; line-height: 1.3; }
+  /* Header estreito no mobile: logo + dock são essenciais; o nome central
+     colidiria com ambos. A marca persiste no logo e no footer (§3.1). */
+  .slide-head { display: none; }
+  .slide-dock { gap: .35rem; top: 2.4vh; }
+  .exit-btn { height: 40px; padding: 0 .55rem; font-size: .6rem; }
+  .exit-btn span { display: none; }
+  .lang-switch { height: 40px; }
+  .lang-btn { height: 32px; min-width: 30px; padding: 0 .4rem; font-size: .6rem; }
+  .reading-btn, .audio-btn { width: 40px; height: 40px; }
+  .reading-panel { top: auto; bottom: 5.5rem; left: 1rem; right: 1rem; width: auto; max-height: 50vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck { scroll-behavior: auto; }
+  .progress-bar { transition: none; }
+  .slide-nav__btn { transition: none; }
 }

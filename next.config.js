@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  basePath: '/bg-health',
+  basePath: '/discoveryHealthShowcase',
 }
 module.exports = nextConfig
