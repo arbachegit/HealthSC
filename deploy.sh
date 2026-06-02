@@ -13,7 +13,7 @@ set -euo pipefail
 
 SERVER="root@192.81.212.31"
 APP_DIR="/opt/bg-health"
-SERVICE="iconsai-bg-health"
+SERVICE="discoveryhealth"
 DOMAIN="iconsai.ai"
 BASEPATH="/discoveryhealth"
 PORT="3103"

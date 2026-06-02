@@ -1,4 +1,4 @@
-# iconsaiDiscoveryHealthShowCase
+# discoveryhealth
 
 Showcase canônico (keynote interativo) do **Icons.ai · Discovery Health** — versão da Discovery especializada em saúde (anamnese guiada por Aura, auto-exames, triagem clínica, gestão financeira e antifraude num único fluxo).
 
@@ -25,7 +25,7 @@ npm run dev
 
 Pipeline 8-fases anti-deploy-fantasma: stamp `BUILD_ID` → `next build` → rsync `.next/standalone` + `.next/static` + `public/` com `--delete` → systemd restart → valida HTTP 200 + `build-info.txt`.
 
-- Server apex `192.81.212.31` (domínio `iconsai.ai`), systemd unit `iconsai-bg-health` (porta 3103)
+- Server apex `192.81.212.31` (domínio `iconsai.ai`), systemd unit `discoveryhealth` (porta 3103)
 - Caddy `iconsai.ai/discoveryhealth/*` → `127.0.0.1:3103/discoveryhealth/*`
 
 ## Slides
