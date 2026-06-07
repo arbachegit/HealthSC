@@ -38,8 +38,26 @@ body {
     radial-gradient(ellipse 70% 40% at 82% 88%, color-mix(in srgb, var(--accent-2) 6%, transparent), transparent 60%),
     var(--bg);
   color: var(--text);
-  overflow: hidden;
   letter-spacing: -0.005em;
+}
+
+body::before, body::after {
+  content: "";
+  position: fixed;
+  left: 0; right: 0;
+  z-index: 80;
+  background: #06080d;
+  pointer-events: none;
+}
+body::before { top: 0; height: clamp(72px, 9vh, 100px); }
+body::after  { bottom: 0; height: clamp(68px, 9vh, 100px); }
+
+/* Shell inner-content wrapper — vertical centering per T2.10 */
+.shell__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
 }
 
 /* ═══════════════════ MOTOR — scroll-snap horizontal (§7) ═══════════════════ */
@@ -74,16 +92,21 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: max(9vh, 76px);
-  padding-bottom: max(11vh, 88px);
+  padding-top: clamp(76px, 9vh, 120px);
+  padding-bottom: clamp(88px, 11vh, 140px);
   padding-left: 2.4vw;
   padding-right: 2.4vw;
 }
-.slide-fit {
+.slide-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+}
+.slide-content {
   width: 100%;
-  max-width: 1520px;
+  height: 100%;
+  align-items: stretch;
   transform-origin: center center;
   will-change: transform;
 }
@@ -159,7 +182,7 @@ body {
 .lang-btn {
   height: 38px; min-width: 38px; padding: 0 .55rem; border: 0; border-radius: 999px;
   background: transparent; color: var(--gray); font-family: var(--font-mono);
-  font-size: .68rem; letter-spacing: .08em; font-weight: 600; cursor: pointer;
+  font-size: .75rem; letter-spacing: .08em; font-weight: 600; cursor: pointer;
   transition: color .2s, background .2s;
 }
 .lang-btn:hover { color: var(--ink); }
@@ -203,7 +226,7 @@ body {
   display: flex; gap: .6rem; pointer-events: auto;
 }
 .slide-nav__btn {
-  width: 52px; height: 52px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
   background: rgba(255,255,255,.92);
   backdrop-filter: blur(12px) saturate(140%);
@@ -244,7 +267,7 @@ body {
 @media (max-width: 768px) {
   .slide-band { padding-left: 3vw; padding-right: 3vw; }
   .slide-nav { left: 4vw; bottom: 2vh; gap: .5rem; }
-  .slide-counter { bottom: 2vh; right: 4vw; font-size: .6rem; }
+  .slide-counter { bottom: 2vh; right: 4vw; font-size: .75rem; }
   .progress-bar { height: 3px; }
   .slide-foot { bottom: 1.5vh; }
   .slide-foot__legal { white-space: normal; max-width: 64vw; line-height: 1.3; }
@@ -252,10 +275,10 @@ body {
      colidiria com ambos. A marca persiste no logo e no footer (§3.1). */
   .slide-head { display: none; }
   .slide-dock { gap: .35rem; top: 2.4vh; }
-  .exit-btn { height: 40px; padding: 0 .55rem; font-size: .6rem; }
+  .exit-btn { height: 40px; padding: 0 .55rem; font-size: .75rem; }
   .exit-btn span { display: none; }
   .lang-switch { height: 40px; }
-  .lang-btn { height: 32px; min-width: 30px; padding: 0 .4rem; font-size: .6rem; }
+  .lang-btn { height: 32px; min-width: 30px; padding: 0 .4rem; font-size: .75rem; }
   .reading-btn, .audio-btn { width: 40px; height: 40px; }
   .reading-panel { top: auto; bottom: 5.5rem; left: 1rem; right: 1rem; width: auto; max-height: 50vh; }
 }
@@ -264,4 +287,21 @@ body {
   .deck { scroll-behavior: auto; }
   .progress-bar { transition: none; }
   .slide-nav__btn { transition: none; }
+}
+
+/* ── PDF documento (T1.11, T3.6) ── */
+.pdf-doc{display:none;}
+.pdf-page{width:210mm;min-height:296mm;box-sizing:border-box;padding:18mm 16mm 16mm;position:relative;overflow:hidden;background:#fff;color:#14181f;font-family:"Inter Tight",Inter,system-ui,sans-serif;page-break-after:always;}
+.pdf-page:last-child{page-break-after:auto;}
+.pdf-mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
+.pdf-cover{background:#05080c !important;color:#e8eaed;padding:0;}
+.pdf-content{padding:20mm 22mm 25mm 22mm;}
+
+@media print{
+  @page{size:A4;margin:0;}
+  html,body{position:static !important;overflow:visible !important;height:auto !important;width:auto !important;background:#fff !important;}
+  .slide-container,.logo-fixed,.slide-head,.slide-foot,.slide-nav,.slide-counter,.progress-bar,.audio-dock,.reading-panel,.deck{display:none !important;}
+  body::before,body::after{display:none !important;}
+  .pdf-doc{display:block !important;}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
 }
