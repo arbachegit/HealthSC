@@ -196,6 +196,45 @@ done
 echo "$FLAT" | grep -qE '\.shell__content\b[^}]*justify-content:\s*center' 2>/dev/null \
   && fail F23 ".shell__content com justify-content:center (causa clipping no header/footer)"
 
+# F12: mx-auto + max-w-[Npx] na mesma className (redundante; ambos devem ser removidos)
+for f in $ACT_FILES; do
+  HITS=$(grep -nE 'mx-auto[^"]*max-w-\[[0-9]+px\]|max-w-\[[0-9]+px\][^"]*mx-auto' "$f" 2>/dev/null || true)
+  if [ -n "$HITS" ]; then
+    while IFS= read -r line; do
+      fail F12 "$f: mx-auto + max-w-[Npx] (remover ambos §6.10) — $line"
+    done <<< "$HITS"
+  fi
+done
+
+# F16: .slide-nav__btn com width/height > 44px (footer reduzido; setas 44×44 canónicas)
+echo "$FLAT" | grep -qE '\.slide-nav__btn\b[^}]*(width|height):\s*(4[5-9]|[5-9][0-9])[0-9]*px' 2>/dev/null \
+  && fail F16 ".slide-nav__btn com width/height > 44px (canónico = 44×44; §4)"
+
+# F21: visuals repetidos/idênticos — não detectável estaticamente.
+# VERIFICAÇÃO MANUAL: confirmar que cada item num grid tem SVG/ícone visualmente distinto (§6.14).
+
+# F24: callout/note-box como último filho de coluna densa — não detectável estaticamente.
+# VERIFICAÇÃO MANUAL: coluna com kicker+H2+lede+≥5 items não deve ter callout/note-box no final (§6.17).
+
+# F25: fit() deve ter content.style.height="auto" antes de medir scrollHeight (§6.18)
+FRAME_TSX=$(grep -rlE 'function fit|const fit|useCallback' components/ app/ 2>/dev/null || true)
+for f in $FRAME_TSX; do
+  if grep -qE 'scrollHeight' "$f" 2>/dev/null; then
+    grep -qE "content\.style\.height\s*=\s*[\"']auto[\"']" "$f" 2>/dev/null \
+      || fail F25 "$f: fit() sem content.style.height='auto' antes de scrollHeight (§6.18)"
+  fi
+done
+
+# F26: min-h-[Npx] em container visual (filhos absolute colapsam — usar flex-1 min-h-0; §6.6 item 7)
+for f in $ACT_FILES; do
+  HITS=$(grep -nE 'min-h-\[[0-9]+(px|rem|vh)\]' "$f" 2>/dev/null || true)
+  if [ -n "$HITS" ]; then
+    while IFS= read -r line; do
+      fail F26 "$f: min-h-[Npx/rem/vh] em visual (usar flex-1 min-h-0) — $line"
+    done <<< "$HITS"
+  fi
+done
+
 # ═══ PDF (T1.11, T3.6) ═══
 
 # F29: PdfDocument existe
