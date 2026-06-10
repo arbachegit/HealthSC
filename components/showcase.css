@@ -5340,3 +5340,68 @@
 
 
 /* .dh-progress* e .dh-navbar* removidos — shell canônico fornece. */
+
+/* ===== EXPLAIN PANEL — layout 2fr:1fr para slides sem side panel ===== */
+.dh-explain-stage {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.dh-explain-visual {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.dh-explain-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.dh-explain-card {
+  border: 1px solid var(--dh-border);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 20px 48px rgba(15, 118, 110, 0.08);
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dh-explain-kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--dh-primary-deep);
+}
+.dh-explain-line {
+  position: relative;
+  padding-left: 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--dh-text);
+  font-weight: 600;
+}
+.dh-explain-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dh-primary);
+}
+
+@media (max-width: 768px) {
+  .dh-explain-stage {
+    grid-template-columns: 1fr;
+  }
+}

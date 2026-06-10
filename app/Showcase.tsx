@@ -12,7 +12,7 @@ import { useState, type CSSProperties } from 'react'
 import { SlideEngine, useLang, type SlideDef } from './SlideEngine'
 import { MedIcon } from '@/components/MedIcon'
 import {
-  UI, OPENING, STEPS, FECHO, S1 as S1C, S2 as S2C, S3 as S3C, S4 as S4C,
+  UI, OPENING, STEPS, FECHO, EXPLAIN, S1 as S1C, S2 as S2C, S3 as S3C, S4 as S4C,
   S5 as S5C, S6 as S6C, S7 as S7C, S8 as S8C,
   S9 as S9C, S10 as S10C, S11 as S11C, S12 as S12C,
   S13 as S13C, S14 as S14C, S15 as S15C, S16 as S16C,
@@ -359,6 +359,24 @@ function captionFor(i: number) {
   return { title, desc }
 }
 
+/* ── Explain panel helper (§plan: slides sem side panel) ── */
+function ExplainAside({ index }: { index: number }) {
+  const entry = EXPLAIN[index]
+  if (!entry) return null
+  const lang = useLang()
+  const ex = entry[lang] ?? entry['pt-BR']
+  return (
+    <aside className="dh-explain-aside">
+      <div className="dh-explain-card">
+        <span className="dh-explain-kicker">{ex.kicker}</span>
+        {ex.lines.map((l, i) => (
+          <p key={i} className="dh-explain-line">{l}</p>
+        ))}
+      </div>
+    </aside>
+  )
+}
+
 /* ═════════════════════════════════════════════════════════════════════
    SCENE RENDERERS
    ═════════════════════════════════════════════════════════════════════ */
@@ -507,24 +525,29 @@ function RenderS2() {
   return (
     <>
       <Scene index={2} url="health.iconsai.ai/identificacao">
-        <StepIndicator current={0} />
-        <SectionHeader title={t.title} subtitle={t.subtitle} />
-        <div className="dh-prefill-banner">
-          <div className="dh-prefill-kicker">{t.prefillKicker}</div>
-          <div className="dh-prefill-text">{t.prefillText}</div>
-        </div>
-        <div className="dh-form-grid">
-          <Field label={t.fName} value={t.nameVal} />
-          <div className="dh-form-row dh-form-row-2">
-            <Field label={t.fAge} value="38" />
-            <Field label={t.fGender} value={t.genderVal} chip />
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <StepIndicator current={0} />
+            <SectionHeader title={t.title} subtitle={t.subtitle} />
+            <div className="dh-prefill-banner">
+              <div className="dh-prefill-kicker">{t.prefillKicker}</div>
+              <div className="dh-prefill-text">{t.prefillText}</div>
+            </div>
+            <div className="dh-form-grid">
+              <Field label={t.fName} value={t.nameVal} />
+              <div className="dh-form-row dh-form-row-2">
+                <Field label={t.fAge} value="38" />
+                <Field label={t.fGender} value={t.genderVal} chip />
+              </div>
+              <Field label={t.fId} value={t.idVal} mono />
+              <Field label={t.fZip} value={t.zipVal} mono hint={t.zipHint} />
+              <div className="dh-form-row dh-form-row-3">
+                <Field label={t.fStreet} value={t.streetVal} span={2} />
+                <Field label={t.fNumber} value={t.numberVal} />
+              </div>
+            </div>
           </div>
-          <Field label={t.fId} value={t.idVal} mono />
-          <Field label={t.fZip} value={t.zipVal} mono hint={t.zipHint} />
-          <div className="dh-form-row dh-form-row-3">
-            <Field label={t.fStreet} value={t.streetVal} span={2} />
-            <Field label={t.fNumber} value={t.numberVal} />
-          </div>
+          <ExplainAside index={2} />
         </div>
       </Scene>
       <SceneCaption index={2} title={c.title} desc={c.desc} />
@@ -660,24 +683,29 @@ function RenderS5() {
   return (
     <>
       <Scene index={5} url="health.iconsai.ai/audio-livre">
-        <StepIndicator current={1} />
-        <SectionHeader title={t.title} subtitle={t.subtitle} />
-        <div className="dh-mic-card">
-          <div className="dh-mic-ring">
-            <div className="dh-mic-pulse" />
-            <div className="dh-mic-pulse dh-mic-pulse-2" />
-            <svg className="dh-mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="9" y="3" width="6" height="12" rx="3" />
-              <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
-            </svg>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <StepIndicator current={1} />
+            <SectionHeader title={t.title} subtitle={t.subtitle} />
+            <div className="dh-mic-card">
+              <div className="dh-mic-ring">
+                <div className="dh-mic-pulse" />
+                <div className="dh-mic-pulse dh-mic-pulse-2" />
+                <svg className="dh-mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="9" y="3" width="6" height="12" rx="3" />
+                  <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+                </svg>
+              </div>
+              <div className="dh-mic-status">{t.status}</div>
+              <div className="dh-wave">
+                {Array.from({ length: 32 }).map((_, i) => (
+                  <span key={i} className="dh-wave-bar" style={{ animationDelay: `${(i % 8) * 0.09}s` }} />
+                ))}
+              </div>
+              <div className="dh-mic-timer">{t.timer}</div>
+            </div>
           </div>
-          <div className="dh-mic-status">{t.status}</div>
-          <div className="dh-wave">
-            {Array.from({ length: 32 }).map((_, i) => (
-              <span key={i} className="dh-wave-bar" style={{ animationDelay: `${(i % 8) * 0.09}s` }} />
-            ))}
-          </div>
-          <div className="dh-mic-timer">{t.timer}</div>
+          <ExplainAside index={5} />
         </div>
       </Scene>
       <SceneCaption index={5} title={c.title} desc={c.desc} />
@@ -745,22 +773,27 @@ function RenderS7() {
   return (
     <>
       <Scene index={7} url="health.iconsai.ai/fisiologico">
-        <StepIndicator current={2} />
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-vitals-grid">
-          {t.vitals.map(([label, value, suffix]) => (
-            <Vital key={label} label={label} value={value} suffix={suffix} />
-          ))}
-        </div>
-        <div className="dh-vitals-classification">
-          {t.tags.map((tg) => (
-            <span className={`dh-tag dh-tag-${tg.tone}`} key={tg.text}>{tg.text}</span>
-          ))}
-        </div>
-        <div className="dh-pain-slider">
-          <div className="dh-pain-label">{t.painLabel}</div>
-          <div className="dh-pain-track"><span className="dh-pain-thumb" /></div>
-          <div className="dh-pain-value">{t.painValue}</div>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <StepIndicator current={2} />
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-vitals-grid">
+              {t.vitals.map(([label, value, suffix]) => (
+                <Vital key={label} label={label} value={value} suffix={suffix} />
+              ))}
+            </div>
+            <div className="dh-vitals-classification">
+              {t.tags.map((tg) => (
+                <span className={`dh-tag dh-tag-${tg.tone}`} key={tg.text}>{tg.text}</span>
+              ))}
+            </div>
+            <div className="dh-pain-slider">
+              <div className="dh-pain-label">{t.painLabel}</div>
+              <div className="dh-pain-track"><span className="dh-pain-thumb" /></div>
+              <div className="dh-pain-value">{t.painValue}</div>
+            </div>
+          </div>
+          <ExplainAside index={7} />
         </div>
       </Scene>
       <SceneCaption index={7} title={c.title} desc={c.desc} />
@@ -810,24 +843,29 @@ function RenderS9() {
   return (
     <>
       <Scene index={9} url="health.iconsai.ai/upload-exames">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-upload-drop">
-          <svg className="dh-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
-          </svg>
-          <div className="dh-upload-text">{t.dropText}</div>
-          <div className="dh-upload-hint">{t.dropHint}</div>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-upload-drop">
+              <svg className="dh-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+              </svg>
+              <div className="dh-upload-text">{t.dropText}</div>
+              <div className="dh-upload-hint">{t.dropHint}</div>
+            </div>
+            <ul className="dh-upload-list">
+              {t.files.map((f) => (
+                <li className="dh-upload-item" key={f.name}>
+                  <div><div className="dh-upload-name">{f.name}</div><div className="dh-upload-meta">{f.meta}</div></div>
+                  {f.state === 'ok' && <span className="dh-upload-check">✓</span>}
+                  {f.state === 'loading' && <span className="dh-upload-spinner" />}
+                  {f.state === 'pending' && <span className="dh-upload-pending">…</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <ExplainAside index={9} />
         </div>
-        <ul className="dh-upload-list">
-          {t.files.map((f) => (
-            <li className="dh-upload-item" key={f.name}>
-              <div><div className="dh-upload-name">{f.name}</div><div className="dh-upload-meta">{f.meta}</div></div>
-              {f.state === 'ok' && <span className="dh-upload-check">✓</span>}
-              {f.state === 'loading' && <span className="dh-upload-spinner" />}
-              {f.state === 'pending' && <span className="dh-upload-pending">…</span>}
-            </li>
-          ))}
-        </ul>
       </Scene>
       <SceneCaption index={9} title={c.title} desc={c.desc} />
     </>
@@ -840,12 +878,17 @@ function RenderS10() {
   return (
     <>
       <Scene index={10} url="health.iconsai.ai/remedios">
-        <StepIndicator current={2} />
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-meds-list">
-          {t.meds.map((m) => (
-            <MedCard key={m.nome} nome={m.nome} classe={m.classe} selected={m.selected} dose={m.dose} freq={m.freq} />
-          ))}
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <StepIndicator current={2} />
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-meds-list">
+              {t.meds.map((m) => (
+                <MedCard key={m.nome} nome={m.nome} classe={m.classe} selected={m.selected} dose={m.dose} freq={m.freq} />
+              ))}
+            </div>
+          </div>
+          <ExplainAside index={10} />
         </div>
       </Scene>
       <SceneCaption index={10} title={c.title} desc={c.desc} />
@@ -980,27 +1023,32 @@ function RenderS13() {
   return (
     <>
       <Scene index={13} url="health.iconsai.ai/agenda">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-agenda-grid">
-          <div className="dh-agenda-row dh-agenda-row-head">
-            {t.head.map((h) => (
-              <span className="dh-agenda-cell-head" key={h}>{h}</span>
-            ))}
-          </div>
-          {t.rows.map((row) => (
-            <div className="dh-agenda-row" key={row.turno}>
-              <span className="dh-agenda-cell-head">{row.turno}</span>
-              {row.slots.map((s, i) => (
-                <span className={`dh-agenda-slot dh-slot-${s.state}`} key={`${row.turno}-${i}`}>{s.label}</span>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-agenda-grid">
+              <div className="dh-agenda-row dh-agenda-row-head">
+                {t.head.map((h) => (
+                  <span className="dh-agenda-cell-head" key={h}>{h}</span>
+                ))}
+              </div>
+              {t.rows.map((row) => (
+                <div className="dh-agenda-row" key={row.turno}>
+                  <span className="dh-agenda-cell-head">{row.turno}</span>
+                  {row.slots.map((s, i) => (
+                    <span className={`dh-agenda-slot dh-slot-${s.state}`} key={`${row.turno}-${i}`}>{s.label}</span>
+                  ))}
+                </div>
               ))}
             </div>
-          ))}
+            <div className="dh-agenda-confirm">
+              <span className="dh-agenda-wa">{t.waConfirm}</span>
+              <span className="dh-agenda-meta">{t.waMeta}</span>
+            </div>
+            <SourcesFooter />
+          </div>
+          <ExplainAside index={13} />
         </div>
-        <div className="dh-agenda-confirm">
-          <span className="dh-agenda-wa">{t.waConfirm}</span>
-          <span className="dh-agenda-meta">{t.waMeta}</span>
-        </div>
-        <SourcesFooter />
       </Scene>
       <SceneCaption index={13} title={c.title} desc={c.desc} />
     </>
@@ -1013,21 +1061,26 @@ function RenderS14() {
   return (
     <>
       <Scene index={14} url="health.iconsai.ai/faturamento">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-fat-chart">
-          {t.bars.map((b) => (
-            <FatBar key={b.label} label={b.label} prev={b.prev} real={b.real} prevK={b.prevK} realK={b.realK} pending={b.pending} />
-          ))}
-        </div>
-        <div className="dh-fat-stats">
-          {t.stats.map((s) => (
-            <div className="dh-fat-stat" key={s.k}>
-              <span className="dh-fat-stat-k">{s.k}</span>
-              <span className={`dh-fat-stat-v ${s.tone === 'warn' ? 'dh-fat-warn' : s.tone === 'ok' ? 'dh-fat-ok' : ''}`}>{s.v}</span>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-fat-chart">
+              {t.bars.map((b) => (
+                <FatBar key={b.label} label={b.label} prev={b.prev} real={b.real} prevK={b.prevK} realK={b.realK} pending={b.pending} />
+              ))}
             </div>
-          ))}
+            <div className="dh-fat-stats">
+              {t.stats.map((s) => (
+                <div className="dh-fat-stat" key={s.k}>
+                  <span className="dh-fat-stat-k">{s.k}</span>
+                  <span className={`dh-fat-stat-v ${s.tone === 'warn' ? 'dh-fat-warn' : s.tone === 'ok' ? 'dh-fat-ok' : ''}`}>{s.v}</span>
+                </div>
+              ))}
+            </div>
+            <SourcesFooter />
+          </div>
+          <ExplainAside index={14} />
         </div>
-        <SourcesFooter />
       </Scene>
       <SceneCaption index={14} title={c.title} desc={c.desc} />
     </>
@@ -1040,22 +1093,27 @@ function RenderS15() {
   return (
     <>
       <Scene index={15} url="health.iconsai.ai/almoxarifado">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-stock-table">
-          <div className="dh-stock-th">
-            {t.th.map((h) => (
-              <span key={h}>{h}</span>
-            ))}
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-stock-table">
+              <div className="dh-stock-th">
+                {t.th.map((h) => (
+                  <span key={h}>{h}</span>
+                ))}
+              </div>
+              {t.rows.map((r) => (
+                <StockRow key={r.item} item={r.item} atual={r.atual} min={r.min} sug={r.sug} status={r.status} />
+              ))}
+            </div>
+            <div className="dh-stock-foot">
+              <span className="dh-stock-badge">{t.badge}</span>
+              <span className="dh-stock-info">{t.info}</span>
+            </div>
+            <SourcesFooter />
           </div>
-          {t.rows.map((r) => (
-            <StockRow key={r.item} item={r.item} atual={r.atual} min={r.min} sug={r.sug} status={r.status} />
-          ))}
+          <ExplainAside index={15} />
         </div>
-        <div className="dh-stock-foot">
-          <span className="dh-stock-badge">{t.badge}</span>
-          <span className="dh-stock-info">{t.info}</span>
-        </div>
-        <SourcesFooter />
       </Scene>
       <SceneCaption index={15} title={c.title} desc={c.desc} />
     </>
@@ -1068,22 +1126,27 @@ function RenderS16() {
   return (
     <>
       <Scene index={16} url="health.iconsai.ai/farmacia">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-farma-table">
-          <div className="dh-farma-th">
-            {t.th.map((h) => (
-              <span key={h}>{h}</span>
-            ))}
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-farma-table">
+              <div className="dh-farma-th">
+                {t.th.map((h) => (
+                  <span key={h}>{h}</span>
+                ))}
+              </div>
+              {t.rows.map((r) => (
+                <FarmaRow key={r.nome} nome={r.nome} classe={r.classe} lote={r.lote} val={r.val} saldo={r.saldo} warn={r.warn} critical={r.critical} />
+              ))}
+            </div>
+            <div className="dh-farma-foot">
+              <span className="dh-farma-badge">{t.badgeWarn}</span>
+              <span className="dh-farma-badge dh-farma-badge-ok">{t.badgeOk}</span>
+            </div>
+            <SourcesFooter />
           </div>
-          {t.rows.map((r) => (
-            <FarmaRow key={r.nome} nome={r.nome} classe={r.classe} lote={r.lote} val={r.val} saldo={r.saldo} warn={r.warn} critical={r.critical} />
-          ))}
+          <ExplainAside index={16} />
         </div>
-        <div className="dh-farma-foot">
-          <span className="dh-farma-badge">{t.badgeWarn}</span>
-          <span className="dh-farma-badge dh-farma-badge-ok">{t.badgeOk}</span>
-        </div>
-        <SourcesFooter />
       </Scene>
       <SceneCaption index={16} title={c.title} desc={c.desc} />
     </>
@@ -1096,28 +1159,33 @@ function RenderS17() {
   return (
     <>
       <Scene index={17} url="health.iconsai.ai/cobranca">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-wa-card">
-          <div className="dh-wa-header">
-            <div className="dh-wa-avatar">DH</div>
-            <div className="dh-wa-meta"><div className="dh-wa-name">{t.waName}</div><div className="dh-wa-online">{t.waOnline}</div></div>
-          </div>
-          <div className="dh-wa-thread">
-            <div className="dh-wa-msg">{t.msg1}</div>
-            <div className="dh-wa-msg">{t.msg2pre}<strong>{t.msg2val}</strong>{t.msg2pos}</div>
-            <div className="dh-wa-pix">
-              <span className="dh-wa-pix-icon"><MedIcon name="bolt" size={18} /></span>
-              <div className="dh-wa-pix-body">
-                <div className="dh-wa-pix-k">{t.payTitle}</div>
-                <div className="dh-wa-pix-v">{t.payMeta}</div>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-wa-card">
+              <div className="dh-wa-header">
+                <div className="dh-wa-avatar">DH</div>
+                <div className="dh-wa-meta"><div className="dh-wa-name">{t.waName}</div><div className="dh-wa-online">{t.waOnline}</div></div>
               </div>
-              <button className="dh-wa-pix-btn">{t.payBtn}</button>
+              <div className="dh-wa-thread">
+                <div className="dh-wa-msg">{t.msg1}</div>
+                <div className="dh-wa-msg">{t.msg2pre}<strong>{t.msg2val}</strong>{t.msg2pos}</div>
+                <div className="dh-wa-pix">
+                  <span className="dh-wa-pix-icon"><MedIcon name="bolt" size={18} /></span>
+                  <div className="dh-wa-pix-body">
+                    <div className="dh-wa-pix-k">{t.payTitle}</div>
+                    <div className="dh-wa-pix-v">{t.payMeta}</div>
+                  </div>
+                  <button className="dh-wa-pix-btn">{t.payBtn}</button>
+                </div>
+                <div className="dh-wa-msg dh-wa-msg-user">{t.userMsg}</div>
+                <div className="dh-wa-msg dh-wa-ok">{t.okMsg}</div>
+              </div>
             </div>
-            <div className="dh-wa-msg dh-wa-msg-user">{t.userMsg}</div>
-            <div className="dh-wa-msg dh-wa-ok">{t.okMsg}</div>
+            <SourcesFooter />
           </div>
+          <ExplainAside index={17} />
         </div>
-        <SourcesFooter />
       </Scene>
       <SceneCaption index={17} title={c.title} desc={c.desc} />
     </>
@@ -1180,26 +1248,31 @@ function RenderS19() {
   return (
     <>
       <Scene index={19} url="health.iconsai.ai/nf">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-nf-table">
-          <div className="dh-nf-th">
-            {t.th.map((h) => (
-              <span key={h}>{h}</span>
-            ))}
-          </div>
-          {t.rows.map((r) => (
-            <NfRow key={r.num} num={r.num} cliente={r.cliente} valor={r.valor} data={r.data} status={r.status} okLabel={t.okLabel} pendingLabel={t.pendingLabel} />
-          ))}
-        </div>
-        <div className="dh-nf-foot">
-          {t.foot.map((f) => (
-            <div className="dh-nf-foot-stat" key={f.k}>
-              <span className="dh-nf-foot-k">{f.k}</span>
-              <span className={`dh-nf-foot-v ${f.tone === 'warn' ? 'dh-fat-warn' : f.tone === 'ok' ? 'dh-fat-ok' : ''}`}>{f.v}</span>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-nf-table">
+              <div className="dh-nf-th">
+                {t.th.map((h) => (
+                  <span key={h}>{h}</span>
+                ))}
+              </div>
+              {t.rows.map((r) => (
+                <NfRow key={r.num} num={r.num} cliente={r.cliente} valor={r.valor} data={r.data} status={r.status} okLabel={t.okLabel} pendingLabel={t.pendingLabel} />
+              ))}
             </div>
-          ))}
+            <div className="dh-nf-foot">
+              {t.foot.map((f) => (
+                <div className="dh-nf-foot-stat" key={f.k}>
+                  <span className="dh-nf-foot-k">{f.k}</span>
+                  <span className={`dh-nf-foot-v ${f.tone === 'warn' ? 'dh-fat-warn' : f.tone === 'ok' ? 'dh-fat-ok' : ''}`}>{f.v}</span>
+                </div>
+              ))}
+            </div>
+            <SourcesFooter />
+          </div>
+          <ExplainAside index={19} />
         </div>
-        <SourcesFooter />
       </Scene>
       <SceneCaption index={19} title={c.title} desc={c.desc} />
     </>
@@ -1212,37 +1285,42 @@ function RenderS20() {
   return (
     <>
       <Scene index={20} url="health.iconsai.ai/previsao-receita">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-prev-chart">
-          <svg viewBox="0 0 600 220" preserveAspectRatio="none" className="dh-prev-svg">
-            <line x1="0" y1="50" x2="600" y2="50" className="dh-prev-grid" />
-            <line x1="0" y1="110" x2="600" y2="110" className="dh-prev-grid" />
-            <line x1="0" y1="170" x2="600" y2="170" className="dh-prev-grid" />
-            {/* F17 — TODO: Replace with GeoJSON-fed chart */}
-            <path d="M 0 130 L 50 122 L 100 118 L 150 110 L 200 102 L 250 90 L 300 96 L 350 84 L 400 76 L 450 70 L 500 62 L 550 56 L 600 50 L 600 90 L 550 92 L 500 98 L 450 106 L 400 112 L 350 118 L 300 130 L 250 124 L 200 134 L 150 140 L 100 148 L 50 152 L 0 160 Z" className="dh-prev-band" />
-            <path d="M 0 145 L 50 138 L 100 134 L 150 126 L 200 118 L 250 106 L 300 112" className="dh-prev-line dh-prev-line-real" />
-            <path d="M 300 112 L 350 100 L 400 92 L 450 86 L 500 78 L 550 72 L 600 64" className="dh-prev-line dh-prev-line-prev" />
-            {[0, 50, 100, 150, 200, 250, 300].map((x, i) => (
-              <circle key={i} cx={x} cy={[145, 138, 134, 126, 118, 106, 112][i]} r="3" className="dh-prev-dot" />
-            ))}
-            <line x1="300" y1="20" x2="300" y2="200" className="dh-prev-now" />
-            <text x="304" y="32" className="dh-prev-now-label">{t.nowLabel}</text>
-          </svg>
-          <div className="dh-prev-xaxis">
-            {t.months.map((m, i) => (
-              <span key={`${m}-${i}`}>{m}</span>
-            ))}
-          </div>
-        </div>
-        <div className="dh-prev-stats">
-          {t.stats.map((s) => (
-            <div className="dh-prev-stat" key={s.k}>
-              <span className="dh-prev-stat-k">{s.k}</span>
-              <span className={`dh-prev-stat-v ${s.tone === 'ok' ? 'dh-fat-ok' : ''}`}>{s.v}</span>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-prev-chart">
+              <svg viewBox="0 0 600 220" preserveAspectRatio="none" className="dh-prev-svg">
+                <line x1="0" y1="50" x2="600" y2="50" className="dh-prev-grid" />
+                <line x1="0" y1="110" x2="600" y2="110" className="dh-prev-grid" />
+                <line x1="0" y1="170" x2="600" y2="170" className="dh-prev-grid" />
+                {/* F17 — TODO: Replace with GeoJSON-fed chart */}
+                <path d="M 0 130 L 50 122 L 100 118 L 150 110 L 200 102 L 250 90 L 300 96 L 350 84 L 400 76 L 450 70 L 500 62 L 550 56 L 600 50 L 600 90 L 550 92 L 500 98 L 450 106 L 400 112 L 350 118 L 300 130 L 250 124 L 200 134 L 150 140 L 100 148 L 50 152 L 0 160 Z" className="dh-prev-band" />
+                <path d="M 0 145 L 50 138 L 100 134 L 150 126 L 200 118 L 250 106 L 300 112" className="dh-prev-line dh-prev-line-real" />
+                <path d="M 300 112 L 350 100 L 400 92 L 450 86 L 500 78 L 550 72 L 600 64" className="dh-prev-line dh-prev-line-prev" />
+                {[0, 50, 100, 150, 200, 250, 300].map((x, i) => (
+                  <circle key={i} cx={x} cy={[145, 138, 134, 126, 118, 106, 112][i]} r="3" className="dh-prev-dot" />
+                ))}
+                <line x1="300" y1="20" x2="300" y2="200" className="dh-prev-now" />
+                <text x="304" y="32" className="dh-prev-now-label">{t.nowLabel}</text>
+              </svg>
+              <div className="dh-prev-xaxis">
+                {t.months.map((m, i) => (
+                  <span key={`${m}-${i}`}>{m}</span>
+                ))}
+              </div>
             </div>
-          ))}
+            <div className="dh-prev-stats">
+              {t.stats.map((s) => (
+                <div className="dh-prev-stat" key={s.k}>
+                  <span className="dh-prev-stat-k">{s.k}</span>
+                  <span className={`dh-prev-stat-v ${s.tone === 'ok' ? 'dh-fat-ok' : ''}`}>{s.v}</span>
+                </div>
+              ))}
+            </div>
+            <SourcesFooter />
+          </div>
+          <ExplainAside index={20} />
         </div>
-        <SourcesFooter />
       </Scene>
       <SceneCaption index={20} title={c.title} desc={c.desc} />
     </>
@@ -1255,30 +1333,35 @@ function RenderS21() {
   return (
     <>
       <Scene index={21} url="health.iconsai.ai/diagnostico">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-diag-pipeline">
-          <div className="dh-diag-node">
-            <div className="dh-diag-node-k">{t.nSymptoms}</div>
-            {t.symptoms.map((s) => (
-              <div className="dh-diag-chip" key={s}>{s}</div>
-            ))}
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-diag-pipeline">
+              <div className="dh-diag-node">
+                <div className="dh-diag-node-k">{t.nSymptoms}</div>
+                {t.symptoms.map((s) => (
+                  <div className="dh-diag-chip" key={s}>{s}</div>
+                ))}
+              </div>
+              <span className="dh-diag-arrow">→</span>
+              <div className="dh-diag-node">
+                <div className="dh-diag-node-k">{t.nCid}</div>
+                {t.cids.map((cid) => (
+                  <div className="dh-diag-cid" key={cid.code}><span>{cid.code}</span><span className={`dh-diag-prob dh-prob-${cid.tone}`}>{cid.prob}</span></div>
+                ))}
+              </div>
+              <span className="dh-diag-arrow">→</span>
+              <div className="dh-diag-node">
+                <div className="dh-diag-node-k">{t.nPlan}</div>
+                {t.plan.map((p) => (
+                  <div className={`dh-diag-action ${p.warn ? 'dh-diag-action-warn' : ''}`} key={p.text}>{p.text}</div>
+                ))}
+              </div>
+            </div>
+            <SourcesFooter variant="medical" />
           </div>
-          <span className="dh-diag-arrow">→</span>
-          <div className="dh-diag-node">
-            <div className="dh-diag-node-k">{t.nCid}</div>
-            {t.cids.map((cid) => (
-              <div className="dh-diag-cid" key={cid.code}><span>{cid.code}</span><span className={`dh-diag-prob dh-prob-${cid.tone}`}>{cid.prob}</span></div>
-            ))}
-          </div>
-          <span className="dh-diag-arrow">→</span>
-          <div className="dh-diag-node">
-            <div className="dh-diag-node-k">{t.nPlan}</div>
-            {t.plan.map((p) => (
-              <div className={`dh-diag-action ${p.warn ? 'dh-diag-action-warn' : ''}`} key={p.text}>{p.text}</div>
-            ))}
-          </div>
+          <ExplainAside index={21} />
         </div>
-        <SourcesFooter variant="medical" />
       </Scene>
       <SceneCaption index={21} title={c.title} desc={c.desc} />
     </>
@@ -1291,22 +1374,27 @@ function RenderS22() {
   return (
     <>
       <Scene index={22} url="health.iconsai.ai/expectativa-vida">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-life-table">
-          <div className="dh-life-th">
-            {t.th.map((h) => (
-              <span key={h}>{h}</span>
-            ))}
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-life-table">
+              <div className="dh-life-th">
+                {t.th.map((h) => (
+                  <span key={h}>{h}</span>
+                ))}
+              </div>
+              {t.rows.map((r) => (
+                <LifeRow key={r.nome} nome={r.nome} idade={r.idade} comorb={r.comorb} adesao={r.adesao} score={r.score} level={r.level} />
+              ))}
+            </div>
+            <div className="dh-life-foot">
+              <span className="dh-life-badge dh-life-badge-bad">{t.badgeBad}</span>
+              <span className="dh-life-badge">{t.badge}</span>
+            </div>
+            <SourcesFooter variant="medical" />
           </div>
-          {t.rows.map((r) => (
-            <LifeRow key={r.nome} nome={r.nome} idade={r.idade} comorb={r.comorb} adesao={r.adesao} score={r.score} level={r.level} />
-          ))}
+          <ExplainAside index={22} />
         </div>
-        <div className="dh-life-foot">
-          <span className="dh-life-badge dh-life-badge-bad">{t.badgeBad}</span>
-          <span className="dh-life-badge">{t.badge}</span>
-        </div>
-        <SourcesFooter variant="medical" />
       </Scene>
       <SceneCaption index={22} title={c.title} desc={c.desc} />
     </>
@@ -1319,49 +1407,54 @@ function RenderS23() {
   return (
     <>
       <Scene index={23} url="health.iconsai.ai/navegacao">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-flow">
-          <svg viewBox="0 0 640 220" className="dh-flow-svg" preserveAspectRatio="xMidYMid meet">
-            <path d="M 90 110 C 160 60, 220 60, 290 60" className="dh-flow-edge dh-flow-edge-a" />
-            <path d="M 90 110 C 160 160, 220 160, 290 160" className="dh-flow-edge dh-flow-edge-b" />
-            <path d="M 350 60 L 510 60" className="dh-flow-edge dh-flow-edge-a" />
-            <path d="M 350 160 L 510 160" className="dh-flow-edge dh-flow-edge-b" />
-            <text x="180" y="78" className="dh-flow-edge-label">{t.edgeA}</text>
-            <text x="180" y="190" className="dh-flow-edge-label">{t.edgeB}</text>
-            <text x="410" y="50" className="dh-flow-edge-label">{t.recovery}</text>
-            <text x="410" y="180" className="dh-flow-edge-label">{t.recovery}</text>
-            <g>
-              <circle cx="60" cy="110" r="28" className="dh-flow-node" />
-              <text x="60" y="105" className="dh-flow-node-t">{t.nTriagem}</text>
-              <text x="60" y="120" className="dh-flow-node-s">{t.nTriagemSub}</text>
-            </g>
-            <g>
-              <circle cx="320" cy="60" r="28" className="dh-flow-node dh-flow-node-a" />
-              <text x="320" y="55" className="dh-flow-node-t">{t.nTratoA}</text>
-              <text x="320" y="70" className="dh-flow-node-s">{t.nTratoASub}</text>
-            </g>
-            <g>
-              <circle cx="320" cy="160" r="28" className="dh-flow-node dh-flow-node-b" />
-              <text x="320" y="155" className="dh-flow-node-t">{t.nTratoB}</text>
-              <text x="320" y="170" className="dh-flow-node-s">{t.nTratoBSub}</text>
-            </g>
-            <g>
-              <circle cx="540" cy="60" r="28" className="dh-flow-node dh-flow-node-out" />
-              <text x="540" y="55" className="dh-flow-node-t">{t.nAlta}</text>
-              <text x="540" y="70" className="dh-flow-node-s">67%</text>
-            </g>
-            <g>
-              <circle cx="540" cy="160" r="28" className="dh-flow-node dh-flow-node-out" />
-              <text x="540" y="155" className="dh-flow-node-t">{t.nAlta}</text>
-              <text x="540" y="170" className="dh-flow-node-s">89%</text>
-            </g>
-          </svg>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-flow">
+              <svg viewBox="0 0 640 220" className="dh-flow-svg" preserveAspectRatio="xMidYMid meet">
+                <path d="M 90 110 C 160 60, 220 60, 290 60" className="dh-flow-edge dh-flow-edge-a" />
+                <path d="M 90 110 C 160 160, 220 160, 290 160" className="dh-flow-edge dh-flow-edge-b" />
+                <path d="M 350 60 L 510 60" className="dh-flow-edge dh-flow-edge-a" />
+                <path d="M 350 160 L 510 160" className="dh-flow-edge dh-flow-edge-b" />
+                <text x="180" y="78" className="dh-flow-edge-label">{t.edgeA}</text>
+                <text x="180" y="190" className="dh-flow-edge-label">{t.edgeB}</text>
+                <text x="410" y="50" className="dh-flow-edge-label">{t.recovery}</text>
+                <text x="410" y="180" className="dh-flow-edge-label">{t.recovery}</text>
+                <g>
+                  <circle cx="60" cy="110" r="28" className="dh-flow-node" />
+                  <text x="60" y="105" className="dh-flow-node-t">{t.nTriagem}</text>
+                  <text x="60" y="120" className="dh-flow-node-s">{t.nTriagemSub}</text>
+                </g>
+                <g>
+                  <circle cx="320" cy="60" r="28" className="dh-flow-node dh-flow-node-a" />
+                  <text x="320" y="55" className="dh-flow-node-t">{t.nTratoA}</text>
+                  <text x="320" y="70" className="dh-flow-node-s">{t.nTratoASub}</text>
+                </g>
+                <g>
+                  <circle cx="320" cy="160" r="28" className="dh-flow-node dh-flow-node-b" />
+                  <text x="320" y="155" className="dh-flow-node-t">{t.nTratoB}</text>
+                  <text x="320" y="170" className="dh-flow-node-s">{t.nTratoBSub}</text>
+                </g>
+                <g>
+                  <circle cx="540" cy="60" r="28" className="dh-flow-node dh-flow-node-out" />
+                  <text x="540" y="55" className="dh-flow-node-t">{t.nAlta}</text>
+                  <text x="540" y="70" className="dh-flow-node-s">67%</text>
+                </g>
+                <g>
+                  <circle cx="540" cy="160" r="28" className="dh-flow-node dh-flow-node-out" />
+                  <text x="540" y="155" className="dh-flow-node-t">{t.nAlta}</text>
+                  <text x="540" y="170" className="dh-flow-node-s">89%</text>
+                </g>
+              </svg>
+            </div>
+            <div className="dh-flow-legend">
+              <span className="dh-flow-leg dh-flow-leg-a">{t.legA}</span>
+              <span className="dh-flow-leg dh-flow-leg-b">{t.legB}</span>
+            </div>
+            <SourcesFooter variant="medical" />
+          </div>
+          <ExplainAside index={23} />
         </div>
-        <div className="dh-flow-legend">
-          <span className="dh-flow-leg dh-flow-leg-a">{t.legA}</span>
-          <span className="dh-flow-leg dh-flow-leg-b">{t.legB}</span>
-        </div>
-        <SourcesFooter variant="medical" />
       </Scene>
       <SceneCaption index={23} title={c.title} desc={c.desc} />
     </>
@@ -1374,23 +1467,28 @@ function RenderS24() {
   return (
     <>
       <Scene index={24} url="health.iconsai.ai/combinacao-tratamentos">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-matrix">
-          <div className="dh-matrix-row dh-matrix-row-head">
-            <span className="dh-matrix-corner">{t.corner}</span>
-            {t.cols.map((col) => (
-              <span className="dh-matrix-h" key={col}>{col}</span>
-            ))}
-          </div>
-          {t.rows.map((row) => (
-            <MatrixRow tratamento={row.tratamento} key={row.tratamento}>
-              {row.cells.map((cell, i) => (
-                <MatrixCell key={`${row.tratamento}-${i}`} prob={cell.prob} ic={cell.ic} tone={cell.tone} />
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-matrix">
+              <div className="dh-matrix-row dh-matrix-row-head">
+                <span className="dh-matrix-corner">{t.corner}</span>
+                {t.cols.map((col) => (
+                  <span className="dh-matrix-h" key={col}>{col}</span>
+                ))}
+              </div>
+              {t.rows.map((row) => (
+                <MatrixRow tratamento={row.tratamento} key={row.tratamento}>
+                  {row.cells.map((cell, i) => (
+                    <MatrixCell key={`${row.tratamento}-${i}`} prob={cell.prob} ic={cell.ic} tone={cell.tone} />
+                  ))}
+                </MatrixRow>
               ))}
-            </MatrixRow>
-          ))}
+            </div>
+            <SourcesFooter variant="medical" strong />
+          </div>
+          <ExplainAside index={24} />
         </div>
-        <SourcesFooter variant="medical" strong />
       </Scene>
       <SceneCaption index={24} title={c.title} desc={c.desc} />
     </>

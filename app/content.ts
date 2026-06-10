@@ -966,6 +966,333 @@ export const S24 = {
   },
 } satisfies L10n<S24>
 
+/* ───────────────────────── EXPLAIN PANELS (slides sem side panel) ───────────────────────── */
+type ExplainEntry = { kicker: string; lines: string[] }
+export type ExplainMap = Record<number, L10n<ExplainEntry>>
+
+export const EXPLAIN: ExplainMap = {
+  2: {
+    'pt-BR': { kicker: 'CADASTRO', lines: [
+      'CPF cruza com dados públicos da Receita Federal em menos de 2 segundos.',
+      'Endereço completado automaticamente via ViaCEP — o paciente só confirma.',
+      'Pré-preenchimento reduz erros de digitação e agiliza a recepção.',
+      'Dados pessoais ficam criptografados e nunca são compartilhados com terceiros.',
+    ]},
+    'pt-PT': { kicker: 'REGISTO', lines: [
+      'O NIF cruza com registos públicos em menos de 2 segundos.',
+      'A morada é completada automaticamente via CTT — o doente só confirma.',
+      'O pré-preenchimento reduz erros de digitação e agiliza a recepção.',
+      'Os dados pessoais ficam cifrados e nunca são partilhados com terceiros.',
+    ]},
+    en: { kicker: 'REGISTRATION', lines: [
+      'ID is cross-checked against public records in under 2 seconds.',
+      'Address auto-completed via postal lookup — the patient just confirms.',
+      'Prefill reduces typos and speeds up front-desk intake.',
+      'Personal data is encrypted and never shared with third parties.',
+    ]},
+  },
+  5: {
+    'pt-BR': { kicker: 'CONSULTA', lines: [
+      'Escuta ativa com IA: o paciente fala livremente por até 2 minutos.',
+      'Waveform em tempo real dá feedback visual de que o áudio está sendo captado.',
+      'Sem termos técnicos — a IA estrutura os sintomas depois.',
+      'Gravação processada localmente, sem envio para servidores externos.',
+    ]},
+    'pt-PT': { kicker: 'CONSULTA', lines: [
+      'Escuta ativa com IA: o doente fala livremente durante até 2 minutos.',
+      'O waveform em tempo real dá feedback visual de que o áudio está a ser captado.',
+      'Sem termos técnicos — a IA estrutura os sintomas depois.',
+      'A gravação é processada localmente, sem envio para servidores externos.',
+    ]},
+    en: { kicker: 'CONSULT', lines: [
+      'Active listening with AI: the patient speaks freely for up to 2 minutes.',
+      'Real-time waveform gives visual feedback that audio is being captured.',
+      'No medical jargon needed — the AI structures symptoms afterwards.',
+      'Recording is processed locally, never sent to external servers.',
+    ]},
+  },
+  7: {
+    'pt-BR': { kicker: 'SINAIS VITAIS', lines: [
+      'PA, FC, glicemia, IMC e SpO2 digitados ou importados de dispositivos.',
+      'Classificação automática com red flags em tempo real.',
+      'Escala de dor validada (0–10) integrada à triagem clínica.',
+      'Valores fora do normal disparam alertas visuais imediatos.',
+    ]},
+    'pt-PT': { kicker: 'SINAIS VITAIS', lines: [
+      'TA, FC, glicemia, IMC e SpO2 digitados ou importados de dispositivos.',
+      'Classificação automática com alertas em tempo real.',
+      'Escala de dor validada (0–10) integrada à triagem clínica.',
+      'Valores fora do normal disparam alertas visuais imediatos.',
+    ]},
+    en: { kicker: 'VITAL SIGNS', lines: [
+      'BP, HR, glucose, BMI, and SpO2 typed or imported from devices.',
+      'Automatic classification with real-time red flags.',
+      'Validated pain scale (0–10) integrated into clinical triage.',
+      'Out-of-range values trigger immediate visual alerts.',
+    ]},
+  },
+  9: {
+    'pt-BR': { kicker: 'EXAMES', lines: [
+      'Upload de PDF, JPG ou PNG — até 20 MB por arquivo.',
+      'IconsAI Vision extrai valores automaticamente do documento.',
+      'Progresso em tempo real: upload, OCR e indexação em paralelo.',
+      'Resultados incorporados ao laudo SOAP sem redigitação.',
+    ]},
+    'pt-PT': { kicker: 'EXAMES', lines: [
+      'Carregamento de PDF, JPG ou PNG — até 20 MB por ficheiro.',
+      'IconsAI Vision extrai valores automaticamente do documento.',
+      'Progresso em tempo real: upload, OCR e indexação em paralelo.',
+      'Resultados incorporados ao laudo SOAP sem redigitação.',
+    ]},
+    en: { kicker: 'LAB RESULTS', lines: [
+      'Upload PDF, JPG, or PNG — up to 20 MB per file.',
+      'IconsAI Vision extracts values automatically from the document.',
+      'Real-time progress: upload, OCR, and indexing run in parallel.',
+      'Results flow into the SOAP report without re-typing.',
+    ]},
+  },
+  10: {
+    'pt-BR': { kicker: 'MEDICAMENTOS', lines: [
+      'RAG cruza a transcrição do áudio com o catálogo de medicações.',
+      'O paciente marca o que usa — sem precisar lembrar nomes exatos.',
+      'Alertas automáticos de interações medicamentosas conhecidas.',
+      'Dose e frequência registradas para conferência no laudo final.',
+    ]},
+    'pt-PT': { kicker: 'MEDICAMENTOS', lines: [
+      'RAG cruza a transcrição do áudio com o catálogo de medicamentos.',
+      'O doente marca o que toma — sem precisar lembrar nomes exatos.',
+      'Alertas automáticos de interações medicamentosas conhecidas.',
+      'Dose e frequência registadas para conferência no laudo final.',
+    ]},
+    en: { kicker: 'MEDICATIONS', lines: [
+      'RAG cross-references the audio transcript with the medication catalog.',
+      'The patient checks what they take — no need to recall exact names.',
+      'Automatic alerts for known drug interactions.',
+      'Dose and frequency recorded for verification in the final report.',
+    ]},
+  },
+  13: {
+    'pt-BR': { kicker: 'AGENDA', lines: [
+      'Visão semanal com slots por turno — arrastar para agendar.',
+      'Confirmação automática via WhatsApp: sem ligação, sem retrabalho.',
+      'Ocupação visual imediata: verde (livre), amarelo (pendente), cheio.',
+      'Integração com faturamento — consulta marcada já aparece na previsão.',
+    ]},
+    'pt-PT': { kicker: 'AGENDA', lines: [
+      'Visão semanal com horários por turno — arrastar para agendar.',
+      'Confirmação automática via WhatsApp: sem telefonema, sem retrabalho.',
+      'Ocupação visual imediata: verde (livre), amarelo (pendente), cheio.',
+      'Integração com faturação — consulta marcada já aparece na previsão.',
+    ]},
+    en: { kicker: 'SCHEDULE', lines: [
+      'Weekly view with shift-based slots — drag to book.',
+      'Automatic confirmation by text: no phone call, no rework.',
+      'Instant visual occupancy: green (open), yellow (pending), full.',
+      'Billing integration — booked visit already shows in the forecast.',
+    ]},
+  },
+  14: {
+    'pt-BR': { kicker: 'FATURAMENTO', lines: [
+      'Previsto vs realizado nas próximas 4 semanas em barras comparativas.',
+      'Ticket médio, cancelamentos e taxa de no-show em destaque.',
+      'Curva real cruzada com agenda confirmada identifica gap antecipadamente.',
+      'Alertas de desvio disparam antes de fechar o mês.',
+    ]},
+    'pt-PT': { kicker: 'FATURAÇÃO', lines: [
+      'Previsto vs realizado nas próximas 4 semanas em barras comparativas.',
+      'Ticket médio, cancelamentos e taxa de no-show em destaque.',
+      'Curva real cruzada com agenda confirmada identifica o desvio antecipadamente.',
+      'Alertas de desvio disparam antes de fechar o mês.',
+    ]},
+    en: { kicker: 'BILLING', lines: [
+      'Forecast vs actual for the next 4 weeks in comparative bars.',
+      'Average ticket, cancellations, and no-show rate highlighted.',
+      'Actual curve cross-checked with confirmed schedule spots gaps early.',
+      'Variance alerts fire before month-end close.',
+    ]},
+  },
+  15: {
+    'pt-BR': { kicker: 'INVENTÁRIO', lines: [
+      'Visão por item: estoque atual, mínimo, sugestão de compra.',
+      'Consumo médio das últimas 4 semanas calcula reposição automática.',
+      'Vermelho = abaixo do mínimo, com pedido sugerido ao fornecedor.',
+      'Auto-restock para itens críticos dispensa intervenção manual.',
+    ]},
+    'pt-PT': { kicker: 'INVENTÁRIO', lines: [
+      'Visão por artigo: stock atual, mínimo, sugestão de compra.',
+      'Consumo médio das últimas 4 semanas calcula reposição automática.',
+      'Vermelho = abaixo do mínimo, com encomenda sugerida ao fornecedor.',
+      'Reposição automática para artigos críticos dispensa intervenção manual.',
+    ]},
+    en: { kicker: 'INVENTORY', lines: [
+      'View by item: current stock, minimum, purchase suggestion.',
+      'Average usage over the last 4 weeks drives automatic restock.',
+      'Red = below minimum, with a suggested order to the supplier.',
+      'Auto-restock for critical items requires no manual intervention.',
+    ]},
+  },
+  16: {
+    'pt-BR': { kicker: 'CONTROLADOS', lines: [
+      'Rastreabilidade completa por lote, validade e classe farmacêutica.',
+      'Alerta automático 60 dias antes do vencimento de cada lote.',
+      'Conformidade com ANVISA/SNGPC integrada ao fluxo da farmácia.',
+      'Visualização de saldo por substância — crítico em destaque.',
+    ]},
+    'pt-PT': { kicker: 'CONTROLADOS', lines: [
+      'Rastreabilidade completa por lote, validade e classe farmacêutica.',
+      'Alerta automático 60 dias antes da validade de cada lote.',
+      'Conformidade com INFARMED integrada ao fluxo da farmácia.',
+      'Visualização de saldo por substância — crítico em destaque.',
+    ]},
+    en: { kicker: 'CONTROLLED', lines: [
+      'Full traceability by lot, expiration, and drug schedule.',
+      'Automatic alert 60 days before each lot expires.',
+      'DEA compliance integrated into the pharmacy workflow.',
+      'Balance view by substance — critical items highlighted.',
+    ]},
+  },
+  17: {
+    'pt-BR': { kicker: 'COBRANÇA', lines: [
+      'Sequência humanizada via WhatsApp: lembrete D-3, D-1, D+0.',
+      'Botão PIX integrado — o paciente quita em segundos sem sair do chat.',
+      'Confirmação automática de recebimento fecha o ciclo financeiro.',
+      'Reduz inadimplência sem constranger o paciente.',
+    ]},
+    'pt-PT': { kicker: 'COBRANÇA', lines: [
+      'Sequência humanizada via WhatsApp: lembrete D-3, D-1, D+0.',
+      'Botão MB WAY integrado — o doente paga em segundos sem sair do chat.',
+      'Confirmação automática de recebimento fecha o ciclo financeiro.',
+      'Reduz incumprimento sem constranger o doente.',
+    ]},
+    en: { kicker: 'BILLING', lines: [
+      'Humanized sequence via messaging: reminder D-3, D-1, D+0.',
+      'Integrated instant-pay button — patient settles in seconds without leaving chat.',
+      'Automatic payment confirmation closes the financial cycle.',
+      'Reduces delinquency without embarrassing the patient.',
+    ]},
+  },
+  19: {
+    'pt-BR': { kicker: 'NOTAS FISCAIS', lines: [
+      'NFS-e emitida automaticamente após cada atendimento.',
+      'XML + PDF devolvidos ao paciente em tempo real.',
+      'Status SEFAZ monitorado — rejeições tratadas sem intervenção manual.',
+      'Totais mensais consolidados para contabilidade e auditoria.',
+    ]},
+    'pt-PT': { kicker: 'FATURAS', lines: [
+      'Fatura eletrónica emitida automaticamente após cada consulta.',
+      'XML + PDF devolvidos ao doente em tempo real.',
+      'Comunicação à AT monitorada — rejeições tratadas sem intervenção manual.',
+      'Totais mensais consolidados para contabilidade e auditoria.',
+    ]},
+    en: { kicker: 'INVOICES', lines: [
+      'E-invoice issued automatically after each visit.',
+      'XML + PDF returned to the patient in real time.',
+      'Tax authority status monitored — rejections handled without manual intervention.',
+      'Monthly totals consolidated for accounting and audit.',
+    ]},
+  },
+  20: {
+    'pt-BR': { kicker: 'RECEITA', lines: [
+      'Projeção de 12 meses com modelo VAR, sazonalidade e feriados.',
+      'Banda de confiança IC 80% sombreada sobre a curva prevista.',
+      'CAGR, pico sazonal e projeção total destacados como KPIs.',
+      'Linha de corte "hoje" separa realizado de previsto no gráfico.',
+    ]},
+    'pt-PT': { kicker: 'RECEITA', lines: [
+      'Projeção de 12 meses com modelo VAR, sazonalidade e feriados.',
+      'Banda de confiança IC 80% sombreada sobre a curva prevista.',
+      'CAGR, pico sazonal e projeção total destacados como KPIs.',
+      'Linha de corte "hoje" separa realizado de previsto no gráfico.',
+    ]},
+    en: { kicker: 'REVENUE', lines: [
+      '12-month projection using a VAR model with seasonality and holidays.',
+      '80% confidence band shaded over the forecast curve.',
+      'CAGR, seasonal peak, and total projection highlighted as KPIs.',
+      '"Today" cutoff line separates actual from forecast in the chart.',
+    ]},
+  },
+  21: {
+    'pt-BR': { kicker: 'DIAGNÓSTICO', lines: [
+      'Pipeline: sintomas → CID-10 com probabilidades calibradas → plano.',
+      'Probabilidades calibradas — decisão final é sempre do médico.',
+      'Plano sugerido inclui conduta imediata e gatilhos de encaminhamento.',
+      'Red flag automático quando o quadro indica urgência ou reavaliação.',
+    ]},
+    'pt-PT': { kicker: 'DIAGNÓSTICO', lines: [
+      'Pipeline: sintomas → CID-10 com probabilidades calibradas → plano.',
+      'Probabilidades calibradas — a decisão final é sempre do médico.',
+      'Plano sugerido inclui conduta imediata e critérios de encaminhamento.',
+      'Red flag automático quando o quadro indica urgência ou reavaliação.',
+    ]},
+    en: { kicker: 'DIAGNOSIS', lines: [
+      'Pipeline: symptoms → ICD-10 with calibrated probabilities → plan.',
+      'Calibrated probabilities — the final decision is always the physician\'s.',
+      'Suggested plan includes immediate action and referral triggers.',
+      'Automatic red flag when the presentation indicates urgency or reassessment.',
+    ]},
+  },
+  22: {
+    'pt-BR': { kicker: 'RISCO', lines: [
+      'Score 0–100 combina comorbidades, idade e taxa de adesão.',
+      'Pacientes em vermelho entram automaticamente em busca ativa.',
+      'Expectativa de vida ajustada com intervalo de confiança 95%.',
+      'Priorização objetiva substitui triagem subjetiva de risco.',
+    ]},
+    'pt-PT': { kicker: 'RISCO', lines: [
+      'Score 0–100 combina comorbilidades, idade e taxa de adesão.',
+      'Doentes em vermelho entram automaticamente em busca ativa.',
+      'Esperança de vida ajustada com intervalo de confiança 95%.',
+      'Priorização objetiva substitui triagem subjetiva de risco.',
+    ]},
+    en: { kicker: 'RISK', lines: [
+      'Score 0–100 combines comorbidities, age, and adherence rate.',
+      'Red-flagged patients automatically enter active outreach.',
+      'Adjusted life expectancy with 95% confidence interval.',
+      'Objective prioritization replaces subjective risk triage.',
+    ]},
+  },
+  23: {
+    'pt-BR': { kicker: 'TRAJETÓRIAS', lines: [
+      'Diagrama de fluxo com probabilidades de desfecho por caminho.',
+      'Triagem → tratamento A ou B → alta, com percentuais em cada aresta.',
+      'Recuperação de cada via visível — compara eficácia dos caminhos.',
+      'Visualização tipo Markov para decisão clínica baseada em evidência.',
+    ]},
+    'pt-PT': { kicker: 'TRAJETÓRIAS', lines: [
+      'Diagrama de fluxo com probabilidades de desfecho por caminho.',
+      'Triagem → tratamento A ou B → alta, com percentagens em cada aresta.',
+      'Recuperação de cada via visível — compara eficácia dos caminhos.',
+      'Visualização tipo Markov para decisão clínica baseada em evidência.',
+    ]},
+    en: { kicker: 'TRAJECTORIES', lines: [
+      'Flow diagram with outcome probabilities per pathway.',
+      'Triage → treatment A or B → discharge, with percentages on each edge.',
+      'Recovery rate for each pathway visible — compare effectiveness.',
+      'Markov-style visualization for evidence-based clinical decisions.',
+    ]},
+  },
+  24: {
+    'pt-BR': { kicker: 'TRATAMENTO', lines: [
+      'Matriz de combinações terapêuticas × desfechos clínicos.',
+      'Cada célula traz probabilidade + intervalo de confiança 95%.',
+      'Destaques visuais para combinações com maior evidência de eficácia.',
+      'Base: meta-análises de UpToDate, PubMed e Cochrane — valores ilustrativos.',
+    ]},
+    'pt-PT': { kicker: 'TRATAMENTO', lines: [
+      'Matriz de combinações terapêuticas × desfechos clínicos.',
+      'Cada célula traz probabilidade + intervalo de confiança 95%.',
+      'Destaques visuais para combinações com maior evidência de eficácia.',
+      'Base: meta-análises de UpToDate, PubMed e Cochrane — valores ilustrativos.',
+    ]},
+    en: { kicker: 'TREATMENT', lines: [
+      'Matrix of therapeutic combinations × clinical outcomes.',
+      'Each cell shows probability + 95% confidence interval.',
+      'Visual highlights for combinations with strongest efficacy evidence.',
+      'Based on meta-analyses from UpToDate, PubMed, and Cochrane — illustrative values.',
+    ]},
+  },
+}
+
 /* ───────────────────────── FECHO (§6.12) ───────────────────────── */
 export const FECHO = {
   'pt-BR': { thanks: 'Obrigado.', tagline: 'Inteligência clínica para a saúde moderna.' },
