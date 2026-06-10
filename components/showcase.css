@@ -161,8 +161,7 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 14px;
-  padding: 22px;
+  gap: 18px;
 }
 .dh-opening-sub {
   margin: 0;
@@ -3478,7 +3477,7 @@
 
 .dh-opening {
   align-items: stretch;
-  gap: 18px;
+  gap: 6px;
 }
 .dh-opening-grid {
   width: 100%;
@@ -3498,8 +3497,8 @@
 .dh-opening-copy {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 28px 30px;
+  gap: 12px;
+  padding: 20px 22px;
   background:
     linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(236, 253, 245, 0.88));
   box-shadow: 0 28px 62px rgba(15, 118, 110, 0.12);
