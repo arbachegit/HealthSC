@@ -6,7 +6,7 @@ const LANG = process.env.LANGBTN || 'BR'
 const measure = () => {
   const slide = document.querySelector('.slide[data-active="true"]') || document.querySelectorAll('.slide')[Math.round(document.querySelector('.deck').scrollLeft/window.innerWidth)]
   if(!slide) return null
-  const band=slide.querySelector('.slide-band'), fit=slide.querySelector('.slide-fit'); if(!band||!fit) return null
+  const band=slide.querySelector('.slide-band'), fit=slide.querySelector('.slide-content'); if(!band||!fit) return null
   const cs=getComputedStyle(band), padT=parseFloat(cs.paddingTop), padB=parseFloat(cs.paddingBottom)
   const b=band.getBoundingClientRect(), r=fit.getBoundingClientRect(), avail=b.height-padT-padB
   return { cut: Math.round(Math.max((b.top+padT)-r.top, r.bottom-(b.bottom-padB))*10)/10, fill: Math.round(r.height/avail*100)/100 }

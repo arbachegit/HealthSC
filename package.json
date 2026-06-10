@@ -5,6 +5,7 @@
   "scripts": {
     "predev": "lsof -ti :3103 | xargs kill -9 2>/dev/null || true",
     "dev": "next dev -p 3103",
+    "prebuild": "bash audit-css.sh && bash valida-skill.sh",
     "build": "next build",
     "start": "next start -p 3103",
     "typecheck": "tsc --noEmit"

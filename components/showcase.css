@@ -180,7 +180,7 @@
 }
 .dh-opening-story-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.24em;
@@ -209,7 +209,7 @@
 .dh-opening-console-tag,
 .dh-opening-console-status {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -274,7 +274,7 @@
 }
 .dh-opening-patient-score-k {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -304,7 +304,7 @@
 .dh-opening-stream-row:last-child { border-bottom: none; }
 .dh-opening-stream-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -689,7 +689,7 @@
 .dh-termo-panel-kicker,
 .dh-termo-panel-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -699,7 +699,7 @@
   padding: 5px 9px;
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -733,7 +733,7 @@
 }
 .dh-termo-panel-meta span {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -769,7 +769,7 @@
   margin-top: auto;
   padding-top: 2px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--dh-primary-deep);
@@ -953,7 +953,7 @@
 
 .dh-rf-loader-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.32em;
@@ -1082,7 +1082,7 @@
 }
 .dh-rf-step {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--dh-muted);
   letter-spacing: 0.04em;
@@ -1134,7 +1134,7 @@
   background: var(--dh-primary-soft);
   border: 1px solid var(--dh-border-strong);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--dh-primary-deep);
 }
@@ -1149,7 +1149,7 @@
 }
 .dh-confirm-side-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -1211,7 +1211,7 @@
 }
 .dh-aura-side-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -1576,7 +1576,7 @@
 }
 .dh-autoexam-guide-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -1606,7 +1606,7 @@
   top: 16px;
   left: 16px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -1648,7 +1648,7 @@
 }
 .dh-autoexam-preview-core span {
   max-width: 11ch;
-  font-size: 11px;
+  font-size: 12px;
   color: rgba(255, 255, 255, 0.84);
 }
 .dh-autoexam-steps {
@@ -1856,7 +1856,7 @@
 }
 .dh-chat-side-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -1986,7 +1986,7 @@
 }
 .dh-chat-compose-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -2048,7 +2048,7 @@
   color: #fff;
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -2160,7 +2160,7 @@
   text-align: center;
   border-radius: 5px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
 }
 .dh-cal-day-full {
@@ -2200,7 +2200,7 @@
 }
 .dh-stock-val {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--dh-primary-deep);
   text-align: right;
@@ -2218,7 +2218,7 @@
   border: none;
   background: var(--dh-primary);
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   flex-shrink: 0;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
@@ -2240,7 +2240,7 @@
 }
 .dh-audio-time {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--dh-primary-deep);
   flex-shrink: 0;
@@ -2260,7 +2260,7 @@
   border-radius: 999px;
   align-self: flex-start;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -2300,7 +2300,7 @@
 .dh-agenda-row-head { padding-bottom: 4px; border-bottom: 1px solid var(--dh-border); }
 .dh-agenda-cell-head {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -2406,7 +2406,7 @@
   position: absolute;
   top: -18px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--dh-text);
   white-space: nowrap;
@@ -2418,7 +2418,7 @@
   left: 50%;
   transform: translate(-50%, -50%) rotate(-90deg);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--dh-amber-strong);
   white-space: nowrap;
@@ -2447,7 +2447,7 @@
 }
 .dh-fat-stat-k {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -2484,7 +2484,7 @@
 }
 .dh-stock-th {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -2511,7 +2511,7 @@
 }
 .dh-stock-tr-status {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -2570,7 +2570,7 @@
 }
 .dh-farma-th {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -2593,7 +2593,7 @@
   display: inline-flex;
   justify-content: center;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   background: var(--dh-primary-deep);
   color: #fff;
@@ -2743,7 +2743,7 @@
 }
 .dh-wa-pix-v {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--dh-muted);
   margin-top: 2px;
@@ -2780,7 +2780,7 @@
 }
 .dh-fraud-doc-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.25em;
@@ -2820,7 +2820,7 @@
 }
 .dh-fraud-score-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -2907,7 +2907,7 @@
 }
 .dh-nf-th {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -2925,7 +2925,7 @@
 .dh-nf-tr-data { font-size: 12px; color: var(--dh-muted); }
 .dh-nf-tr-status {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -2953,7 +2953,7 @@
 }
 .dh-nf-foot-k {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -3015,7 +3015,7 @@
 .dh-prev-now-label {
   fill: var(--dh-amber-strong);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.2em;
 }
@@ -3023,7 +3023,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--dh-muted);
   text-align: center;
@@ -3044,7 +3044,7 @@
 }
 .dh-prev-stat-k {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -3078,7 +3078,7 @@
 }
 .dh-diag-node-k {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -3171,7 +3171,7 @@
 }
 .dh-life-th {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -3279,7 +3279,7 @@
 .dh-flow-edge-b { stroke: var(--dh-teal-strong); }
 .dh-flow-edge-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   fill: var(--dh-primary-deep);
 }
@@ -3294,7 +3294,7 @@
 .dh-flow-node-t {
   text-anchor: middle;
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   fill: var(--dh-text);
 }
@@ -3310,7 +3310,7 @@
 .dh-flow-node-s {
   text-anchor: middle;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
   fill: var(--dh-muted);
 }
@@ -3358,7 +3358,7 @@
 .dh-matrix-corner {
   padding: 8px 10px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -3367,7 +3367,7 @@
 .dh-matrix-h {
   padding: 8px 10px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -3408,7 +3408,7 @@
 }
 .dh-matrix-cell-ic {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--dh-muted);
 }
@@ -3481,7 +3481,6 @@
 }
 .dh-opening-grid {
   width: 100%;
-  max-width: 1480px;
   margin: auto;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
@@ -3525,7 +3524,7 @@
 .dh-opening-patient-score-k,
 .dh-opening-stream-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -3727,7 +3726,7 @@
 }
 .dh-rf-counter-unit {
   margin-left: 0;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -3784,7 +3783,7 @@
   border-radius: 999px;
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.18);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--dh-primary-deep);
 }
@@ -3796,7 +3795,7 @@
 }
 .dh-confirm-side-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -3880,7 +3879,7 @@
 }
 .dh-aura-side-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -3933,7 +3932,7 @@
 }
 .dh-autoexam-guide-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -3944,7 +3943,7 @@
   border-radius: 999px;
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.18);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--dh-primary-deep);
 }
@@ -3968,7 +3967,7 @@
   padding: 6px 9px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--dh-primary-deep);
 }
@@ -3994,7 +3993,7 @@
   gap: 2px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-size: 10px;
+  font-size: 12px;
   box-shadow: 0 18px 32px rgba(44, 16, 8, 0.24);
 }
 .dh-autoexam-preview-core strong {
@@ -4002,7 +4001,7 @@
   letter-spacing: -0.03em;
 }
 .dh-autoexam-preview-core span {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.16em;
 }
 .dh-autoexam-steps {
@@ -4093,7 +4092,7 @@
 .dh-chat-compose-label,
 .dh-chat-side-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -4218,7 +4217,7 @@
 }
 .dh-fraud-trust-kicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -4281,7 +4280,7 @@
   .dh-laudo-soap { grid-template-columns: 1fr; }
   .dh-gestao-strip { grid-template-columns: 1fr; }
   .dh-tagline { font-size: 12px; }
-  .dh-badge { font-size: 11px; }
+  .dh-badge { font-size: 12px; }
   .dh-diag-pipeline { grid-template-columns: 1fr; }
   .dh-diag-arrow { transform: rotate(90deg); }
   .dh-fat-stats { grid-template-columns: repeat(2, 1fr); }

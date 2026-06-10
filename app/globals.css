@@ -92,22 +92,26 @@ body::after  { bottom: 0; height: clamp(68px, 9vh, 100px); }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding-top: clamp(76px, 9vh, 120px);
-  padding-bottom: clamp(88px, 11vh, 140px);
+  padding-top: clamp(72px, 9vh, 100px);
+  padding-bottom: clamp(68px, 9vh, 100px);
   padding-left: 2.4vw;
   padding-right: 2.4vw;
 }
 .slide-stage {
   flex: 1;
   min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
   display: flex;
   align-items: stretch;
+  overflow: hidden;
 }
 .slide-content {
   width: 100%;
   height: 100%;
   align-items: stretch;
-  transform-origin: center center;
+  transform-origin: center top;
   will-change: transform;
 }
 
@@ -204,6 +208,20 @@ body::after  { bottom: 0; height: clamp(68px, 9vh, 100px); }
 .audio-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .audio-btn svg polygon { fill: currentColor; stroke: currentColor; }
 
+/* ═══════════════════ PDF button — 2º no dock (§8.6) ═══════════════════ */
+.pdf-btn {
+  display: inline-flex; align-items: center; gap: .35rem; height: 46px; padding: 0 .85rem;
+  border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,.8);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  color: var(--gray); font-family: var(--font-mono);
+  font-size: .68rem; letter-spacing: .06em; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15,23,42,.06);
+  transition: border-color .25s, color .25s, background .25s;
+}
+.pdf-btn:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, white); }
+.pdf-btn:active { transform: scale(.95); }
+.pdf-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
 /* ═══════════════════ Painel de leitura «Aa» — variante clara ═══════════════════ */
 .reading-panel {
   position: fixed; z-index: 130; right: max(1.5rem, env(safe-area-inset-right)); top: 5.5rem;
@@ -280,7 +298,19 @@ body::after  { bottom: 0; height: clamp(68px, 9vh, 100px); }
   .lang-switch { height: 40px; }
   .lang-btn { height: 32px; min-width: 30px; padding: 0 .4rem; font-size: .75rem; }
   .reading-btn, .audio-btn { width: 40px; height: 40px; }
+  .pdf-btn { height: 40px; padding: 0 .55rem; font-size: .6rem; }
+  .pdf-btn span { display: none; }
   .reading-panel { top: auto; bottom: 5.5rem; left: 1rem; right: 1rem; width: auto; max-height: 50vh; }
+}
+
+/* ═══════════════════ Viewports curtos (laptop 13", tablet landscape) ═══════════════════ */
+@media (max-height: 700px) {
+  .slide-band { padding-top: 56px; padding-bottom: 48px; }
+  .slide-stage { padding: 12px; }
+  .slide-nav__btn { width: 36px; height: 36px; }
+  .slide-nav__btn svg { width: 16px; height: 16px; }
+  .slide-foot .logo-foot { font-size: .8rem; }
+  .slide-foot__legal { font-size: .5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -289,18 +319,32 @@ body::after  { bottom: 0; height: clamp(68px, 9vh, 100px); }
   .slide-nav__btn { transition: none; }
 }
 
-/* ── PDF documento (T1.11, T3.6) ── */
-.pdf-doc{display:none;}
-.pdf-page{width:210mm;min-height:296mm;box-sizing:border-box;padding:18mm 16mm 16mm;position:relative;overflow:hidden;background:#fff;color:#14181f;font-family:"Inter Tight",Inter,system-ui,sans-serif;page-break-after:always;}
-.pdf-page:last-child{page-break-after:auto;}
-.pdf-mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
-.pdf-cover{background:#05080c !important;color:#e8eaed;padding:0;}
-.pdf-content{padding:20mm 22mm 25mm 22mm;}
+/* ── PDF documento (skill /pdf) ── */
+.pdf-doc { display: none; }
+.pdf-page { width: 210mm; min-height: 296mm; box-sizing: border-box; padding: 18mm 16mm 16mm; position: relative; overflow: hidden; background: #fff; color: #1f2937; font-family: "Inter Tight", Inter, system-ui, sans-serif; page-break-after: always; }
+.pdf-page:last-child { page-break-after: auto; }
+.pdf-mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+.pdf-cover { background: #05080c !important; color: #e8eaed; padding: 0; }
+.pdf-cover-in { padding: 22mm 25mm; min-height: 296mm; display: flex; flex-direction: column; position: relative; }
+.pdf-content { padding: 20mm 22mm 25mm 22mm; }
+.pdf-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6mm; padding-bottom: 3mm; border-bottom: 1px solid #e5e7eb; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 8pt; color: #9ca3af; }
+.pdf-head .brand { display: inline-flex; align-items: center; gap: .3em; }
+.pdf-foot { display: flex; justify-content: space-between; align-items: center; position: absolute; bottom: 16mm; left: 16mm; right: 16mm; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 8pt; color: #9ca3af; }
+.pdf-sec-kick { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #10b981; margin-bottom: 3mm; }
+.pdf-table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+.pdf-table th { text-align: left; font-weight: 700; border-bottom: 2px solid #1f2937; padding: 2.5mm 3mm; font-size: 9pt; }
+.pdf-table td { border-bottom: 1px solid #e5e7eb; padding: 2.5mm 3mm; }
+.pdf-wm { display: inline-flex; align-items: center; gap: .02em; font-family: "Plus Jakarta Sans", system-ui, sans-serif; font-weight: 700; font-size: 1.6rem; }
+.pdf-wm .i { font-family: "Libre Baskerville", Georgia, serif; font-weight: 700; font-size: 1.55em; color: #f97316; }
+.pdf-wm .c { font-weight: 800; color: #1f2937; }
+.pdf-wm .a { font-weight: 800; color: #ef4444; }
+.pdf-wm.on-dark .c { color: #ffffff; }
+.pdf-foot-legal { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 7.5pt; color: #6b7280; line-height: 1.5; }
 
 @media print{
   @page{size:A4;margin:0;}
   html,body{position:static !important;overflow:visible !important;height:auto !important;width:auto !important;background:#fff !important;}
-  .slide-container,.logo-fixed,.slide-head,.slide-foot,.slide-nav,.slide-counter,.progress-bar,.audio-dock,.reading-panel,.deck{display:none !important;}
+  .slide-container,.logo-fixed,.slide-head,.slide-foot,.slide-nav,.slide-counter,.progress-bar,.audio-dock,.reading-panel,.deck,.slide-dock,.shell__content{display:none !important;}
   body::before,body::after{display:none !important;}
   .pdf-doc{display:block !important;}
   *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}

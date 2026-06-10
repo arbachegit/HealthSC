@@ -18,7 +18,7 @@ const measure = () => {
     document.querySelectorAll('.slide')[Math.round(document.querySelector('.deck').scrollLeft / window.innerWidth)]
   if (!slide) return null
   const band = slide.querySelector('.slide-band')
-  const fit = slide.querySelector('.slide-fit')
+  const fit = slide.querySelector('.slide-content')
   if (!band || !fit) return null
   const cs = getComputedStyle(band)
   const padT = parseFloat(cs.paddingTop), padB = parseFloat(cs.paddingBottom)

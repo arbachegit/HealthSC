@@ -966,6 +966,13 @@ export const S24 = {
   },
 } satisfies L10n<S24>
 
+/* ───────────────────────── FECHO (§6.12) ───────────────────────── */
+export const FECHO = {
+  'pt-BR': { thanks: 'Obrigado.', tagline: 'Inteligência clínica para a saúde moderna.' },
+  'pt-PT': { thanks: 'Obrigado.', tagline: 'Inteligência clínica para a saúde moderna.' },
+  en: { thanks: 'Thank you.', tagline: 'Clinical intelligence for modern healthcare.' },
+} satisfies L10n<{ thanks: string; tagline: string }>
+
 /* ───────────────────────── UI (microtextos de helpers compartilhados) ───────────────────────── */
 type UIStrings = {
   dose: string; freq: string; previsto: string

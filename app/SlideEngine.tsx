@@ -65,45 +65,61 @@ export function useSlide() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SlideFrame — PALCO com scale-to-fit (§6.3). Conteúdo nunca
+   SlideFrame — PALCO com scale-to-fit (§6.5). Conteúdo nunca
    invade header/footer; encolhe pra caber, sem scroll, sem corte.
+   3-level hierarchy: slide-band > slide-stage > slide-content (§6.2.4)
    ═══════════════════════════════════════════════════════════ */
+const UPCAP = 1.0   // §6.5: NUNCA ampliar — scale só REDUZ
+const FLOOR = 0.15
+
 function SlideFrame({ children }: { children: ReactNode }) {
-  const bandRef = useRef<HTMLDivElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const scaleRef = useRef(1)
+  const measuringRef = useRef(false)
   const [scale, setScale] = useState(1)
 
   const fit = useCallback(() => {
-    const band = bandRef.current
+    if (measuringRef.current) return
+    const stage = stageRef.current
     const content = contentRef.current
-    if (!band || !content) return
-    const cs = getComputedStyle(band)
-    const available =
-      band.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
-    const natural = content.offsetHeight // altura de layout — imune ao transform
-    if (natural <= 0 || available <= 0) return
-    const target = available * 0.95
-    const next = natural > target ? Math.max(0.15, target / natural) : 1
+    if (!stage || !content) return
+    const cs = getComputedStyle(stage)
+    const availW = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)
+    const availH = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
+
+    // §6.18: height:auto trick — temporarily collapse h-full chain to measure true scrollHeight
+    measuringRef.current = true
+    content.style.height = 'auto'
+    content.style.alignSelf = 'flex-start'
+    const natW = content.scrollWidth
+    const natH = content.scrollHeight
+    content.style.alignSelf = ''
+    content.style.height = ''
+    measuringRef.current = false
+
+    if (natW <= 0 || natH <= 0 || availW <= 0 || availH <= 0) return
+    const scaleW = natW > availW ? availW / natW : 1
+    const scaleH = natH > availH ? availH / natH : 1
+    const next = Math.max(FLOOR, Math.min(UPCAP, Math.min(scaleW, scaleH)))
     if (Math.abs(next - scaleRef.current) > 0.004) {
       scaleRef.current = next
       setScale(next)
     }
   }, [])
 
-  useLayoutEffect(() => {
+  useLayoutEffect(() => { fit() }, [fit])
+
+  useEffect(() => {
     fit()
-    const band = bandRef.current
-    const content = contentRef.current
-    if (!band || !content) return
     const ro = new ResizeObserver(() => fit())
-    ro.observe(band)
-    ro.observe(content)
+    if (stageRef.current) ro.observe(stageRef.current)
+    if (contentRef.current) ro.observe(contentRef.current)
     window.addEventListener('resize', fit)
     const t1 = window.setTimeout(fit, 60)
     const t2 = window.setTimeout(fit, 300)
     if (typeof document !== 'undefined' && 'fonts' in document) {
-      document.fonts.ready.then(fit).catch(() => {})
+      (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts?.ready.then(() => fit()).catch(() => {})
     }
     return () => {
       ro.disconnect()
@@ -114,13 +130,15 @@ function SlideFrame({ children }: { children: ReactNode }) {
   }, [fit])
 
   return (
-    <div className="slide-band" ref={bandRef}>
-      <div
-        className="slide-fit"
-        ref={contentRef}
-        style={scale < 1 ? { transform: `scale(${scale})` } : undefined}
-      >
-        {children}
+    <div className="slide-band">
+      <div ref={stageRef} className="slide-stage">
+        <div
+          className="slide-content"
+          ref={contentRef}
+          style={scale < 1 ? { transform: `scale(${scale})` } : undefined}
+        >
+          {children}
+        </div>
       </div>
     </div>
   )
@@ -244,6 +262,7 @@ export function SlideEngine({ slides, projectName, kicker }: SlideEngineProps) {
     <SlideContext.Provider
       value={{ currentSlide: current, totalSlides: total, seenSlides: seen, goTo }}
     >
+      <div className="shell__content">
       {/* Progress-bar — TOPO */}
       <div className="progress-bar" style={{ width: `${progressPct}%` }} />
 
@@ -256,7 +275,7 @@ export function SlideEngine({ slides, projectName, kicker }: SlideEngineProps) {
         <span className="slide-head__name">{projectName}</span>
       </header>
 
-      {/* Dock — header DIR: Sair → idioma → «Aa» → áudio */}
+      {/* Dock — header DIR: Sair → PDF → idioma → «Aa» → áudio */}
       <div className="slide-dock">
         <a
           className="exit-btn"
@@ -274,6 +293,21 @@ export function SlideEngine({ slides, projectName, kicker }: SlideEngineProps) {
           </svg>
           <span>Sair</span>
         </a>
+
+        <button
+          type="button"
+          className="pdf-btn"
+          onClick={() => window.print()}
+          aria-label="Exportar PDF"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="12" y1="18" x2="12" y2="12" />
+            <polyline points="9 15 12 18 15 15" />
+          </svg>
+          <span>PDF</span>
+        </button>
 
         <div className="lang-switch" role="group" aria-label="Idioma da narração">
           {LANGS.map((l) => (
@@ -401,6 +435,7 @@ export function SlideEngine({ slides, projectName, kicker }: SlideEngineProps) {
         onError={() => setAudioOk(false)}
         onCanPlay={() => setAudioOk(true)}
       />
+      </div>{/* .shell__content */}
     </SlideContext.Provider>
   )
 }

@@ -12,7 +12,7 @@ import { useState, type CSSProperties } from 'react'
 import { SlideEngine, useLang, type SlideDef } from './SlideEngine'
 import { MedIcon } from '@/components/MedIcon'
 import {
-  UI, OPENING, STEPS, S1 as S1C, S2 as S2C, S3 as S3C, S4 as S4C,
+  UI, OPENING, STEPS, FECHO, S1 as S1C, S2 as S2C, S3 as S3C, S4 as S4C,
   S5 as S5C, S6 as S6C, S7 as S7C, S8 as S8C,
   S9 as S9C, S10 as S10C, S11 as S11C, S12 as S12C,
   S13 as S13C, S14 as S14C, S15 as S15C, S16 as S16C,
@@ -59,6 +59,7 @@ const DH_NAV: DhNavScene[] = [
   { startMs: 229_000, step: '22', label: 'Expectativa vida' },
   { startMs: 239_000, step: '23', label: 'Navegação paciente' },
   { startMs: 249_000, step: '24', label: 'Combinação tratos' },
+  { startMs: 259_000, step: '25', label: 'Fecho' },
 ]
 
 type TermoId = 'uso' | 'privacidade' | 'voz'
@@ -1217,6 +1218,7 @@ function RenderS20() {
             <line x1="0" y1="50" x2="600" y2="50" className="dh-prev-grid" />
             <line x1="0" y1="110" x2="600" y2="110" className="dh-prev-grid" />
             <line x1="0" y1="170" x2="600" y2="170" className="dh-prev-grid" />
+            {/* F17 — TODO: Replace with GeoJSON-fed chart */}
             <path d="M 0 130 L 50 122 L 100 118 L 150 110 L 200 102 L 250 90 L 300 96 L 350 84 L 400 76 L 450 70 L 500 62 L 550 56 L 600 50 L 600 90 L 550 92 L 500 98 L 450 106 L 400 112 L 350 118 L 300 130 L 250 124 L 200 134 L 150 140 L 100 148 L 50 152 L 0 160 Z" className="dh-prev-band" />
             <path d="M 0 145 L 50 138 L 100 134 L 150 126 L 200 118 L 250 106 L 300 112" className="dh-prev-line dh-prev-line-real" />
             <path d="M 300 112 L 350 100 L 400 92 L 450 86 L 500 78 L 550 72 L 600 64" className="dh-prev-line dh-prev-line-prev" />
@@ -1396,6 +1398,31 @@ function RenderS24() {
 }
 
 /* ═════════════════════════════════════════════════════════════════════
+   FECHO — "Obrigado." canónico (§6.12)
+   ═════════════════════════════════════════════════════════════════════ */
+function RenderFecho() {
+  const f = FECHO[useLang()]
+  return (
+    <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1.2rem', textAlign: 'center' }}>
+      <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(2.2rem, 5vw, 3.6rem)', color: 'var(--ink)', letterSpacing: '-0.02em' }}>
+        {f.thanks}
+      </h2>
+      <a className="logo-foot" href="https://iconsai.ai" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.4rem' }}>
+        <span className="logo-i">i</span>
+        <span className="logo-cons">cons</span>
+        <span className="logo-ai">.ai</span>
+      </a>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.82rem', letterSpacing: '.06em', color: 'var(--gray)' }}>
+        iconsai.ai
+      </span>
+      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '.92rem', color: 'var(--gray)', maxWidth: '36ch', lineHeight: 1.5, marginTop: '.4rem' }}>
+        {f.tagline}
+      </p>
+    </div>
+  )
+}
+
+/* ═════════════════════════════════════════════════════════════════════
    SCENES — composição pro shell
    ═════════════════════════════════════════════════════════════════════ */
 
@@ -1404,6 +1431,7 @@ const RENDERERS: Array<() => React.ReactNode> = [
   RenderS1, RenderS2, RenderS3, RenderS4, RenderS5, RenderS6, RenderS7, RenderS8,
   RenderS9, RenderS10, RenderS11, RenderS12, RenderS13, RenderS14, RenderS15, RenderS16,
   RenderS17, RenderS18, RenderS19, RenderS20, RenderS21, RenderS22, RenderS23, RenderS24,
+  RenderFecho,
 ]
 
 const SLIDES: SlideDef[] = DH_NAV.map((sc, i) => {
