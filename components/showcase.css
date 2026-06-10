@@ -142,6 +142,8 @@
   grid-template-columns: 1.1fr 0.9fr;
   gap: 22px;
   align-items: stretch;
+  flex: 1;
+  min-height: 0;
 }
 .dh-opening-copy,
 .dh-opening-console {
