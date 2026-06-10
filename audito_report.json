@@ -1,0 +1,146 @@
+{
+  "version": "1.0.0",
+  "orchestrator": "audito",
+  "started_at": "2026-06-10T18:30:00Z",
+  "finished_at": "2026-06-10T20:10:00Z",
+  "category": "Showcase",
+  "context": {
+    "project_root": "/Users/usuario/projects/showcase/discoveryhealth",
+    "stack": "node",
+    "has_db": false,
+    "has_llm": false,
+    "has_frontend": true,
+    "uses_zod": false,
+    "uses_nestjs": false,
+    "has_brazilian_codes": false,
+    "has_websocket_node": false,
+    "has_playwright": true
+  },
+  "skills_selected": [
+    "skill-architecture-mother-normalizer",
+    "skill-frontend-normalization",
+    "skill-node-quality",
+    "skill-dependency-governance",
+    "skill-codebase-sanitizer",
+    "legacy-killer",
+    "skill-normalize-identifiers",
+    "skill-playwright-massive-tester",
+    "showcase-compliance"
+  ],
+  "skills_skipped_user": [],
+  "skills_skipped_na": [
+    "skill-fullstack-audit",
+    "skill-python-quality",
+    "skill-api-validation-zod",
+    "skill-contract-jsonschema-ajv",
+    "skill-dto-nest-classvalidator",
+    "skill-python-pydantic",
+    "skill-python-marshmallow",
+    "skill-normalize-brazilian-codes",
+    "skill-chat-node",
+    "skill-chat-python",
+    "api-test-audit"
+  ],
+  "results": {
+    "bloco_a_architecture": {
+      "skill-architecture-mother-normalizer": {
+        "status": "PASS",
+        "notes": "Zero runtime deps beyond next/react. No app/api/*. output:standalone. basePath by NODE_ENV. No infra hardcode in code (port/URL via config.ts + env). No business calc in front (showcase is static by design)."
+      }
+    },
+    "bloco_b_compliance": {
+      "skill-frontend-normalization": {
+        "status": "PASS",
+        "notes": "App Router, client boundaries correct, next/font for all 4 fonts, no portals, no getAnimations, performance.now timing."
+      },
+      "showcase-compliance": {
+        "status": "FAIL",
+        "blockers": [
+          "fillArea gate (skill 6.7) fails massively below 1440x800: desktop 1280x620 fails slides 02/04/09/19/20; 1280x560 many; mobile 390x740 and 390x667 nearly all slides 0.37-0.65",
+          "viewport-fit: cover absent in layout.tsx (skill 6.6) - safe-area-inset inert on notched iPhones",
+          "scripts/audit-fit.mjs missing as named; fit-harness.mjs measures HEIGHT fill with non-blocking 0.65, not AREA fill with blocking 0.75/0.70; no scale or minFont gates",
+          "narration/slidePlan.ts (skill 6.0 schema) absent - nPlan strings do not match SlidePlan type",
+          "closing slide (26th, Fecho) has no narration mp3 and no Aa reading text (skill 8.1)",
+          "audit-css.sh missing rules F12, F16, F21, F24, F25, F26"
+        ],
+        "passes": [
+          "chrome complete and canonical (logo, slide-head, dock order Sair-PDF-lang-Aa-audio, nav 44x44 bottom-left, counter bottom-right, progress top, slide-foot legal)",
+          "scroll-snap x mandatory engine, frame-aware Esc/Sair",
+          "LANGS order BR-PT-EN default BR, single-source readingText",
+          "PdfDocument canonical (window.print, display:none, locale-driven, zero pdf deps)",
+          "closing slide 'Obrigado.' canonical",
+          "SlideFrame UPCAP=1.0, F25 height-auto measuring, scrollWidth/Height",
+          "no emoji (MedIcon SVGs), no F11/F20 violations, no floating button",
+          "favicon trio deck-specific emerald #10b981, tab title = DiscoveryHealth",
+          "tri-locale localization with correct national institutions (SUS/ANS/PIX vs SNS/RGPD/MB WAY vs HIPAA/CMS/Zelle)",
+          "cut gate PASS: worst cut -12px across 26 slides x 6 viewports"
+        ]
+      }
+    },
+    "bloco_d_lint": {
+      "skill-node-quality": {
+        "status": "PARTIAL",
+        "notes": "tsc --noEmit clean, zero any, no console.log in prod paths, no Math.random for business data. FAIL item: no ESLint/Prettier config in repo."
+      },
+      "skill-python-quality": { "status": "SKIPPED", "reason": "not_applicable" }
+    },
+    "bloco_e_supply_chain": {
+      "skill-dependency-governance": {
+        "status": "FAIL",
+        "vulns_high": 1,
+        "notes": "next 15.5.15 has 13 advisories incl. 1 HIGH (middleware auth bypass, cache poisoning, DoS) - fix = next@15.5.19. 1 moderate (postcss). Lockfile present, versions pinned."
+      }
+    },
+    "bloco_f_sanitization": {
+      "skill-codebase-sanitizer": {
+        "status": "PASS",
+        "notes": "No dead exports of note; DhTw is a documented compatibility shim (commented); no orphan components."
+      },
+      "legacy-killer": {
+        "status": "FAIL",
+        "notes": "tsconfig.tsbuildinfo is TRACKED in git and modified (build artifact in VCS); missing from .gitignore."
+      }
+    },
+    "bloco_g_chat": {
+      "skill-chat-node": { "status": "SKIPPED", "reason": "not_applicable" },
+      "skill-chat-python": { "status": "SKIPPED", "reason": "not_applicable" }
+    },
+    "bloco_h_tests": {
+      "skill-playwright-massive-tester": {
+        "status": "PARTIAL",
+        "notes": "Repo fit harness executed against real production build (26 slides x 6 viewports). Cut gate PASS everywhere (max -12px). Fill: 70 cases below even the lenient 0.65 height threshold; vs skill area gate (0.75/0.70) only 1440x800 truly passes. Harness itself is v1 (height-based, non-blocking fill)."
+      },
+      "skill-normalize-identifiers": {
+        "status": "PASS",
+        "notes": "Light-touch check: slide ids sequential ints, scene steps zero-padded strings, mp3 naming slide-NN consistent across 3 locales (1..25). Only gap: 26th slide has no narration id."
+      }
+    },
+    "deterministic_gates": {
+      "audit-css.sh": "PASS (0 falhas)",
+      "valida-skill.sh": "PASS",
+      "tsc --noEmit": "PASS",
+      "next build (production, served)": "PASS (HTTP 200 + chunks)"
+    }
+  },
+  "summary": {
+    "total_skills": 19,
+    "executed": 9,
+    "passed": 4,
+    "partial": 2,
+    "failed": 3,
+    "skipped_na": 11
+  },
+  "verdict": "PARTIAL",
+  "blockers": [
+    "showcase 6.7 fillArea gate fails on 5 of 6 canonical viewports (mobile near-total)",
+    "next 15.5.15 HIGH vulnerability - upgrade to 15.5.19",
+    "viewport-fit: cover missing (mobile safe-area)"
+  ],
+  "recommendations": [
+    "Redistribute slide content per showcase 6.3 (horizontal layouts, larger focal SVGs) - especially mobile variants",
+    "Upgrade fit harness to area-based blocking gates and wire as audit:fit npm script",
+    "Add slidePlan.ts per 6.0; add narration/reading for closing slide",
+    "Untrack tsconfig.tsbuildinfo; add ESLint config",
+    "Propagate repo's F29-F32 PDF gates upstream into the showcase skill F-table"
+  ]
+}

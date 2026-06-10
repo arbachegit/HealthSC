@@ -1,6 +1,6 @@
 /**
  * Guião de narração / leitura enriquecida — Português de Portugal (pt-PT).
- * Fonte única (§8.1): alimenta TTS e painel «Aa». Chave = número do slide (1..25).
+ * Fonte única (§8.1): alimenta TTS e painel «Aa». Chave = número do slide (1..26).
  * Localização PT (§8.5): €, ortografia e léxico de Portugal (ecrã, telemóvel, gestão).
  */
 export const NARRATION: Record<number, string> = {
@@ -29,4 +29,5 @@ export const NARRATION: Record<number, string> = {
   23: 'A pontuação de risco populacional combina comorbilidades, idade e adesão para apontar quem está em risco de perda. Três doentes entram em busca ativa hoje. Esperança de vida ajustada de setenta e oito vírgula quatro anos, intervalo de confiança de noventa e cinco por cento.',
   24: 'A navegação do doente desenha a trajetória prevista com um modelo de Markov. Cada nó é uma etapa do tratamento; cada ligação, a probabilidade de transição. Percurso conservador, sessenta e sete por cento de recuperação por seiscentos e oitenta euros; intensivo, oitenta e nove por cento por mil novecentos e quarenta.',
   25: 'A matriz de evidência cruza combinações de tratamento com desfechos, cada célula com probabilidade e intervalo de confiança de noventa e cinco por cento de fontes médicas. A monoterapia A traz sessenta e dois por cento de remissão; A mais B sobe para setenta e oito; A mais B mais C chega a oitenta e quatro.',
+  26: 'Obrigado pela atenção. Discovery Health, uma criação icons ai.',
 }

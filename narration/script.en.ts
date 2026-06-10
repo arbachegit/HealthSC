@@ -1,6 +1,6 @@
 /**
  * Narration / enriched reading script — American English (en).
- * Single source (§8.1): drives TTS and the «Aa» panel. Key = slide number (1..25).
+ * Single source (§8.1): drives TTS and the «Aa» panel. Key = slide number (1..26).
  * US localization (§8.5): US$, US spelling and conventions.
  */
 export const NARRATION: Record<number, string> = {
@@ -29,4 +29,5 @@ export const NARRATION: Record<number, string> = {
   23: 'The population risk score combines comorbidities, age, and adherence to flag who is at risk of being lost to follow-up. Three patients enter active outreach today. Adjusted life expectancy of seventy-eight point four years, ninety-five percent confidence interval.',
   24: 'Patient navigation maps the predicted trajectory with a Markov model. Each node is a treatment step; each edge, the transition probability. Conservative path, sixty-seven percent recovery for eight hundred dollars; intensive, eighty-nine percent for twenty-two hundred and fifty.',
   25: 'The evidence matrix crosses treatment combinations with outcomes, each cell carrying a probability and a ninety-five percent confidence interval from medical sources. Monotherapy A yields sixty-two percent remission; A plus B rises to seventy-eight; A plus B plus C reaches eighty-four.',
+  26: 'Thank you for your time. Discovery Health, by icons ai.',
 }

@@ -8,10 +8,11 @@
     "prebuild": "bash audit-css.sh && bash valida-skill.sh",
     "build": "next build",
     "start": "next start -p 3103",
+    "audit:fit": "node scripts/audit-fit.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "15.5.15",
+    "next": "15.5.19",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

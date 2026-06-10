@@ -5400,8 +5400,219 @@
   background: var(--dh-primary);
 }
 
+/* ===== MOBILE — apresentação própria (§6.6): simplificar, não encolher =====
+   Alvo: altura natural ≤ ~650px em 390×667 (scale ≥ 0.84 → fillArea ≥ 0.70,
+   minFont 12px × 0.84 ≥ 10px). Estratégia: display:none em decorativos e
+   linhas excedentes (NUNCA overflow clipping — F18). */
 @media (max-width: 768px) {
-  .dh-explain-stage {
-    grid-template-columns: 1fr;
-  }
+  /* Explain panel: visual em cima, aside resumido (kicker + 1ª linha) */
+  .dh-explain-stage { grid-template-columns: 1fr; gap: 10px; align-items: stretch; }
+  .dh-explain-card { padding: 12px 14px; gap: 6px; box-shadow: none; }
+  .dh-explain-line { font-size: 13px; line-height: 1.4; }
+  .dh-explain-line:nth-of-type(n+2) { display: none; }
+
+  /* Chrome decorativo fora (barra de browser e step indicator) */
+  .dh-chrome { display: none; }
+  .dh-steps { display: none; }
+
+  /* Janela compacta */
+  .dh-window-body { padding: 10px 12px; gap: 6px; }
+  .dh-section-title { font-size: 18px; }
+  .dh-section-subtitle { font-size: 12px; }
+  .dh-sources { font-size: 12px; }
+
+  /* Slide 01 — Opening: copy enxuto, console com 3 sinais + 2 métricas */
+  .dh-opening-grid { gap: 10px; }
+  .dh-opening-copy, .dh-opening-console { padding: 14px; }
+  .dh-opening-story { display: none; }
+  .dh-opening-foot { display: none; }
+  .dh-opening-stream-row:nth-child(n+4) { display: none; }
+  .dh-opening-metric:nth-child(n+3) { display: none; }
+
+  /* Slide 02 — Termos: cards = kicker+título; painel = título+resumo */
+  .dh-termo-text { display: none; }
+  .dh-termo-card { padding: 12px; }
+  .dh-termo-panel { padding: 14px; }
+  .dh-termo-panel-meta,
+  .dh-termo-panel-block,
+  .dh-termo-panel-foot { display: none; }
+  .dh-btn-row { display: none; }
+
+  /* Slides 05/07 — Aura: segundo side-card sai */
+  .dh-aura-side-card-soft { display: none; }
+  .dh-aura-panel, .dh-aura-side-card { padding: 14px; }
+
+  /* Tabelas — máx. 3 linhas de dados (header é o 1º filho) */
+  .dh-stock-table .dh-stock-tr:nth-child(n+5) { display: none; }
+  .dh-farma-table .dh-farma-tr:nth-child(n+5) { display: none; }
+  .dh-nf-table .dh-nf-tr:nth-child(n+5) { display: none; }
+  .dh-life-table .dh-life-tr:nth-child(n+4) { display: none; }
+  .dh-matrix .dh-matrix-row:nth-child(n+4) { display: none; }
+
+  /* Slide 14 — Agenda: header + 2 turnos */
+  .dh-agenda-grid .dh-agenda-row:nth-child(n+4) { display: none; }
+
+  /* Slide 19 — Fraude: chips de confiança saem, issues ficam */
+  .dh-fraud-trust { display: none; }
+
+  /* Slide 01 — Opening: corte profundo (nat 844 → ≤640) */
+  .dh-wordmark { font-size: 32px; }
+  .dh-opening-sub { display: none; }
+  .dh-opening-patient-score { display: none; }
+  .dh-opening-metrics { display: none; }
+
+  /* Slide 04 — RF/Confirmação: loader sai, confirm compacto */
+  .dh-rf-layout { grid-template-columns: 1fr; gap: 10px; }
+  .dh-rf-loader { display: none; }
+  .dh-confirm-audit { display: none; }
+  .dh-confirm-side-line + .dh-confirm-side-line + .dh-confirm-side-line { display: none; }
+
+  /* Slide 09 — Autoexame: grade 2 col com 4 exames, guia compacto */
+  .dh-autoexam-stage { grid-template-columns: 1fr; gap: 10px; }
+  .dh-exames-check-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .dh-exames-check-grid .dh-exame-check:nth-child(n+5) { display: none; }
+  .dh-autoexam-steps { display: none; }
+  .dh-autoexam-preview { min-height: 110px; padding: 12px; }
+  .dh-autoexam-preview-core { width: 84px; height: 84px; }
+
+  /* Slide 12 — Chat: só a thread (sem side/quote/typing/compose) */
+  .dh-chat-layout { grid-template-columns: 1fr; gap: 10px; }
+  .dh-chat-side { display: none; }
+  .dh-msg-quote, .dh-msg-typing { display: none; }
+  .dh-chat-compose { display: none; }
+
+  /* Slide 13 — Laudo: strip de gestão sai */
+  .dh-gestao-strip { display: none; }
+
+  /* Slide 18 — WhatsApp: 1ª mensagem e confirmação saem */
+  .dh-wa-thread > .dh-wa-msg:first-child { display: none; }
+  .dh-wa-ok { display: none; }
+  .dh-wa-msg, .dh-wa-pix { padding: 8px 10px; }
+
+  /* Slide 19 — Fraude: 1 coluna, scan/copy saem, 2 issues, anel menor */
+  .dh-fraud-grid { grid-template-columns: 1fr; gap: 10px; }
+  .dh-fraud-doc-scan { display: none; }
+  .dh-fraud-score-copy { display: none; }
+  .dh-fraud-doc-row + .dh-fraud-doc-row + .dh-fraud-doc-row { display: none; }
+  .dh-fraud-issues .dh-fraud-issue:nth-child(n+3) { display: none; }
+  .dh-fraud-score-ring { width: 72px; height: 72px; }
+
+  /* Slide 21 — Prevenção: 2 stats */
+  .dh-prev-stats .dh-prev-stat:nth-child(n+3) { display: none; }
+
+  /* Slide 22 — Diagnóstico: pipeline vertical compacto, 2 itens por nó
+     (.dh-diag-node-k é div irmã — usar combinador de irmãos, não nth-of-type) */
+  .dh-diag-pipeline { grid-template-columns: 1fr; gap: 8px; }
+  .dh-diag-arrow { display: none; }
+  .dh-diag-node { padding: 8px 10px; gap: 6px; }
+  .dh-diag-chip + .dh-diag-chip + .dh-diag-chip { display: none; }
+  .dh-diag-cid + .dh-diag-cid + .dh-diag-cid { display: none; }
+  .dh-diag-action + .dh-diag-action + .dh-diag-action { display: none; }
+  .dh-diag-chip, .dh-diag-cid, .dh-diag-action { padding: 5px 8px; }
+
+  /* Slide 20 — NF: foot stats compactos (nat 644 → ≤640) */
+  .dh-nf-foot-stat { padding: 6px 8px; }
+}
+
+/* ===== DESKTOP BASE — compactação de slides altos (nat > 711 em 1440×800) ===== */
+@media (min-width: 769px) {
+  /* Slide 02 — Termos: painel lateral compacto (driver da altura; nat 730 → ≤711) */
+  .dh-termo-card { padding: 12px 14px; }
+  .dh-termo-panel { gap: 10px; padding: 14px; }
+
+  /* Slide 09 — Autoexame: steps + preview enxutos (nat 709 → folga sobre o gate) */
+  .dh-autoexam-step { padding: 8px 10px; }
+  .dh-autoexam-preview { min-height: 160px; }
+
+  /* Slide 19 — Fraude: issues lado a lado (§6.3), doc/anel compactos (nat 775 → ≤711) */
+  .dh-fraud-grid { gap: 10px; }
+  .dh-fraud-doc { padding: 12px 14px; }
+  .dh-fraud-issues { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .dh-fraud-issue { padding: 6px 10px; }
+  .dh-fraud-score-ring { width: 80px; height: 80px; }
+  /* trust: kicker + chips numa única linha horizontal (§6.3) */
+  .dh-fraud-trust { flex-direction: row; align-items: center; justify-content: center; padding: 10px 14px; gap: 12px; }
+}
+
+/* ===== DESKTOP CURTO (≤700px de altura) — conteúdo natural ≤ ~490px =====
+   Cobre 1280×620 e 1280×560. Escopado a min-width:769px para não colidir
+   com o mobile 390×740/667. Estratégia: display:none (NUNCA clipping — F18). */
+@media (min-width: 769px) and (max-height: 700px) {
+  /* Globais */
+  .dh-window-body { padding: 14px 20px; gap: 8px; }
+  .dh-section-title { font-size: 19px; }
+  .dh-section-subtitle { font-size: 12px; }
+  .dh-explain-card { padding: 12px 14px; gap: 6px; }
+  .dh-explain-line { font-size: 13px; }
+  .dh-explain-line:nth-of-type(n+3) { display: none; }
+  .dh-steps { display: none; }
+  .dh-chrome { display: none; }
+
+  /* Slide 02 — Termos */
+  .dh-termo-text { display: none; }
+  .dh-termo-panel-block, .dh-termo-panel-foot { display: none; }
+  .dh-termo-card { padding: 10px 12px; }
+  .dh-termo-panel { padding: 14px; }
+
+  /* Slide 03 — Formulário */
+  .dh-form-grid { gap: 8px; }
+
+  /* Slide 04 — RF/Confirmação (nat 523 → ≤490): card compacto, 2 side-lines */
+  .dh-rf-donut { width: 84px; height: 84px; }
+  .dh-rf-loader-steps { display: none; }
+  .dh-confirm-audit { display: none; }
+  .dh-confirm-card { padding: 14px 16px; }
+  .dh-confirm-side-line + .dh-confirm-side-line + .dh-confirm-side-line { display: none; }
+  .dh-rf-layout { gap: 10px; }
+
+  /* Slides 05/07 — Aura */
+  .dh-aura-panel, .dh-aura-side-card { padding: 12px; }
+
+  /* Slide 09 — Autoexame */
+  .dh-autoexam-steps { display: none; }
+  .dh-autoexam-preview { min-height: 110px; padding: 12px; }
+  .dh-autoexam-preview-core { width: 84px; height: 84px; }
+  .dh-exames-check-grid { gap: 8px; }
+
+  /* Slide 10 — Upload */
+  .dh-upload-item { padding: 8px 10px; }
+
+  /* Slide 11 — Medicamentos */
+  .dh-med { padding: 8px 10px; }
+
+  /* Slide 12 — Chat */
+  .dh-msg-typing { display: none; }
+  .dh-chat-compose { display: none; }
+  .dh-chat-thread { gap: 8px; }
+
+  /* Slide 16 — Estoque: máx. 4 linhas */
+  .dh-stock-table .dh-stock-tr:nth-child(n+6) { display: none; }
+
+  /* Slide 18 — WhatsApp */
+  .dh-wa-msg, .dh-wa-pix { padding: 8px 10px; }
+  .dh-wa-ok { display: none; }
+
+  /* Slide 19 — Fraude */
+  .dh-fraud-doc-scan { display: none; }
+  .dh-fraud-trust { display: none; }
+  .dh-fraud-score-copy { display: none; }
+  .dh-fraud-issues .dh-fraud-issue:nth-child(n+3) { display: none; }
+  .dh-fraud-score-ring { width: 72px; height: 72px; }
+
+  /* Slide 20 — NF: máx. 3 linhas + foot compacto */
+  .dh-nf-table .dh-nf-tr:nth-child(n+5) { display: none; }
+  .dh-nf-foot-stat { padding: 8px 10px; }
+
+  /* Slide 21 — Prevenção */
+  .dh-prev-stat { padding: 7px 10px; }
+
+  /* Slide 23 — Lifecycle: foot sai, máx. 3 linhas */
+  .dh-life-foot { display: none; }
+  .dh-life-table .dh-life-tr:nth-child(n+5) { display: none; }
+
+  /* Slide 24 — Fluxo: legenda compacta */
+  .dh-flow-legend { gap: 8px; font-size: 12px; }
+
+  /* Slide 25 — Matrix: máx. 3 linhas */
+  .dh-matrix .dh-matrix-row:nth-child(n+5) { display: none; }
 }
