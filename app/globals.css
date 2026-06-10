@@ -52,11 +52,12 @@ body::before, body::after {
 body::before { top: 0; height: clamp(72px, 9vh, 100px); }
 body::after  { bottom: 0; height: clamp(68px, 9vh, 100px); }
 
-/* Shell inner-content wrapper — vertical centering per T2.10 */
+/* Shell inner-content wrapper — content anchors at top; individual slides
+   handle their own vertical alignment internally to avoid pushing overflow
+   into header/footer zones. */
 .shell__content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   min-height: 100%;
 }
 

@@ -190,9 +190,11 @@ for f in $EXTRA_CSS; do
   fi
 done
 
-# F23: .shell__content DEVE ter justify-content:center (vertical centering)
+# F23: .shell__content must NOT have justify-content:center (causes content
+# to overflow into header/footer zones when taller than the stage).
+# Content anchors top; individual slides handle vertical centering internally.
 echo "$FLAT" | grep -qE '\.shell__content\b[^}]*justify-content:\s*center' 2>/dev/null \
-  || fail F23 ".shell__content sem justify-content:center (conteúdo não centrado verticalmente)"
+  && fail F23 ".shell__content com justify-content:center (causa clipping no header/footer)"
 
 # ═══ PDF (T1.11, T3.6) ═══
 

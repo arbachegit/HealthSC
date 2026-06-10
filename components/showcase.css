@@ -389,8 +389,7 @@
 .dh-scene {
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
 }
 /* @keyframes dh-scene-cycle removido — shell canônico controla visibilidade
  * via .icx-scene.is-active. */
@@ -450,7 +449,7 @@
 .dh-window-body {
   flex: 1;
   padding: 26px 32px;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   gap: 14px;
