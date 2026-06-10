@@ -5341,12 +5341,14 @@
 
 /* .dh-progress* e .dh-navbar* removidos — shell canônico fornece. */
 
-/* ===== EXPLAIN PANEL — layout 2fr:1fr para slides sem side panel ===== */
+/* ===== EXPLAIN PANEL — layout 2fr:1fr para slides sem side panel =====
+   LEI (skill §6.3 + F1/F2): align-items STRETCH, nunca center — center faz
+   o aside flutuar compacto no meio com palco vazio acima/abaixo. */
 .dh-explain-stage {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 20px;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
   height: 100%;
 }
@@ -5357,6 +5359,29 @@
   flex-direction: column;
   align-items: stretch;
 }
+/* Bloco focal de cada slide cresce para eliminar espaço morto abaixo (§6.3
+   "ZERO espaço vazio abaixo do conteúdo") */
+.dh-explain-visual > .dh-form-grid,
+.dh-explain-visual > .dh-mic-card,
+.dh-explain-visual > .dh-vitals-grid,
+.dh-explain-visual > .dh-upload-drop,
+.dh-explain-visual > .dh-meds-list,
+.dh-explain-visual > .dh-agenda-grid,
+.dh-explain-visual > .dh-fat-chart,
+.dh-explain-visual > .dh-stock-table,
+.dh-explain-visual > .dh-farma-table,
+.dh-explain-visual > .dh-wa-card,
+.dh-explain-visual > .dh-nf-table,
+.dh-explain-visual > .dh-prev-chart,
+.dh-explain-visual > .dh-diag-pipeline,
+.dh-explain-visual > .dh-life-table,
+.dh-explain-visual > .dh-flow,
+.dh-explain-visual > .dh-matrix {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+/* Slide 03 — linhas do formulário distribuem-se pela altura disponível */
+.dh-explain-visual > .dh-form-grid { justify-content: space-evenly; }
 .dh-explain-aside {
   display: flex;
   flex-direction: column;
@@ -5371,7 +5396,9 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
+  flex: 1;
 }
 .dh-explain-kicker {
   font-family: var(--font-mono);
