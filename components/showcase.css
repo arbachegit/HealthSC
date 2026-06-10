@@ -142,8 +142,6 @@
   grid-template-columns: 1.1fr 0.9fr;
   gap: 22px;
   align-items: stretch;
-  flex: 1;
-  min-height: 0;
 }
 .dh-opening-copy,
 .dh-opening-console {
@@ -3477,12 +3475,10 @@
 
 .dh-opening {
   align-items: stretch;
-  gap: 6px;
+  gap: 12px;
 }
 .dh-opening-grid {
   width: 100%;
-  flex: 1;
-  min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
   gap: 18px;
@@ -3497,8 +3493,8 @@
 .dh-opening-copy {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 20px 22px;
+  gap: 14px;
+  padding: 26px 28px;
   background:
     linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(236, 253, 245, 0.88));
   box-shadow: 0 28px 62px rgba(15, 118, 110, 0.12);
