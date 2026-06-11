@@ -4415,6 +4415,23 @@
 
 
 /* ═══════════════════════════════════════════════════════════════════
+   ANIMATION GATE — fire only on the active slide, reset on exit
+   Suppressing animation on inactive slides (data-active="false") forces
+   CSS to restart every animation the moment the slide becomes active.
+   This is a single rule that replaces the need to manually scope every
+   selector to [data-active="true"]. Works because:
+   1) animation: none !important suppresses all animations on inactive slides
+   2) When data-active becomes "true", the rule no longer matches the slide
+   3) CSS restarts all animations on the slide from t=0 (property removal triggers restart)
+   4) fill-mode: both snaps elements to their 0% state immediately on activation
+   5) When navigating away, elements reset to their base CSS state (incl. opacity:0 base rules)
+   ═══════════════════════════════════════════════════════════════════ */
+.slide:not([data-active="true"]) * {
+  animation: none !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
    SCENE ENTRY ANIMATIONS — S02, S07, S10
    CSS-only staggered reveals. Duration 10s, fill-mode both.
    ═══════════════════════════════════════════════════════════════════ */
