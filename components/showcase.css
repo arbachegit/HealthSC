@@ -2638,6 +2638,10 @@
   font-size: 14px;
   font-weight: 700;
   color: var(--dh-text);
+  font-variant-numeric: tabular-nums;
+  min-width: 2.8em;
+  text-align: right;
+  display: inline-block;
 }
 .dh-stock-tr-status {
   font-family: var(--font-mono);
@@ -5080,6 +5084,11 @@
   0%   { opacity: 0; transform: translateX(-16px); }
   100% { opacity: 1; transform: translateX(0); }
 }
+@keyframes dh-stock-num-count {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.85); }
+  60%  { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
 @keyframes dh-stock-critical-pulse {
   0%, 100% { box-shadow: 0 0 0 rgba(239, 68, 68, 0); }
   50%      { box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); }
@@ -5093,11 +5102,45 @@
   opacity: 0;
   animation: dh-stock-row-in 0.5s ease-out both;
 }
+
+.dh-stock-tr-num {
+  animation: dh-stock-num-count 0.6s ease-out both;
+  animation-delay: 0.15s;
+}
+/* Number stagger within each row: 1st, 2nd, 3rd number appear sequentially */
+.dh-stock-tr > .dh-stock-tr-num:nth-child(2) { animation-delay: 0.15s; }
+.dh-stock-tr > .dh-stock-tr-num:nth-child(3) { animation-delay: 0.25s; }
+.dh-stock-tr > .dh-stock-tr-num:nth-child(4) { animation-delay: 0.35s; }
+
+/* Row entrance + number count stagger (row 1) */
 .dh-stock-table > .dh-stock-tr:nth-child(2) { animation-delay: 0.2s; }
+.dh-stock-table > .dh-stock-tr:nth-child(2) > .dh-stock-tr-num:nth-child(2) { animation-delay: 0.35s; }
+.dh-stock-table > .dh-stock-tr:nth-child(2) > .dh-stock-tr-num:nth-child(3) { animation-delay: 0.45s; }
+.dh-stock-table > .dh-stock-tr:nth-child(2) > .dh-stock-tr-num:nth-child(4) { animation-delay: 0.55s; }
+
+/* Row entrance + number count stagger (row 2) */
 .dh-stock-table > .dh-stock-tr:nth-child(3) { animation-delay: 0.32s; }
+.dh-stock-table > .dh-stock-tr:nth-child(3) > .dh-stock-tr-num:nth-child(2) { animation-delay: 0.47s; }
+.dh-stock-table > .dh-stock-tr:nth-child(3) > .dh-stock-tr-num:nth-child(3) { animation-delay: 0.57s; }
+.dh-stock-table > .dh-stock-tr:nth-child(3) > .dh-stock-tr-num:nth-child(4) { animation-delay: 0.67s; }
+
+/* Row entrance + number count stagger (row 3) */
 .dh-stock-table > .dh-stock-tr:nth-child(4) { animation-delay: 0.44s; }
+.dh-stock-table > .dh-stock-tr:nth-child(4) > .dh-stock-tr-num:nth-child(2) { animation-delay: 0.59s; }
+.dh-stock-table > .dh-stock-tr:nth-child(4) > .dh-stock-tr-num:nth-child(3) { animation-delay: 0.69s; }
+.dh-stock-table > .dh-stock-tr:nth-child(4) > .dh-stock-tr-num:nth-child(4) { animation-delay: 0.79s; }
+
+/* Row entrance + number count stagger (row 4) */
 .dh-stock-table > .dh-stock-tr:nth-child(5) { animation-delay: 0.56s; }
+.dh-stock-table > .dh-stock-tr:nth-child(5) > .dh-stock-tr-num:nth-child(2) { animation-delay: 0.71s; }
+.dh-stock-table > .dh-stock-tr:nth-child(5) > .dh-stock-tr-num:nth-child(3) { animation-delay: 0.81s; }
+.dh-stock-table > .dh-stock-tr:nth-child(5) > .dh-stock-tr-num:nth-child(4) { animation-delay: 0.91s; }
+
+/* Row entrance + number count stagger (row 5) */
 .dh-stock-table > .dh-stock-tr:nth-child(6) { animation-delay: 0.68s; }
+.dh-stock-table > .dh-stock-tr:nth-child(6) > .dh-stock-tr-num:nth-child(2) { animation-delay: 0.83s; }
+.dh-stock-table > .dh-stock-tr:nth-child(6) > .dh-stock-tr-num:nth-child(3) { animation-delay: 0.93s; }
+.dh-stock-table > .dh-stock-tr:nth-child(6) > .dh-stock-tr-num:nth-child(4) { animation-delay: 1.03s; }
 
 .dh-stock-tr-critical {
   animation: dh-stock-row-in 0.5s ease-out both,
