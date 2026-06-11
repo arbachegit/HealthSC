@@ -967,29 +967,80 @@ export const S24 = {
 } satisfies L10n<S24>
 
 /* ───────────────────────── EXPLAIN PANELS (slides sem side panel) ───────────────────────── */
-type ExplainEntry = { kicker: string; lines: string[] }
+export type ExplainSource = { name: string; field: string; icon: 'id' | 'map-pin' }
+export type ExplainMetric = { value: string; label: string }
+type ExplainEntry = {
+  kicker: string
+  lines: string[]
+  sourcesLabel?: string
+  sources?: ExplainSource[]
+  metricsLabel?: string
+  metrics?: ExplainMetric[]
+}
 export type ExplainMap = Record<number, L10n<ExplainEntry>>
 
 export const EXPLAIN: ExplainMap = {
   2: {
-    'pt-BR': { kicker: 'CADASTRO', lines: [
-      'CPF cruza com dados públicos da Receita Federal em menos de 2 segundos.',
-      'Endereço completado automaticamente via ViaCEP — o paciente só confirma.',
-      'Pré-preenchimento reduz erros de digitação e agiliza a recepção.',
-      'Dados pessoais ficam criptografados e nunca são compartilhados com terceiros.',
-    ]},
-    'pt-PT': { kicker: 'REGISTO', lines: [
-      'O NIF cruza com registos públicos em menos de 2 segundos.',
-      'A morada é completada automaticamente via CTT — o doente só confirma.',
-      'O pré-preenchimento reduz erros de digitação e agiliza a recepção.',
-      'Os dados pessoais ficam cifrados e nunca são partilhados com terceiros.',
-    ]},
-    en: { kicker: 'REGISTRATION', lines: [
-      'ID is cross-checked against public records in under 2 seconds.',
-      'Address auto-completed via postal lookup — the patient just confirms.',
-      'Prefill reduces typos and speeds up front-desk intake.',
-      'Personal data is encrypted and never shared with third parties.',
-    ]},
+    'pt-BR': {
+      kicker: 'CADASTRO',
+      lines: [
+        'CPF cruza com dados públicos da Receita Federal em menos de 2 segundos.',
+        'Endereço completado automaticamente via ViaCEP — o paciente só confirma.',
+        'Pré-preenchimento reduz erros de digitação e agiliza a recepção.',
+        'Dados pessoais ficam criptografados e nunca são compartilhados com terceiros.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Receita Federal', field: 'CPF & RG', icon: 'id' },
+        { name: 'ViaCEP', field: 'Endereço', icon: 'map-pin' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '< 2 s', label: 'Validação em tempo real' },
+        { value: 'AES-256', label: 'Dados criptografados' },
+        { value: 'LGPD', label: 'Em conformidade' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'REGISTO',
+      lines: [
+        'O NIF cruza com registos públicos em menos de 2 segundos.',
+        'A morada é completada automaticamente via CTT — o doente só confirma.',
+        'O pré-preenchimento reduz erros de digitação e agiliza a recepção.',
+        'Os dados pessoais ficam cifrados e nunca são partilhados com terceiros.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Registos Públicos', field: 'NIF & BI', icon: 'id' },
+        { name: 'CTT', field: 'Código Postal', icon: 'map-pin' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '< 2 s', label: 'Validação em tempo real' },
+        { value: 'AES-256', label: 'Dados cifrados' },
+        { value: 'RGPD', label: 'Em conformidade' },
+      ],
+    },
+    en: {
+      kicker: 'REGISTRATION',
+      lines: [
+        'ID is cross-checked against public records in under 2 seconds.',
+        'Address auto-completed via postal lookup — the patient just confirms.',
+        'Prefill reduces typos and speeds up front-desk intake.',
+        'Personal data is encrypted and never shared with third parties.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'Public Records', field: 'SSN / State ID', icon: 'id' },
+        { name: 'USPS API', field: 'ZIP Code', icon: 'map-pin' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '< 2 s', label: 'Real-time validation' },
+        { value: 'AES-256', label: 'Encrypted at rest' },
+        { value: 'HIPAA', label: 'Compliant' },
+      ],
+    },
   },
   5: {
     'pt-BR': { kicker: 'CONSULTA', lines: [

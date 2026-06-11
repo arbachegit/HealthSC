@@ -360,6 +360,21 @@ function captionFor(i: number) {
 }
 
 /* ── Explain panel helper (§plan: slides sem side panel) ── */
+function SrcIcon({ type }: { type: 'id' | 'map-pin' }) {
+  if (type === 'map-pin') return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+  )
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="5" width="20" height="14" rx="2"/>
+      <line x1="2" y1="10" x2="22" y2="10"/>
+    </svg>
+  )
+}
+
 function ExplainAside({ index }: { index: number }) {
   const entry = EXPLAIN[index]
   if (!entry) return null
@@ -368,10 +383,41 @@ function ExplainAside({ index }: { index: number }) {
   return (
     <aside className="dh-explain-aside">
       <div className="dh-explain-card">
-        <span className="dh-explain-kicker">{ex.kicker}</span>
-        {ex.lines.map((l, i) => (
-          <p key={i} className="dh-explain-line">{l}</p>
-        ))}
+        {ex.sources && (
+          <div className="dh-explain-top">
+            {ex.sourcesLabel && <span className="dh-explain-section-label">{ex.sourcesLabel}</span>}
+            <div className="dh-explain-sources">
+              {ex.sources.map((s, i) => (
+                <div key={i} className="dh-source-badge">
+                  <span className="dh-source-icon"><SrcIcon type={s.icon} /></span>
+                  <div className="dh-source-info">
+                    <span className="dh-source-name">{s.name}</span>
+                    <span className="dh-source-field">{s.field}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="dh-explain-main">
+          <span className="dh-explain-kicker">{ex.kicker}</span>
+          {ex.lines.map((l, i) => (
+            <p key={i} className="dh-explain-line">{l}</p>
+          ))}
+        </div>
+        {ex.metrics && (
+          <div className="dh-explain-bottom">
+            {ex.metricsLabel && <span className="dh-explain-section-label">{ex.metricsLabel}</span>}
+            <div className="dh-explain-metrics">
+              {ex.metrics.map((m, i) => (
+                <div key={i} className="dh-metric-item">
+                  <span className="dh-metric-value">{m.value}</span>
+                  <span className="dh-metric-label">{m.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </aside>
   )

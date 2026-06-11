@@ -5396,9 +5396,118 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 0;
   flex: 1;
+}
+/* Top block — data sources (fills the area above the explanation text) */
+.dh-explain-top {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--dh-border);
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+/* Middle block — kicker + bullet lines, grows to fill remaining space */
+.dh-explain-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+/* Bottom block — key metrics (fills the area below the explanation text) */
+.dh-explain-bottom {
+  padding-top: 14px;
+  border-top: 1px solid var(--dh-border);
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+/* Section label for top/bottom blocks */
+.dh-explain-section-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--dh-muted);
+}
+/* Source badges row */
+.dh-explain-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.dh-source-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--dh-primary-soft);
+  border: 1px solid var(--dh-border-strong);
+  border-radius: 10px;
+}
+.dh-source-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dh-primary);
+  border-radius: 6px;
+  color: #fff;
+}
+.dh-source-icon svg { width: 15px; height: 15px; }
+.dh-source-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.dh-source-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dh-text);
+  line-height: 1.2;
+}
+.dh-source-field {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dh-primary-deep);
+}
+/* Metrics row */
+.dh-explain-metrics {
+  display: flex;
+  gap: 7px;
+}
+.dh-metric-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 6px;
+  background: var(--dh-primary-soft);
+  border: 1px solid var(--dh-border-strong);
+  border-radius: 10px;
+  text-align: center;
+}
+.dh-metric-value {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dh-primary-deep);
+  line-height: 1.1;
+}
+.dh-metric-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dh-muted);
+  line-height: 1.2;
 }
 .dh-explain-kicker {
   font-family: var(--font-mono);
@@ -5437,6 +5546,9 @@
   .dh-explain-card { padding: 12px 14px; gap: 6px; box-shadow: none; }
   .dh-explain-line { font-size: 13px; line-height: 1.4; }
   .dh-explain-line:nth-of-type(n+2) { display: none; }
+  /* Hide top/bottom blocks on mobile — keep only the main kicker+line */
+  .dh-explain-top { display: none; }
+  .dh-explain-bottom { display: none; }
 
   /* Chrome decorativo fora (barra de browser e step indicator) */
   .dh-chrome { display: none; }
@@ -5572,6 +5684,9 @@
   .dh-explain-card { padding: 12px 14px; gap: 6px; }
   .dh-explain-line { font-size: 13px; }
   .dh-explain-line:nth-of-type(n+3) { display: none; }
+  /* Hide top/bottom blocks on short viewports — not enough vertical space */
+  .dh-explain-top { display: none; }
+  .dh-explain-bottom { display: none; }
   .dh-steps { display: none; }
   .dh-chrome { display: none; }
 
