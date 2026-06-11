@@ -578,6 +578,12 @@ function RenderS1() {
                   {item.kicker && <div className="dh-termo-kicker">{item.kicker}</div>}
                   <div className="dh-termo-title">{item.titulo}</div>
                   <div className="dh-termo-text">{item.texto}</div>
+                  <div className="dh-termo-resumo">{item.resumo}</div>
+                  <div className="dh-termo-sinais">
+                    {item.sinais.map((s) => (
+                      <span key={s} className="dh-termo-sinal">{s}</span>
+                    ))}
+                  </div>
                   <div className="dh-termo-detail">
                     <span className={`dh-termo-risk dh-termo-risk-${item.risco}`}>{item.risco}</span>
                     <span className="dh-termo-base">{item.base}</span>

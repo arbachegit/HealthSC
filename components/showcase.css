@@ -654,6 +654,29 @@
   color: var(--dh-text-soft);
   line-height: 1.55;
 }
+.dh-termo-resumo {
+  font-size: 13px;
+  color: var(--dh-muted);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.dh-termo-sinais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+.dh-termo-sinal {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(34,211,238,0.08);
+  color: var(--dh-primary);
+  border: 1px solid rgba(34,211,238,0.18);
+}
 .dh-termo-detail {
   display: flex;
   align-items: center;
@@ -5877,7 +5900,7 @@
 
   /* Slide 02 — Termos: simplified for mobile */
   .dh-termos-shell { grid-template-columns: 1fr; }
-  .dh-termo-text, .dh-termo-detail { display: none; }
+  .dh-termo-text, .dh-termo-detail, .dh-termo-resumo, .dh-termo-sinais { display: none; }
   .dh-termo-card { padding: 12px; }
   .dh-chat-panel { display: none; }
   .dh-vcursor { display: none; }
@@ -6005,7 +6028,7 @@
   .dh-chrome { display: none; }
 
   /* Slide 02 — Termos */
-  .dh-termo-text, .dh-termo-detail { display: none; }
+  .dh-termo-text, .dh-termo-detail, .dh-termo-resumo, .dh-termo-sinais { display: none; }
   .dh-termo-card { padding: 10px 12px; }
   .dh-chat-panel { display: none; }
   .dh-vcursor { display: none; }
