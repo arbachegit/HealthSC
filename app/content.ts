@@ -88,93 +88,55 @@ export const OPENING = {
   rows: [string, string][]; metrics: [string, string][]; pills: string[]
 }>
 
-/* ───────────────────────── S1 · TERMOS ───────────────────────── */
-type Termo = {
-  id: 'uso' | 'privacidade' | 'voz'
-  titulo: string; texto: string; resumo: string; base: string
-  risco: 'baixo' | 'moderado' | 'alto'; aceite: string; kicker?: string; sinais: string[]
-}
+/* ───────────────────────── S1 · DESCUBRA ───────────────────────── */
+type S1Card = { title: string; desc: string }
+type S1ChatMsg = { role: 'system' | 'user'; text: string }
 type S1 = {
   kicker: string; title: string; subtitle: string
-  panelKicker: string; metaBase: string; metaAceite: string; metaStatus: string
-  statusVal: string; itemsLabel: string; footNote: string
-  btnLater: string; btnAccept: string; termos: Termo[]
-  chatTitle: string; chatLines: string[]
+  cards: S1Card[]
+  chatMessages: S1ChatMsg[]
 }
 export const S1 = {
   'pt-BR': {
-    kicker: 'discovery health · termos legais', title: 'Antes de começar.',
-    subtitle: 'Aceite explícito em três documentos — exigência LGPD.',
-    panelKicker: 'documento em foco', metaBase: 'base legal', metaAceite: 'tipo de aceite', metaStatus: 'status',
-    statusVal: 'pronto para assinatura', itemsLabel: 'itens validados no fluxo',
-    footNote: 'clique em outro termo para simular a revisão do onboarding clínico',
-    btnLater: 'Revisar depois', btnAccept: 'Aceito e quero começar →',
-    chatTitle: 'LGPD · CYBERSECURITY',
-    chatLines: [
-      '$ lgpd --check',
-      '> aceite explícito obrigatório',
-      '> dados de saúde: Art. 11',
-      '$ crypto --status',
-      '> criptografia end-to-end',
-      '> chaves rotativas 24h',
-      '$ audit --verify',
-      '> zero partilha sem aceite',
-      '> conformidade LGPD ativa',
+    kicker: 'discovery health · diagnóstico', title: 'Descubra.',
+    subtitle: 'Diagnóstico inteligente em saúde — rápido, seguro e sem compromisso.',
+    cards: [
+      { title: 'Diagnóstico Rápido', desc: 'Análise clínica automatizada com IA em menos de 2 minutos. Identificação de sintomas, cruzamento com histórico e sugestão de conduta.' },
+      { title: 'Sem Compromisso', desc: 'Explore o fluxo completo sem custo. Cancele a qualquer momento — seus dados são apagados sob demanda (LGPD Art. 18).' },
+      { title: 'Recomendações', desc: 'Receba orientações baseadas em evidências clínicas. Encaminhamento para especialista quando o caso exigir atendimento presencial.' },
     ],
-    termos: [
-      { id: 'uso', titulo: '1 · Termos de Uso', texto: 'O que o Discovery Health faz, o que não substitui consulta presencial, suspensão por descumprimento.', resumo: 'Paciente entende escopo do produto, limites clínicos e quando o caso deve ser escalado para atendimento humano.', base: 'contrato de uso · onboarding', risco: 'baixo', aceite: 'aceite simples', sinais: ['escopo da plataforma', 'limites de responsabilidade', 'encaminhamento presencial'] },
-      { id: 'privacidade', titulo: '2 · Política de Privacidade', texto: 'Quais dados, bases legais, retenção e compartilhamento com operadores homologados pela IconsAI.', resumo: 'Explica o ciclo de vida dos dados, os operadores envolvidos e a retenção operacional do histórico clínico.', base: 'LGPD art. 7º e art. 9º', risco: 'moderado', aceite: 'aceite explícito', sinais: ['bases legais', 'retenção', 'operadores e subprocessadores'] },
-      { id: 'voz', titulo: '3 · Biometria de Voz', texto: 'Gravação de áudio + características acústicas + prosódia. LGPD Art. 5º II.', resumo: 'Documento sensível para consentimento específico de biometria e processamento de traços de voz no fluxo clínico.', base: 'LGPD art. 5º II', risco: 'alto', aceite: 'consentimento sensível', kicker: 'DADO SENSÍVEL · CONSENTIMENTO ESPECÍFICO', sinais: ['biometria de voz', 'traços acústicos', 'revogação assistida'] },
+    chatMessages: [
+      { role: 'system', text: 'Seus dados de saúde são protegidos por criptografia end-to-end e conformidade total com a LGPD. Nenhuma informação é compartilhada sem seu consentimento explícito.' },
+      { role: 'user', text: 'Como funciona a proteção dos meus dados biométricos de voz?' },
+      { role: 'system', text: 'A biometria de voz utiliza processamento local com chaves rotativas a cada 24h. Os traços acústicos são anonimizados antes do armazenamento — revogação assistida disponível a qualquer momento.' },
     ],
   },
   'pt-PT': {
-    kicker: 'discovery health · termos legais', title: 'Antes de começar.',
-    subtitle: 'Aceitação explícita em três documentos — exigência do RGPD.',
-    panelKicker: 'documento em foco', metaBase: 'base legal', metaAceite: 'tipo de aceitação', metaStatus: 'estado',
-    statusVal: 'pronto para assinatura', itemsLabel: 'itens validados no fluxo',
-    footNote: 'clique noutro termo para simular a revisão do onboarding clínico',
-    btnLater: 'Rever depois', btnAccept: 'Aceito e quero começar →',
-    chatTitle: 'RGPD · CYBERSECURITY',
-    chatLines: [
-      '$ rgpd --check',
-      '> aceitação explícita requerida',
-      '> dados de saúde: Art. 9.º',
-      '$ crypto --status',
-      '> cifração end-to-end activa',
-      '> chaves rotativas 24h',
-      '$ audit --verify',
-      '> zero partilha sem aceite',
-      '> conformidade RGPD activa',
+    kicker: 'discovery health · diagnóstico', title: 'Descubra.',
+    subtitle: 'Diagnóstico inteligente em saúde — rápido, seguro e sem compromisso.',
+    cards: [
+      { title: 'Diagnóstico Rápido', desc: 'Análise clínica automatizada com IA em menos de 2 minutos. Identificação de sintomas, cruzamento com histórico e sugestão de conduta.' },
+      { title: 'Sem Compromisso', desc: 'Explore o fluxo completo sem custo. Cancele a qualquer momento — os seus dados são apagados sob pedido (RGPD Art. 17.º).' },
+      { title: 'Recomendações', desc: 'Receba orientações baseadas em evidências clínicas. Encaminhamento para especialista quando o caso exigir atendimento presencial.' },
     ],
-    termos: [
-      { id: 'uso', titulo: '1 · Termos de Utilização', texto: 'O que o Discovery Health faz, o que não substitui consulta presencial, suspensão por incumprimento.', resumo: 'O doente compreende o âmbito do produto, os limites clínicos e quando o caso deve ser encaminhado para atendimento humano.', base: 'contrato de utilização · onboarding', risco: 'baixo', aceite: 'aceitação simples', sinais: ['âmbito da plataforma', 'limites de responsabilidade', 'encaminhamento presencial'] },
-      { id: 'privacidade', titulo: '2 · Política de Privacidade', texto: 'Que dados, bases legais, retenção e partilha com subcontratantes homologados pela IconsAI.', resumo: 'Explica o ciclo de vida dos dados, os subcontratantes envolvidos e a retenção operacional do histórico clínico.', base: 'RGPD art. 6.º e art. 9.º', risco: 'moderado', aceite: 'aceitação explícita', sinais: ['bases legais', 'retenção', 'subcontratantes'] },
-      { id: 'voz', titulo: '3 · Biometria de Voz', texto: 'Gravação de áudio + características acústicas + prosódia. RGPD art. 9.º.', resumo: 'Documento sensível para consentimento específico de biometria e processamento de traços de voz no fluxo clínico.', base: 'RGPD art. 9.º', risco: 'alto', aceite: 'consentimento sensível', kicker: 'DADO SENSÍVEL · CONSENTIMENTO ESPECÍFICO', sinais: ['biometria de voz', 'traços acústicos', 'revogação assistida'] },
+    chatMessages: [
+      { role: 'system', text: 'Os seus dados de saúde são protegidos por cifração end-to-end e conformidade total com o RGPD. Nenhuma informação é partilhada sem o seu consentimento explícito.' },
+      { role: 'user', text: 'Como funciona a proteção dos meus dados biométricos de voz?' },
+      { role: 'system', text: 'A biometria de voz utiliza processamento local com chaves rotativas a cada 24h. Os traços acústicos são anonimizados antes do armazenamento — revogação assistida disponível a qualquer momento.' },
     ],
   },
   en: {
-    kicker: 'discovery health · legal terms', title: 'Before we start.',
-    subtitle: 'Explicit consent across three documents — required under HIPAA.',
-    panelKicker: 'document in focus', metaBase: 'legal basis', metaAceite: 'consent type', metaStatus: 'status',
-    statusVal: 'ready to sign', itemsLabel: 'items validated in the flow',
-    footNote: 'click another term to simulate the clinical onboarding review',
-    btnLater: 'Review later', btnAccept: 'I accept and want to start →',
-    chatTitle: 'HIPAA · CYBERSECURITY',
-    chatLines: [
-      '$ hipaa --check',
-      '> explicit consent required',
-      '> health data: Privacy Rule',
-      '$ crypto --status',
-      '> end-to-end encryption on',
-      '> keys rotated every 24h',
-      '$ audit --verify',
-      '> zero sharing w/o consent',
-      '> HIPAA compliance verified',
+    kicker: 'discovery health · diagnostics', title: 'Discover.',
+    subtitle: 'Intelligent health diagnostics — fast, secure, and commitment-free.',
+    cards: [
+      { title: 'Quick Diagnosis', desc: 'AI-powered clinical analysis in under 2 minutes. Symptom identification, history cross-referencing, and recommended course of action.' },
+      { title: 'No Commitment', desc: 'Explore the full flow at no cost. Cancel anytime — your data is deleted on request (HIPAA Privacy Rule).' },
+      { title: 'Recommendations', desc: 'Receive evidence-based clinical guidance. Specialist referral when the case requires in-person care.' },
     ],
-    termos: [
-      { id: 'uso', titulo: '1 · Terms of Use', texto: 'What Discovery Health does, what it does not replace in an in-person visit, suspension for misuse.', resumo: 'The patient understands the product scope, the clinical limits, and when a case must be escalated to human care.', base: 'terms of use · onboarding', risco: 'baixo', aceite: 'simple acceptance', sinais: ['platform scope', 'liability limits', 'in-person referral'] },
-      { id: 'privacidade', titulo: '2 · Privacy Policy', texto: 'Which data, legal bases, retention, and sharing with IconsAI-approved processors.', resumo: 'Explains the data lifecycle, the processors involved, and the operational retention of the clinical record.', base: 'HIPAA Privacy Rule', risco: 'moderado', aceite: 'explicit acceptance', sinais: ['legal bases', 'retention', 'processors and subprocessors'] },
-      { id: 'voz', titulo: '3 · Voice Biometrics', texto: 'Audio recording + acoustic features + prosody. Sensitive biometric identifier.', resumo: 'Sensitive document for specific consent to biometrics and processing of voice traits within the clinical flow.', base: 'HIPAA · biometric identifier', risco: 'alto', aceite: 'sensitive consent', kicker: 'SENSITIVE DATA · SPECIFIC CONSENT', sinais: ['voice biometrics', 'acoustic traits', 'assisted revocation'] },
+    chatMessages: [
+      { role: 'system', text: 'Your health data is protected by end-to-end encryption and full HIPAA compliance. No information is shared without your explicit consent.' },
+      { role: 'user', text: 'How does voice biometric data protection work?' },
+      { role: 'system', text: 'Voice biometrics uses local processing with keys rotated every 24h. Acoustic traits are anonymized before storage — assisted revocation is available at any time.' },
     ],
   },
 } satisfies L10n<S1>

@@ -8,8 +8,8 @@
  * PALCO (entre header/footer) com scale-to-fit.
  */
 
-import { type CSSProperties } from 'react'
-import { SlideEngine, useLang, type SlideDef } from './SlideEngine'
+import { type CSSProperties, useState, useEffect, useRef, useCallback } from 'react'
+import { SlideEngine, useLang, useSlide, type SlideDef } from './SlideEngine'
 import { MedIcon } from '@/components/MedIcon'
 import {
   UI, OPENING, STEPS, FECHO, EXPLAIN, S1 as S1C, S2 as S2C, S3 as S3C, S4 as S4C,
@@ -554,58 +554,125 @@ function RenderOpening() {
   )
 }
 
+/* ═══ Typewriter chat for Slide 02 (JS-driven, plays once per view) ═══ */
+const CHAR_DELAY = 28          // ms per character (~8s total for 3 messages)
+const MSG_PAUSE  = 200         // ms pause between messages
+const START_DELAY = 500        // ms before first character
+
+function TypewriterChat({ messages }: { messages: { role: 'system' | 'user'; text: string }[] }) {
+  const { currentSlide, seenSlides } = useSlide()
+  const isActive = currentSlide === 1
+  const hasPlayed = useRef(false)
+  const [displayed, setDisplayed] = useState<string[]>([])
+  const [cursorVisible, setCursorVisible] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const run = useCallback(() => {
+    if (hasPlayed.current) return
+    hasPlayed.current = true
+    setCursorVisible(true)
+
+    // Build a flat sequence: for each message, type char-by-char, then pause
+    let delay = START_DELAY
+    const totalMsgs = messages.length
+    for (let m = 0; m < totalMsgs; m++) {
+      const chars = messages[m].text
+      for (let c = 0; c <= chars.length; c++) {
+        const mm = m, cc = c
+        const d = delay
+        timerRef.current = setTimeout(() => {
+          setDisplayed(prev => {
+            const next = [...prev]
+            next[mm] = chars.slice(0, cc)
+            return next
+          })
+        }, d)
+        delay += CHAR_DELAY
+      }
+      delay += MSG_PAUSE
+    }
+    // Hide cursor after all messages are done
+    const finalDelay = delay
+    timerRef.current = setTimeout(() => setCursorVisible(false), finalDelay)
+  }, [messages])
+
+  useEffect(() => {
+    if (isActive && !hasPlayed.current) run()
+  }, [isActive, run])
+
+  // Reset when navigating away (so it replays if not yet seen)
+  useEffect(() => {
+    if (!isActive && !seenSlides.has(1)) {
+      hasPlayed.current = false
+      setDisplayed([])
+      setCursorVisible(false)
+    }
+  }, [isActive, seenSlides])
+
+  // Find which message is currently being typed (for cursor placement)
+  const activeMsg = displayed.length > 0
+    ? displayed.reduce((last, txt, i) => (txt !== undefined && txt.length < messages[i]?.text.length ? i : last), displayed.length - 1)
+    : -1
+
+  return (
+    <div className="dh-tw-chat">
+      {messages.map((msg, i) => {
+        const text = displayed[i]
+        if (text === undefined && i > 0 && !displayed[i - 1]) return null
+        if (text === undefined) return null
+        return (
+          <div key={i} className={`dh-tw-row dh-tw-row-${msg.role}`}>
+            <div className={`dh-tw-bubble dh-tw-bubble-${msg.role}`}>
+              {text}
+              {cursorVisible && i === activeMsg && text.length < msg.text.length && (
+                <span className="dh-tw-cursor" />
+              )}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 function RenderS1() {
   const c = captionFor(1)
   const t = S1C[useLang()]
   return (
     <>
-      <Scene index={1} url="health.iconsai.ai/termos">
+      <Scene index={1} url="health.iconsai.ai/descubra">
         <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-termos-shell" aria-hidden="true">
-          {/* Virtual mouse cursor */}
-          <svg className="dh-vcursor" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M5 3l14 8.5-6.2 1.8L9.6 19z" fill="#1f2937" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
-          </svg>
-
-          <div className="dh-termos-list">
-            {t.termos.map((item, i) => (
-              <div
-                key={item.id}
-                className={`dh-termo-card dh-termo-anim dh-termo-anim-${i + 1}${item.id === 'voz' ? ' dh-termo-sensivel' : ''}`}
-              >
-                <span className={`dh-checkbox dh-checkbox-anim dh-checkbox-anim-${i + 1}`} />
-                <div className="dh-termo-body">
-                  {item.kicker && <div className="dh-termo-kicker">{item.kicker}</div>}
-                  <div className="dh-termo-title">{item.titulo}</div>
-                  <div className="dh-termo-text">{item.texto}</div>
-                  <div className="dh-termo-detail">
-                    <span className={`dh-termo-risk dh-termo-risk-${item.risco}`}>{item.risco}</span>
-                    <span className="dh-termo-base">{item.base}</span>
-                    <span className="dh-termo-aceite">{item.aceite}</span>
-                  </div>
+        <div className="dh-discover-grid">
+          <div className="dh-discover-cards">
+            {t.cards.map((card, i) => (
+              <div key={i} className="dh-discover-card">
+                <div className="dh-discover-icon">
+                  {i === 0 && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                  )}
+                  {i === 1 && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                  )}
+                  {i === 2 && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                  )}
+                </div>
+                <div className="dh-discover-card-body">
+                  <div className="dh-discover-card-title">{card.title}</div>
+                  <div className="dh-discover-card-desc">{card.desc}</div>
                 </div>
               </div>
             ))}
           </div>
-
-          <aside className="dh-chat-panel" aria-hidden="true">
-            <div className="dh-chat-header">
-              <span className="dh-chat-dot" /><span className="dh-chat-dot" /><span className="dh-chat-dot" />
-              <span className="dh-chat-title">{t.chatTitle}</span>
-            </div>
-            <div className="dh-chat-body">
-              {t.chatLines.map((line, i) => (
-                <div key={i} className={`dh-chat-line dh-chat-ln-${i + 1}${line.startsWith('$') ? ' dh-chat-cmd' : ' dh-chat-out'}`}>
-                  <span>{line}</span>
-                </div>
-              ))}
-              <span className="dh-chat-caret">&#9612;</span>
-            </div>
+          <aside className="dh-discover-chat">
+            <TypewriterChat messages={t.chatMessages} />
           </aside>
-        </div>
-        <div className="dh-btn-row dh-self-end">
-          <button className="dh-btn dh-btn-ghost" type="button">{t.btnLater}</button>
-          <button className="dh-btn dh-btn-primary dh-btn-activate" type="button">{t.btnAccept}</button>
         </div>
       </Scene>
       <SceneCaption index={1} title={c.title} desc={c.desc} />

@@ -603,261 +603,114 @@
 }
 
 /* ──────────────────────────────────────────────────────────
-   CENA 1 — TERMOS (animated checkbox flow)
-   Timeline: cursor→cb1 @1.5s, check1 @2.2s, cursor→cb2 @3.5s,
-   check2 @4.2s, cursor→cb3 @5.5s, check3 @6.2s, btn activates @7s, cursor→btn @7.5s
+   CENA 1 — DESCUBRA (two-column: cards + typewriter chat)
    ────────────────────────────────────────────────────────── */
-.dh-termos-shell {
-  position: relative;
+.dh-discover-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) 260px;
-  gap: 14px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   align-items: stretch;
   flex: 1; min-height: 0;
 }
-.dh-termos-list {
+.dh-discover-cards {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  flex: 1;
-}
-.dh-termo-card {
-  display: flex;
   gap: 12px;
-  padding: 16px 18px;
-  background: var(--dh-surface);
+}
+.dh-discover-card {
+  display: flex;
+  gap: 14px;
+  padding: 18px 20px;
+  background: #ffffff;
   border: 1px solid var(--dh-border);
-  border-radius: 12px;
+  border-radius: 8px;
   flex: 1;
-  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
-.dh-termo-sensivel { border-left: 4px solid var(--dh-amber); }
-.dh-termo-body { flex: 1; min-width: 0; }
-.dh-termo-kicker {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--dh-amber-strong);
-  margin-bottom: 4px;
+.dh-discover-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  border-color: var(--dh-primary);
 }
-.dh-termo-title {
-  font-size: 16px;
+.dh-discover-icon {
+  width: 36px; height: 36px;
+  min-width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--dh-primary-soft);
+  color: var(--dh-primary);
+}
+.dh-discover-icon svg {
+  width: 20px; height: 20px;
+}
+.dh-discover-card-body {
+  flex: 1; min-width: 0;
+}
+.dh-discover-card-title {
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  margin-bottom: 4px;
   color: var(--dh-text);
+  margin-bottom: 4px;
 }
-.dh-termo-text {
-  font-size: 14px;
+.dh-discover-card-desc {
+  font-size: 13px;
   color: var(--dh-text-soft);
   line-height: 1.55;
 }
-.dh-termo-detail {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-  flex-wrap: wrap;
-}
-.dh-termo-risk {
-  padding: 4px 9px;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border: 1px solid currentColor;
-}
-.dh-termo-risk-baixo { color: #0f9f68; background: rgba(16,185,129,0.1); }
-.dh-termo-risk-moderado { color: #d97706; background: rgba(245,158,11,0.12); }
-.dh-termo-risk-alto { color: #b45309; background: rgba(245,158,11,0.16); }
-.dh-termo-base, .dh-termo-aceite {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--dh-muted);
-  letter-spacing: 0.04em;
-}
 
-/* ═══ Animated checkbox activation ═══ */
-.dh-termo-anim-1 { animation: dh-termo-activate 0.3s ease 2.2s 1 both; }
-.dh-termo-anim-2 { animation: dh-termo-activate 0.3s ease 4.2s 1 both; }
-.dh-termo-anim-3 { animation: dh-termo-activate 0.3s ease 6.2s 1 both; }
-@keyframes dh-termo-activate {
-  0%   { border-color: var(--dh-border); background: var(--dh-surface); box-shadow: none; }
-  100% { border-color: rgba(16,185,129,0.34); background: linear-gradient(180deg,rgba(16,185,129,0.08),rgba(255,255,255,0.96)); box-shadow: 0 12px 28px rgba(15,118,110,0.12); }
-}
-
-/* Checkbox fill animation */
-.dh-checkbox-anim-1 { animation: dh-cb-check 0.25s ease 2.2s 1 both; }
-.dh-checkbox-anim-2 { animation: dh-cb-check 0.25s ease 4.2s 1 both; }
-.dh-checkbox-anim-3 { animation: dh-cb-check 0.25s ease 6.2s 1 both; }
-@keyframes dh-cb-check {
-  0%   { background: #fff; border-color: var(--dh-border-strong); }
-  50%  { transform: scale(1.15); }
-  100% { background: var(--dh-primary); border-color: var(--dh-primary); }
-}
-/* Checkmark tick after fill */
-.dh-checkbox-anim-1::after { animation: dh-cb-tick 0.2s ease 2.35s 1 both; }
-.dh-checkbox-anim-2::after { animation: dh-cb-tick 0.2s ease 4.35s 1 both; }
-.dh-checkbox-anim-3::after { animation: dh-cb-tick 0.2s ease 6.35s 1 both; }
-.dh-checkbox-anim::after,
-.dh-checkbox-anim-1::after,
-.dh-checkbox-anim-2::after,
-.dh-checkbox-anim-3::after {
-  content: '';
-  position: absolute;
-  left: 5px; top: 1px;
-  width: 5px; height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  opacity: 0;
-}
-@keyframes dh-cb-tick { 0%{opacity:0;transform:rotate(45deg) scale(0)} 100%{opacity:1;transform:rotate(45deg) scale(1)} }
-
-/* ═══ Virtual mouse cursor ═══ */
-.dh-vcursor {
-  position: absolute;
-  width: 22px; height: 22px;
-  z-index: 10;
-  pointer-events: none;
-  opacity: 0;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
-  animation: dh-vcursor-flow 9s ease 0.8s 1 both;
-}
-/* Cursor travel: start above card1 → cb1 → cb2 → cb3 → button
-   Positions are approximate % of the shell container.
-   top/left are animated via keyframes. */
-@keyframes dh-vcursor-flow {
-  0%   { opacity:0; top:8%;  left:2%; }
-  5%   { opacity:1; top:8%;  left:2%; }
-  /* move to checkbox 1 */
-  14%  { top:14%; left:2.5%; }
-  16%  { top:14%; left:2.5%; transform:scale(0.88); } /* click press */
-  18%  { transform:scale(1); }
-  /* pause, then move to checkbox 2 */
-  30%  { top:14%; left:2.5%; }
-  42%  { top:45%; left:2.5%; }
-  44%  { top:45%; left:2.5%; transform:scale(0.88); }
-  46%  { transform:scale(1); }
-  /* pause, then move to checkbox 3 */
-  54%  { top:45%; left:2.5%; }
-  64%  { top:76%; left:2.5%; }
-  66%  { top:76%; left:2.5%; transform:scale(0.88); }
-  68%  { transform:scale(1); }
-  /* pause, then move to button */
-  78%  { top:76%; left:2.5%; }
-  90%  { top:98%; left:52%; }
-  92%  { top:98%; left:52%; transform:scale(0.88); }
-  94%  { transform:scale(1); }
-  96%  { opacity:1; }
-  100% { opacity:0; top:98%; left:52%; }
-}
-
-/* ═══ Button disabled → enabled transition ═══ */
-.dh-btn-activate {
-  opacity: 0.4;
-  pointer-events: none;
-  filter: grayscale(0.6);
-  animation: dh-btn-enable 0.5s ease 6.8s 1 both;
-}
-@keyframes dh-btn-enable {
-  0%   { opacity:0.4; filter:grayscale(0.6); pointer-events:none; }
-  100% { opacity:1; filter:grayscale(0); pointer-events:auto; }
-}
-
-/* ═══ Terminal chat panel — typewriter (LGPD/Cybersecurity) ═══ */
-.dh-chat-panel {
+/* ═══ Chat interface (typewriter, JS-driven) ═══ */
+.dh-discover-chat {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  border-radius: 12px;
-  border: 1px solid rgba(34, 211, 238, 0.18);
-  background: #0d1117;
-  overflow: hidden;
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.25);
 }
-.dh-chat-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: rgba(255,255,255,0.04);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.dh-chat-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-}
-.dh-chat-dot:first-child { background: #ff5f57; }
-.dh-chat-dot:nth-child(2) { background: #febc2e; }
-.dh-chat-dot:nth-child(3) { background: #28c840; }
-.dh-chat-title {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: rgba(255,255,255,0.45);
-  margin-left: auto;
-}
-.dh-chat-body {
+.dh-tw-chat {
   display: flex;
   flex-direction: column;
-  padding: 14px;
-  font-family: var(--font-mono);
+  gap: 10px;
+  padding: 16px;
+  background: rgb(245,245,245);
+  border-radius: 12px;
+  border: 1px solid var(--dh-border);
+  flex: 1;
+  min-height: 0;
+}
+.dh-tw-row {
+  display: flex;
+}
+.dh-tw-row-system { justify-content: flex-start; }
+.dh-tw-row-user   { justify-content: flex-end; }
+.dh-tw-bubble {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 14px;
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.55;
+  color: var(--dh-text);
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
-.dh-chat-line {
-  overflow: hidden;
-  max-height: 0;
+.dh-tw-bubble-system {
+  background: #f0f0f0;
+  border-bottom-left-radius: 4px;
 }
-.dh-chat-line span {
+.dh-tw-bubble-user {
+  background: #e3f2fd;
+  border-bottom-right-radius: 4px;
+}
+.dh-tw-cursor {
   display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 0;
+  width: 2px;
+  height: 1em;
+  background: #f97316;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: dh-tw-blink 0.6s step-end infinite;
 }
-.dh-chat-cmd span { color: #22d3ee; }
-.dh-chat-out span { color: rgba(163, 230, 53, 0.9); }
-
-/* Typewriter reveal: each line shows + text types sequentially */
-@keyframes dh-ln-show { to { max-height: 1.8em; } }
-@keyframes dh-type    { to { max-width: 40ch; } }
-
-/* Timeline aligned with checkbox animation (cbs at 2.2s, 4.2s, 6.2s) */
-.dh-chat-ln-1 { animation: dh-ln-show 0.01s linear 0.29s both; }
-.dh-chat-ln-1 span { animation: dh-type 0.6s steps(18, end) 0.3s both; }
-.dh-chat-ln-2 { animation: dh-ln-show 0.01s linear 0.99s both; }
-.dh-chat-ln-2 span { animation: dh-type 0.7s steps(20, end) 1.0s both; }
-.dh-chat-ln-3 { animation: dh-ln-show 0.01s linear 1.79s both; }
-.dh-chat-ln-3 span { animation: dh-type 0.6s steps(18, end) 1.8s both; }
-.dh-chat-ln-4 { animation: dh-ln-show 0.01s linear 2.59s both; }
-.dh-chat-ln-4 span { animation: dh-type 0.6s steps(18, end) 2.6s both; }
-.dh-chat-ln-5 { animation: dh-ln-show 0.01s linear 3.29s both; }
-.dh-chat-ln-5 span { animation: dh-type 0.6s steps(18, end) 3.3s both; }
-.dh-chat-ln-6 { animation: dh-ln-show 0.01s linear 3.99s both; }
-.dh-chat-ln-6 span { animation: dh-type 0.6s steps(18, end) 4.0s both; }
-.dh-chat-ln-7 { animation: dh-ln-show 0.01s linear 4.79s both; }
-.dh-chat-ln-7 span { animation: dh-type 0.6s steps(18, end) 4.8s both; }
-.dh-chat-ln-8 { animation: dh-ln-show 0.01s linear 5.49s both; }
-.dh-chat-ln-8 span { animation: dh-type 0.6s steps(18, end) 5.5s both; }
-.dh-chat-ln-9 { animation: dh-ln-show 0.01s linear 6.19s both; }
-.dh-chat-ln-9 span { animation: dh-type 0.6s steps(18, end) 6.2s both; }
-
-/* Blinking caret at the bottom */
-.dh-chat-caret {
-  color: var(--dh-primary);
-  font-size: 14px;
-  line-height: 1;
-  animation: dh-caret-blink 0.7s step-end infinite;
-}
-@keyframes dh-caret-blink { 50% { opacity: 0; } }
+@keyframes dh-tw-blink { 50% { opacity: 0; } }
 
 /* ──────────────────────────────────────────────────────────
    CENA 2 — IDENTIFICAÇÃO
@@ -4346,7 +4199,7 @@
   .dh-opening-patient,
   .dh-autoexam-guide-head,
   .dh-opening-console-head { flex-direction: column; align-items: flex-start; }
-  .dh-termos-shell { grid-template-columns: 1fr; }
+  .dh-discover-grid { grid-template-columns: 1fr; }
   .dh-vitals-grid { grid-template-columns: repeat(2, 1fr); }
   .dh-exames-check-grid { grid-template-columns: repeat(2, 1fr); }
   .dh-laudo-soap { grid-template-columns: 1fr; }
@@ -4397,14 +4250,7 @@
   .dh-agenda-confirm,
   .dh-agenda-wa,
   .dh-wa-thread > *,
-  .dh-vcursor,
-  .dh-termo-anim,
-  .dh-checkbox-anim,
-  .dh-checkbox-anim::after,
-  .dh-btn-activate,
-  .dh-chat-line,
-  .dh-chat-line span,
-  .dh-chat-caret,
+  .dh-tw-cursor,
   .dh-rf-loader,
   .dh-rf-donut-arc,
   .dh-rf-ptick,
@@ -4474,9 +4320,8 @@
     transform: none !important;
     max-height: none !important;
   }
-  /* Chat typewriter: show all lines immediately */
-  .dh-chat-line { max-height: 2em !important; }
-  .dh-chat-line span { max-width: 40ch !important; }
+  /* Typewriter chat: cursor stops blinking */
+  .dh-tw-cursor { animation: none !important; opacity: 1 !important; }
   .dh-prefill-banner,
   .dh-field,
   .dh-field-typed,
@@ -5875,13 +5720,12 @@
   .dh-opening-stream-row:nth-child(n+4) { display: none; }
   .dh-opening-metric:nth-child(n+3) { display: none; }
 
-  /* Slide 02 — Termos: simplified for mobile */
-  .dh-termos-shell { grid-template-columns: 1fr; }
-  .dh-termo-text, .dh-termo-detail { display: none; }
-  .dh-termo-card { padding: 12px; }
-  .dh-chat-panel { display: none; }
-  .dh-vcursor { display: none; }
-  .dh-btn-row { display: none; }
+  /* Slide 02 — Descubra: stacked for mobile */
+  .dh-discover-grid { grid-template-columns: 1fr; gap: 12px; }
+  .dh-discover-card { padding: 12px 14px; }
+  .dh-discover-card-desc { font-size: 12px; }
+  .dh-tw-chat { padding: 12px; }
+  .dh-tw-bubble { font-size: 12px; padding: 10px 12px; }
 
   /* Slides 05/07 — Aura: segundo side-card sai */
   .dh-aura-side-card-soft { display: none; }
@@ -5961,9 +5805,9 @@
 
 /* ===== DESKTOP BASE — compactação de slides altos (nat > 711 em 1440×800) ===== */
 @media (min-width: 769px) {
-  /* Slide 02 — Termos: compact (driver da altura; nat 730 → ≤711) */
-  .dh-termo-card { padding: 12px 14px; }
-  .dh-chat-body { padding: 10px; font-size: 12px; }
+  /* Slide 02 — Descubra: compact cards */
+  .dh-discover-card { padding: 14px 16px; }
+  .dh-tw-chat { padding: 12px; }
 
   /* Slide 09 — Autoexame: steps + preview enxutos (nat 709 → folga sobre o gate) */
   .dh-autoexam-step { padding: 8px 10px; }
@@ -6004,11 +5848,10 @@
   .dh-steps { display: none; }
   .dh-chrome { display: none; }
 
-  /* Slide 02 — Termos */
-  .dh-termo-text, .dh-termo-detail { display: none; }
-  .dh-termo-card { padding: 10px 12px; }
-  .dh-chat-panel { display: none; }
-  .dh-vcursor { display: none; }
+  /* Slide 02 — Descubra: compact for short viewport */
+  .dh-discover-card { padding: 10px 12px; }
+  .dh-discover-card-desc { font-size: 12px; line-height: 1.4; }
+  .dh-discover-chat { display: none; }
 
   /* Slide 03 — Formulário */
   .dh-form-grid { gap: 8px; }
