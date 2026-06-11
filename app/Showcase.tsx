@@ -684,20 +684,17 @@ function RenderS3() {
                   <circle className="dh-rf-donut-arc" cx="60" cy="60" r="52" fill="none" stroke="url(#dh-rf-grad)" strokeWidth="10" strokeLinecap="round" pathLength={100} />
                 </svg>
                 <div className="dh-rf-donut-center">
-                  <div className="dh-rf-pct">
-                    <span className="dh-rf-pct-num">
-                      <span className="dh-rf-ptick dh-rf-pt-0">0</span>
-                      <span className="dh-rf-ptick dh-rf-pt-1">10</span>
-                      <span className="dh-rf-ptick dh-rf-pt-2">20</span>
-                      <span className="dh-rf-ptick dh-rf-pt-3">30</span>
-                      <span className="dh-rf-ptick dh-rf-pt-4">40</span>
-                      <span className="dh-rf-ptick dh-rf-pt-5">50</span>
-                      <span className="dh-rf-ptick dh-rf-pt-6">60</span>
-                      <span className="dh-rf-ptick dh-rf-pt-7">70</span>
-                      <span className="dh-rf-ptick dh-rf-pt-8">80</span>
-                      <span className="dh-rf-ptick dh-rf-pt-9">100</span>
-                    </span>
-                    <span className="dh-rf-pct-unit">%</span>
+                  <div className="dh-rf-pct-num">
+                    <span className="dh-rf-ptick dh-rf-pt-0">0%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-1">10%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-2">20%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-3">30%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-4">40%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-5">50%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-6">60%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-7">70%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-8">80%</span>
+                    <span className="dh-rf-ptick dh-rf-pt-9">100%</span>
                   </div>
                 </div>
               </div>

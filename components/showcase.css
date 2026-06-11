@@ -937,17 +937,19 @@
 @property --rf-c12 { syntax: '<integer>'; inherits: false; initial-value: 0; }
 
 .dh-rf-stage {
-  position: relative; flex: 1; min-height: 360px;
-  display: flex; flex-direction: column; gap: 16px;
+  position: relative; flex: 1; min-height: 0;
+  display: flex; flex-direction: column; gap: 14px;
 }
 .dh-rf-layout {
   display: grid; grid-template-columns: 0.9fr 1.1fr;
   gap: 16px; align-items: stretch;
+  flex: 1; min-height: 0;
 }
 .dh-rf-loader {
   position: relative; display: flex; flex-direction: column;
-  align-items: center; gap: 10px; padding: 18px 16px;
-  min-height: 100%; background: rgba(255,255,255,0.92);
+  align-items: center; gap: 8px; padding: 14px 16px;
+  min-height: 0; overflow: hidden;
+  background: rgba(255,255,255,0.92);
   border: 1px solid var(--dh-border); border-radius: 18px;
 }
 .dh-rf-kicker {
@@ -969,15 +971,12 @@
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
 }
-.dh-rf-pct {
-  display: inline-flex; align-items: baseline; gap: 1px;
-  font-family: var(--font-sans); font-weight: 800; font-size: 24px;
-  color: #1f2937; font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
-}
 .dh-rf-pct-num {
   position: relative; display: inline-flex;
   align-items: center; justify-content: center;
-  min-width: 40px; height: 28px;
+  font-family: var(--font-sans); font-weight: 800; font-size: 22px;
+  color: #1f2937; font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+  min-width: 48px; height: 30px;
 }
 .dh-rf-ptick {
   position: absolute; inset: 0;
@@ -1008,8 +1007,6 @@
 @keyframes dh-rf-pt-7 { 0%, 69%{opacity:0} 70%,79%{opacity:1} 80%,100%{opacity:0} }
 @keyframes dh-rf-pt-8 { 0%, 79%{opacity:0} 80%,89%{opacity:1} 90%,100%{opacity:0} }
 @keyframes dh-rf-pt-9 { 0%, 89%{opacity:0} 90%,100%{opacity:1} }
-
-.dh-rf-pct-unit { font-size: 14px; font-weight: 700; color: var(--dh-muted); }
 
 .dh-rf-label {
   font-family: var(--font-sans); font-size: 14px; font-weight: 600;
@@ -3776,19 +3773,19 @@
 }
 
 /* ═══ S3 dark-mode overrides ═══ */
-.dh-rf-stage { min-height: 0; gap: 14px; }
 .dh-rf-layout {
   display: grid; grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
   gap: 16px; align-items: stretch;
 }
 .dh-rf-loader {
-  padding: 18px 16px; border-radius: 20px;
+  padding: 14px 16px; border-radius: 20px;
   background: linear-gradient(180deg, rgba(236,253,245,0.92), rgba(255,255,255,0.98));
   border: 1px solid rgba(16,185,129,0.16);
   box-shadow: 0 20px 44px rgba(15,118,110,0.1);
 }
-.dh-rf-donut { width: 120px; height: 120px; }
-.dh-rf-donut-svg { width: 120px; height: 120px; }
+.dh-rf-donut { width: 118px; height: 118px; }
+.dh-rf-donut-svg { width: 118px; height: 118px; }
+.dh-rf-pct-num { font-size: 24px; min-width: 52px; height: 32px; }
 .dh-rf-src:nth-child(odd) { background: rgba(16,185,129,0.08); }
 .dh-rf-total-num { color: var(--dh-primary-deep); }
 .dh-rf-revealed { display: flex; flex-direction: column; gap: 14px; }
@@ -4329,8 +4326,10 @@
   .dh-wa-thread > *,
   .dh-rf-loader,
   .dh-rf-donut-arc,
-  .dh-rf-tick,
-  .dh-rf-step,
+  .dh-rf-ptick,
+  .dh-rf-src,
+  .dh-rf-sources,
+  .dh-rf-total,
   .dh-rf-revealed,
   .dh-window,
   .dh-window::before,
@@ -5933,7 +5932,9 @@
 
   /* Slide 04 — RF/Confirmação (nat 523 → ≤490): card compacto, 2 side-lines */
   .dh-rf-donut { width: 84px; height: 84px; }
-  .dh-rf-loader-steps { display: none; }
+  .dh-rf-donut-svg { width: 84px; height: 84px; }
+  .dh-rf-pct-num { font-size: 16px; min-width: 36px; height: 22px; }
+  .dh-rf-sources { gap: 2px 6px; }
   .dh-confirm-audit { display: none; }
   .dh-confirm-card { padding: 14px 16px; }
   .dh-confirm-side-line + .dh-confirm-side-line + .dh-confirm-side-line { display: none; }
