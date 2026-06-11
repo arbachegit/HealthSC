@@ -1679,6 +1679,75 @@
   font-weight: 800;
 }
 
+/* ────────────────────────────────────────────────────────
+   CENA 8 — ANIMATIONS (entrance staggered)
+   ──────────────────────────────────────────────────────── */
+/* Exam check cards: staggered entrance from left */
+.dh-exame-check {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: dh-s8-card-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.dh-exame-check:nth-child(1) { animation-delay: 0.0s; }
+.dh-exame-check:nth-child(2) { animation-delay: 0.1s; }
+.dh-exame-check:nth-child(3) { animation-delay: 0.2s; }
+.dh-exame-check:nth-child(4) { animation-delay: 0.3s; }
+.dh-exame-check:nth-child(5) { animation-delay: 0.4s; }
+.dh-exame-check:nth-child(6) { animation-delay: 0.5s; }
+.dh-exame-check:nth-child(7) { animation-delay: 0.6s; }
+.dh-exame-check:nth-child(8) { animation-delay: 0.7s; }
+
+@keyframes dh-s8-card-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Guide panel: entrance from right with fade-in */
+.dh-autoexam-guide {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: dh-s8-guide-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+
+@keyframes dh-s8-guide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Guide steps: staggered entrance from bottom */
+.dh-autoexam-step {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: dh-s8-step-in 0.5s ease-out both;
+}
+.dh-autoexam-step:nth-child(1) { animation-delay: 1.0s; }
+.dh-autoexam-step:nth-child(2) { animation-delay: 1.15s; }
+.dh-autoexam-step:nth-child(3) { animation-delay: 1.3s; }
+.dh-autoexam-step:nth-child(4) { animation-delay: 1.45s; }
+
+@keyframes dh-s8-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ──────────────────────────────────────────────────────────
    CENA 9 — UPLOAD EXAMES
    ────────────────────────────────────────────────────────── */
@@ -2105,26 +2174,71 @@
   font-weight: 500;
 }
 
-/* Cena 12 starts at 129s. Reveal sequentially: S → O → A → P. */
-.dh-reveal-s { animation-delay: calc(129s + 0.4s); }
-.dh-reveal-o { animation-delay: calc(129s + 1.2s); }
-.dh-reveal-a { animation-delay: calc(129s + 2.0s); }
-.dh-reveal-p { animation-delay: calc(129s + 2.8s); }
+/* ────────────────────────────────────────────────────────
+   CENA 12 — ANIMATIONS (entrance staggered, local timeline)
+   ──────────────────────────────────────────────────────── */
 
-@keyframes dh-soap-reveal {
-  0%, 0.40% { opacity: 0; transform: translateY(8px); }
-  0.60%     { opacity: 1; transform: translateY(0); }
-  3.40%     { opacity: 1; transform: translateY(0); }
-  3.86%     { opacity: 0; transform: translateY(-4px); }
-  100%      { opacity: 0; }
+/* Laudo header: entrance from top */
+.dh-laudo-header {
+  opacity: 0;
+  transform: translateY(-16px);
+  animation: dh-s12-header-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* Gestão strip */
+@keyframes dh-s12-header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SOAP cards: staggered entrance with local slide timing */
+.dh-soap-row {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: dh-s12-soap-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.dh-reveal-s { animation-delay: 0.4s; }
+.dh-reveal-o { animation-delay: 0.7s; }
+.dh-reveal-a { animation-delay: 1.0s; }
+.dh-reveal-p { animation-delay: 1.3s; }
+
+@keyframes dh-s12-soap-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gestão strip: entrance from bottom with staggered cards */
 .dh-gestao-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: dh-s12-gestao-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.8s both;
 }
+
+@keyframes dh-s12-gestao-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .dh-gestao-card {
   padding: 12px 14px;
   background: linear-gradient(140deg, #ffffff 0%, #f0fdf4 100%);
@@ -2134,6 +2248,23 @@
   flex-direction: column;
   gap: 8px;
   min-width: 0;
+  opacity: 0;
+  transform: scale(0.95);
+  animation: dh-s12-card-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.dh-gestao-card:nth-child(1) { animation-delay: 1.8s; }
+.dh-gestao-card:nth-child(2) { animation-delay: 2.0s; }
+.dh-gestao-card:nth-child(3) { animation-delay: 2.2s; }
+
+@keyframes dh-s12-card-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 .dh-gestao-kicker {
   font-family: var(--font-mono);
@@ -4098,11 +4229,15 @@
   border: 1px solid rgba(16, 185, 129, 0.14);
 }
 .dh-chat-compose-line {
-  display: block;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
   min-height: 2.8em;
   font-size: 14px;
   line-height: 1.5;
   color: var(--dh-text);
+  border-right: 2px solid transparent; /* cursor slot */
+  vertical-align: bottom;
 }
 .dh-chat-side {
   display: flex;
@@ -4766,6 +4901,29 @@
 .dh-med-fields {
   animation: dh-med-expand 10s both;
   animation-delay: 0.4s;
+}
+
+/* ──────────────────────────────────────────────────────────
+   S11 — CHAT ANAMNESE (Typewriter animation)
+   ────────────────────────────────────────────────────────── */
+
+/* Typewriter effect: max-width grows to reveal text character by character */
+@keyframes dh-s11-type {
+  from { max-width: 0; }
+  to   { max-width: 125ch; }
+}
+
+/* Cursor: visible while typing, fades out when done */
+@keyframes dh-s11-cursor {
+  0%, 96% { border-right-color: #10b981; }
+  97%, 100% { border-right-color: transparent; }
+}
+
+/* Apply typewriter animation to chat compose line (starts after 0.8s delay) */
+.dh-scene-11 .dh-chat-compose-line {
+  animation:
+    dh-s11-type   6.5s steps(120, end) 0.8s both,
+    dh-s11-cursor 6.5s linear         0.8s 1 both;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
