@@ -3301,11 +3301,6 @@
 .dh-flow-node-out ~ .dh-flow-node-t {
   fill: #fff;
 }
-/* Force out node text to white via dedicated rule */
-.dh-flow svg g:nth-child(4) text,
-.dh-flow svg g:nth-child(5) text {
-  fill: #fff;
-}
 .dh-flow-node-s {
   text-anchor: middle;
   font-family: var(--font-mono);
@@ -3313,8 +3308,8 @@
   font-weight: 700;
   fill: var(--dh-muted);
 }
-.dh-flow svg g:nth-child(4) .dh-flow-node-s,
-.dh-flow svg g:nth-child(5) .dh-flow-node-s {
+/* Sub-text inside an "out" (Alta) node → always white */
+.dh-flow-node-out ~ .dh-flow-node-s {
   fill: rgba(255, 255, 255, 0.85);
 }
 .dh-flow-legend {
@@ -4554,6 +4549,40 @@
 }
 
 /* ──────────────────────────────────────────────────────────
+   S09 — UPLOAD DE EXAMES (items appear + last one arrives)
+   ────────────────────────────────────────────────────────── */
+
+/* Existing items slide in from right */
+@keyframes dh-upload-item-in {
+  0%   { opacity: 0; transform: translateX(20px); }
+  8%   { opacity: 1; transform: translateX(0); }
+  92%  { opacity: 1; transform: translateX(0); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* New file drops in from above (patient just uploaded it) */
+@keyframes dh-upload-new-drop {
+  0%, 35%  { opacity: 0; transform: translateY(-14px); }
+  50%      { opacity: 1; transform: translateY(0); }
+  92%      { opacity: 1; transform: translateY(0); }
+  100%     { opacity: 1; transform: translateY(0); }
+}
+
+.dh-upload-list .dh-upload-item:nth-child(1) {
+  animation: dh-upload-item-in 10s both;
+  animation-delay: 0.0s;
+}
+.dh-upload-list .dh-upload-item:nth-child(2) {
+  animation: dh-upload-item-in 10s both;
+  animation-delay: 0.25s;
+}
+/* Third item arrives as if freshly dropped */
+.dh-upload-list .dh-upload-item:nth-child(3) {
+  animation: dh-upload-new-drop 10s both;
+  animation-delay: 0s;
+}
+
+/* ──────────────────────────────────────────────────────────
    S10 — REMÉDIOS (checklist)
    ────────────────────────────────────────────────────────── */
 
@@ -5166,28 +5195,28 @@
 }
 
 /* Node groups: each <g> in the SVG contains a circle + text.
-   Using nth-child on the <g> elements inside the SVG. */
-.dh-flow-svg > g:nth-child(1) {
+   Using nth-of-type because paths and texts precede the g elements in DOM order. */
+.dh-flow-svg > g:nth-of-type(1) {
   transform-origin: 60px 110px;
   animation: dh-flow-node-in 10s both;
   animation-delay: 0s;
 }
-.dh-flow-svg > g:nth-child(2) {
+.dh-flow-svg > g:nth-of-type(2) {
   transform-origin: 320px 60px;
   animation: dh-flow-node-in 10s both;
   animation-delay: 0.6s;
 }
-.dh-flow-svg > g:nth-child(3) {
+.dh-flow-svg > g:nth-of-type(3) {
   transform-origin: 320px 160px;
   animation: dh-flow-node-in 10s both;
   animation-delay: 0.6s;
 }
-.dh-flow-svg > g:nth-child(4) {
+.dh-flow-svg > g:nth-of-type(4) {
   transform-origin: 540px 60px;
   animation: dh-flow-node-in 10s both;
   animation-delay: 1.8s;
 }
-.dh-flow-svg > g:nth-child(5) {
+.dh-flow-svg > g:nth-of-type(5) {
   transform-origin: 540px 160px;
   animation: dh-flow-node-in 10s both;
   animation-delay: 1.8s;
@@ -5511,7 +5540,7 @@
 }
 .dh-explain-kicker {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -5520,7 +5549,7 @@
 .dh-explain-line {
   position: relative;
   padding-left: 14px;
-  font-size: 14px;
+  font-size: 28px;
   line-height: 1.55;
   color: var(--dh-text);
   font-weight: 600;

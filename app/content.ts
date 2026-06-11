@@ -967,7 +967,7 @@ export const S24 = {
 } satisfies L10n<S24>
 
 /* ───────────────────────── EXPLAIN PANELS (slides sem side panel) ───────────────────────── */
-export type ExplainSource = { name: string; field: string; icon: 'id' | 'map-pin' }
+export type ExplainSource = { name: string; field: string; icon: 'id' | 'map-pin' | 'mic' | 'zap' | 'database' | 'file' | 'shield' | 'chart' | 'calendar' | 'message' }
 export type ExplainMetric = { value: string; label: string }
 type ExplainEntry = {
   kicker: string
@@ -1043,304 +1043,934 @@ export const EXPLAIN: ExplainMap = {
     },
   },
   5: {
-    'pt-BR': { kicker: 'CONSULTA', lines: [
-      'Escuta ativa com IA: o paciente fala livremente por até 2 minutos.',
-      'Waveform em tempo real dá feedback visual de que o áudio está sendo captado.',
-      'Sem termos técnicos — a IA estrutura os sintomas depois.',
-      'Gravação processada localmente, sem envio para servidores externos.',
-    ]},
-    'pt-PT': { kicker: 'CONSULTA', lines: [
-      'Escuta ativa com IA: o doente fala livremente durante até 2 minutos.',
-      'O waveform em tempo real dá feedback visual de que o áudio está a ser captado.',
-      'Sem termos técnicos — a IA estrutura os sintomas depois.',
-      'A gravação é processada localmente, sem envio para servidores externos.',
-    ]},
-    en: { kicker: 'CONSULT', lines: [
-      'Active listening with AI: the patient speaks freely for up to 2 minutes.',
-      'Real-time waveform gives visual feedback that audio is being captured.',
-      'No medical jargon needed — the AI structures symptoms afterwards.',
-      'Recording is processed locally, never sent to external servers.',
-    ]},
+    'pt-BR': {
+      kicker: 'CONSULTA',
+      lines: [
+        'Escuta ativa com IA: o paciente fala livremente por até 2 minutos.',
+        'Waveform em tempo real dá feedback visual de que o áudio está sendo captado.',
+        'Sem termos técnicos — a IA estrutura os sintomas depois.',
+        'Gravação processada localmente, sem envio para servidores externos.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'IconsAI TTS', field: 'Transcrição de voz', icon: 'mic' },
+        { name: 'IconsAI NLP', field: 'Estruturação clínica', icon: 'zap' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '< 3 s', label: 'Transcrição completa' },
+        { value: 'Local', label: 'Processado no device' },
+        { value: 'LGPD', label: 'Em conformidade' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'CONSULTA',
+      lines: [
+        'Escuta ativa com IA: o doente fala livremente durante até 2 minutos.',
+        'O waveform em tempo real dá feedback visual de que o áudio está a ser captado.',
+        'Sem termos técnicos — a IA estrutura os sintomas depois.',
+        'A gravação é processada localmente, sem envio para servidores externos.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'IconsAI TTS', field: 'Transcrição de voz', icon: 'mic' },
+        { name: 'IconsAI NLP', field: 'Estruturação clínica', icon: 'zap' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '< 3 s', label: 'Transcrição completa' },
+        { value: 'Local', label: 'Processado no dispositivo' },
+        { value: 'RGPD', label: 'Em conformidade' },
+      ],
+    },
+    en: {
+      kicker: 'CONSULT',
+      lines: [
+        'Active listening with AI: the patient speaks freely for up to 2 minutes.',
+        'Real-time waveform gives visual feedback that audio is being captured.',
+        'No medical jargon needed — the AI structures symptoms afterwards.',
+        'Recording is processed locally, never sent to external servers.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'IconsAI TTS', field: 'Voice transcription', icon: 'mic' },
+        { name: 'IconsAI NLP', field: 'Clinical structuring', icon: 'zap' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '< 3 s', label: 'Full transcription' },
+        { value: 'On-device', label: 'Local processing' },
+        { value: 'HIPAA', label: 'Compliant' },
+      ],
+    },
   },
   7: {
-    'pt-BR': { kicker: 'SINAIS VITAIS', lines: [
-      'PA, FC, glicemia, IMC e SpO2 digitados ou importados de dispositivos.',
-      'Classificação automática com red flags em tempo real.',
-      'Escala de dor validada (0–10) integrada à triagem clínica.',
-      'Valores fora do normal disparam alertas visuais imediatos.',
-    ]},
-    'pt-PT': { kicker: 'SINAIS VITAIS', lines: [
-      'TA, FC, glicemia, IMC e SpO2 digitados ou importados de dispositivos.',
-      'Classificação automática com alertas em tempo real.',
-      'Escala de dor validada (0–10) integrada à triagem clínica.',
-      'Valores fora do normal disparam alertas visuais imediatos.',
-    ]},
-    en: { kicker: 'VITAL SIGNS', lines: [
-      'BP, HR, glucose, BMI, and SpO2 typed or imported from devices.',
-      'Automatic classification with real-time red flags.',
-      'Validated pain scale (0–10) integrated into clinical triage.',
-      'Out-of-range values trigger immediate visual alerts.',
-    ]},
+    'pt-BR': {
+      kicker: 'SINAIS VITAIS',
+      lines: [
+        'PA, FC, glicemia, IMC e SpO2 digitados ou importados de dispositivos.',
+        'Classificação automática com red flags em tempo real.',
+        'Escala de dor validada (0–10) integrada à triagem clínica.',
+        'Valores fora do normal disparam alertas visuais imediatos.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Entrada Clínica', field: 'Manual ou dispositivo', icon: 'zap' },
+        { name: 'CFM · ANS', field: 'Valores de referência', icon: 'shield' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '5 vitais', label: 'Monitorados por sessão' },
+        { value: '< 1 s', label: 'Validação automática' },
+        { value: 'Red flag', label: 'Alerta imediato' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'SINAIS VITAIS',
+      lines: [
+        'TA, FC, glicemia, IMC e SpO2 digitados ou importados de dispositivos.',
+        'Classificação automática com alertas em tempo real.',
+        'Escala de dor validada (0–10) integrada à triagem clínica.',
+        'Valores fora do normal disparam alertas visuais imediatos.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Entrada Clínica', field: 'Manual ou dispositivo', icon: 'zap' },
+        { name: 'Ordem dos Médicos', field: 'Valores de referência', icon: 'shield' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '5 vitais', label: 'Monitorizados por sessão' },
+        { value: '< 1 s', label: 'Validação automática' },
+        { value: 'Red flag', label: 'Alerta imediato' },
+      ],
+    },
+    en: {
+      kicker: 'VITAL SIGNS',
+      lines: [
+        'BP, HR, glucose, BMI, and SpO2 typed or imported from devices.',
+        'Automatic classification with real-time red flags.',
+        'Validated pain scale (0–10) integrated into clinical triage.',
+        'Out-of-range values trigger immediate visual alerts.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'Clinical Input', field: 'Manual or device', icon: 'zap' },
+        { name: 'AMA · AHA', field: 'Reference ranges', icon: 'shield' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '5 vitals', label: 'Per session' },
+        { value: '< 1 s', label: 'Auto-validation' },
+        { value: 'Red flag', label: 'Instant alert' },
+      ],
+    },
   },
   9: {
-    'pt-BR': { kicker: 'EXAMES', lines: [
-      'Upload de PDF, JPG ou PNG — até 20 MB por arquivo.',
-      'IconsAI Vision extrai valores automaticamente do documento.',
-      'Progresso em tempo real: upload, OCR e indexação em paralelo.',
-      'Resultados incorporados ao laudo SOAP sem redigitação.',
-    ]},
-    'pt-PT': { kicker: 'EXAMES', lines: [
-      'Carregamento de PDF, JPG ou PNG — até 20 MB por ficheiro.',
-      'IconsAI Vision extrai valores automaticamente do documento.',
-      'Progresso em tempo real: upload, OCR e indexação em paralelo.',
-      'Resultados incorporados ao laudo SOAP sem redigitação.',
-    ]},
-    en: { kicker: 'LAB RESULTS', lines: [
-      'Upload PDF, JPG, or PNG — up to 20 MB per file.',
-      'IconsAI Vision extracts values automatically from the document.',
-      'Real-time progress: upload, OCR, and indexing run in parallel.',
-      'Results flow into the SOAP report without re-typing.',
-    ]},
+    'pt-BR': {
+      kicker: 'EXAMES',
+      lines: [
+        'Upload de PDF, JPG ou PNG — até 20 MB por arquivo.',
+        'IconsAI Vision extrai valores automaticamente do documento.',
+        'Progresso em tempo real: upload, OCR e indexação em paralelo.',
+        'Resultados incorporados ao laudo SOAP sem redigitação.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'IconsAI Vision', field: 'OCR de laudos', icon: 'file' },
+        { name: 'CBHPM', field: 'Nomenclatura de exames', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '20 MB', label: 'Por arquivo' },
+        { value: '< 5 s', label: 'OCR completo' },
+        { value: 'LGPD', label: 'Em conformidade' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'EXAMES',
+      lines: [
+        'Carregamento de PDF, JPG ou PNG — até 20 MB por ficheiro.',
+        'IconsAI Vision extrai valores automaticamente do documento.',
+        'Progresso em tempo real: upload, OCR e indexação em paralelo.',
+        'Resultados incorporados ao laudo SOAP sem redigitação.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'IconsAI Vision', field: 'OCR de laudos', icon: 'file' },
+        { name: 'Nomenclatura Clínica', field: 'Indexação de exames', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '20 MB', label: 'Por ficheiro' },
+        { value: '< 5 s', label: 'OCR completo' },
+        { value: 'RGPD', label: 'Em conformidade' },
+      ],
+    },
+    en: {
+      kicker: 'LAB RESULTS',
+      lines: [
+        'Upload PDF, JPG, or PNG — up to 20 MB per file.',
+        'IconsAI Vision extracts values automatically from the document.',
+        'Real-time progress: upload, OCR, and indexing run in parallel.',
+        'Results flow into the SOAP report without re-typing.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'IconsAI Vision', field: 'Lab report OCR', icon: 'file' },
+        { name: 'CPT Codes', field: 'Result indexing', icon: 'database' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '20 MB', label: 'Per file' },
+        { value: '< 5 s', label: 'OCR complete' },
+        { value: 'HIPAA', label: 'Compliant' },
+      ],
+    },
   },
   10: {
-    'pt-BR': { kicker: 'MEDICAMENTOS', lines: [
-      'RAG cruza a transcrição do áudio com o catálogo de medicações.',
-      'O paciente marca o que usa — sem precisar lembrar nomes exatos.',
-      'Alertas automáticos de interações medicamentosas conhecidas.',
-      'Dose e frequência registradas para conferência no laudo final.',
-    ]},
-    'pt-PT': { kicker: 'MEDICAMENTOS', lines: [
-      'RAG cruza a transcrição do áudio com o catálogo de medicamentos.',
-      'O doente marca o que toma — sem precisar lembrar nomes exatos.',
-      'Alertas automáticos de interações medicamentosas conhecidas.',
-      'Dose e frequência registadas para conferência no laudo final.',
-    ]},
-    en: { kicker: 'MEDICATIONS', lines: [
-      'RAG cross-references the audio transcript with the medication catalog.',
-      'The patient checks what they take — no need to recall exact names.',
-      'Automatic alerts for known drug interactions.',
-      'Dose and frequency recorded for verification in the final report.',
-    ]},
+    'pt-BR': {
+      kicker: 'MEDICAMENTOS',
+      lines: [
+        'RAG cruza a transcrição do áudio com o catálogo de medicações.',
+        'O paciente marca o que usa — sem precisar lembrar nomes exatos.',
+        'Alertas automáticos de interações medicamentosas conhecidas.',
+        'Dose e frequência registradas para conferência no laudo final.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'ANVISA', field: 'Catálogo de medicamentos', icon: 'database' },
+        { name: 'RAG Engine', field: 'Transcrição cruzada', icon: 'zap' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '12k+', label: 'Medicamentos indexados' },
+        { value: 'Tempo real', label: 'Alerta de interações' },
+        { value: 'LGPD', label: 'Em conformidade' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'MEDICAMENTOS',
+      lines: [
+        'RAG cruza a transcrição do áudio com o catálogo de medicamentos.',
+        'O doente marca o que toma — sem precisar lembrar nomes exatos.',
+        'Alertas automáticos de interações medicamentosas conhecidas.',
+        'Dose e frequência registadas para conferência no laudo final.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'INFARMED', field: 'Prontuário Terapêutico', icon: 'database' },
+        { name: 'RAG Engine', field: 'Transcrição cruzada', icon: 'zap' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '12k+', label: 'Medicamentos indexados' },
+        { value: 'Tempo real', label: 'Alerta de interações' },
+        { value: 'RGPD', label: 'Em conformidade' },
+      ],
+    },
+    en: {
+      kicker: 'MEDICATIONS',
+      lines: [
+        'RAG cross-references the audio transcript with the medication catalog.',
+        'The patient checks what they take — no need to recall exact names.',
+        'Automatic alerts for known drug interactions.',
+        'Dose and frequency recorded for verification in the final report.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'FDA Orange Book', field: 'Medication catalog', icon: 'database' },
+        { name: 'RAG Engine', field: 'Transcript cross-ref', icon: 'zap' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '12k+', label: 'Indexed medications' },
+        { value: 'Real time', label: 'Interaction alerts' },
+        { value: 'HIPAA', label: 'Compliant' },
+      ],
+    },
   },
   13: {
-    'pt-BR': { kicker: 'AGENDA', lines: [
-      'Visão semanal com slots por turno — arrastar para agendar.',
-      'Confirmação automática via WhatsApp: sem ligação, sem retrabalho.',
-      'Ocupação visual imediata: verde (livre), amarelo (pendente), cheio.',
-      'Integração com faturamento — consulta marcada já aparece na previsão.',
-    ]},
-    'pt-PT': { kicker: 'AGENDA', lines: [
-      'Visão semanal com horários por turno — arrastar para agendar.',
-      'Confirmação automática via WhatsApp: sem telefonema, sem retrabalho.',
-      'Ocupação visual imediata: verde (livre), amarelo (pendente), cheio.',
-      'Integração com faturação — consulta marcada já aparece na previsão.',
-    ]},
-    en: { kicker: 'SCHEDULE', lines: [
-      'Weekly view with shift-based slots — drag to book.',
-      'Automatic confirmation by text: no phone call, no rework.',
-      'Instant visual occupancy: green (open), yellow (pending), full.',
-      'Billing integration — booked visit already shows in the forecast.',
-    ]},
+    'pt-BR': {
+      kicker: 'AGENDA',
+      lines: [
+        'Visão semanal com slots por turno — arrastar para agendar.',
+        'Confirmação automática via WhatsApp: sem ligação, sem retrabalho.',
+        'Ocupação visual imediata: verde (livre), amarelo (pendente), cheio.',
+        'Integração com faturamento — consulta marcada já aparece na previsão.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Agenda Interna', field: 'Slots e turnos', icon: 'calendar' },
+        { name: 'WhatsApp Business', field: 'Confirmações', icon: 'message' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '< 30 s', label: 'Confirmação enviada' },
+        { value: '−40%', label: 'Remarcações' },
+        { value: '3 turnos', label: 'Manhã · tarde · noite' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'AGENDA',
+      lines: [
+        'Visão semanal com horários por turno — arrastar para agendar.',
+        'Confirmação automática via WhatsApp: sem telefonema, sem retrabalho.',
+        'Ocupação visual imediata: verde (livre), amarelo (pendente), cheio.',
+        'Integração com faturação — consulta marcada já aparece na previsão.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Agenda Interna', field: 'Horários e turnos', icon: 'calendar' },
+        { name: 'WhatsApp Business', field: 'Confirmações', icon: 'message' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '< 30 s', label: 'Confirmação enviada' },
+        { value: '−40%', label: 'Remarcações' },
+        { value: '3 turnos', label: 'Manhã · tarde · noite' },
+      ],
+    },
+    en: {
+      kicker: 'SCHEDULE',
+      lines: [
+        'Weekly view with shift-based slots — drag to book.',
+        'Automatic confirmation by text: no phone call, no rework.',
+        'Instant visual occupancy: green (open), yellow (pending), full.',
+        'Billing integration — booked visit already shows in the forecast.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'Internal Schedule', field: 'Shifts & slots', icon: 'calendar' },
+        { name: 'WhatsApp Business', field: 'Confirmations', icon: 'message' },
+      ],
+      metricsLabel: 'KEY METRICS',
+      metrics: [
+        { value: '< 30 s', label: 'Confirmation sent' },
+        { value: '−40%', label: 'Reschedules' },
+        { value: '3 shifts', label: 'AM · PM · evening' },
+      ],
+    },
   },
   14: {
-    'pt-BR': { kicker: 'FATURAMENTO', lines: [
-      'Previsto vs realizado nas próximas 4 semanas em barras comparativas.',
-      'Ticket médio, cancelamentos e taxa de no-show em destaque.',
-      'Curva real cruzada com agenda confirmada identifica gap antecipadamente.',
-      'Alertas de desvio disparam antes de fechar o mês.',
-    ]},
-    'pt-PT': { kicker: 'FATURAÇÃO', lines: [
-      'Previsto vs realizado nas próximas 4 semanas em barras comparativas.',
-      'Ticket médio, cancelamentos e taxa de no-show em destaque.',
-      'Curva real cruzada com agenda confirmada identifica o desvio antecipadamente.',
-      'Alertas de desvio disparam antes de fechar o mês.',
-    ]},
-    en: { kicker: 'BILLING', lines: [
-      'Forecast vs actual for the next 4 weeks in comparative bars.',
-      'Average ticket, cancellations, and no-show rate highlighted.',
-      'Actual curve cross-checked with confirmed schedule spots gaps early.',
-      'Variance alerts fire before month-end close.',
-    ]},
+    'pt-BR': {
+      kicker: 'FATURAMENTO',
+      lines: [
+        'Previsto vs realizado nas próximas 4 semanas em barras comparativas.',
+        'Ticket médio, cancelamentos e taxa de no-show em destaque.',
+        'Curva real cruzada com agenda confirmada identifica gap antecipadamente.',
+        'Alertas de desvio disparam antes de fechar o mês.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Agenda Confirmada', field: 'Base de projeção', icon: 'calendar' },
+        { name: 'Histórico 12 meses', field: 'Ticket médio e séries', icon: 'chart' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '± 8%', label: 'Desvio típico' },
+        { value: '4 sem', label: 'Horizonte de projeção' },
+        { value: 'Alerta', label: 'Antes do fechamento' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'FATURAÇÃO',
+      lines: [
+        'Previsto vs realizado nas próximas 4 semanas em barras comparativas.',
+        'Ticket médio, cancelamentos e taxa de no-show em destaque.',
+        'Curva real cruzada com agenda confirmada identifica o desvio antecipadamente.',
+        'Alertas de desvio disparam antes de fechar o mês.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Agenda Confirmada', field: 'Base de projeção', icon: 'calendar' },
+        { name: 'Histórico 12 meses', field: 'Ticket médio e séries', icon: 'chart' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '± 8%', label: 'Desvio típico' },
+        { value: '4 sem', label: 'Horizonte de projeção' },
+        { value: 'Alerta', label: 'Antes do fechamento' },
+      ],
+    },
+    en: {
+      kicker: 'BILLING',
+      lines: [
+        'Forecast vs actual for the next 4 weeks in comparative bars.',
+        'Average ticket, cancellations, and no-show rate highlighted.',
+        'Actual curve cross-checked with confirmed schedule spots gaps early.',
+        'Variance alerts fire before month-end close.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'Confirmed Schedule', field: 'Projection base', icon: 'calendar' },
+        { name: '12-month History', field: 'Avg ticket & series', icon: 'chart' },
+      ],
+      metricsLabel: 'KEY METRICS',
+      metrics: [
+        { value: '± 8%', label: 'Typical variance' },
+        { value: '4 wk', label: 'Forecast horizon' },
+        { value: 'Alert', label: 'Before month-end' },
+      ],
+    },
   },
   15: {
-    'pt-BR': { kicker: 'INVENTÁRIO', lines: [
-      'Visão por item: estoque atual, mínimo, sugestão de compra.',
-      'Consumo médio das últimas 4 semanas calcula reposição automática.',
-      'Vermelho = abaixo do mínimo, com pedido sugerido ao fornecedor.',
-      'Auto-restock para itens críticos dispensa intervenção manual.',
-    ]},
-    'pt-PT': { kicker: 'INVENTÁRIO', lines: [
-      'Visão por artigo: stock atual, mínimo, sugestão de compra.',
-      'Consumo médio das últimas 4 semanas calcula reposição automática.',
-      'Vermelho = abaixo do mínimo, com encomenda sugerida ao fornecedor.',
-      'Reposição automática para artigos críticos dispensa intervenção manual.',
-    ]},
-    en: { kicker: 'INVENTORY', lines: [
-      'View by item: current stock, minimum, purchase suggestion.',
-      'Average usage over the last 4 weeks drives automatic restock.',
-      'Red = below minimum, with a suggested order to the supplier.',
-      'Auto-restock for critical items requires no manual intervention.',
-    ]},
+    'pt-BR': {
+      kicker: 'INVENTÁRIO',
+      lines: [
+        'Visão por item: estoque atual, mínimo, sugestão de compra.',
+        'Consumo médio das últimas 4 semanas calcula reposição automática.',
+        'Vermelho = abaixo do mínimo, com pedido sugerido ao fornecedor.',
+        'Auto-restock para itens críticos dispensa intervenção manual.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Consumo Histórico', field: 'Últimas 4 semanas', icon: 'chart' },
+        { name: 'Fornecedores', field: 'Catálogo e preços', icon: 'database' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '−30%', label: 'Ruptura de estoque' },
+        { value: 'Auto', label: 'Pedido de reposição' },
+        { value: '48h', label: 'Lead time médio' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'INVENTÁRIO',
+      lines: [
+        'Visão por artigo: stock atual, mínimo, sugestão de compra.',
+        'Consumo médio das últimas 4 semanas calcula reposição automática.',
+        'Vermelho = abaixo do mínimo, com encomenda sugerida ao fornecedor.',
+        'Reposição automática para artigos críticos dispensa intervenção manual.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Consumo Histórico', field: 'Últimas 4 semanas', icon: 'chart' },
+        { name: 'Fornecedores', field: 'Catálogo e preços', icon: 'database' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '−30%', label: 'Ruturas de stock' },
+        { value: 'Auto', label: 'Encomenda de reposição' },
+        { value: '48h', label: 'Lead time médio' },
+      ],
+    },
+    en: {
+      kicker: 'INVENTORY',
+      lines: [
+        'View by item: current stock, minimum, purchase suggestion.',
+        'Average usage over the last 4 weeks drives automatic restock.',
+        'Red = below minimum, with a suggested order to the supplier.',
+        'Auto-restock for critical items requires no manual intervention.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'Usage History', field: 'Last 4 weeks', icon: 'chart' },
+        { name: 'Suppliers', field: 'Catalog & pricing', icon: 'database' },
+      ],
+      metricsLabel: 'KEY METRICS',
+      metrics: [
+        { value: '−30%', label: 'Stockout reduction' },
+        { value: 'Auto', label: 'Restock orders' },
+        { value: '48h', label: 'Avg lead time' },
+      ],
+    },
   },
   16: {
-    'pt-BR': { kicker: 'CONTROLADOS', lines: [
-      'Rastreabilidade completa por lote, validade e classe farmacêutica.',
-      'Alerta automático 60 dias antes do vencimento de cada lote.',
-      'Conformidade com ANVISA/SNGPC integrada ao fluxo da farmácia.',
-      'Visualização de saldo por substância — crítico em destaque.',
-    ]},
-    'pt-PT': { kicker: 'CONTROLADOS', lines: [
-      'Rastreabilidade completa por lote, validade e classe farmacêutica.',
-      'Alerta automático 60 dias antes da validade de cada lote.',
-      'Conformidade com INFARMED integrada ao fluxo da farmácia.',
-      'Visualização de saldo por substância — crítico em destaque.',
-    ]},
-    en: { kicker: 'CONTROLLED', lines: [
-      'Full traceability by lot, expiration, and drug schedule.',
-      'Automatic alert 60 days before each lot expires.',
-      'DEA compliance integrated into the pharmacy workflow.',
-      'Balance view by substance — critical items highlighted.',
-    ]},
+    'pt-BR': {
+      kicker: 'CONTROLADOS',
+      lines: [
+        'Rastreabilidade completa por lote, validade e classe farmacêutica.',
+        'Alerta automático 60 dias antes do vencimento de cada lote.',
+        'Conformidade com ANVISA/SNGPC integrada ao fluxo da farmácia.',
+        'Visualização de saldo por substância — crítico em destaque.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'ANVISA / SNGPC', field: 'Regulação federal', icon: 'shield' },
+        { name: 'Rastreio por Lote', field: 'Validade e saldo', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '60 dias', label: 'Alerta de vencimento' },
+        { value: '100%', label: 'Rastreabilidade' },
+        { value: 'SNGPC', label: 'Em conformidade' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'CONTROLADOS',
+      lines: [
+        'Rastreabilidade completa por lote, validade e classe farmacêutica.',
+        'Alerta automático 60 dias antes da validade de cada lote.',
+        'Conformidade com INFARMED integrada ao fluxo da farmácia.',
+        'Visualização de saldo por substância — crítico em destaque.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'INFARMED', field: 'Regulação farmacêutica', icon: 'shield' },
+        { name: 'Rastreio por Lote', field: 'Validade e saldo', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '60 dias', label: 'Alerta de vencimento' },
+        { value: '100%', label: 'Rastreabilidade' },
+        { value: 'INFARMED', label: 'Em conformidade' },
+      ],
+    },
+    en: {
+      kicker: 'CONTROLLED',
+      lines: [
+        'Full traceability by lot, expiration, and drug schedule.',
+        'Automatic alert 60 days before each lot expires.',
+        'DEA compliance integrated into the pharmacy workflow.',
+        'Balance view by substance — critical items highlighted.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'DEA / FDA', field: 'Drug regulation', icon: 'shield' },
+        { name: 'Lot Tracking', field: 'Expiry & balance', icon: 'database' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '60 days', label: 'Expiry alert' },
+        { value: '100%', label: 'Lot traceability' },
+        { value: 'DEA', label: 'Compliant' },
+      ],
+    },
   },
   17: {
-    'pt-BR': { kicker: 'COBRANÇA', lines: [
-      'Sequência humanizada via WhatsApp: lembrete D-3, D-1, D+0.',
-      'Botão PIX integrado — o paciente quita em segundos sem sair do chat.',
-      'Confirmação automática de recebimento fecha o ciclo financeiro.',
-      'Reduz inadimplência sem constranger o paciente.',
-    ]},
-    'pt-PT': { kicker: 'COBRANÇA', lines: [
-      'Sequência humanizada via WhatsApp: lembrete D-3, D-1, D+0.',
-      'Botão MB WAY integrado — o doente paga em segundos sem sair do chat.',
-      'Confirmação automática de recebimento fecha o ciclo financeiro.',
-      'Reduz incumprimento sem constranger o doente.',
-    ]},
-    en: { kicker: 'BILLING', lines: [
-      'Humanized sequence via messaging: reminder D-3, D-1, D+0.',
-      'Integrated instant-pay button — patient settles in seconds without leaving chat.',
-      'Automatic payment confirmation closes the financial cycle.',
-      'Reduces delinquency without embarrassing the patient.',
-    ]},
+    'pt-BR': {
+      kicker: 'COBRANÇA',
+      lines: [
+        'Sequência humanizada via WhatsApp: lembrete D-3, D-1, D+0.',
+        'Botão PIX integrado — o paciente quita em segundos sem sair do chat.',
+        'Confirmação automática de recebimento fecha o ciclo financeiro.',
+        'Reduz inadimplência sem constranger o paciente.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'WhatsApp Business', field: 'Canal de cobrança', icon: 'message' },
+        { name: 'PIX / Banco Central', field: 'Liquidação instantânea', icon: 'id' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '< 10 s', label: 'Confirmação PIX' },
+        { value: '+35%', label: 'Redução inadimplência' },
+        { value: 'D-3, D-1, D', label: 'Sequência de lembretes' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'COBRANÇA',
+      lines: [
+        'Sequência humanizada via WhatsApp: lembrete D-3, D-1, D+0.',
+        'Botão MB WAY integrado — o doente paga em segundos sem sair do chat.',
+        'Confirmação automática de recebimento fecha o ciclo financeiro.',
+        'Reduz incumprimento sem constranger o doente.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'WhatsApp Business', field: 'Canal de cobrança', icon: 'message' },
+        { name: 'MB WAY / Banco de Portugal', field: 'Liquidação instantânea', icon: 'id' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '< 10 s', label: 'Confirmação de pagamento' },
+        { value: '+35%', label: 'Redução de incumprimento' },
+        { value: 'D-3, D-1, D', label: 'Sequência de lembretes' },
+      ],
+    },
+    en: {
+      kicker: 'BILLING',
+      lines: [
+        'Humanized sequence via messaging: reminder D-3, D-1, D+0.',
+        'Integrated instant-pay button — patient settles in seconds without leaving chat.',
+        'Automatic payment confirmation closes the financial cycle.',
+        'Reduces delinquency without embarrassing the patient.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'WhatsApp Business', field: 'Collection channel', icon: 'message' },
+        { name: 'ACH / Zelle', field: 'Payment settlement', icon: 'id' },
+      ],
+      metricsLabel: 'KEY METRICS',
+      metrics: [
+        { value: '< 10 s', label: 'Payment confirmed' },
+        { value: '+35%', label: 'Delinquency reduction' },
+        { value: 'D-3, D-1, D', label: 'Reminder sequence' },
+      ],
+    },
   },
   19: {
-    'pt-BR': { kicker: 'NOTAS FISCAIS', lines: [
-      'NFS-e emitida automaticamente após cada atendimento.',
-      'XML + PDF devolvidos ao paciente em tempo real.',
-      'Status SEFAZ monitorado — rejeições tratadas sem intervenção manual.',
-      'Totais mensais consolidados para contabilidade e auditoria.',
-    ]},
-    'pt-PT': { kicker: 'FATURAS', lines: [
-      'Fatura eletrónica emitida automaticamente após cada consulta.',
-      'XML + PDF devolvidos ao doente em tempo real.',
-      'Comunicação à AT monitorada — rejeições tratadas sem intervenção manual.',
-      'Totais mensais consolidados para contabilidade e auditoria.',
-    ]},
-    en: { kicker: 'INVOICES', lines: [
-      'E-invoice issued automatically after each visit.',
-      'XML + PDF returned to the patient in real time.',
-      'Tax authority status monitored — rejections handled without manual intervention.',
-      'Monthly totals consolidated for accounting and audit.',
-    ]},
+    'pt-BR': {
+      kicker: 'NOTAS FISCAIS',
+      lines: [
+        'NFS-e emitida automaticamente após cada atendimento.',
+        'XML + PDF devolvidos ao paciente em tempo real.',
+        'Status SEFAZ monitorado — rejeições tratadas sem intervenção manual.',
+        'Totais mensais consolidados para contabilidade e auditoria.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'SEFAZ Municipal', field: 'Autoridade fiscal', icon: 'shield' },
+        { name: 'Cadastro do Paciente', field: 'Dados do tomador', icon: 'id' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '< 5 s', label: 'Emissão automática' },
+        { value: 'XML + PDF', label: 'Formatos entregues' },
+        { value: '100%', label: 'SEFAZ monitorado' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'FATURAS',
+      lines: [
+        'Fatura eletrónica emitida automaticamente após cada consulta.',
+        'XML + PDF devolvidos ao doente em tempo real.',
+        'Comunicação à AT monitorada — rejeições tratadas sem intervenção manual.',
+        'Totais mensais consolidados para contabilidade e auditoria.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'AT / e-Fatura', field: 'Autoridade tributária', icon: 'shield' },
+        { name: 'Cadastro do Doente', field: 'Dados do tomador', icon: 'id' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '< 5 s', label: 'Emissão automática' },
+        { value: 'XML + PDF', label: 'Formatos entregues' },
+        { value: '100%', label: 'AT monitorada' },
+      ],
+    },
+    en: {
+      kicker: 'INVOICES',
+      lines: [
+        'E-invoice issued automatically after each visit.',
+        'XML + PDF returned to the patient in real time.',
+        'Tax authority status monitored — rejections handled without manual intervention.',
+        'Monthly totals consolidated for accounting and audit.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'IRS / e-Filing', field: 'Tax authority', icon: 'shield' },
+        { name: 'Patient Record', field: 'Billing entity', icon: 'id' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '< 5 s', label: 'Auto-issue' },
+        { value: 'XML + PDF', label: 'Delivered formats' },
+        { value: '100%', label: 'Status monitored' },
+      ],
+    },
   },
   20: {
-    'pt-BR': { kicker: 'RECEITA', lines: [
-      'Projeção de 12 meses com modelo VAR, sazonalidade e feriados.',
-      'Banda de confiança IC 80% sombreada sobre a curva prevista.',
-      'CAGR, pico sazonal e projeção total destacados como KPIs.',
-      'Linha de corte "hoje" separa realizado de previsto no gráfico.',
-    ]},
-    'pt-PT': { kicker: 'RECEITA', lines: [
-      'Projeção de 12 meses com modelo VAR, sazonalidade e feriados.',
-      'Banda de confiança IC 80% sombreada sobre a curva prevista.',
-      'CAGR, pico sazonal e projeção total destacados como KPIs.',
-      'Linha de corte "hoje" separa realizado de previsto no gráfico.',
-    ]},
-    en: { kicker: 'REVENUE', lines: [
-      '12-month projection using a VAR model with seasonality and holidays.',
-      '80% confidence band shaded over the forecast curve.',
-      'CAGR, seasonal peak, and total projection highlighted as KPIs.',
-      '"Today" cutoff line separates actual from forecast in the chart.',
-    ]},
+    'pt-BR': {
+      kicker: 'RECEITA',
+      lines: [
+        'Projeção de 12 meses com modelo VAR, sazonalidade e feriados.',
+        'Banda de confiança IC 80% sombreada sobre a curva prevista.',
+        'CAGR, pico sazonal e projeção total destacados como KPIs.',
+        'Linha de corte "hoje" separa realizado de previsto no gráfico.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Modelo VAR', field: 'Série temporal', icon: 'chart' },
+        { name: 'Calendário Nacional', field: 'Feriados e sazonalidade', icon: 'calendar' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '12 meses', label: 'Horizonte de projeção' },
+        { value: 'IC 80%', label: 'Banda de confiança' },
+        { value: 'CAGR', label: 'Crescimento anual' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'RECEITA',
+      lines: [
+        'Projeção de 12 meses com modelo VAR, sazonalidade e feriados.',
+        'Banda de confiança IC 80% sombreada sobre a curva prevista.',
+        'CAGR, pico sazonal e projeção total destacados como KPIs.',
+        'Linha de corte "hoje" separa realizado de previsto no gráfico.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Modelo VAR', field: 'Série temporal', icon: 'chart' },
+        { name: 'Calendário Nacional', field: 'Feriados e sazonalidade', icon: 'calendar' },
+      ],
+      metricsLabel: 'MÉTRICAS',
+      metrics: [
+        { value: '12 meses', label: 'Horizonte de projeção' },
+        { value: 'IC 80%', label: 'Banda de confiança' },
+        { value: 'CAGR', label: 'Crescimento anual' },
+      ],
+    },
+    en: {
+      kicker: 'REVENUE',
+      lines: [
+        '12-month projection using a VAR model with seasonality and holidays.',
+        '80% confidence band shaded over the forecast curve.',
+        'CAGR, seasonal peak, and total projection highlighted as KPIs.',
+        '"Today" cutoff line separates actual from forecast in the chart.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'VAR Model', field: 'Time series', icon: 'chart' },
+        { name: 'National Calendar', field: 'Holidays & seasonality', icon: 'calendar' },
+      ],
+      metricsLabel: 'KEY METRICS',
+      metrics: [
+        { value: '12 mo', label: 'Forecast horizon' },
+        { value: 'IC 80%', label: 'Confidence band' },
+        { value: 'CAGR', label: 'Annual growth' },
+      ],
+    },
   },
   21: {
-    'pt-BR': { kicker: 'DIAGNÓSTICO', lines: [
-      'Pipeline: sintomas → CID-10 com probabilidades calibradas → plano.',
-      'Probabilidades calibradas — decisão final é sempre do médico.',
-      'Plano sugerido inclui conduta imediata e gatilhos de encaminhamento.',
-      'Red flag automático quando o quadro indica urgência ou reavaliação.',
-    ]},
-    'pt-PT': { kicker: 'DIAGNÓSTICO', lines: [
-      'Pipeline: sintomas → CID-10 com probabilidades calibradas → plano.',
-      'Probabilidades calibradas — a decisão final é sempre do médico.',
-      'Plano sugerido inclui conduta imediata e critérios de encaminhamento.',
-      'Red flag automático quando o quadro indica urgência ou reavaliação.',
-    ]},
-    en: { kicker: 'DIAGNOSIS', lines: [
-      'Pipeline: symptoms → ICD-10 with calibrated probabilities → plan.',
-      'Calibrated probabilities — the final decision is always the physician\'s.',
-      'Suggested plan includes immediate action and referral triggers.',
-      'Automatic red flag when the presentation indicates urgency or reassessment.',
-    ]},
+    'pt-BR': {
+      kicker: 'DIAGNÓSTICO',
+      lines: [
+        'Pipeline: sintomas → CID-10 com probabilidades calibradas → plano.',
+        'Probabilidades calibradas — decisão final é sempre do médico.',
+        'Plano sugerido inclui conduta imediata e gatilhos de encaminhamento.',
+        'Red flag automático quando o quadro indica urgência ou reavaliação.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'CID-10 / OMS', field: 'Classificação padrão', icon: 'database' },
+        { name: 'PubMed + Cochrane', field: 'Base de evidências', icon: 'file' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: 'IC 95%', label: 'Probabilidades calibradas' },
+        { value: 'Red flag', label: 'Automático' },
+        { value: 'CFM · ANS', label: 'Em conformidade' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'DIAGNÓSTICO',
+      lines: [
+        'Pipeline: sintomas → CID-10 com probabilidades calibradas → plano.',
+        'Probabilidades calibradas — a decisão final é sempre do médico.',
+        'Plano sugerido inclui conduta imediata e critérios de encaminhamento.',
+        'Red flag automático quando o quadro indica urgência ou reavaliação.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'CID-10 / OMS', field: 'Classificação padrão', icon: 'database' },
+        { name: 'PubMed + Cochrane', field: 'Base de evidências', icon: 'file' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: 'IC 95%', label: 'Probabilidades calibradas' },
+        { value: 'Red flag', label: 'Automático' },
+        { value: 'Ordem Médicos', label: 'Em conformidade' },
+      ],
+    },
+    en: {
+      kicker: 'DIAGNOSIS',
+      lines: [
+        'Pipeline: symptoms → ICD-10 with calibrated probabilities → plan.',
+        "Calibrated probabilities — the final decision is always the physician's.",
+        'Suggested plan includes immediate action and referral triggers.',
+        'Automatic red flag when the presentation indicates urgency or reassessment.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'ICD-10 / WHO', field: 'Standard classification', icon: 'database' },
+        { name: 'PubMed + Cochrane', field: 'Evidence base', icon: 'file' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '95% CI', label: 'Calibrated probabilities' },
+        { value: 'Red flag', label: 'Auto-detected' },
+        { value: 'AMA · CMS', label: 'Compliant' },
+      ],
+    },
   },
   22: {
-    'pt-BR': { kicker: 'RISCO', lines: [
-      'Score 0–100 combina comorbidades, idade e taxa de adesão.',
-      'Pacientes em vermelho entram automaticamente em busca ativa.',
-      'Expectativa de vida ajustada com intervalo de confiança 95%.',
-      'Priorização objetiva substitui triagem subjetiva de risco.',
-    ]},
-    'pt-PT': { kicker: 'RISCO', lines: [
-      'Score 0–100 combina comorbilidades, idade e taxa de adesão.',
-      'Doentes em vermelho entram automaticamente em busca ativa.',
-      'Esperança de vida ajustada com intervalo de confiança 95%.',
-      'Priorização objetiva substitui triagem subjetiva de risco.',
-    ]},
-    en: { kicker: 'RISK', lines: [
-      'Score 0–100 combines comorbidities, age, and adherence rate.',
-      'Red-flagged patients automatically enter active outreach.',
-      'Adjusted life expectancy with 95% confidence interval.',
-      'Objective prioritization replaces subjective risk triage.',
-    ]},
+    'pt-BR': {
+      kicker: 'RISCO',
+      lines: [
+        'Score 0–100 combina comorbidades, idade e taxa de adesão.',
+        'Pacientes em vermelho entram automaticamente em busca ativa.',
+        'Expectativa de vida ajustada com intervalo de confiança 95%.',
+        'Priorização objetiva substitui triagem subjetiva de risco.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Prontuário', field: 'Histórico clínico', icon: 'file' },
+        { name: 'Tabelas Atuariais', field: 'Expectativa de vida', icon: 'chart' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: 'IC 95%', label: 'Intervalo de confiança' },
+        { value: 'Score 0–100', label: 'Normalizado' },
+        { value: 'Busca ativa', label: 'Casos críticos' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'RISCO',
+      lines: [
+        'Score 0–100 combina comorbilidades, idade e taxa de adesão.',
+        'Doentes em vermelho entram automaticamente em busca ativa.',
+        'Esperança de vida ajustada com intervalo de confiança 95%.',
+        'Priorização objetiva substitui triagem subjetiva de risco.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Processo Clínico', field: 'Histórico clínico', icon: 'file' },
+        { name: 'Tabelas Atuariais', field: 'Esperança de vida', icon: 'chart' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: 'IC 95%', label: 'Intervalo de confiança' },
+        { value: 'Score 0–100', label: 'Normalizado' },
+        { value: 'Busca ativa', label: 'Casos críticos' },
+      ],
+    },
+    en: {
+      kicker: 'RISK',
+      lines: [
+        'Score 0–100 combines comorbidities, age, and adherence rate.',
+        'Red-flagged patients automatically enter active outreach.',
+        'Adjusted life expectancy with 95% confidence interval.',
+        'Objective prioritization replaces subjective risk triage.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'Patient Record', field: 'Clinical history', icon: 'file' },
+        { name: 'Actuarial Tables', field: 'Life expectancy', icon: 'chart' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '95% CI', label: 'Confidence interval' },
+        { value: 'Score 0–100', label: 'Normalized' },
+        { value: 'Active outreach', label: 'Critical cases' },
+      ],
+    },
   },
   23: {
-    'pt-BR': { kicker: 'TRAJETÓRIAS', lines: [
-      'Diagrama de fluxo com probabilidades de desfecho por caminho.',
-      'Triagem → tratamento A ou B → alta, com percentuais em cada aresta.',
-      'Recuperação de cada via visível — compara eficácia dos caminhos.',
-      'Visualização tipo Markov para decisão clínica baseada em evidência.',
-    ]},
-    'pt-PT': { kicker: 'TRAJETÓRIAS', lines: [
-      'Diagrama de fluxo com probabilidades de desfecho por caminho.',
-      'Triagem → tratamento A ou B → alta, com percentagens em cada aresta.',
-      'Recuperação de cada via visível — compara eficácia dos caminhos.',
-      'Visualização tipo Markov para decisão clínica baseada em evidência.',
-    ]},
-    en: { kicker: 'TRAJECTORIES', lines: [
-      'Flow diagram with outcome probabilities per pathway.',
-      'Triage → treatment A or B → discharge, with percentages on each edge.',
-      'Recovery rate for each pathway visible — compare effectiveness.',
-      'Markov-style visualization for evidence-based clinical decisions.',
-    ]},
+    'pt-BR': {
+      kicker: 'TRAJETÓRIAS',
+      lines: [
+        'Diagrama de fluxo com probabilidades de desfecho por caminho.',
+        'Triagem → tratamento A ou B → alta, com percentuais em cada aresta.',
+        'Recuperação de cada via visível — compara eficácia dos caminhos.',
+        'Visualização tipo Markov para decisão clínica baseada em evidência.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Modelo Markov', field: 'Transições de estado', icon: 'chart' },
+        { name: 'Desfechos Históricos', field: 'Base de dados clínica', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '4 vias', label: 'Caminhos mapeados' },
+        { value: 'IC 95%', label: 'Por aresta do fluxo' },
+        { value: 'Evidência', label: 'Base em meta-análises' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'TRAJETÓRIAS',
+      lines: [
+        'Diagrama de fluxo com probabilidades de desfecho por caminho.',
+        'Triagem → tratamento A ou B → alta, com percentagens em cada aresta.',
+        'Recuperação de cada via visível — compara eficácia dos caminhos.',
+        'Visualização tipo Markov para decisão clínica baseada em evidência.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'Modelo Markov', field: 'Transições de estado', icon: 'chart' },
+        { name: 'Desfechos Históricos', field: 'Base de dados clínica', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: '4 vias', label: 'Caminhos mapeados' },
+        { value: 'IC 95%', label: 'Por aresta do fluxo' },
+        { value: 'Evidência', label: 'Base em meta-análises' },
+      ],
+    },
+    en: {
+      kicker: 'TRAJECTORIES',
+      lines: [
+        'Flow diagram with outcome probabilities per pathway.',
+        'Triage → treatment A or B → discharge, with percentages on each edge.',
+        'Recovery rate for each pathway visible — compare effectiveness.',
+        'Markov-style visualization for evidence-based clinical decisions.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'Markov Model', field: 'State transitions', icon: 'chart' },
+        { name: 'Historical Outcomes', field: 'Clinical database', icon: 'database' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '4 paths', label: 'Mapped pathways' },
+        { value: '95% CI', label: 'Per flow edge' },
+        { value: 'Evidence', label: 'Meta-analysis based' },
+      ],
+    },
   },
   24: {
-    'pt-BR': { kicker: 'TRATAMENTO', lines: [
-      'Matriz de combinações terapêuticas × desfechos clínicos.',
-      'Cada célula traz probabilidade + intervalo de confiança 95%.',
-      'Destaques visuais para combinações com maior evidência de eficácia.',
-      'Base: meta-análises de UpToDate, PubMed e Cochrane — valores ilustrativos.',
-    ]},
-    'pt-PT': { kicker: 'TRATAMENTO', lines: [
-      'Matriz de combinações terapêuticas × desfechos clínicos.',
-      'Cada célula traz probabilidade + intervalo de confiança 95%.',
-      'Destaques visuais para combinações com maior evidência de eficácia.',
-      'Base: meta-análises de UpToDate, PubMed e Cochrane — valores ilustrativos.',
-    ]},
-    en: { kicker: 'TREATMENT', lines: [
-      'Matrix of therapeutic combinations × clinical outcomes.',
-      'Each cell shows probability + 95% confidence interval.',
-      'Visual highlights for combinations with strongest efficacy evidence.',
-      'Based on meta-analyses from UpToDate, PubMed, and Cochrane — illustrative values.',
-    ]},
+    'pt-BR': {
+      kicker: 'TRATAMENTO',
+      lines: [
+        'Matriz de combinações terapêuticas × desfechos clínicos.',
+        'Cada célula traz probabilidade + intervalo de confiança 95%.',
+        'Destaques visuais para combinações com maior evidência de eficácia.',
+        'Base: meta-análises de UpToDate, PubMed e Cochrane — valores ilustrativos.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'UpToDate', field: 'Meta-análises clínicas', icon: 'file' },
+        { name: 'PubMed + Cochrane', field: 'Evidências RCT', icon: 'file' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: 'IC 95%', label: 'Por célula da matriz' },
+        { value: '4 × 3', label: 'Combinações × desfechos' },
+        { value: 'Grau A', label: 'Evidência máxima' },
+      ],
+    },
+    'pt-PT': {
+      kicker: 'TRATAMENTO',
+      lines: [
+        'Matriz de combinações terapêuticas × desfechos clínicos.',
+        'Cada célula traz probabilidade + intervalo de confiança 95%.',
+        'Destaques visuais para combinações com maior evidência de eficácia.',
+        'Base: meta-análises de UpToDate, PubMed e Cochrane — valores ilustrativos.',
+      ],
+      sourcesLabel: 'FONTES DE DADOS',
+      sources: [
+        { name: 'UpToDate', field: 'Meta-análises clínicas', icon: 'file' },
+        { name: 'PubMed + Cochrane', field: 'Evidências RCT', icon: 'file' },
+      ],
+      metricsLabel: 'GARANTIAS',
+      metrics: [
+        { value: 'IC 95%', label: 'Por célula da matriz' },
+        { value: '4 × 3', label: 'Combinações × desfechos' },
+        { value: 'Grau A', label: 'Evidência máxima' },
+      ],
+    },
+    en: {
+      kicker: 'TREATMENT',
+      lines: [
+        'Matrix of therapeutic combinations × clinical outcomes.',
+        'Each cell shows probability + 95% confidence interval.',
+        'Visual highlights for combinations with strongest efficacy evidence.',
+        'Based on meta-analyses from UpToDate, PubMed, and Cochrane — illustrative values.',
+      ],
+      sourcesLabel: 'DATA SOURCES',
+      sources: [
+        { name: 'UpToDate', field: 'Clinical meta-analyses', icon: 'file' },
+        { name: 'PubMed + Cochrane', field: 'RCT evidence', icon: 'file' },
+      ],
+      metricsLabel: 'GUARANTEES',
+      metrics: [
+        { value: '95% CI', label: 'Per matrix cell' },
+        { value: '4 × 3', label: 'Combos × outcomes' },
+        { value: 'Grade A', label: 'Top evidence' },
+      ],
+    },
   },
 }
 
