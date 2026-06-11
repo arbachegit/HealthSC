@@ -164,7 +164,7 @@ function Vital({ label, value, suffix }: { label: string; value: string; suffix:
     <div className="dh-vital">
       <div className="dh-vital-label">{label}</div>
       <div className="dh-vital-row">
-        <span className="dh-vital-value">{value}</span>
+        <span className="dh-vital-value"><span className="dh-vital-typed">{value}</span></span>
         <span className="dh-vital-suffix">{suffix}</span>
       </div>
     </div>
@@ -896,7 +896,7 @@ function RenderS7() {
             <div className="dh-pain-slider">
               <div className="dh-pain-label">{t.painLabel}</div>
               <div className="dh-pain-track"><span className="dh-pain-thumb" /></div>
-              <div className="dh-pain-value">{t.painValue}</div>
+              <div className="dh-pain-value"><span className="dh-pain-typed">{t.painValue}</span></div>
             </div>
           </div>
           <ExplainAside index={7} />
