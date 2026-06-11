@@ -8,7 +8,7 @@
  * PALCO (entre header/footer) com scale-to-fit.
  */
 
-import { useState, type CSSProperties } from 'react'
+import { type CSSProperties } from 'react'
 import { SlideEngine, useLang, type SlideDef } from './SlideEngine'
 import { MedIcon } from '@/components/MedIcon'
 import {
@@ -63,7 +63,7 @@ const DH_NAV: DhNavScene[] = [
   { startMs: 259_000, step: '25', label: 'Fecho' },
 ]
 
-type TermoId = 'uso' | 'privacidade' | 'voz'
+/* TermoId removed — checkboxes are now CSS-animated, not interactive */
 
 /* ═════════════════════════════════════════════════════════════════════
    HELPERS
@@ -557,58 +557,41 @@ function RenderOpening() {
 function RenderS1() {
   const c = captionFor(1)
   const t = S1C[useLang()]
-  const [selected, setSelected] = useState<TermoId>('voz')
-  const termo = t.termos.find((item) => item.id === selected) ?? t.termos[0]
   return (
     <>
       <Scene index={1} url="health.iconsai.ai/termos">
         <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-termos-shell">
+        <div className="dh-termos-shell" aria-hidden="true">
+          {/* Virtual mouse cursor */}
+          <svg className="dh-vcursor" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 3l14 8.5-6.2 1.8L9.6 19z" fill="#1f2937" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
+          </svg>
+
           <div className="dh-termos-list">
-            {t.termos.map((item) => {
-              const isSelected = item.id === selected
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={`dh-termo-card dh-termo-card-button${item.id === 'voz' ? ' dh-termo-sensivel' : ''}${isSelected ? ' dh-termo-card-active' : ''}`}
-                  onClick={() => setSelected(item.id)}
-                  aria-pressed={isSelected}
-                >
-                  <span className={`dh-checkbox ${isSelected ? 'dh-checkbox-on' : ''}`} />
-                  <div className="dh-termo-body">
-                    {item.kicker && <div className="dh-termo-kicker">{item.kicker}</div>}
-                    <div className="dh-termo-title">{item.titulo}</div>
-                    <div className="dh-termo-text">{item.texto}</div>
-                  </div>
-                </button>
-              )
-            })}
+            {t.termos.map((item, i) => (
+              <div
+                key={item.id}
+                className={`dh-termo-card dh-termo-anim dh-termo-anim-${i + 1}${item.id === 'voz' ? ' dh-termo-sensivel' : ''}`}
+              >
+                <span className={`dh-checkbox dh-checkbox-anim dh-checkbox-anim-${i + 1}`} />
+                <div className="dh-termo-body">
+                  {item.kicker && <div className="dh-termo-kicker">{item.kicker}</div>}
+                  <div className="dh-termo-title">{item.titulo}</div>
+                  <div className="dh-termo-text">{item.texto}</div>
+                </div>
+              </div>
+            ))}
           </div>
 
           <aside className="dh-termo-panel">
             <div className="dh-termo-panel-head">
               <span className="dh-termo-panel-kicker">{t.panelKicker}</span>
-              <span className={`dh-termo-risk dh-termo-risk-${termo.risco}`}>{termo.risco}</span>
             </div>
-            <div className="dh-termo-panel-title">{termo.titulo}</div>
-            <p className="dh-termo-panel-copy">{termo.resumo}</p>
-
             <div className="dh-termo-panel-meta">
-              <div><span>{t.metaBase}</span><strong>{termo.base}</strong></div>
-              <div><span>{t.metaAceite}</span><strong>{termo.aceite}</strong></div>
+              <div><span>{t.metaBase}</span><strong>{t.termos[0].base}</strong></div>
+              <div><span>{t.metaAceite}</span><strong>{t.termos[0].aceite}</strong></div>
               <div><span>{t.metaStatus}</span><strong>{t.statusVal}</strong></div>
             </div>
-
-            <div className="dh-termo-panel-block">
-              <div className="dh-termo-panel-label">{t.itemsLabel}</div>
-              <div className="dh-termo-sinais">
-                {termo.sinais.map((sinal) => (
-                  <span key={sinal} className="dh-termo-sinal">{sinal}</span>
-                ))}
-              </div>
-            </div>
-
             <div className="dh-termo-panel-foot">
               <span className="dh-termo-live-dot" />
               {t.footNote}
@@ -617,7 +600,7 @@ function RenderS1() {
         </div>
         <div className="dh-btn-row dh-self-end">
           <button className="dh-btn dh-btn-ghost" type="button">{t.btnLater}</button>
-          <button className="dh-btn dh-btn-primary" type="button">{t.btnAccept}</button>
+          <button className="dh-btn dh-btn-primary dh-btn-activate" type="button">{t.btnAccept}</button>
         </div>
       </Scene>
       <SceneCaption index={1} title={c.title} desc={c.desc} />
