@@ -4384,6 +4384,7 @@
   }
   .dh-prefill-banner,
   .dh-field,
+  .dh-field-typed,
   .dh-vital,
   .dh-vital-value,
   .dh-tag,
@@ -4394,7 +4395,9 @@
     transform: none !important;
     clip-path: none !important;
     max-height: none !important;
+    max-width: none !important;
   }
+  .dh-field-chip { opacity: 1 !important; transform: none !important; }
   .dh-agenda-row,
   .dh-agenda-slot,
   .dh-agenda-confirm,
@@ -4448,56 +4451,108 @@
   100% { clip-path: inset(0 0 0 0);    opacity: 1; }
 }
 
-.dh-prefill-banner {
-  animation: dh-form-banner-in 10s both;
-  animation-delay: 0.3s;
+.dh-scene-2 .dh-prefill-banner {
+  animation: dh-form-banner-in 10s both 0.2s;
 }
 
-/* Fields: staggered fade + slide */
-@keyframes dh-form-field-in {
-  0%   { opacity: 0; transform: translateY(8px); }
-  8%   { opacity: 1; transform: translateY(0); }
-  92%  { opacity: 1; transform: translateY(0); }
-  100% { opacity: 1; transform: translateY(0); }
+/* ─────────────────────────────────────────────────────────────────
+   S02 — TYPEWRITER FORM FILL
+   Each field value types in char-by-char with a blinking cursor.
+   The field box (border + label) is always visible — only the text
+   inside animates. Uses max-width 0 → Nch with steps(N, end).
+
+   Field order in .dh-form-grid:
+     direct child 1            → Name (Fernando, 8 chars)
+     .dh-form-row:nth-child(2) → Age (38, 2c) + Gender chip (M)
+     direct child 3            → CPF/NIF/SSN (max 14 chars)
+     direct child 4            → CEP/ZIP/Postal (max 9 chars)
+     .dh-form-row:nth-child(5) → Street (max 19c) + Number (4c)
+   ───────────────────────────────────────────────────────────────── */
+
+/* Typed inner span: starts at zero width, cursor rail always on */
+.dh-scene-2 .dh-field-typed {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 0;
+  vertical-align: bottom;
+  border-right: 1.5px solid transparent; /* cursor slot */
 }
 
-/* Individual field stagger: 150ms apart, starting after banner (0.3s + 0.3s base) */
-.dh-field:nth-child(1),
-.dh-form-row:nth-child(1) .dh-field:nth-child(1) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 0.6s;
+/* Gender chip starts invisible */
+.dh-scene-2 .dh-field-chip { opacity: 0; }
+
+/* ── Keyframes ── */
+
+/* Typewriter grow: from 0 to --tw-end (CSS var per field) */
+@keyframes dh-s2-type {
+  from { max-width: 0; }
+  to   { max-width: var(--tw-end, 12ch); }
 }
-.dh-form-row:nth-child(1) .dh-field:nth-child(2) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 0.75s;
+
+/* Cursor: visible while typing, off when done */
+@keyframes dh-s2-cursor {
+  0%, 96% { border-right-color: #10b981; }
+  97%, 100% { border-right-color: transparent; }
 }
-.dh-form-grid > .dh-field:nth-child(1) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 0.6s;
+
+/* Gender chip pop-in */
+@keyframes dh-s2-chip-in {
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 1; transform: scale(1); }
 }
-.dh-form-grid > .dh-form-row:nth-child(2) .dh-field:nth-child(1) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 0.75s;
+
+/* ── Name: Fernando (8 chars · 56ms/char) → start 0.4s ── */
+.dh-scene-2 .dh-form-grid > .dh-field:nth-child(1) .dh-field-typed {
+  --tw-end: 8ch;
+  animation:
+    dh-s2-type   0.45s steps(8,  end) 0.4s both,
+    dh-s2-cursor 0.45s linear         0.4s 1 both;
 }
-.dh-form-grid > .dh-form-row:nth-child(2) .dh-field:nth-child(2) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 0.9s;
+
+/* ── Age: 38 (2 chars · 90ms/char) → start 1.1s ── */
+.dh-scene-2 .dh-form-grid > .dh-form-row:nth-child(2) .dh-field:nth-child(1) .dh-field-typed {
+  --tw-end: 2ch;
+  animation:
+    dh-s2-type   0.18s steps(2,  end) 1.1s both,
+    dh-s2-cursor 0.18s linear         1.1s 1 both;
 }
-.dh-form-grid > .dh-field:nth-child(3) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 1.05s;
+
+/* ── Gender chip (M) → pop in at 1.42s ── */
+.dh-scene-2 .dh-form-grid > .dh-form-row:nth-child(2) .dh-field:nth-child(2) .dh-field-chip {
+  animation: dh-s2-chip-in 0.2s ease-out 1.42s both;
 }
-.dh-form-grid > .dh-field:nth-child(4) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 1.2s;
+
+/* ── CPF 123.456.789-00 (14 chars mono · 58ms/char) → start 1.78s ── */
+.dh-scene-2 .dh-form-grid > .dh-field:nth-child(3) .dh-field-typed {
+  --tw-end: 14ch;
+  animation:
+    dh-s2-type   0.81s steps(14, end) 1.78s both,
+    dh-s2-cursor 0.81s linear         1.78s 1 both;
 }
-.dh-form-grid > .dh-form-row:nth-child(5) .dh-field:nth-child(1) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 1.35s;
+
+/* ── CEP 01310-100 (9 chars mono · 62ms/char) → start 2.82s ── */
+.dh-scene-2 .dh-form-grid > .dh-field:nth-child(4) .dh-field-typed {
+  --tw-end: 9ch;
+  animation:
+    dh-s2-type   0.56s steps(9,  end) 2.82s both,
+    dh-s2-cursor 0.56s linear         2.82s 1 both;
 }
-.dh-form-grid > .dh-form-row:nth-child(5) .dh-field:nth-child(2) {
-  animation: dh-form-field-in 10s both;
-  animation-delay: 1.5s;
+
+/* ── Street max 19 chars (Avenida da Liberdade PT · 58ms/char) → start 3.6s ── */
+.dh-scene-2 .dh-form-grid > .dh-form-row:nth-child(5) .dh-field:nth-child(1) .dh-field-typed {
+  --tw-end: 19ch;
+  animation:
+    dh-s2-type   1.1s  steps(19, end) 3.6s both,
+    dh-s2-cursor 1.1s  linear         3.6s 1 both;
+}
+
+/* ── Number: 1578 (4 chars · 70ms/char) → start 4.92s ── */
+.dh-scene-2 .dh-form-grid > .dh-form-row:nth-child(5) .dh-field:nth-child(2) .dh-field-typed {
+  --tw-end: 4ch;
+  animation:
+    dh-s2-type   0.28s steps(4,  end) 4.92s both,
+    dh-s2-cursor 0.28s linear         4.92s 1 both;
 }
 
 /* ──────────────────────────────────────────────────────────
