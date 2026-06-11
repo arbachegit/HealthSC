@@ -176,6 +176,7 @@ export const S2 = {
 /* ───────────────────────── S3 · CONFIRMAÇÃO ───────────────────────── */
 type S3 = {
   kicker: string; title: string; subtitle: string; loaderKicker: string; loaderLabel: string
+  totalLabel: string
   steps: string[]; nameK: string; ageK: string; ageV: string; linkK: string; linkV: string
   chips: string[]; sideKicker: string; sideLines: string[]; btnYes: string; btnNo: string
 }
@@ -183,7 +184,8 @@ export const S3 = {
   'pt-BR': {
     kicker: 'confirmação · registros públicos', title: 'Achei alguém com esse CPF. É você?',
     subtitle: 'Pré-preenchimento só é liberado depois de um gesto explícito do paciente.',
-    loaderKicker: 'cruzando registros públicos', loaderLabel: 'Cruzando bases médicas...',
+    loaderKicker: 'cruzando registros públicos', loaderLabel: 'Cruzando bases médicas',
+    totalLabel: 'dados analisados',
     steps: ['dim_pessoas · Receita Federal', 'vínculos QSA · sócios', 'consentimento LGPD'],
     nameK: 'nome', ageK: 'idade aproximada', ageV: '38 anos', linkK: 'vínculo empresarial mais recente', linkV: 'IconsAI · Sócio',
     chips: ['Receita Federal ✓', 'ViaCEP ✓', 'LGPD · consentimento válido'],
@@ -194,7 +196,8 @@ export const S3 = {
   'pt-PT': {
     kicker: 'confirmação · registos públicos', title: 'Encontrei alguém com este NIF. É você?',
     subtitle: 'O pré-preenchimento só é libertado após um gesto explícito do doente.',
-    loaderKicker: 'a cruzar registos públicos', loaderLabel: 'A cruzar bases médicas...',
+    loaderKicker: 'a cruzar registos públicos', loaderLabel: 'A cruzar bases médicas',
+    totalLabel: 'dados analisados',
     steps: ['registos · AT', 'vínculos societários', 'consentimento RGPD'],
     nameK: 'nome', ageK: 'idade aproximada', ageV: '38 anos', linkK: 'vínculo empresarial mais recente', linkV: 'IconsAI · Sócio',
     chips: ['Registos AT ✓', 'CTT ✓', 'RGPD · consentimento válido'],
@@ -205,7 +208,8 @@ export const S3 = {
   en: {
     kicker: 'confirmation · public records', title: 'I found someone with this ID. Is it you?',
     subtitle: 'Prefill is only released after an explicit gesture from the patient.',
-    loaderKicker: 'cross-referencing public records', loaderLabel: 'Cross-referencing medical records...',
+    loaderKicker: 'cross-referencing public records', loaderLabel: 'Cross-referencing medical records',
+    totalLabel: 'data points analyzed',
     steps: ['public records · IRS', 'business affiliations', 'HIPAA consent'],
     nameK: 'name', ageK: 'approximate age', ageV: '38 years', linkK: 'most recent business affiliation', linkV: 'IconsAI · Partner',
     chips: ['Public records ✓', 'USPS ✓', 'HIPAA · valid consent'],

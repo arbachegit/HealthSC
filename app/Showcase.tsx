@@ -671,36 +671,56 @@ function RenderS3() {
           <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
           <div className="dh-rf-layout">
             <div className="dh-rf-loader" aria-hidden="true">
-              <div className="dh-rf-loader-kicker">{t.loaderKicker}</div>
+              <div className="dh-rf-kicker">{t.loaderKicker}</div>
               <div className="dh-rf-donut">
-                <svg className="dh-rf-donut-svg" viewBox="0 0 120 120" role="img" aria-label="Cruzando bases médicas">
+                <svg className="dh-rf-donut-svg" viewBox="0 0 120 120" role="img" aria-label={t.loaderKicker}>
                   <defs>
                     <linearGradient id="dh-rf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stopColor="#10b981" />
                       <stop offset="100%" stopColor="#14b8a6" />
                     </linearGradient>
                   </defs>
-                  <circle className="dh-rf-donut-track" cx="60" cy="60" r="52" fill="none" strokeWidth="8" />
-                  <circle className="dh-rf-donut-arc" cx="60" cy="60" r="52" fill="none" stroke="url(#dh-rf-grad)" strokeWidth="8" strokeLinecap="round" pathLength={100} />
+                  <circle className="dh-rf-donut-track" cx="60" cy="60" r="52" fill="none" strokeWidth="10" />
+                  <circle className="dh-rf-donut-arc" cx="60" cy="60" r="52" fill="none" stroke="url(#dh-rf-grad)" strokeWidth="10" strokeLinecap="round" pathLength={100} />
                 </svg>
                 <div className="dh-rf-donut-center">
-                  <div className="dh-rf-counter">
-                    <span className="dh-rf-counter-num">
-                      <span className="dh-rf-tick dh-rf-tick-0">0.0</span>
-                      <span className="dh-rf-tick dh-rf-tick-1">1.2</span>
-                      <span className="dh-rf-tick dh-rf-tick-2">2.4</span>
-                      <span className="dh-rf-tick dh-rf-tick-3">3.6</span>
-                      <span className="dh-rf-tick dh-rf-tick-4 dh-rf-tick-done">4.8 <span className="dh-rf-counter-check">✓</span></span>
+                  <div className="dh-rf-pct">
+                    <span className="dh-rf-pct-num">
+                      <span className="dh-rf-ptick dh-rf-pt-0">0</span>
+                      <span className="dh-rf-ptick dh-rf-pt-1">10</span>
+                      <span className="dh-rf-ptick dh-rf-pt-2">20</span>
+                      <span className="dh-rf-ptick dh-rf-pt-3">30</span>
+                      <span className="dh-rf-ptick dh-rf-pt-4">40</span>
+                      <span className="dh-rf-ptick dh-rf-pt-5">50</span>
+                      <span className="dh-rf-ptick dh-rf-pt-6">60</span>
+                      <span className="dh-rf-ptick dh-rf-pt-7">70</span>
+                      <span className="dh-rf-ptick dh-rf-pt-8">80</span>
+                      <span className="dh-rf-ptick dh-rf-pt-9">100</span>
                     </span>
-                    <span className="dh-rf-counter-unit">s</span>
+                    <span className="dh-rf-pct-unit">%</span>
                   </div>
                 </div>
               </div>
-              <div className="dh-rf-loader-label">{t.loaderLabel}</div>
-              <div className="dh-rf-loader-steps">
-                <span className="dh-rf-step dh-rf-step-1">{t.steps[0]}</span>
-                <span className="dh-rf-step dh-rf-step-2">{t.steps[1]}</span>
-                <span className="dh-rf-step dh-rf-step-3">{t.steps[2]}</span>
+              <div className="dh-rf-label">{t.loaderLabel}<span className="dh-rf-dots" aria-hidden="true"><span className="dh-rf-d1">.</span><span className="dh-rf-d2">.</span><span className="dh-rf-d3">.</span></span></div>
+              <div className="dh-rf-feed">
+                <div className="dh-rf-sources">
+                  <div className="dh-rf-src dh-rf-src-1"><span className="dh-rf-src-name">Europe PMC</span><span className="dh-rf-src-cnt dh-rf-cnt-1" /></div>
+                  <div className="dh-rf-src dh-rf-src-2"><span className="dh-rf-src-name">PubMed</span><span className="dh-rf-src-cnt dh-rf-cnt-2" /></div>
+                  <div className="dh-rf-src dh-rf-src-3"><span className="dh-rf-src-name">NLM Catalog</span><span className="dh-rf-src-cnt dh-rf-cnt-3" /></div>
+                  <div className="dh-rf-src dh-rf-src-4"><span className="dh-rf-src-name">MEDLINE</span><span className="dh-rf-src-cnt dh-rf-cnt-4" /></div>
+                  <div className="dh-rf-src dh-rf-src-5"><span className="dh-rf-src-name">ANVISA</span><span className="dh-rf-src-cnt dh-rf-cnt-5" /></div>
+                  <div className="dh-rf-src dh-rf-src-6"><span className="dh-rf-src-name">FDA</span><span className="dh-rf-src-cnt dh-rf-cnt-6" /></div>
+                  <div className="dh-rf-src dh-rf-src-7"><span className="dh-rf-src-name">WHO IRIS</span><span className="dh-rf-src-cnt dh-rf-cnt-7" /></div>
+                  <div className="dh-rf-src dh-rf-src-8"><span className="dh-rf-src-name">Cochrane Library</span><span className="dh-rf-src-cnt dh-rf-cnt-8" /></div>
+                  <div className="dh-rf-src dh-rf-src-9"><span className="dh-rf-src-name">SUS Protocolos</span><span className="dh-rf-src-cnt dh-rf-cnt-9" /></div>
+                  <div className="dh-rf-src dh-rf-src-10"><span className="dh-rf-src-name">Min. da Saúde</span><span className="dh-rf-src-cnt dh-rf-cnt-10" /></div>
+                  <div className="dh-rf-src dh-rf-src-11"><span className="dh-rf-src-name">SBMFC</span><span className="dh-rf-src-cnt dh-rf-cnt-11" /></div>
+                  <div className="dh-rf-src dh-rf-src-12"><span className="dh-rf-src-name">CFM</span><span className="dh-rf-src-cnt dh-rf-cnt-12" /></div>
+                </div>
+                <div className="dh-rf-total">
+                  <span className="dh-rf-total-num">3,8 mi</span>
+                  <span className="dh-rf-total-sub">{t.totalLabel}</span>
+                </div>
               </div>
             </div>
 
