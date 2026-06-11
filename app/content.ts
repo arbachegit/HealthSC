@@ -99,6 +99,7 @@ type S1 = {
   panelKicker: string; metaBase: string; metaAceite: string; metaStatus: string
   statusVal: string; itemsLabel: string; footNote: string
   btnLater: string; btnAccept: string; termos: Termo[]
+  chatTitle: string; chatLines: string[]
 }
 export const S1 = {
   'pt-BR': {
@@ -108,6 +109,18 @@ export const S1 = {
     statusVal: 'pronto para assinatura', itemsLabel: 'itens validados no fluxo',
     footNote: 'clique em outro termo para simular a revisão do onboarding clínico',
     btnLater: 'Revisar depois', btnAccept: 'Aceito e quero começar →',
+    chatTitle: 'LGPD · CYBERSECURITY',
+    chatLines: [
+      '$ lgpd --check',
+      '> aceite explícito obrigatório',
+      '> dados de saúde: Art. 11',
+      '$ crypto --status',
+      '> criptografia end-to-end',
+      '> chaves rotativas 24h',
+      '$ audit --verify',
+      '> zero partilha sem aceite',
+      '> conformidade LGPD ativa',
+    ],
     termos: [
       { id: 'uso', titulo: '1 · Termos de Uso', texto: 'O que o Discovery Health faz, o que não substitui consulta presencial, suspensão por descumprimento.', resumo: 'Paciente entende escopo do produto, limites clínicos e quando o caso deve ser escalado para atendimento humano.', base: 'contrato de uso · onboarding', risco: 'baixo', aceite: 'aceite simples', sinais: ['escopo da plataforma', 'limites de responsabilidade', 'encaminhamento presencial'] },
       { id: 'privacidade', titulo: '2 · Política de Privacidade', texto: 'Quais dados, bases legais, retenção e compartilhamento com operadores homologados pela IconsAI.', resumo: 'Explica o ciclo de vida dos dados, os operadores envolvidos e a retenção operacional do histórico clínico.', base: 'LGPD art. 7º e art. 9º', risco: 'moderado', aceite: 'aceite explícito', sinais: ['bases legais', 'retenção', 'operadores e subprocessadores'] },
@@ -121,6 +134,18 @@ export const S1 = {
     statusVal: 'pronto para assinatura', itemsLabel: 'itens validados no fluxo',
     footNote: 'clique noutro termo para simular a revisão do onboarding clínico',
     btnLater: 'Rever depois', btnAccept: 'Aceito e quero começar →',
+    chatTitle: 'RGPD · CYBERSECURITY',
+    chatLines: [
+      '$ rgpd --check',
+      '> aceitação explícita requerida',
+      '> dados de saúde: Art. 9.º',
+      '$ crypto --status',
+      '> cifração end-to-end activa',
+      '> chaves rotativas 24h',
+      '$ audit --verify',
+      '> zero partilha sem aceite',
+      '> conformidade RGPD activa',
+    ],
     termos: [
       { id: 'uso', titulo: '1 · Termos de Utilização', texto: 'O que o Discovery Health faz, o que não substitui consulta presencial, suspensão por incumprimento.', resumo: 'O doente compreende o âmbito do produto, os limites clínicos e quando o caso deve ser encaminhado para atendimento humano.', base: 'contrato de utilização · onboarding', risco: 'baixo', aceite: 'aceitação simples', sinais: ['âmbito da plataforma', 'limites de responsabilidade', 'encaminhamento presencial'] },
       { id: 'privacidade', titulo: '2 · Política de Privacidade', texto: 'Que dados, bases legais, retenção e partilha com subcontratantes homologados pela IconsAI.', resumo: 'Explica o ciclo de vida dos dados, os subcontratantes envolvidos e a retenção operacional do histórico clínico.', base: 'RGPD art. 6.º e art. 9.º', risco: 'moderado', aceite: 'aceitação explícita', sinais: ['bases legais', 'retenção', 'subcontratantes'] },
@@ -134,6 +159,18 @@ export const S1 = {
     statusVal: 'ready to sign', itemsLabel: 'items validated in the flow',
     footNote: 'click another term to simulate the clinical onboarding review',
     btnLater: 'Review later', btnAccept: 'I accept and want to start →',
+    chatTitle: 'HIPAA · CYBERSECURITY',
+    chatLines: [
+      '$ hipaa --check',
+      '> explicit consent required',
+      '> health data: Privacy Rule',
+      '$ crypto --status',
+      '> end-to-end encryption on',
+      '> keys rotated every 24h',
+      '$ audit --verify',
+      '> zero sharing w/o consent',
+      '> HIPAA compliance verified',
+    ],
     termos: [
       { id: 'uso', titulo: '1 · Terms of Use', texto: 'What Discovery Health does, what it does not replace in an in-person visit, suspension for misuse.', resumo: 'The patient understands the product scope, the clinical limits, and when a case must be escalated to human care.', base: 'terms of use · onboarding', risco: 'baixo', aceite: 'simple acceptance', sinais: ['platform scope', 'liability limits', 'in-person referral'] },
       { id: 'privacidade', titulo: '2 · Privacy Policy', texto: 'Which data, legal bases, retention, and sharing with IconsAI-approved processors.', resumo: 'Explains the data lifecycle, the processors involved, and the operational retention of the clinical record.', base: 'HIPAA Privacy Rule', risco: 'moderado', aceite: 'explicit acceptance', sinais: ['legal bases', 'retention', 'processors and subprocessors'] },

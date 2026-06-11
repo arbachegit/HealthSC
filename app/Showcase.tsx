@@ -588,18 +588,18 @@ function RenderS1() {
             ))}
           </div>
 
-          <aside className="dh-termo-panel">
-            <div className="dh-termo-panel-head">
-              <span className="dh-termo-panel-kicker">{t.panelKicker}</span>
+          <aside className="dh-chat-panel" aria-hidden="true">
+            <div className="dh-chat-header">
+              <span className="dh-chat-dot" /><span className="dh-chat-dot" /><span className="dh-chat-dot" />
+              <span className="dh-chat-title">{t.chatTitle}</span>
             </div>
-            <div className="dh-termo-panel-meta">
-              <div><span>{t.metaBase}</span><strong>{t.termos[0].base}</strong></div>
-              <div><span>{t.metaAceite}</span><strong>{t.termos[0].aceite}</strong></div>
-              <div><span>{t.metaStatus}</span><strong>{t.statusVal}</strong></div>
-            </div>
-            <div className="dh-termo-panel-foot">
-              <span className="dh-termo-live-dot" />
-              {t.footNote}
+            <div className="dh-chat-body">
+              {t.chatLines.map((line, i) => (
+                <div key={i} className={`dh-chat-line dh-chat-ln-${i + 1}${line.startsWith('$') ? ' dh-chat-cmd' : ' dh-chat-out'}`}>
+                  <span>{line}</span>
+                </div>
+              ))}
+              <span className="dh-chat-caret">&#9612;</span>
             </div>
           </aside>
         </div>

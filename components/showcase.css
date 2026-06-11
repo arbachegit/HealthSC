@@ -770,80 +770,94 @@
   100% { opacity:1; filter:grayscale(0); pointer-events:auto; }
 }
 
-/* ═══ Side panel (compact) ═══ */
-.dh-termo-panel {
+/* ═══ Terminal chat panel — typewriter (LGPD/Cybersecurity) ═══ */
+.dh-chat-panel {
   display: flex;
   flex-direction: column;
-  gap: 14px;
   min-width: 0;
-  padding: 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(20, 184, 166, 0.22);
-  background: linear-gradient(180deg, rgba(20, 184, 166, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.65), 0 18px 38px rgba(15, 118, 110, 0.12);
+  border-radius: 12px;
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  background: #0d1117;
+  overflow: hidden;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.25);
 }
-.dh-termo-panel-head {
+.dh-chat-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-.dh-termo-panel-kicker,
-.dh-termo-panel-label {
+.dh-chat-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.dh-chat-dot:first-child { background: #ff5f57; }
+.dh-chat-dot:nth-child(2) { background: #febc2e; }
+.dh-chat-dot:nth-child(3) { background: #28c840; }
+.dh-chat-title {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--dh-muted);
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.45);
+  margin-left: auto;
 }
-.dh-termo-panel-meta {
-  display: grid;
-  gap: 8px;
-}
-.dh-termo-panel-meta div {
+.dh-chat-body {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(20, 184, 166, 0.12);
-}
-.dh-termo-panel-meta span {
+  flex-direction: column;
+  padding: 14px;
   font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--dh-muted);
+  font-size: 13px;
+  line-height: 1.7;
 }
-.dh-termo-panel-meta strong {
-  font-size: 12px;
-  color: var(--dh-text);
+.dh-chat-line {
+  overflow: hidden;
+  max-height: 0;
 }
-.dh-termo-panel-foot {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: 2px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--dh-primary-deep);
+.dh-chat-line span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 0;
 }
-.dh-termo-live-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--dh-primary);
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.38);
-  animation: dh-termo-live-pulse 1.8s ease-out infinite;
+.dh-chat-cmd span { color: #22d3ee; }
+.dh-chat-out span { color: rgba(163, 230, 53, 0.9); }
+
+/* Typewriter reveal: each line shows + text types sequentially */
+@keyframes dh-ln-show { to { max-height: 1.8em; } }
+@keyframes dh-type    { to { max-width: 40ch; } }
+
+/* Timeline aligned with checkbox animation (cbs at 2.2s, 4.2s, 6.2s) */
+.dh-chat-ln-1 { animation: dh-ln-show 0.01s linear 0.29s both; }
+.dh-chat-ln-1 span { animation: dh-type 0.6s steps(18, end) 0.3s both; }
+.dh-chat-ln-2 { animation: dh-ln-show 0.01s linear 0.99s both; }
+.dh-chat-ln-2 span { animation: dh-type 0.7s steps(20, end) 1.0s both; }
+.dh-chat-ln-3 { animation: dh-ln-show 0.01s linear 1.79s both; }
+.dh-chat-ln-3 span { animation: dh-type 0.6s steps(18, end) 1.8s both; }
+.dh-chat-ln-4 { animation: dh-ln-show 0.01s linear 2.59s both; }
+.dh-chat-ln-4 span { animation: dh-type 0.6s steps(18, end) 2.6s both; }
+.dh-chat-ln-5 { animation: dh-ln-show 0.01s linear 3.29s both; }
+.dh-chat-ln-5 span { animation: dh-type 0.6s steps(18, end) 3.3s both; }
+.dh-chat-ln-6 { animation: dh-ln-show 0.01s linear 3.99s both; }
+.dh-chat-ln-6 span { animation: dh-type 0.6s steps(18, end) 4.0s both; }
+.dh-chat-ln-7 { animation: dh-ln-show 0.01s linear 4.79s both; }
+.dh-chat-ln-7 span { animation: dh-type 0.6s steps(18, end) 4.8s both; }
+.dh-chat-ln-8 { animation: dh-ln-show 0.01s linear 5.49s both; }
+.dh-chat-ln-8 span { animation: dh-type 0.6s steps(18, end) 5.5s both; }
+.dh-chat-ln-9 { animation: dh-ln-show 0.01s linear 6.19s both; }
+.dh-chat-ln-9 span { animation: dh-type 0.6s steps(18, end) 6.2s both; }
+
+/* Blinking caret at the bottom */
+.dh-chat-caret {
+  color: var(--dh-primary);
+  font-size: 14px;
+  line-height: 1;
+  animation: dh-caret-blink 0.7s step-end infinite;
 }
-@keyframes dh-termo-live-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.38); }
-  100% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
-}
+@keyframes dh-caret-blink { 50% { opacity: 0; } }
 
 /* ──────────────────────────────────────────────────────────
    CENA 2 — IDENTIFICAÇÃO
@@ -4388,6 +4402,9 @@
   .dh-checkbox-anim,
   .dh-checkbox-anim::after,
   .dh-btn-activate,
+  .dh-chat-line,
+  .dh-chat-line span,
+  .dh-chat-caret,
   .dh-rf-loader,
   .dh-rf-donut-arc,
   .dh-rf-ptick,
@@ -4457,6 +4474,9 @@
     transform: none !important;
     max-height: none !important;
   }
+  /* Chat typewriter: show all lines immediately */
+  .dh-chat-line { max-height: 2em !important; }
+  .dh-chat-line span { max-width: 40ch !important; }
   .dh-prefill-banner,
   .dh-field,
   .dh-field-typed,
@@ -5859,7 +5879,7 @@
   .dh-termos-shell { grid-template-columns: 1fr; }
   .dh-termo-text, .dh-termo-detail { display: none; }
   .dh-termo-card { padding: 12px; }
-  .dh-termo-panel { display: none; }
+  .dh-chat-panel { display: none; }
   .dh-vcursor { display: none; }
   .dh-btn-row { display: none; }
 
@@ -5941,9 +5961,9 @@
 
 /* ===== DESKTOP BASE — compactação de slides altos (nat > 711 em 1440×800) ===== */
 @media (min-width: 769px) {
-  /* Slide 02 — Termos: painel lateral compacto (driver da altura; nat 730 → ≤711) */
+  /* Slide 02 — Termos: compact (driver da altura; nat 730 → ≤711) */
   .dh-termo-card { padding: 12px 14px; }
-  .dh-termo-panel { gap: 10px; padding: 14px; }
+  .dh-chat-body { padding: 10px; font-size: 12px; }
 
   /* Slide 09 — Autoexame: steps + preview enxutos (nat 709 → folga sobre o gate) */
   .dh-autoexam-step { padding: 8px 10px; }
@@ -5987,7 +6007,7 @@
   /* Slide 02 — Termos */
   .dh-termo-text, .dh-termo-detail { display: none; }
   .dh-termo-card { padding: 10px 12px; }
-  .dh-termo-panel { display: none; }
+  .dh-chat-panel { display: none; }
   .dh-vcursor { display: none; }
 
   /* Slide 03 — Formulário */
