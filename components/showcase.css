@@ -5684,9 +5684,17 @@
   .dh-explain-card { padding: 12px 14px; gap: 6px; }
   .dh-explain-line { font-size: 13px; }
   .dh-explain-line:nth-of-type(n+3) { display: none; }
-  /* Hide top/bottom blocks on short viewports — not enough vertical space */
-  .dh-explain-top { display: none; }
-  .dh-explain-bottom { display: none; }
+  /* Compact top/bottom blocks on short viewports — stay visible, SlideFrame scales */
+  .dh-explain-top { padding-bottom: 8px; margin-bottom: 8px; gap: 5px; }
+  .dh-explain-bottom { padding-top: 8px; margin-top: 8px; gap: 5px; }
+  .dh-source-badge { padding: 5px 8px; gap: 7px; }
+  .dh-source-icon { width: 22px; height: 22px; }
+  .dh-source-icon svg { width: 12px; height: 12px; }
+  .dh-source-name { font-size: 12px; }
+  .dh-source-field { font-size: 12px; }
+  .dh-metric-item { padding: 6px 4px; gap: 2px; }
+  .dh-metric-value { font-size: 13px; }
+  .dh-metric-label { font-size: 12px; }
   .dh-steps { display: none; }
   .dh-chrome { display: none; }
 
