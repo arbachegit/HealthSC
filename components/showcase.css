@@ -1019,18 +1019,7 @@
    1s ≈ 0.3861% of cycle.
    ────────────────────────────────────────────────────────── */
 /* ═══ S3 — loader / donut / sources feed ═══ */
-@property --rf-c1  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c2  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c3  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c4  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c5  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c6  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c7  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c8  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c9  { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c10 { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c11 { syntax: '<integer>'; inherits: false; initial-value: 0; }
-@property --rf-c12 { syntax: '<integer>'; inherits: false; initial-value: 0; }
+/* @property --rf-c* removed — counters now JS-driven (CountUp component) */
 
 .dh-rf-stage {
   position: relative; flex: 1; min-height: 0;
@@ -1147,25 +1136,7 @@
   font-family: var(--font-mono); font-size: 12px; font-weight: 700;
   color: var(--dh-primary-strong); font-variant-numeric: tabular-nums; white-space: nowrap;
 }
-.dh-rf-cnt-1::after{counter-reset:c var(--rf-c1);content:counter(c);animation:dh-rfc-1 9.4s linear .6s 1 both}
-.dh-rf-cnt-2::after{counter-reset:c var(--rf-c2);content:counter(c);animation:dh-rfc-2 9.4s linear .6s 1 both}
-.dh-rf-cnt-3::after{counter-reset:c var(--rf-c3);content:counter(c);animation:dh-rfc-3 9.4s linear .6s 1 both}
-.dh-rf-cnt-4::after{counter-reset:c var(--rf-c4);content:counter(c);animation:dh-rfc-4 9.4s linear .6s 1 both}
-.dh-rf-cnt-5::after{counter-reset:c var(--rf-c5);content:counter(c);animation:dh-rfc-5 9.4s linear .6s 1 both}
-.dh-rf-cnt-6::after{counter-reset:c var(--rf-c6);content:counter(c);animation:dh-rfc-6 9.4s linear .6s 1 both}
-.dh-rf-cnt-7::after{counter-reset:c var(--rf-c7);content:counter(c);animation:dh-rfc-7 9.4s linear .6s 1 both}
-.dh-rf-cnt-8::after{counter-reset:c var(--rf-c8);content:counter(c);animation:dh-rfc-8 9.4s linear .6s 1 both}
-.dh-rf-cnt-9::after{counter-reset:c var(--rf-c9);content:counter(c);animation:dh-rfc-9 9.4s linear .6s 1 both}
-.dh-rf-cnt-10::after{counter-reset:c var(--rf-c10);content:counter(c);animation:dh-rfc-10 9.4s linear .6s 1 both}
-.dh-rf-cnt-11::after{counter-reset:c var(--rf-c11);content:counter(c);animation:dh-rfc-11 9.4s linear .6s 1 both}
-.dh-rf-cnt-12::after{counter-reset:c var(--rf-c12);content:counter(c);animation:dh-rfc-12 9.4s linear .6s 1 both}
-
-@keyframes dh-rfc-1{to{--rf-c1:38423}} @keyframes dh-rfc-2{to{--rf-c2:29847}}
-@keyframes dh-rfc-3{to{--rf-c3:18241}} @keyframes dh-rfc-4{to{--rf-c4:44156}}
-@keyframes dh-rfc-5{to{--rf-c5:22538}} @keyframes dh-rfc-6{to{--rf-c6:41092}}
-@keyframes dh-rfc-7{to{--rf-c7:35673}} @keyframes dh-rfc-8{to{--rf-c8:22419}}
-@keyframes dh-rfc-9{to{--rf-c9:14381}} @keyframes dh-rfc-10{to{--rf-c10:16812}}
-@keyframes dh-rfc-11{to{--rf-c11:13156}} @keyframes dh-rfc-12{to{--rf-c12:28924}}
+/* CSS @property counters replaced by JS CountUp component (performance.now + rAF) */
 
 .dh-rf-total {
   position: absolute; inset: 0;
@@ -1188,7 +1159,8 @@
   justify-content: space-between; gap: 14px; opacity: 1;
 }
 .dh-confirm-card-live {
-  min-height: 100%;
+  flex: 1;
+  min-height: 0;
 }
 .dh-confirm-audit {
   display: flex;

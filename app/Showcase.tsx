@@ -8,8 +8,8 @@
  * PALCO (entre header/footer) com scale-to-fit.
  */
 
-import { type CSSProperties } from 'react'
-import { SlideEngine, useLang, type SlideDef } from './SlideEngine'
+import { type CSSProperties, useState, useEffect, useRef } from 'react'
+import { SlideEngine, useLang, useSlide, type SlideDef } from './SlideEngine'
 import { MedIcon } from '@/components/MedIcon'
 import {
   UI, OPENING, STEPS, FECHO, EXPLAIN, S1 as S1C, S2 as S2C, S3 as S3C, S4 as S4C,
@@ -655,6 +655,33 @@ function RenderS2() {
   )
 }
 
+/* ── CountUp: animated counter using rAF + performance.now() (§9 CLAUDE.md) ── */
+const RF_COUNTS = [38423, 29847, 18241, 44156, 22538, 41092, 35673, 22419, 14381, 16812, 13156, 28924]
+function CountUp({ target, delay = 600 }: { target: number; delay?: number }) {
+  const [value, setValue] = useState(0)
+  const { seenSlides } = useSlide()
+  const startedRef = useRef(false)
+  useEffect(() => {
+    if (!seenSlides.has(3)) { startedRef.current = false; setValue(0); return }
+    if (startedRef.current) return
+    startedRef.current = true
+    const duration = 9400
+    const t0 = performance.now() + delay
+    let raf: number
+    const tick = (now: number) => {
+      const elapsed = now - t0
+      if (elapsed < 0) { raf = requestAnimationFrame(tick); return }
+      const p = Math.min(elapsed / duration, 1)
+      const eased = 1 - (1 - p) * (1 - p)
+      setValue(Math.round(eased * target))
+      if (p < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [seenSlides, target, delay])
+  return <>{value.toLocaleString('pt-BR')}</>
+}
+
 function RenderS3() {
   const c = captionFor(3)
   const t = S3C[useLang()]
@@ -695,18 +722,12 @@ function RenderS3() {
               <div className="dh-rf-label">{t.loaderLabel}<span className="dh-rf-dots" aria-hidden="true"><span className="dh-rf-d1">.</span><span className="dh-rf-d2">.</span><span className="dh-rf-d3">.</span></span></div>
               <div className="dh-rf-feed">
                 <div className="dh-rf-sources">
-                  <div className="dh-rf-src dh-rf-src-1"><span className="dh-rf-src-name">Europe PMC</span><span className="dh-rf-src-cnt dh-rf-cnt-1" /></div>
-                  <div className="dh-rf-src dh-rf-src-2"><span className="dh-rf-src-name">PubMed</span><span className="dh-rf-src-cnt dh-rf-cnt-2" /></div>
-                  <div className="dh-rf-src dh-rf-src-3"><span className="dh-rf-src-name">NLM Catalog</span><span className="dh-rf-src-cnt dh-rf-cnt-3" /></div>
-                  <div className="dh-rf-src dh-rf-src-4"><span className="dh-rf-src-name">MEDLINE</span><span className="dh-rf-src-cnt dh-rf-cnt-4" /></div>
-                  <div className="dh-rf-src dh-rf-src-5"><span className="dh-rf-src-name">ANVISA</span><span className="dh-rf-src-cnt dh-rf-cnt-5" /></div>
-                  <div className="dh-rf-src dh-rf-src-6"><span className="dh-rf-src-name">FDA</span><span className="dh-rf-src-cnt dh-rf-cnt-6" /></div>
-                  <div className="dh-rf-src dh-rf-src-7"><span className="dh-rf-src-name">WHO IRIS</span><span className="dh-rf-src-cnt dh-rf-cnt-7" /></div>
-                  <div className="dh-rf-src dh-rf-src-8"><span className="dh-rf-src-name">Cochrane Library</span><span className="dh-rf-src-cnt dh-rf-cnt-8" /></div>
-                  <div className="dh-rf-src dh-rf-src-9"><span className="dh-rf-src-name">SUS Protocolos</span><span className="dh-rf-src-cnt dh-rf-cnt-9" /></div>
-                  <div className="dh-rf-src dh-rf-src-10"><span className="dh-rf-src-name">Min. da Saúde</span><span className="dh-rf-src-cnt dh-rf-cnt-10" /></div>
-                  <div className="dh-rf-src dh-rf-src-11"><span className="dh-rf-src-name">SBMFC</span><span className="dh-rf-src-cnt dh-rf-cnt-11" /></div>
-                  <div className="dh-rf-src dh-rf-src-12"><span className="dh-rf-src-name">CFM</span><span className="dh-rf-src-cnt dh-rf-cnt-12" /></div>
+                  {['Europe PMC','PubMed','NLM Catalog','MEDLINE','ANVISA','FDA','WHO IRIS','Cochrane Library','SUS Protocolos','Min. da Saúde','SBMFC','CFM'].map((name, i) => (
+                    <div key={name} className={`dh-rf-src dh-rf-src-${i + 1}`}>
+                      <span className="dh-rf-src-name">{name}</span>
+                      <span className="dh-rf-src-cnt"><CountUp target={RF_COUNTS[i]} delay={600 + i * 600} /></span>
+                    </div>
+                  ))}
                 </div>
                 <div className="dh-rf-total">
                   <span className="dh-rf-total-num">3,8 mi</span>
