@@ -5898,10 +5898,15 @@
   .dh-opening-stream-row:nth-child(n+4) { display: none; }
   .dh-opening-metric:nth-child(n+3) { display: none; }
 
-  /* Slide 02 — Termos: simplified for mobile */
+  /* Slide 02 — Termos: single column, compact content, no chat panel */
   .dh-termos-shell { grid-template-columns: 1fr; }
-  .dh-termo-text, .dh-termo-detail, .dh-termo-resumo, .dh-termo-sinais { display: none; }
-  .dh-termo-card { padding: 12px; }
+  .dh-termo-card { padding: 10px 12px; gap: 8px; }
+  .dh-termo-title { font-size: 14px; }
+  .dh-termo-text { font-size: 12px; line-height: 1.35; }
+  .dh-termo-resumo { font-size: 12px; margin-top: 2px; }
+  .dh-termo-sinais { gap: 3px; margin-top: 3px; }
+  .dh-termo-sinal { font-size: 12px; padding: 2px 5px; }
+  .dh-termo-detail { margin-top: 4px; gap: 4px; }
   .dh-chat-panel { display: none; }
   .dh-vcursor { display: none; }
   .dh-btn-row { display: none; }
@@ -6027,11 +6032,19 @@
   .dh-steps { display: none; }
   .dh-chrome { display: none; }
 
-  /* Slide 02 — Termos */
-  .dh-termo-text, .dh-termo-detail, .dh-termo-resumo, .dh-termo-sinais { display: none; }
-  .dh-termo-card { padding: 10px 12px; }
-  .dh-chat-panel { display: none; }
-  .dh-vcursor { display: none; }
+  /* Slide 02 — Termos: compact, content visible, chat panel visible */
+  .dh-termo-card { padding: 8px 10px; gap: 8px; }
+  .dh-termo-title { font-size: 14px; margin-bottom: 2px; }
+  .dh-termo-text { font-size: 12px; line-height: 1.4; }
+  .dh-termo-resumo { font-size: 12px; line-height: 1.35; margin-top: 2px; }
+  .dh-termo-sinais { gap: 3px; margin-top: 3px; }
+  .dh-termo-sinal { font-size: 12px; padding: 2px 5px; }
+  .dh-termo-detail { margin-top: 4px; gap: 4px; }
+  .dh-termo-kicker { font-size: 12px; margin-bottom: 2px; }
+  .dh-termos-shell { gap: 8px; }
+  .dh-termos-list { gap: 6px; }
+  .dh-chat-panel { font-size: 12px; }
+  .dh-chat-body { padding: 8px 10px; gap: 4px; }
 
   /* Slide 03 — Formulário */
   .dh-form-grid { gap: 8px; }
