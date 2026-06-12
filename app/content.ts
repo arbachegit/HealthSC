@@ -252,7 +252,7 @@ export const S3 = {
     chips: ['Public records ✓', 'USPS ✓', 'HIPAA · valid consent'],
     sideKicker: 'signals found',
     sideLines: ['address consistent with the ZIP provided', 'profile released for clinical prefill', 'audio can be linked to the chart'],
-    btnYes: 'That’s me →', btnNo: 'Not me',
+    btnYes: 'That\'s me →', btnNo: 'Not me',
   },
 } satisfies L10n<S3>
 
@@ -268,9 +268,11 @@ export const S4 = {
       'Oi. Eu sou a Aura, a médica virtual da IconsAI.',
       'Vou ouvir com calma, organizar o seu relato e destacar o que pode merecer atenção médica mais rápida.',
       'No fim, você recebe um resumo clínico claro para seguir atendimento sem perder contexto.',
+      'Tudo o que você disser fica protegido por criptografia ponta a ponta e segue as diretrizes da LGPD-Saúde.',
+      'Pode começar quando quiser — estou aqui para ouvir.',
     ],
     sideKicker1: 'o que ela faz enquanto fala',
-    side1: ['estruturando sintomas principais', 'detectando red flags no relato', 'preparando perguntas de follow-up'],
+    side1: ['estruturando sintomas principais', 'detectando red flags no relato', 'preparando perguntas de follow-up', 'correlacionando com evidência médica'],
     sideKicker2: 'camadas do fluxo', chips: ['anamnese', 'evidência médica', 'laudo SOAP'],
   },
   'pt-PT': {
@@ -279,20 +281,24 @@ export const S4 = {
       'Olá. Eu sou a Aura, a médica virtual da IconsAI.',
       'Vou ouvir com calma, organizar o seu relato e destacar o que pode merecer atenção médica mais rápida.',
       'No fim, recebe um resumo clínico claro para prosseguir o atendimento sem perder o contexto.',
+      'Tudo o que disser fica protegido por encriptação ponta a ponta e segue as diretrizes do RGPD-Saúde.',
+      'Pode começar quando quiser — estou aqui para o ouvir.',
     ],
     sideKicker1: 'o que faz enquanto fala',
-    side1: ['a estruturar os sintomas principais', 'a detetar sinais de alarme no relato', 'a preparar perguntas de seguimento'],
+    side1: ['a estruturar os sintomas principais', 'a detetar sinais de alarme no relato', 'a preparar perguntas de seguimento', 'a correlacionar com evidência médica'],
     sideKicker2: 'camadas do fluxo', chips: ['anamnese', 'evidência médica', 'laudo SOAP'],
   },
   en: {
     kicker: 'Aura · Virtual Physician', status: 'voice active · empathetic clinical listening',
     lines: [
-      'Hi. I’m Aura, the virtual physician from IconsAI.',
-      'I’ll listen carefully, organize your account, and flag what may deserve faster medical attention.',
+      'Hi. I\'m Aura, the virtual physician from IconsAI.',
+      'I\'ll listen carefully, organize your account, and flag what may deserve faster medical attention.',
       'At the end, you get a clear clinical summary to continue care without losing context.',
+      'Everything you share is protected by end-to-end encryption and follows HIPAA compliance standards.',
+      'You can start whenever you\'re ready — I\'m here to listen.',
     ],
     sideKicker1: 'what she does while you talk',
-    side1: ['structuring the main symptoms', 'detecting red flags in the account', 'preparing follow-up questions'],
+    side1: ['structuring the main symptoms', 'detecting red flags in the account', 'preparing follow-up questions', 'cross-referencing medical evidence'],
     sideKicker2: 'flow layers', chips: ['intake', 'medical evidence', 'SOAP report'],
   },
 } satisfies L10n<S4>
@@ -309,7 +315,7 @@ type S5 = { title: string; subtitle: string; status: string; timer: string }
 export const S5 = {
   'pt-BR': { title: 'Fernando, conta o que está te incomodando.', subtitle: 'Em até 2 minutos, fale como sente. Não precisa usar termo técnico.', status: 'gravando · escutando você', timer: '00:47 / 02:00' },
   'pt-PT': { title: 'Fernando, conte o que o está a incomodar.', subtitle: 'Em até 2 minutos, fale como se sente. Não precisa de termo técnico.', status: 'a gravar · a ouvi-lo', timer: '00:47 / 02:00' },
-  en: { title: 'Fernando, tell me what’s bothering you.', subtitle: 'In up to 2 minutes, say how you feel. No medical terms needed.', status: 'recording · listening to you', timer: '00:47 / 02:00' },
+  en: { title: 'Fernando, tell me what\'s bothering you.', subtitle: 'In up to 2 minutes, say how you feel. No medical terms needed.', status: 'recording · listening to you', timer: '00:47 / 02:00' },
 } satisfies L10n<S5>
 
 /* ───────────────────────── S6 · AURA PERGUNTA ───────────────────────── */
@@ -320,24 +326,39 @@ type S6 = {
 export const S6 = {
   'pt-BR': {
     kicker: 'Aura · escutou você', status: 'pergunta adaptativa · contexto emocional preservado',
-    lines: ['Entendi. Você descreveu cefaleia pulsátil há 3 dias, piorando à tarde e sensível à luz.', 'Parece algo que está te tirando do eixo. Nessas crises você consegue continuar trabalhando ou precisa parar tudo e deitar?'],
+    lines: [
+      'Entendi. Você descreveu cefaleia pulsátil há 3 dias, piorando à tarde e sensível à luz.',
+      'Parece algo que está te tirando do eixo. Nessas crises você consegue continuar trabalhando ou precisa parar tudo e deitar?',
+      'Preciso entender o impacto real no seu dia a dia — isso muda a classificação de urgência.',
+      'Também vou perguntar sobre sono e hidratação, porque alteram o limiar de dor.',
+    ],
     chipsKicker: 'resposta rápida', chips: ['Continuo, com dificuldade', 'Preciso parar e deitar', 'Depende da intensidade'],
-    sideKicker1: 'sinais extraídos', side1: ['dor 6/10 com piora vespertina', 'fotossensibilidade presente', 'tela longa como gatilho provável'],
-    sideKicker2: 'próximo objetivo', side2: ['medir impacto funcional e sono', 'decidir se sobe urgência clínica'],
+    sideKicker1: 'sinais extraídos', side1: ['dor 6/10 com piora vespertina', 'fotossensibilidade presente', 'tela longa como gatilho provável', 'sem náusea ou aura visual'],
+    sideKicker2: 'próximo objetivo', side2: ['medir impacto funcional e sono', 'decidir se sobe urgência clínica', 'avaliar padrão de hidratação'],
   },
   'pt-PT': {
     kicker: 'Aura · ouviu-o', status: 'pergunta adaptativa · contexto emocional preservado',
-    lines: ['Percebi. Descreveu cefaleia pulsátil há 3 dias, a piorar à tarde e sensível à luz.', 'Parece algo que o está a desequilibrar. Nessas crises consegue continuar a trabalhar ou precisa de parar tudo e deitar-se?'],
+    lines: [
+      'Percebi. Descreveu cefaleia pulsátil há 3 dias, a piorar à tarde e sensível à luz.',
+      'Parece algo que o está a desequilibrar. Nessas crises consegue continuar a trabalhar ou precisa de parar tudo e deitar-se?',
+      'Preciso de perceber o impacto real no seu dia a dia — isso altera a classificação de urgência.',
+      'Também vou perguntar sobre sono e hidratação, porque alteram o limiar de dor.',
+    ],
     chipsKicker: 'resposta rápida', chips: ['Continuo, com dificuldade', 'Preciso de parar e deitar-me', 'Depende da intensidade'],
-    sideKicker1: 'sinais extraídos', side1: ['dor 6/10 com agravamento vespertino', 'fotossensibilidade presente', 'ecrã prolongado como gatilho provável'],
-    sideKicker2: 'próximo objetivo', side2: ['medir impacto funcional e sono', 'decidir se aumenta a urgência clínica'],
+    sideKicker1: 'sinais extraídos', side1: ['dor 6/10 com agravamento vespertino', 'fotossensibilidade presente', 'ecrã prolongado como gatilho provável', 'sem náusea ou aura visual'],
+    sideKicker2: 'próximo objetivo', side2: ['medir impacto funcional e sono', 'decidir se aumenta a urgência clínica', 'avaliar padrão de hidratação'],
   },
   en: {
     kicker: 'Aura · heard you', status: 'adaptive question · emotional context preserved',
-    lines: ['Got it. You described a pulsating headache for 3 days, worse in the afternoon and sensitive to light.', 'It sounds like it’s throwing you off. During these episodes, can you keep working or do you need to stop everything and lie down?'],
+    lines: [
+      'Got it. You described a pulsating headache for 3 days, worse in the afternoon and sensitive to light.',
+      'It sounds like it\'s throwing you off. During these episodes, can you keep working or do you need to stop everything and lie down?',
+      'I need to understand the real impact on your daily life — that changes the urgency classification.',
+      'I\'ll also ask about sleep and hydration, as they affect the pain threshold.',
+    ],
     chipsKicker: 'quick reply', chips: ['I keep going, with difficulty', 'I need to stop and lie down', 'Depends on the intensity'],
-    sideKicker1: 'extracted signals', side1: ['pain 6/10 worsening in the afternoon', 'photosensitivity present', 'long screen time as likely trigger'],
-    sideKicker2: 'next objective', side2: ['measure functional impact and sleep', 'decide whether to raise clinical urgency'],
+    sideKicker1: 'extracted signals', side1: ['pain 6/10 worsening in the afternoon', 'photosensitivity present', 'long screen time as likely trigger', 'no nausea or visual aura'],
+    sideKicker2: 'next objective', side2: ['measure functional impact and sleep', 'decide whether to raise clinical urgency', 'assess hydration pattern'],
   },
 } satisfies L10n<S6>
 
@@ -361,7 +382,7 @@ export const S7 = {
     painLabel: 'Dor agora (0–10)', painValue: '6/10',
   },
   en: {
-    kicker: 'vital signs', title: 'Confirm your physiological data.', subtitle: 'Whatever you can measure helps. Don’t have it? Mark "Not sure" and move on.',
+    kicker: 'vital signs', title: 'Confirm your physiological data.', subtitle: 'Whatever you can measure helps. Don\'t have it? Mark "Not sure" and move on.',
     vitals: [['Weight', '159', 'lb'], ['Height', '5\'9"', ''], ['BP sys.', '128', 'mmHg'], ['BP dia.', '82', 'mmHg'], ['Heart rate', '74', 'bpm'], ['Glucose', '94', 'mg/dL']],
     tags: [{ tone: 'ok', text: 'BMI 23.5 · Normal weight' }, { tone: 'warn', text: 'BP 128/82 · Elevated' }, { tone: 'ok', text: 'HR 74 · Normal' }],
     painLabel: 'Pain now (0–10)', painValue: '6/10',
@@ -789,7 +810,7 @@ export const S18 = {
     trustKicker: 'why confidence dropped', trust: ['mismatched metadata', 'amount 4x above schedule', 'no matching invoice'],
     issues: [
       { tone: 'bad', text: 'Date was rewritten over the original PDF (pixel forensics)' },
-      { tone: 'bad', text: 'Amount $272 doesn’t match the procedure schedule ($68)' },
+      { tone: 'bad', text: 'Amount $272 doesn\'t match the procedure schedule ($68)' },
       { tone: 'warn', text: 'EIN checks out, but no matching invoice was issued' },
     ],
   },
@@ -888,7 +909,7 @@ export const S21 = {
     nPlan: 'PLANO SUGERIDO', plan: [{ text: 'Higiene visual 20-20-20' }, { text: 'Hidratação + sono regular' }, { text: 'Reavaliar TA em 7 dias' }, { text: 'Encaminhar neuro se > 14 dias', warn: true }],
   },
   en: {
-    kicker: 'assisted diagnosis · AI pipeline', title: 'Symptoms → ICD-10 → Plan.', subtitle: 'Calibrated probabilities. The final clinical decision is always the physician’s — AI is support.',
+    kicker: 'assisted diagnosis · AI pipeline', title: 'Symptoms → ICD-10 → Plan.', subtitle: 'Calibrated probabilities. The final clinical decision is always the physician\'s — AI is support.',
     nSymptoms: 'SYMPTOMS', symptoms: ['pulsating headache', 'photophobia', 'afternoon worsening', 'pain 6/10'], nCid: 'ICD-10 (PROB.)',
     cids: [{ code: 'G44.2 · Tension headache', prob: '72%', tone: 'high' }, { code: 'G43.0 · Migraine w/o aura', prob: '19%', tone: 'mid' }, { code: 'H53.5 · Eye strain', prob: '6%', tone: 'low' }, { code: 'Other', prob: '3%', tone: 'low' }],
     nPlan: 'SUGGESTED PLAN', plan: [{ text: 'Visual hygiene 20-20-20' }, { text: 'Hydration + regular sleep' }, { text: 'Recheck BP in 7 days' }, { text: 'Refer to neuro if > 14 days', warn: true }],
@@ -1810,7 +1831,7 @@ export const EXPLAIN: ExplainMap = {
       kicker: 'DIAGNOSIS',
       lines: [
         'Pipeline: symptoms → ICD-10 with calibrated probabilities → plan.',
-        "Calibrated probabilities — the final decision is always the physician's.",
+        "Calibrated probabilities — the final decision is always the physician\'s.",
         'Suggested plan includes immediate action and referral triggers.',
         'Automatic red flag when the presentation indicates urgency or reassessment.',
       ],
