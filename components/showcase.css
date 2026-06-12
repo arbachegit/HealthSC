@@ -3897,6 +3897,22 @@
 }
 .dh-aura-stage-compact {
   grid-template-columns: minmax(0, 1.08fr) 250px;
+  align-items: start;
+}
+.dh-aura-stage-compact .dh-aura-panel {
+  gap: 12px;
+  padding: 16px;
+}
+.dh-aura-stage-compact .dh-aura-line {
+  min-height: 1.3em;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.dh-aura-stage-compact .dh-chips { margin-top: 2px; }
+.dh-aura-stage-compact .dh-chips-kicker { margin-bottom: 4px; }
+.dh-aura-stage-compact .dh-chip {
+  padding: 5px 12px;
+  font-size: 12px;
 }
 .dh-aura-panel,
 .dh-aura-side-card {
