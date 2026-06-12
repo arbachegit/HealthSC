@@ -3889,6 +3889,11 @@
   animation: dh-live-pulse 2s ease-out infinite;
 }
 
+/* Aura scenes: content-driven height (no stretch to full stage) */
+.dh-scene-4,
+.dh-scene-6 {
+  align-items: start;
+}
 .dh-aura-stage {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) 272px;
@@ -3916,14 +3921,23 @@
 }
 .dh-aura-line {
   display: block;
-  min-height: 2.9em;
+  min-height: 1.6em;
   font-size: 16px;
   line-height: 1.6;
   color: var(--dh-text);
   font-weight: 500;
 }
-.dh-aura-line .dh-tw-caret {
+.dh-tw-caret {
   color: var(--dh-primary);
+  font-weight: 600;
+  animation: dh-caret-blink .65s step-end infinite;
+}
+.dh-tw-caret-done {
+  display: none;
+}
+@keyframes dh-caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 .dh-aura-side {
   display: flex;

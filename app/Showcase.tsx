@@ -655,6 +655,52 @@ function RenderS2() {
   )
 }
 
+/* ── AuraTypewriter: progressive text reveal with blinking cursor ────────── */
+function AuraTypewriter({ lines, slideIndex }: { lines: string[]; slideIndex: number }) {
+  const { seenSlides } = useSlide()
+  const [charCount, setCharCount] = useState(0)
+  const startedRef = useRef(false)
+  const totalChars = lines.reduce((sum, ln) => sum + ln.length, 0)
+  const done = charCount >= totalChars
+
+  useEffect(() => {
+    if (!seenSlides.has(slideIndex)) { startedRef.current = false; setCharCount(0); return }
+    if (startedRef.current) return
+    startedRef.current = true
+    const msPerChar = 28
+    const t0 = performance.now() + 400
+    let raf: number
+    const tick = (now: number) => {
+      const elapsed = now - t0
+      if (elapsed < 0) { raf = requestAnimationFrame(tick); return }
+      const next = Math.min(Math.floor(elapsed / msPerChar), totalChars)
+      setCharCount(next)
+      if (next < totalChars) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [seenSlides, slideIndex, totalChars])
+
+  let consumed = 0
+  return (
+    <>
+      {lines.map((line, i) => {
+        const lineStart = consumed
+        consumed += line.length
+        const visible = Math.max(0, Math.min(line.length, charCount - lineStart))
+        const isCurrentLine = charCount >= lineStart && charCount < lineStart + line.length
+        return (
+          <span key={i} className="dh-aura-line">
+            {line.slice(0, visible)}
+            {isCurrentLine && <span className="dh-tw-caret">|</span>}
+          </span>
+        )
+      })}
+      {done && <span className="dh-tw-caret dh-tw-caret-done">|</span>}
+    </>
+  )
+}
+
 /* ── CountUp: animated counter using rAF + performance.now() (§9 CLAUDE.md) ── */
 const RF_COUNTS = [38423, 29847, 18241, 44156, 22538, 41092, 35673, 22419, 14381, 16812, 13156, 28924]
 function CountUp({ target, delay = 600 }: { target: number; delay?: number }) {
@@ -787,9 +833,7 @@ function RenderS4() {
               </div>
             </div>
             <div className="dh-aura-script dh-aura-script-live">
-              {t.lines.map((ln) => (
-                <DhTw key={ln} text={ln} className="dh-aura-line" />
-              ))}
+              <AuraTypewriter lines={t.lines} slideIndex={4} />
             </div>
           </div>
           <aside className="dh-aura-side">
@@ -871,9 +915,7 @@ function RenderS6() {
               </div>
             </div>
             <div className="dh-aura-script dh-aura-script-live">
-              {t.lines.map((ln) => (
-                <DhTw key={ln} text={ln} className="dh-aura-line" />
-              ))}
+              <AuraTypewriter lines={t.lines} slideIndex={6} />
             </div>
             <div className="dh-chips">
               <div className="dh-chips-kicker">{t.chipsKicker}</div>
