@@ -701,6 +701,34 @@ function AuraTypewriter({ lines, slideIndex }: { lines: string[]; slideIndex: nu
   )
 }
 
+/* ── StatCounter: generic animated counter for any slide (rAF + performance.now) ── */
+function StatCounter({ target, decimals = 0, slideIndex, delay = 400, duration = 2200 }: {
+  target: number; decimals?: number; slideIndex: number; delay?: number; duration?: number
+}) {
+  const [value, setValue] = useState(0)
+  const { seenSlides } = useSlide()
+  const startedRef = useRef(false)
+  useEffect(() => {
+    if (!seenSlides.has(slideIndex)) { startedRef.current = false; setValue(0); return }
+    if (startedRef.current) return
+    startedRef.current = true
+    const t0 = performance.now() + delay
+    let raf: number
+    const tick = (now: number) => {
+      const elapsed = now - t0
+      if (elapsed < 0) { raf = requestAnimationFrame(tick); return }
+      const p = Math.min(elapsed / duration, 1)
+      const eased = 1 - (1 - p) * (1 - p)
+      setValue(eased * target)
+      if (p < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [seenSlides, slideIndex, target, delay, duration])
+  if (decimals === 0) return <>{Math.round(value).toLocaleString('pt-BR')}</>
+  return <>{value.toFixed(decimals)}</>
+}
+
 /* ── CountUp: animated counter using rAF + performance.now() (§9 CLAUDE.md) ── */
 const RF_COUNTS = [38423, 29847, 18241, 44156, 22538, 41092, 35673, 22419, 14381, 16812, 13156, 28924]
 function CountUp({ target, delay = 600 }: { target: number; delay?: number }) {
@@ -885,6 +913,16 @@ function RenderS5() {
                 ))}
               </div>
               <div className="dh-mic-timer">{t.timer}</div>
+              <div className="dh-mic-stats">
+                <div className="dh-mic-stat">
+                  <span className="dh-mic-stat-value"><StatCounter target={1247} slideIndex={5} delay={600} duration={2800} /></span>
+                  <span className="dh-mic-stat-label">tokens</span>
+                </div>
+                <div className="dh-mic-stat">
+                  <span className="dh-mic-stat-value"><StatCounter target={0.3} decimals={1} slideIndex={5} delay={900} duration={1400} /></span>
+                  <span className="dh-mic-stat-label">temp</span>
+                </div>
+              </div>
             </div>
           </div>
           <ExplainAside index={5} />

@@ -1416,6 +1416,35 @@
   font-weight: 700;
   color: var(--dh-text);
 }
+.dh-mic-stats {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+}
+.dh-mic-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+}
+.dh-mic-stat-value {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--dh-primary-deep);
+  letter-spacing: -0.02em;
+}
+.dh-mic-stat-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dh-muted);
+}
 
 /* ──────────────────────────────────────────────────────────
    CENA 6 — CHIPS
