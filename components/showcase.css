@@ -1438,11 +1438,11 @@
 .dh-chip {
   display: inline-flex;
   align-items: center;
-  padding: 10px 18px;
+  padding: 7px 14px;
   border-radius: 999px;
   border: 1px solid var(--dh-border-strong);
   background: var(--dh-surface);
-  font-size: 15px;
+  font-size: 13px;
   color: var(--dh-text);
   font-weight: 500;
 }
@@ -3937,22 +3937,23 @@
 .dh-aura-side {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 .dh-aura-side-card {
-  padding: 20px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
   flex: 1;
   animation: dh-card-float 7.2s ease-in-out infinite;
 }
 .dh-aura-side-card-soft {
+  flex: 0 0 auto;
   animation-delay: 0.35s;
 }
 .dh-aura-side-kicker {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -3960,25 +3961,25 @@
 }
 .dh-aura-side-line {
   position: relative;
-  padding-left: 16px;
-  font-size: 16px;
-  line-height: 1.55;
+  padding-left: 14px;
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--dh-text-soft);
 }
 .dh-aura-side-line::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.55em;
-  width: 8px;
-  height: 8px;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
   border-radius: 999px;
   background: var(--dh-primary);
 }
 .dh-aura-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .dh-autoexam-stage {
