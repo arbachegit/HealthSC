@@ -657,14 +657,14 @@ function RenderS2() {
 
 /* ── AuraTypewriter: progressive text reveal with blinking cursor ────────── */
 function AuraTypewriter({ lines, slideIndex }: { lines: string[]; slideIndex: number }) {
-  const { seenSlides } = useSlide()
+  const { currentSlide } = useSlide()
   const [charCount, setCharCount] = useState(0)
   const startedRef = useRef(false)
   const totalChars = lines.reduce((sum, ln) => sum + ln.length, 0)
   const done = charCount >= totalChars
 
   useEffect(() => {
-    if (!seenSlides.has(slideIndex)) { startedRef.current = false; setCharCount(0); return }
+    if (currentSlide !== slideIndex) { startedRef.current = false; setCharCount(0); return }
     if (startedRef.current) return
     startedRef.current = true
     const msPerChar = 28
@@ -679,7 +679,7 @@ function AuraTypewriter({ lines, slideIndex }: { lines: string[]; slideIndex: nu
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [seenSlides, slideIndex, totalChars])
+  }, [currentSlide, slideIndex, totalChars])
 
   let consumed = 0
   return (
@@ -706,10 +706,10 @@ function StatCounter({ target, decimals = 0, slideIndex, delay = 400, duration =
   target: number; decimals?: number; slideIndex: number; delay?: number; duration?: number
 }) {
   const [value, setValue] = useState(0)
-  const { seenSlides } = useSlide()
+  const { currentSlide } = useSlide()
   const startedRef = useRef(false)
   useEffect(() => {
-    if (!seenSlides.has(slideIndex)) { startedRef.current = false; setValue(0); return }
+    if (currentSlide !== slideIndex) { startedRef.current = false; setValue(0); return }
     if (startedRef.current) return
     startedRef.current = true
     const t0 = performance.now() + delay
@@ -724,7 +724,7 @@ function StatCounter({ target, decimals = 0, slideIndex, delay = 400, duration =
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [seenSlides, slideIndex, target, delay, duration])
+  }, [currentSlide, slideIndex, target, delay, duration])
   if (decimals === 0) return <>{Math.round(value).toLocaleString('pt-BR')}</>
   return <>{value.toFixed(decimals)}</>
 }
@@ -733,10 +733,10 @@ function StatCounter({ target, decimals = 0, slideIndex, delay = 400, duration =
 const RF_COUNTS = [38423, 29847, 18241, 44156, 22538, 41092, 35673, 22419, 14381, 16812, 13156, 28924]
 function CountUp({ target, delay = 600 }: { target: number; delay?: number }) {
   const [value, setValue] = useState(0)
-  const { seenSlides } = useSlide()
+  const { currentSlide } = useSlide()
   const startedRef = useRef(false)
   useEffect(() => {
-    if (!seenSlides.has(3)) { startedRef.current = false; setValue(0); return }
+    if (currentSlide !== 3) { startedRef.current = false; setValue(0); return }
     if (startedRef.current) return
     startedRef.current = true
     const duration = 9400
@@ -752,7 +752,7 @@ function CountUp({ target, delay = 600 }: { target: number; delay?: number }) {
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [seenSlides, target, delay])
+  }, [currentSlide, target, delay])
   return <>{value.toLocaleString('pt-BR')}</>
 }
 
