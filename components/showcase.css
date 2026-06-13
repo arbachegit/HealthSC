@@ -3930,6 +3930,12 @@
   grid-template-columns: minmax(0, 1.1fr) 290px;
   gap: 12px;
   align-items: stretch;
+  /* §6.1: grow into the flex-column window-body so columns fill the palco
+     vertically (sibling .dh-explain-stage does the same via height:100%).
+     Without this the grid is only content-tall → empty band below + right
+     explanation column stops at ~55% height. */
+  flex: 1;
+  min-height: 0;
 }
 .dh-aura-stage-compact {
   grid-template-columns: minmax(0, 1.08fr) 268px;
