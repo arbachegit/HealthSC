@@ -159,12 +159,14 @@ function Field({ label, value, mono, hint, chip, span }: { label: string; value:
   )
 }
 
-function Vital({ label, value, suffix }: { label: string; value: string; suffix: string }) {
+function Vital({ label, value, suffix, typeDelay }: { label: string; value: string; suffix: string; typeDelay?: number }) {
   return (
     <div className="dh-vital">
       <div className="dh-vital-label">{label}</div>
       <div className="dh-vital-row">
-        <span className="dh-vital-value"><span className="dh-vital-typed">{value}</span></span>
+        <span className="dh-vital-value">
+          {typeDelay === undefined ? value : <TypeText text={value} slideIndex={7} delay={typeDelay} />}
+        </span>
         <span className="dh-vital-suffix">{suffix}</span>
       </div>
     </div>
@@ -727,6 +729,42 @@ function AuraTypewriter({ lines, slideIndex, onDone }: { lines: string[]; slideI
   )
 }
 
+/* ── TypeText: single-string typewriter (rAF + performance.now, §9). Renders the
+   text progressively with a blinking caret at the typing position; the caret
+   freezes/hides on completion. Gated on currentSlide so it replays on slide
+   enter (§7). Presentation-only — the value itself is static content. ── */
+function TypeText({ text, slideIndex, delay = 0, cps = 20 }: { text: string; slideIndex: number; delay?: number; cps?: number }) {
+  const { currentSlide } = useSlide()
+  const [n, setN] = useState(0)
+  const startedRef = useRef(false)
+  const done = n >= text.length
+  useEffect(() => {
+    if (currentSlide !== slideIndex) { startedRef.current = false; setN(0); return }
+    if (startedRef.current) return
+    startedRef.current = true
+    const msPerChar = 1000 / cps
+    const t0 = performance.now() + delay
+    let raf: number
+    const tick = (now: number) => {
+      const e = now - t0
+      if (e < 0) { raf = requestAnimationFrame(tick); return }
+      const next = Math.min(Math.floor(e / msPerChar), text.length)
+      setN(next)
+      if (next < text.length) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [currentSlide, slideIndex, text, delay, cps])
+  // caret shows only while actively typing (not before first char, not after done)
+  const typing = n > 0 && !done
+  return (
+    <span className="dh-type">
+      {text.slice(0, n)}
+      <span className={`dh-type-caret${typing ? '' : ' dh-type-caret-off'}`} aria-hidden="true">|</span>
+    </span>
+  )
+}
+
 /* ── StatCounter: generic animated counter for any slide (rAF + performance.now) ── */
 function StatCounter({ target, decimals = 0, slideIndex, delay = 400, duration = 2200 }: {
   target: number; decimals?: number; slideIndex: number; delay?: number; duration?: number
@@ -1028,8 +1066,8 @@ function RenderS7() {
             <StepIndicator current={2} />
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
             <div className="dh-vitals-grid">
-              {t.vitals.map(([label, value, suffix]) => (
-                <Vital key={label} label={label} value={value} suffix={suffix} />
+              {t.vitals.map(([label, value, suffix], i) => (
+                <Vital key={label} label={label} value={value} suffix={suffix} typeDelay={250 + i * 420} />
               ))}
             </div>
             <div className="dh-vitals-classification">
@@ -1040,7 +1078,7 @@ function RenderS7() {
             <div className="dh-pain-slider">
               <div className="dh-pain-label">{t.painLabel}</div>
               <div className="dh-pain-track"><span className="dh-pain-thumb" /></div>
-              <div className="dh-pain-value"><span className="dh-pain-typed">{t.painValue}</span></div>
+              <div className="dh-pain-value"><TypeText text={t.painValue} slideIndex={7} delay={2770} /></div>
             </div>
           </div>
           <ExplainAside index={7} />

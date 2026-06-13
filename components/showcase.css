@@ -4560,8 +4560,6 @@
   .dh-field,
   .dh-vital,
   .dh-vital-value,
-  .dh-vital-typed,
-  .dh-pain-typed,
   .dh-tag,
   .dh-pain-thumb,
   .dh-med,
@@ -4616,8 +4614,6 @@
   .dh-field-typed,
   .dh-vital,
   .dh-vital-value,
-  .dh-vital-typed,
-  .dh-pain-typed,
   .dh-tag,
   .dh-med,
   .dh-med-selected,
@@ -4805,83 +4801,23 @@
 .dh-vitals-grid .dh-vital:nth-child(5) { animation: dh-vital-in 10s both; animation-delay: 0.48s; }
 .dh-vitals-grid .dh-vital:nth-child(6) { animation: dh-vital-in 10s both; animation-delay: 0.60s; }
 
-/* Vital values: typewriter per-character reveal, one field at a time */
-/* Base state: hidden behind max-width:0 clip, cursor rail transparent */
-.dh-scene-7 .dh-vital-typed {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 0;
-  vertical-align: bottom;
-  border-right: 1.5px solid transparent;
+/* Vital/pain values now type via the JS <TypeText> component (rAF, §9) —
+   the brittle max-width:0 ch-clip + steps() reveal was replaced because the
+   per-field char counts (--tw-end in ch) were hardcoded for EN and mis-clipped
+   pt-BR/pt-PT values. Caret styling for <TypeText> below. */
+.dh-type { white-space: nowrap; }
+.dh-type-caret {
+  color: var(--dh-primary, #10b981);
+  font-weight: 600;
+  margin-left: 1px;
+  animation: dh-type-blink 0.7s step-end infinite;
 }
-.dh-scene-7 .dh-pain-typed {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 0;
-  vertical-align: bottom;
-  border-right: 1.5px solid transparent;
+.dh-type-caret-off { opacity: 0; animation: none; }  /* frozen/hidden when complete or before start */
+@keyframes dh-type-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
 }
 
-@keyframes dh-s7-type {
-  from { max-width: 0; }
-  to   { max-width: var(--tw-end, 4ch); }
-}
-@keyframes dh-s7-cursor {
-  0%, 96%  { border-right-color: #10b981; }
-  97%, 100% { border-right-color: transparent; }
-}
-
-/* Weight/Peso: 3 chars max (159 lb EN) → starts at 0.5s */
-.dh-scene-7 .dh-vitals-grid .dh-vital:nth-child(1) .dh-vital-typed {
-  --tw-end: 3ch;
-  animation:
-    dh-s7-type   0.24s steps(3, end) 0.5s both,
-    dh-s7-cursor 0.24s linear        0.5s 1 both;
-}
-/* Height/Altura: 4 chars max (5'9" EN) → starts at 0.88s */
-.dh-scene-7 .dh-vitals-grid .dh-vital:nth-child(2) .dh-vital-typed {
-  --tw-end: 4ch;
-  animation:
-    dh-s7-type   0.32s steps(4, end) 0.88s both,
-    dh-s7-cursor 0.32s linear        0.88s 1 both;
-}
-/* BP sys./PA sis.: 3 chars → starts at 1.34s */
-.dh-scene-7 .dh-vitals-grid .dh-vital:nth-child(3) .dh-vital-typed {
-  --tw-end: 3ch;
-  animation:
-    dh-s7-type   0.24s steps(3, end) 1.34s both,
-    dh-s7-cursor 0.24s linear        1.34s 1 both;
-}
-/* BP dia./PA dia.: 2 chars → starts at 1.72s */
-.dh-scene-7 .dh-vitals-grid .dh-vital:nth-child(4) .dh-vital-typed {
-  --tw-end: 2ch;
-  animation:
-    dh-s7-type   0.16s steps(2, end) 1.72s both,
-    dh-s7-cursor 0.16s linear        1.72s 1 both;
-}
-/* Heart rate/Freq. card.: 2 chars → starts at 2.02s */
-.dh-scene-7 .dh-vitals-grid .dh-vital:nth-child(5) .dh-vital-typed {
-  --tw-end: 2ch;
-  animation:
-    dh-s7-type   0.16s steps(2, end) 2.02s both,
-    dh-s7-cursor 0.16s linear        2.02s 1 both;
-}
-/* Glucose/Glicemia: 2 chars → starts at 2.32s */
-.dh-scene-7 .dh-vitals-grid .dh-vital:nth-child(6) .dh-vital-typed {
-  --tw-end: 2ch;
-  animation:
-    dh-s7-type   0.16s steps(2, end) 2.32s both,
-    dh-s7-cursor 0.16s linear        2.32s 1 both;
-}
-/* Pain value (6/10, 4 chars) → starts at 2.62s */
-.dh-scene-7 .dh-pain-typed {
-  --tw-end: 4ch;
-  animation:
-    dh-s7-type   0.32s steps(4, end) 2.62s both,
-    dh-s7-cursor 0.32s linear        2.62s 1 both;
-}
 
 /* Classification tags: fade in after vitals, 200ms stagger */
 @keyframes dh-vital-tag-in {
