@@ -4154,8 +4154,10 @@
 /* BOTTOM — skin (Pele·ABCDE) guide */
 .dh-skin {
   flex: 1; min-height: 0;
-  display: flex; flex-direction: column; gap: 10px;
-  padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 9px;
+  /* extra bottom padding = guaranteed clearance so the rounded bottom border
+     never clips the last criterion / note (§6.0 zero-overlap, §6.17) */
+  padding: 12px 18px 20px;
   border-radius: 18px;
   border: 1px solid rgba(16, 185, 129, 0.16);
   background: linear-gradient(180deg, rgba(236, 253, 245, 0.7), rgba(255, 255, 255, 0.96));
@@ -4210,14 +4212,14 @@
 .dh-skin-abcde { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 6px; }
 .dh-skin-abcde-row { flex: 1; min-height: 0; display: flex; gap: 14px; align-items: stretch; }
 .dh-skin-lesion { flex: 0 0 40%; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 0; }
-.dh-skin-lesion-svg { flex: 1; min-height: 0; width: auto; max-width: 100%; max-height: 26vh; aspect-ratio: 1 / 1; }
+.dh-skin-lesion-svg { flex: 1; min-height: 0; width: auto; max-width: 100%; max-height: 22vh; aspect-ratio: 1 / 1; }
 .dh-skin-lesion-tag {
   font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #7c3f00;
   background: rgba(124, 63, 0, 0.08); padding: 3px 8px; border-radius: 8px;
 }
-.dh-skin-criteria { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+.dh-skin-criteria { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 5px; justify-content: center; }
 .dh-skin-crit {
-  display: flex; align-items: center; gap: 10px; padding: 7px 10px;
+  display: flex; align-items: center; gap: 10px; padding: 6px 10px;
   border-radius: 10px; background: rgba(236, 253, 245, 0.7); border: 1px solid rgba(16, 185, 129, 0.14);
   opacity: 0; animation: dh-skin-crit-in 0.5s var(--ease-out, ease-out) both;
 }
@@ -4228,9 +4230,9 @@
 .dh-skin-crit-5 { animation-delay: 2.2s; }
 @keyframes dh-skin-crit-in { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
 .dh-skin-crit-k {
-  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 8px;
+  flex: 0 0 auto; width: 24px; height: 24px; border-radius: 8px;
   display: inline-flex; align-items: center; justify-content: center;
-  background: var(--dh-primary); color: #fff; font-weight: 800; font-size: 14px;
+  background: var(--dh-primary); color: #fff; font-weight: 800; font-size: 13px;
 }
 .dh-skin-crit-text { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; font-size: 12px; color: var(--dh-text-soft); }
 .dh-skin-crit-text strong { font-size: 13px; color: var(--dh-text); }
