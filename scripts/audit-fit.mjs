@@ -1,6 +1,6 @@
 /**
  * audit-fit.mjs — gate de cabimento (skill /showcase §6.7). BLOQUEIA deploy.
- * Mede CADA slide × 6 viewports no build servido: cut, fillArea, scale, minFont.
+ * Mede CADA slide × 6 viewports no build servido: cut, fillArea, scale, minFont, contain.
  * Env: URL (obrigatório apontar pro build de produção servido), LOCALES (opcional).
  * Exit 1 se qualquer gate falhar.
  */
@@ -14,7 +14,7 @@ const VIEWPORTS = [
   { w: 1440, h: 800, kind: 'desktop' }, { w: 1280, h: 620, kind: 'desktop' }, { w: 1280, h: 560, kind: 'desktop' },
   { w: 390, h: 844, kind: 'mobile' }, { w: 390, h: 740, kind: 'mobile' }, { w: 390, h: 667, kind: 'mobile' },
 ]
-const GATE = { cut: 2, fillDesktop: 0.75, fillMobile: 0.70, scale: 0.70, minFontPx: 8 }
+const GATE = { cut: 2, fillDesktop: 0.75, fillMobile: 0.70, scale: 0.70, minFontPx: 8, containMin: 18 }
 
 // Roda DENTRO da página, no slide ativo. Mede contra .slide-stage (palco + moldura).
 const measure = () => {
@@ -53,11 +53,37 @@ const measure = () => {
   }
   if (!isFinite(minFont)) minFont = 999
 
+  // Containment (§6.19): clearance (DESIGN px) do texto in-flow até a borda inferior
+  // do painel bordado+arredondado que o contém. O fit (§6.18) preenche o palco EXATO,
+  // então conteúdo ancorado na base encosta na borda — só o padding-bottom separa. É o
+  // overflow INTERNO que cut/fill (bbox externa) não veem. Reserve faixa ≥24px (§6.19/F27).
+  let contain = 999
+  for (const panel of slide.querySelectorAll('*')) {
+    const pe = getComputedStyle(panel)
+    const bw = parseFloat(pe.borderBottomWidth) || 0
+    const br = parseFloat(pe.borderBottomLeftRadius) || 0
+    if (bw <= 0 || br < 6) continue
+    if (pe.overflow === 'hidden' || pe.overflowY === 'hidden') continue
+    const pr = panel.getBoundingClientRect()
+    if (pr.height < 160) continue
+    for (const d of panel.querySelectorAll('*')) {
+      const de = getComputedStyle(d)
+      if (de.position === 'absolute' || de.position === 'fixed') continue
+      if (de.display === 'none' || de.visibility === 'hidden' || parseFloat(de.opacity) === 0) continue
+      if (![...d.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) continue
+      const dr = d.getBoundingClientRect()
+      if (dr.width < 4 || dr.height < 4) continue
+      contain = Math.min(contain, (pr.bottom - dr.bottom) / (scale || 1))
+    }
+  }
+  if (!isFinite(contain)) contain = 999
+
   return {
     cut: Math.round(cut * 10) / 10,
     fillArea: Math.round(fillArea * 100) / 100,
     scale: Math.round(scale * 100) / 100,
     minFont: Math.round(minFont * 10) / 10,
+    contain: Math.round(contain),
   }
 }
 
@@ -84,11 +110,12 @@ const run = async () => {
         const id = `${locale || 'default'} ${vp.w}x${vp.h} slide ${String(i + 1).padStart(2, '0')}`
         if (!m) { failures.push(`${id}: MEASURE FAILED (hierarquia §6.2.4 ausente?)`) }
         else {
-          rows.push(`${String(i + 1).padStart(2, '0')} cut=${m.cut} fill=${m.fillArea} scale=${m.scale} minFont=${m.minFont}`)
+          rows.push(`${String(i + 1).padStart(2, '0')} cut=${m.cut} fill=${m.fillArea} scale=${m.scale} minFont=${m.minFont} contain=${m.contain}`)
           if (m.cut > GATE.cut) failures.push(`${id}: CUT ${m.cut}px (gate ≤ ${GATE.cut}px)`)
           if (m.fillArea <= fillGate) failures.push(`${id}: FILL ${m.fillArea} (gate > ${fillGate})`)
           if (m.scale < GATE.scale) failures.push(`${id}: SCALE ${m.scale} (gate ≥ ${GATE.scale})`)
           if (m.minFont * m.scale < GATE.minFontPx) failures.push(`${id}: MINFONT ${m.minFont}×${m.scale} < ${GATE.minFontPx}px`)
+          if (m.contain < GATE.containMin) failures.push(`${id}: CONTAIN ${m.contain}px clearance < ${GATE.containMin}px (texto encosta na borda de um painel interno — reserve faixa §6.19; clipa no Chrome real)`)
         }
         await page.keyboard.press('ArrowRight')
       }
