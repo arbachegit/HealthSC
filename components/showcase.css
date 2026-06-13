@@ -1475,6 +1475,13 @@
   color: var(--dh-text);
   font-weight: 500;
 }
+.dh-chips-reveal {
+  animation: dh-chips-fade-in 0.5s ease-out both;
+}
+@keyframes dh-chips-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 /* ──────────────────────────────────────────────────────────
    CENA 7 — FISIOLÓGICO
@@ -3920,13 +3927,13 @@
 
 .dh-aura-stage {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) 272px;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1.1fr) 290px;
+  gap: 12px;
   align-items: stretch;
 }
 .dh-aura-stage-compact {
-  grid-template-columns: minmax(0, 1.08fr) 250px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1.08fr) 268px;
+  align-items: stretch;
 }
 .dh-aura-stage-compact .dh-aura-panel {
   gap: 12px;
@@ -3953,17 +3960,17 @@
 .dh-aura-panel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 20px;
+  gap: 12px;
+  padding: 16px;
 }
 .dh-aura-script-live {
   gap: 14px;
 }
 .dh-aura-line {
   display: block;
-  min-height: 1.6em;
+  min-height: 1.4em;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--dh-text);
   font-weight: 500;
 }
@@ -3983,12 +3990,14 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
+  min-height: 0;
 }
 .dh-aura-side-card {
-  padding: 14px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
   animation: dh-card-float 7.2s ease-in-out infinite;
 }
@@ -4007,7 +4016,7 @@
 .dh-aura-side-line {
   position: relative;
   padding-left: 14px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--dh-text-soft);
 }
@@ -4426,6 +4435,7 @@
   .dh-aura-side-card,
   .dh-autoexam-guide { padding: 18px; }
   .dh-opening-metrics { grid-template-columns: 1fr; }
+  .dh-aura-side-line { font-size: 13px; }
 }
 
 /* ──────────────────────────────────────────────────────────

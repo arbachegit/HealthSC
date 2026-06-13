@@ -267,6 +267,7 @@ export const S4 = {
     lines: [
       'Oi. Eu sou a Aura, a médica virtual da IconsAI.',
       'Vou ouvir com calma, organizar o seu relato e destacar o que pode merecer atenção médica mais rápida.',
+      'Enquanto você fala, estou estruturando cada sintoma, cruzando com evidência clínica e identificando sinais de alerta em tempo real.',
       'No fim, você recebe um resumo clínico claro para seguir atendimento sem perder contexto.',
       'Tudo o que você disser fica protegido por criptografia ponta a ponta e segue as diretrizes da LGPD-Saúde.',
       'Pode começar quando quiser — estou aqui para ouvir.',
@@ -280,6 +281,7 @@ export const S4 = {
     lines: [
       'Olá. Eu sou a Aura, a médica virtual da IconsAI.',
       'Vou ouvir com calma, organizar o seu relato e destacar o que pode merecer atenção médica mais rápida.',
+      'Enquanto fala, estou a estruturar cada sintoma, a cruzar com evidência clínica e a identificar sinais de alarme em tempo real.',
       'No fim, recebe um resumo clínico claro para prosseguir o atendimento sem perder o contexto.',
       'Tudo o que disser fica protegido por encriptação ponta a ponta e segue as diretrizes do RGPD-Saúde.',
       'Pode começar quando quiser — estou aqui para o ouvir.',
@@ -293,6 +295,7 @@ export const S4 = {
     lines: [
       'Hi. I\'m Aura, the virtual physician from IconsAI.',
       'I\'ll listen carefully, organize your account, and flag what may deserve faster medical attention.',
+      'While you speak, I\'m structuring each symptom, cross-referencing clinical evidence, and identifying warning signs in real time.',
       'At the end, you get a clear clinical summary to continue care without losing context.',
       'Everything you share is protected by end-to-end encryption and follows HIPAA compliance standards.',
       'You can start whenever you\'re ready — I\'m here to listen.',
@@ -328,9 +331,9 @@ export const S6 = {
     kicker: 'Aura · escutou você', status: 'pergunta adaptativa · contexto emocional preservado',
     lines: [
       'Entendi. Você descreveu cefaleia pulsátil há 3 dias, piorando à tarde e sensível à luz.',
-      'Parece algo que está te tirando do eixo. Nessas crises você consegue continuar trabalhando ou precisa parar tudo e deitar?',
-      'Preciso entender o impacto real no seu dia a dia — isso muda a classificação de urgência.',
-      'Também vou perguntar sobre sono e hidratação, porque alteram o limiar de dor.',
+      'Parece algo que está te tirando do eixo. Normalmente nessas crises você consegue continuar trabalhando ou precisa parar tudo e deitar?',
+      'Preciso entender o impacto real no seu dia a dia — isso muda a classificação de urgência e o tipo de encaminhamento.',
+      'Também vou perguntar sobre sono, hidratação e tempo de tela, porque alteram o limiar de dor de forma significativa.',
     ],
     chipsKicker: 'resposta rápida', chips: ['Continuo, com dificuldade', 'Preciso parar e deitar', 'Depende da intensidade'],
     sideKicker1: 'sinais extraídos', side1: ['dor 6/10 com piora vespertina', 'fotossensibilidade presente', 'tela longa como gatilho provável', 'sem náusea ou aura visual'],
@@ -340,9 +343,9 @@ export const S6 = {
     kicker: 'Aura · ouviu-o', status: 'pergunta adaptativa · contexto emocional preservado',
     lines: [
       'Percebi. Descreveu cefaleia pulsátil há 3 dias, a piorar à tarde e sensível à luz.',
-      'Parece algo que o está a desequilibrar. Nessas crises consegue continuar a trabalhar ou precisa de parar tudo e deitar-se?',
-      'Preciso de perceber o impacto real no seu dia a dia — isso altera a classificação de urgência.',
-      'Também vou perguntar sobre sono e hidratação, porque alteram o limiar de dor.',
+      'Parece algo que o está a desequilibrar. Normalmente nessas crises consegue continuar a trabalhar ou precisa de parar tudo e deitar-se?',
+      'Preciso de perceber o impacto real no seu dia a dia — isso altera a classificação de urgência e o tipo de encaminhamento.',
+      'Também vou perguntar sobre sono, hidratação e tempo de ecrã, porque alteram o limiar de dor de forma significativa.',
     ],
     chipsKicker: 'resposta rápida', chips: ['Continuo, com dificuldade', 'Preciso de parar e deitar-me', 'Depende da intensidade'],
     sideKicker1: 'sinais extraídos', side1: ['dor 6/10 com agravamento vespertino', 'fotossensibilidade presente', 'ecrã prolongado como gatilho provável', 'sem náusea ou aura visual'],
@@ -352,9 +355,9 @@ export const S6 = {
     kicker: 'Aura · heard you', status: 'adaptive question · emotional context preserved',
     lines: [
       'Got it. You described a pulsating headache for 3 days, worse in the afternoon and sensitive to light.',
-      'It sounds like it\'s throwing you off. During these episodes, can you keep working or do you need to stop everything and lie down?',
-      'I need to understand the real impact on your daily life — that changes the urgency classification.',
-      'I\'ll also ask about sleep and hydration, as they affect the pain threshold.',
+      'It sounds like it\'s throwing you off. Normally during these episodes, can you keep working or do you need to stop everything and lie down?',
+      'I need to understand the real impact on your daily life — that changes the urgency classification and the referral type.',
+      'I\'ll also ask about sleep, hydration, and screen time, as they significantly affect the pain threshold.',
     ],
     chipsKicker: 'quick reply', chips: ['I keep going, with difficulty', 'I need to stop and lie down', 'Depends on the intensity'],
     sideKicker1: 'extracted signals', side1: ['pain 6/10 worsening in the afternoon', 'photosensitivity present', 'long screen time as likely trigger', 'no nausea or visual aura'],

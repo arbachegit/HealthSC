@@ -8,7 +8,7 @@
  * PALCO (entre header/footer) com scale-to-fit.
  */
 
-import { type CSSProperties, useState, useEffect, useRef } from 'react'
+import { type CSSProperties, useState, useEffect, useRef, useCallback } from 'react'
 import { SlideEngine, useLang, useSlide, type SlideDef } from './SlideEngine'
 import { MedIcon } from '@/components/MedIcon'
 import {
@@ -656,12 +656,14 @@ function RenderS2() {
 }
 
 /* ── AuraTypewriter: progressive text reveal with blinking cursor ────────── */
-function AuraTypewriter({ lines, slideIndex }: { lines: string[]; slideIndex: number }) {
+function AuraTypewriter({ lines, slideIndex, onDone }: { lines: string[]; slideIndex: number; onDone?: (done: boolean) => void }) {
   const { currentSlide } = useSlide()
   const [charCount, setCharCount] = useState(0)
   const startedRef = useRef(false)
   const totalChars = lines.reduce((sum, ln) => sum + ln.length, 0)
   const done = charCount >= totalChars
+
+  useEffect(() => { onDone?.(done) }, [done, onDone])
 
   useEffect(() => {
     if (currentSlide !== slideIndex) { startedRef.current = false; setCharCount(0); return }
@@ -936,6 +938,8 @@ function RenderS5() {
 function RenderS6() {
   const c = captionFor(6)
   const t = S6C[useLang()]
+  const [typingDone, setTypingDone] = useState(false)
+  const handleTypingDone = useCallback((d: boolean) => setTypingDone(d), [])
   return (
     <>
       <Scene index={6} url="health.iconsai.ai/aura-pergunta">
@@ -953,16 +957,18 @@ function RenderS6() {
               </div>
             </div>
             <div className="dh-aura-script dh-aura-script-live">
-              <AuraTypewriter lines={t.lines} slideIndex={6} />
+              <AuraTypewriter lines={t.lines} slideIndex={6} onDone={handleTypingDone} />
             </div>
-            <div className="dh-chips">
-              <div className="dh-chips-kicker">{t.chipsKicker}</div>
-              <div className="dh-chips-row">
-                {t.chips.map((ch) => (
-                  <span className="dh-chip" key={ch}>{ch}</span>
-                ))}
+            {typingDone && (
+              <div className="dh-chips dh-chips-reveal">
+                <div className="dh-chips-kicker">{t.chipsKicker}</div>
+                <div className="dh-chips-row">
+                  {t.chips.map((ch) => (
+                    <span className="dh-chip" key={ch}>{ch}</span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <aside className="dh-aura-side">
             <div className="dh-aura-side-card">
