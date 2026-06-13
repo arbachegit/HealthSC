@@ -4004,8 +4004,75 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  flex: 1;
+  /* §6.1: cards keep natural height; the .dh-aura-mic block (flex:1) fills the
+     gap between top and bottom card so the column has no dead space. */
+  flex: 0 0 auto;
   animation: dh-card-float 7.2s ease-in-out infinite;
+}
+
+/* ── Mic animation that fills the right-column gap (slides 05/07, §6.1) ── */
+.dh-aura-mic {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 185, 129, 0.16);
+  background: radial-gradient(ellipse 92% 70% at 50% 36%, rgba(16, 185, 129, 0.12), rgba(236, 253, 245, 0.45) 72%);
+}
+.dh-aura-mic-ring {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--dh-primary) 0%, var(--dh-primary-strong) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 8px 28px -8px rgba(16, 185, 129, 0.5);
+}
+.dh-aura-mic-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--dh-primary);
+  opacity: 0.4;
+  animation: dh-pulse-ring 1.8s ease-out infinite;
+}
+.dh-aura-mic-pulse-2 { animation-delay: -0.9s; }
+.dh-aura-mic-icon { width: 30px; height: 30px; position: relative; z-index: 2; }
+.dh-aura-mic-wave { display: flex; align-items: flex-end; gap: 3px; height: 36px; }
+.dh-aura-mic-wave span {
+  display: inline-block;
+  width: 3px;
+  height: 8px;
+  background: linear-gradient(180deg, var(--dh-primary), var(--dh-teal));
+  border-radius: 2px;
+  animation: dh-wave 1.2s ease-in-out infinite;
+}
+.dh-aura-mic-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--dh-primary-deep);
+  text-align: center;
+}
+
+/* ── Pills entering one-by-one on slide enter (§7 replay via suppression rule) ── */
+.dh-chip-stagger {
+  opacity: 0;
+  animation: dh-chip-in 0.5s var(--ease-out, ease-out) both;
+}
+@keyframes dh-chip-in {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: none; }
 }
 .dh-aura-side-card-soft {
   flex: 0 0 auto;
@@ -5955,8 +6022,10 @@
   .dh-vcursor { display: none; }
   .dh-btn-row { display: none; }
 
-  /* Slides 05/07 — Aura: segundo side-card sai */
+  /* Slides 05/07 — Aura: segundo side-card sai; mic é filler decorativo (§6.6,
+     não-essencial) — esconde no mobile para não roubar altura da coluna stacked */
   .dh-aura-side-card-soft { display: none; }
+  .dh-aura-mic { display: none; }
   .dh-aura-panel, .dh-aura-side-card { padding: 14px; }
 
   /* Tabelas — máx. 3 linhas de dados (header é o 1º filho) */

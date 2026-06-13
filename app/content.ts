@@ -260,6 +260,7 @@ export const S3 = {
 type S4 = {
   kicker: string; status: string; lines: string[]
   sideKicker1: string; side1: string[]; sideKicker2: string; chips: string[]
+  micLabel: string
 }
 export const S4 = {
   'pt-BR': {
@@ -270,11 +271,13 @@ export const S4 = {
       'Enquanto você fala, estou estruturando cada sintoma, cruzando com evidência clínica e identificando sinais de alerta em tempo real.',
       'No fim, você recebe um resumo clínico claro para seguir atendimento sem perder contexto.',
       'Tudo o que você disser fica protegido por criptografia ponta a ponta e segue as diretrizes da LGPD-Saúde.',
+      'Quanto mais natural for o seu relato, mais preciso fica o meu raciocínio clínico — fale no seu ritmo, sem se preocupar com termos.',
       'Pode começar quando quiser — estou aqui para ouvir.',
     ],
     sideKicker1: 'o que ela faz enquanto fala',
     side1: ['estruturando sintomas principais', 'detectando red flags no relato', 'preparando perguntas de follow-up', 'correlacionando com evidência médica'],
     sideKicker2: 'camadas do fluxo', chips: ['anamnese', 'evidência médica', 'laudo SOAP'],
+    micLabel: 'escuta ativa em tempo real',
   },
   'pt-PT': {
     kicker: 'Aura · Médica Virtual', status: 'voz ativa · escuta clínica empática',
@@ -284,11 +287,13 @@ export const S4 = {
       'Enquanto fala, estou a estruturar cada sintoma, a cruzar com evidência clínica e a identificar sinais de alarme em tempo real.',
       'No fim, recebe um resumo clínico claro para prosseguir o atendimento sem perder o contexto.',
       'Tudo o que disser fica protegido por encriptação ponta a ponta e segue as diretrizes do RGPD-Saúde.',
+      'Quanto mais natural for o seu relato, mais preciso fica o meu raciocínio clínico — fale ao seu ritmo, sem se preocupar com termos.',
       'Pode começar quando quiser — estou aqui para o ouvir.',
     ],
     sideKicker1: 'o que faz enquanto fala',
     side1: ['a estruturar os sintomas principais', 'a detetar sinais de alarme no relato', 'a preparar perguntas de seguimento', 'a correlacionar com evidência médica'],
     sideKicker2: 'camadas do fluxo', chips: ['anamnese', 'evidência médica', 'laudo SOAP'],
+    micLabel: 'escuta ativa em tempo real',
   },
   en: {
     kicker: 'Aura · Virtual Physician', status: 'voice active · empathetic clinical listening',
@@ -298,11 +303,13 @@ export const S4 = {
       'While you speak, I\'m structuring each symptom, cross-referencing clinical evidence, and identifying warning signs in real time.',
       'At the end, you get a clear clinical summary to continue care without losing context.',
       'Everything you share is protected by end-to-end encryption and follows HIPAA compliance standards.',
+      'The more natural your account, the sharper my clinical reasoning — speak at your own pace, no medical terms needed.',
       'You can start whenever you\'re ready — I\'m here to listen.',
     ],
     sideKicker1: 'what she does while you talk',
     side1: ['structuring the main symptoms', 'detecting red flags in the account', 'preparing follow-up questions', 'cross-referencing medical evidence'],
     sideKicker2: 'flow layers', chips: ['intake', 'medical evidence', 'SOAP report'],
+    micLabel: 'active real-time listening',
   },
 } satisfies L10n<S4>
 
@@ -325,6 +332,7 @@ export const S5 = {
 type S6 = {
   kicker: string; status: string; lines: string[]; chipsKicker: string; chips: string[]
   sideKicker1: string; side1: string[]; sideKicker2: string; side2: string[]
+  micLabel: string
 }
 export const S6 = {
   'pt-BR': {
@@ -338,6 +346,7 @@ export const S6 = {
     chipsKicker: 'resposta rápida', chips: ['Continuo, com dificuldade', 'Preciso parar e deitar', 'Depende da intensidade'],
     sideKicker1: 'sinais extraídos', side1: ['dor 6/10 com piora vespertina', 'fotossensibilidade presente', 'tela longa como gatilho provável', 'sem náusea ou aura visual'],
     sideKicker2: 'próximo objetivo', side2: ['medir impacto funcional e sono', 'decidir se sobe urgência clínica', 'avaliar padrão de hidratação'],
+    micLabel: 'ouvindo e ajustando a pergunta',
   },
   'pt-PT': {
     kicker: 'Aura · ouviu-o', status: 'pergunta adaptativa · contexto emocional preservado',
@@ -350,6 +359,7 @@ export const S6 = {
     chipsKicker: 'resposta rápida', chips: ['Continuo, com dificuldade', 'Preciso de parar e deitar-me', 'Depende da intensidade'],
     sideKicker1: 'sinais extraídos', side1: ['dor 6/10 com agravamento vespertino', 'fotossensibilidade presente', 'ecrã prolongado como gatilho provável', 'sem náusea ou aura visual'],
     sideKicker2: 'próximo objetivo', side2: ['medir impacto funcional e sono', 'decidir se aumenta a urgência clínica', 'avaliar padrão de hidratação'],
+    micLabel: 'a ouvir e a ajustar a pergunta',
   },
   en: {
     kicker: 'Aura · heard you', status: 'adaptive question · emotional context preserved',
@@ -362,6 +372,7 @@ export const S6 = {
     chipsKicker: 'quick reply', chips: ['I keep going, with difficulty', 'I need to stop and lie down', 'Depends on the intensity'],
     sideKicker1: 'extracted signals', side1: ['pain 6/10 worsening in the afternoon', 'photosensitivity present', 'long screen time as likely trigger', 'no nausea or visual aura'],
     sideKicker2: 'next objective', side2: ['measure functional impact and sleep', 'decide whether to raise clinical urgency', 'assess hydration pattern'],
+    micLabel: 'listening and adapting',
   },
 } satisfies L10n<S6>
 

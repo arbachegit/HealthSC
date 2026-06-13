@@ -483,6 +483,30 @@ function ExplainAside({ index }: { index: number }) {
   )
 }
 
+/* AuraMic — listening-mic animation that fills the right-column gap on the
+   Aura slides (05/07). Pure CSS pulse + waveform; replays via the data-active
+   suppression rule (§7). Fills the dead space the two side cards leave (§6.1). */
+function AuraMic({ label }: { label: string }) {
+  return (
+    <div className="dh-aura-mic" aria-hidden="true">
+      <div className="dh-aura-mic-ring">
+        <span className="dh-aura-mic-pulse" />
+        <span className="dh-aura-mic-pulse dh-aura-mic-pulse-2" />
+        <svg className="dh-aura-mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="9" y="3" width="6" height="12" rx="3" />
+          <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+        </svg>
+      </div>
+      <div className="dh-aura-mic-wave">
+        {Array.from({ length: 18 }).map((_, i) => (
+          <span key={i} style={{ animationDelay: `${(i % 9) * 0.09}s` }} />
+        ))}
+      </div>
+      <div className="dh-aura-mic-label">{label}</div>
+    </div>
+  )
+}
+
 /* ═════════════════════════════════════════════════════════════════════
    SCENE RENDERERS
    ═════════════════════════════════════════════════════════════════════ */
@@ -873,11 +897,12 @@ function RenderS4() {
                 <div className="dh-aura-side-line" key={l}>{l}</div>
               ))}
             </div>
+            <AuraMic label={t.micLabel} />
             <div className="dh-aura-side-card dh-aura-side-card-soft">
               <span className="dh-aura-side-kicker">{t.sideKicker2}</span>
               <div className="dh-aura-tags">
-                {t.chips.map((ch) => (
-                  <span className="dh-chip" key={ch}>{ch}</span>
+                {t.chips.map((ch, i) => (
+                  <span className="dh-chip dh-chip-stagger" style={{ animationDelay: `${0.4 + i * 0.3}s` }} key={ch}>{ch}</span>
                 ))}
               </div>
             </div>
@@ -977,6 +1002,7 @@ function RenderS6() {
                 <div className="dh-aura-side-line" key={l}>{l}</div>
               ))}
             </div>
+            <AuraMic label={t.micLabel} />
             <div className="dh-aura-side-card dh-aura-side-card-soft">
               <span className="dh-aura-side-kicker">{t.sideKicker2}</span>
               {t.side2.map((l) => (
