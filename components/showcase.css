@@ -4121,6 +4121,11 @@
 
 /* TOP — exam picker + virtual cursor */
 .dh-ae-pick { position: relative; flex: 0 0 auto; }
+/* FIX: .dh-exame-check-on/-active override the `animation` of .dh-exame-check,
+   so the entrance (dh-s8-card-in) that fades opacity 0->1 never runs — the base
+   opacity:0 stuck and the selected cards (Mama/Pele/Pulso) were invisible. The
+   pulse keyframes don't touch opacity, so a late opacity:1 here makes them show. */
+.dh-exame-check-on, .dh-exame-check-active { opacity: 1; }
 .dh-exame-check-active {
   border-color: var(--dh-primary) !important;
   background: rgba(16, 185, 129, 0.07) !important;
