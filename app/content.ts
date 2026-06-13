@@ -409,6 +409,9 @@ type S8 = {
   exams: { pict: MedIconKey; title: string; guia: string; selected?: boolean }[]
   guideKicker: string; guidePill: string; previewBadge: string; lesionLabel: string; lesion: string; lesionNote: string
   steps: string[]
+  // Pele · ABCDE guided self-exam (bottom-half animation)
+  bodyMapTitle: string; bodyMapNote: string; bodyRegions: string[]
+  abcdeTitle: string; abcde: { k: string; name: string; desc: string }[]
 }
 export const S8 = {
   'pt-BR': {
@@ -421,6 +424,16 @@ export const S8 = {
     ],
     guideKicker: 'guia ativo', guidePill: 'Pele · ABCDE', previewBadge: 'captura orientada', lesionLabel: 'lesão', lesion: '8 mm', lesionNote: 'borda irregular',
     steps: ['assimetria visível na metade direita', 'borda com serrilhado discreto', 'cor heterogênea em 2 tons', 'registrar foto e seguir para upload'],
+    bodyMapTitle: 'como examinar', bodyMapNote: 'Toda a pele, sob boa luz e com espelho — do couro cabeludo às plantas dos pés e entre os dedos.',
+    bodyRegions: ['couro cabeludo', 'rosto e pescoço', 'tronco e mamas', 'braços e mãos', 'pernas', 'pés e entre dedos', 'costas no espelho'],
+    abcdeTitle: 'regra ABCDE do melanoma',
+    abcde: [
+      { k: 'A', name: 'Assimetria', desc: 'metades diferentes' },
+      { k: 'B', name: 'Borda', desc: 'irregular, serrilhada' },
+      { k: 'C', name: 'Cor', desc: 'mais de um tom' },
+      { k: 'D', name: 'Diâmetro', desc: 'maior que 6 mm' },
+      { k: 'E', name: 'Evolução', desc: 'muda com o tempo' },
+    ],
   },
   'pt-PT': {
     kicker: 'biblioteca · auto-exames guiados', title: 'Quais quer fazer agora?', subtitle: 'Marque os auto-exames. Cada um traz guia visual passo a passo.',
@@ -432,6 +445,16 @@ export const S8 = {
     ],
     guideKicker: 'guia ativo', guidePill: 'Pele · ABCDE', previewBadge: 'captura orientada', lesionLabel: 'lesão', lesion: '8 mm', lesionNote: 'bordo irregular',
     steps: ['assimetria visível na metade direita', 'bordo com serrilhado discreto', 'cor heterogénea em 2 tons', 'registar foto e seguir para o carregamento'],
+    bodyMapTitle: 'como examinar', bodyMapNote: 'Toda a pele, sob boa luz e com espelho — do couro cabeludo às plantas dos pés e entre os dedos.',
+    bodyRegions: ['couro cabeludo', 'rosto e pescoço', 'tronco e mamas', 'braços e mãos', 'pernas', 'pés e entre dedos', 'costas no espelho'],
+    abcdeTitle: 'regra ABCDE do melanoma',
+    abcde: [
+      { k: 'A', name: 'Assimetria', desc: 'metades diferentes' },
+      { k: 'B', name: 'Bordo', desc: 'irregular, serrilhado' },
+      { k: 'C', name: 'Cor', desc: 'mais de um tom' },
+      { k: 'D', name: 'Diâmetro', desc: 'maior que 6 mm' },
+      { k: 'E', name: 'Evolução', desc: 'muda com o tempo' },
+    ],
   },
   en: {
     kicker: 'library · guided self-exams', title: 'Which ones now?', subtitle: 'Select the self-exams. Each comes with a step-by-step visual guide.',
@@ -443,6 +466,16 @@ export const S8 = {
     ],
     guideKicker: 'active guide', guidePill: 'Skin · ABCDE', previewBadge: 'guided capture', lesionLabel: 'lesion', lesion: '8 mm', lesionNote: 'irregular border',
     steps: ['visible asymmetry on the right half', 'subtly serrated border', 'heterogeneous color in 2 tones', 'capture photo and go to upload'],
+    bodyMapTitle: 'how to examine', bodyMapNote: 'All your skin, in good light with a mirror — scalp to soles and between the toes.',
+    bodyRegions: ['scalp', 'face and neck', 'trunk and breasts', 'arms and hands', 'legs', 'feet and between toes', 'back in mirror'],
+    abcdeTitle: 'melanoma ABCDE rule',
+    abcde: [
+      { k: 'A', name: 'Asymmetry', desc: 'halves differ' },
+      { k: 'B', name: 'Border', desc: 'irregular, notched' },
+      { k: 'C', name: 'Color', desc: 'more than one shade' },
+      { k: 'D', name: 'Diameter', desc: 'over 6 mm' },
+      { k: 'E', name: 'Evolving', desc: 'changes over time' },
+    ],
   },
 } satisfies L10n<S8>
 

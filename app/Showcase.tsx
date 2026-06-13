@@ -11,6 +11,7 @@
 import { type CSSProperties, useState, useEffect, useRef, useCallback } from 'react'
 import { SlideEngine, useLang, useSlide, type SlideDef } from './SlideEngine'
 import { MedIcon } from '@/components/MedIcon'
+import { BASE_PATH } from '@/components/config'
 import {
   UI, OPENING, STEPS, FECHO, EXPLAIN, S1 as S1C, S2 as S2C, S3 as S3C, S4 as S4C,
   S5 as S5C, S6 as S6C, S7 as S7C, S8 as S8C,
@@ -173,9 +174,9 @@ function Vital({ label, value, suffix, typeDelay }: { label: string; value: stri
   )
 }
 
-function ExameCheck({ pict, title, guia, selected }: { pict: import('@/components/MedIcon').MedIconKey; title: string; guia: string; selected?: boolean }) {
+function ExameCheck({ pict, title, guia, selected, active }: { pict: import('@/components/MedIcon').MedIconKey; title: string; guia: string; selected?: boolean; active?: boolean }) {
   return (
-    <label className={`dh-exame-check ${selected ? 'dh-exame-check-on' : ''}`}>
+    <label className={`dh-exame-check ${selected ? 'dh-exame-check-on' : ''} ${active ? 'dh-exame-check-active' : ''}`}>
       <span className={`dh-checkbox ${selected ? 'dh-checkbox-on' : ''}`} />
       <span className="dh-exame-check-pict"><MedIcon name={pict} size={28} /></span>
       <span className="dh-exame-check-body">
@@ -1089,6 +1090,106 @@ function RenderS7() {
   )
 }
 
+/* Skin self-exam (Pele · ABCDE) — bottom-half guide.
+   Body map uses a REAL human-body figure (Wikimedia, public domain) per the
+   SVGBody skill (no hand-drawn anatomy). The ABCDE lesion is a dermatology
+   teaching diagram (asymmetry/border/color/diameter), not organ anatomy. */
+const SKIN_DOTS = [
+  { top: '7%', left: '50%' },   // scalp
+  { top: '15%', left: '50%' },  // face/neck
+  { top: '30%', left: '50%' },  // trunk
+  { top: '40%', left: '78%' },  // arm/hand
+  { top: '63%', left: '43%' },  // legs
+  { top: '93%', left: '50%' },  // feet/soles
+  { top: '30%', left: '22%' },  // back (mirror)
+]
+
+function LesionDiagram() {
+  // ABCDE teaching diagram: irregular, asymmetric, variegated pigmented lesion.
+  return (
+    <svg className="dh-skin-lesion-svg" viewBox="0 0 200 200" aria-hidden="true">
+      <defs>
+        <radialGradient id="dhLesMain" cx="44%" cy="40%" r="62%">
+          <stop offset="0%" stopColor="#170c05" />
+          <stop offset="42%" stopColor="#3f2410" />
+          <stop offset="78%" stopColor="#6e421f" />
+          <stop offset="100%" stopColor="#8a5a30" />
+        </radialGradient>
+        <radialGradient id="dhLesDark" cx="64%" cy="62%" r="40%">
+          <stop offset="0%" stopColor="#0a0502" />
+          <stop offset="100%" stopColor="#0a0502" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="dhSkinBg" cx="50%" cy="44%" r="72%">
+          <stop offset="0%" stopColor="#fcefe0" />
+          <stop offset="100%" stopColor="#f0d6bd" />
+        </radialGradient>
+      </defs>
+      <rect x="0" y="0" width="200" height="200" rx="16" fill="url(#dhSkinBg)" />
+      {/* irregular, asymmetric lesion with notched border */}
+      <path className="dh-les-shape" d="M98 47 C124 44 143 60 148 84 C153 104 149 120 137 133 C150 141 152 158 136 162 C117 168 95 165 79 155 C58 161 43 147 47 127 C35 114 35 92 47 78 C56 60 74 49 98 47 Z" fill="url(#dhLesMain)" />
+      {/* color variegation lobes */}
+      <path d="M120 96 C134 100 136 120 124 130 C110 138 96 132 96 118 C96 104 108 93 120 96 Z" fill="url(#dhLesDark)" />
+      <ellipse cx="78" cy="92" rx="16" ry="13" fill="#241307" opacity="0.5" />
+      {/* B — border highlight that draws on loop */}
+      <path className="dh-les-border" d="M98 47 C124 44 143 60 148 84 C153 104 149 120 137 133 C150 141 152 158 136 162 C117 168 95 165 79 155 C58 161 43 147 47 127 C35 114 35 92 47 78 C56 60 74 49 98 47 Z" fill="none" stroke="#0ea5e9" strokeWidth="2.6" strokeLinecap="round" />
+      {/* A — asymmetry axis */}
+      <line className="dh-les-axis" x1="100" y1="34" x2="100" y2="176" stroke="#0f766e" strokeWidth="1.6" strokeDasharray="5 5" />
+      {/* D — diameter caliper */}
+      <g className="dh-les-cal" stroke="#0f766e" strokeWidth="1.6" fill="none">
+        <line x1="40" y1="186" x2="160" y2="186" />
+        <line x1="40" y1="181" x2="40" y2="191" />
+        <line x1="160" y1="181" x2="160" y2="191" />
+      </g>
+    </svg>
+  )
+}
+
+function SkinGuide({ t }: { t: (typeof S8C)['pt-BR'] }) {
+  return (
+    <div className="dh-skin">
+      <div className="dh-skin-head">
+        <span className="dh-skin-kicker">{t.guideKicker}</span>
+        <span className="dh-skin-pill">{t.guidePill}</span>
+      </div>
+      <div className="dh-skin-body">
+        {/* Body map — real figure + sequenced region scan */}
+        <div className="dh-skin-map">
+          <span className="dh-skin-sub">{t.bodyMapTitle}</span>
+          <div className="dh-skin-figure">
+            <div className="dh-skin-figure-pos">
+              <div className="dh-skin-figure-inner">
+                <img className="dh-skin-svg" src={`${BASE_PATH}/anatomy/body_silhouette.svg`} alt="" />
+                {SKIN_DOTS.map((d, i) => (
+                  <span key={i} className={`dh-skin-dot dh-skin-dot-${i + 1}`} style={{ top: d.top, left: d.left }} />
+                ))}
+              </div>
+            </div>
+          </div>
+          <p className="dh-skin-note">{t.bodyMapNote}</p>
+        </div>
+        {/* ABCDE — lesion diagram + criteria revealing in sequence */}
+        <div className="dh-skin-abcde">
+          <span className="dh-skin-sub">{t.abcdeTitle}</span>
+          <div className="dh-skin-abcde-row">
+            <div className="dh-skin-lesion">
+              <LesionDiagram />
+              <span className="dh-skin-lesion-tag">{t.lesionLabel} {t.lesion} · {t.lesionNote}</span>
+            </div>
+            <div className="dh-skin-criteria">
+              {t.abcde.map((a, i) => (
+                <div key={a.k} className={`dh-skin-crit dh-skin-crit-${i + 1}`}>
+                  <span className="dh-skin-crit-k">{a.k}</span>
+                  <span className="dh-skin-crit-text"><strong>{a.name}</strong>{a.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function RenderS8() {
   const c = captionFor(8)
   const t = S8C[useLang()]
@@ -1097,27 +1198,19 @@ function RenderS8() {
       <Scene index={8} url="health.iconsai.ai/auto-exames">
         <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
         <div className="dh-autoexam-stage">
-          <div className="dh-exames-check-grid">
-            {t.exams.map((e) => (
-              <ExameCheck key={e.title} pict={e.pict} title={e.title} guia={e.guia} selected={e.selected} />
-            ))}
-          </div>
-          <aside className="dh-autoexam-guide">
-            <div className="dh-autoexam-guide-head">
-              <span className="dh-autoexam-guide-kicker">{t.guideKicker}</span>
-              <span className="dh-autoexam-guide-pill">{t.guidePill}</span>
-            </div>
-            <div className="dh-autoexam-preview">
-              <div className="dh-autoexam-preview-badge">{t.previewBadge}</div>
-              <div className="dh-autoexam-preview-ring" />
-              <div className="dh-autoexam-preview-core">{t.lesionLabel} <strong>{t.lesion}</strong><span>{t.lesionNote}</span></div>
-            </div>
-            <div className="dh-autoexam-steps">
-              {t.steps.map((s, i) => (
-                <div className="dh-autoexam-step" key={s}><span>{i + 1}</span> {s}</div>
+          {/* TOP — exam cards (static); a virtual cursor picks Pele */}
+          <div className="dh-ae-pick">
+            <div className="dh-exames-check-grid">
+              {t.exams.map((e) => (
+                <ExameCheck key={e.title} pict={e.pict} title={e.title} guia={e.guia} selected={e.selected} active={e.pict === 'skin'} />
               ))}
             </div>
-          </aside>
+            <svg className="dh-ae-cursor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 3l14 8.5-6.2 1.8L9.6 19z" fill="#1f2937" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
+            </svg>
+          </div>
+          {/* BOTTOM — active guide for the picked exam */}
+          <SkinGuide t={t} />
         </div>
       </Scene>
       <SceneCaption index={8} title={c.title} desc={c.desc} />

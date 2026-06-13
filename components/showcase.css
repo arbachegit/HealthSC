@@ -4109,12 +4109,139 @@
   gap: 6px;
 }
 
+/* CENA 8 v2 — auto-exames: cards static (top) + Pele·ABCDE guide (bottom) */
 .dh-autoexam-stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) 290px;
-  gap: 16px;
-  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
 }
+
+/* TOP — exam picker + virtual cursor */
+.dh-ae-pick { position: relative; flex: 0 0 auto; }
+.dh-exame-check-active {
+  border-color: var(--dh-primary) !important;
+  background: rgba(16, 185, 129, 0.07) !important;
+  box-shadow: 0 0 0 2px var(--dh-primary), 0 14px 30px rgba(16, 185, 129, 0.18) !important;
+  animation: dh-ae-active-pulse 2.2s ease-in-out 1.6s infinite;
+}
+@keyframes dh-ae-active-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--dh-primary), 0 14px 30px rgba(16, 185, 129, 0.18); }
+  50% { box-shadow: 0 0 0 3px var(--dh-primary), 0 14px 34px rgba(16, 185, 129, 0.34); }
+}
+.dh-ae-cursor {
+  position: absolute; width: 22px; height: 22px; z-index: 12; pointer-events: none;
+  left: 62%; top: 27%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: dh-ae-cursor-move 2.3s var(--ease-out, ease-out) 0.2s both;
+}
+@keyframes dh-ae-cursor-move {
+  0%   { left: 86%; top: 92%; opacity: 0; transform: scale(1); }
+  16%  { opacity: 1; }
+  66%  { left: 62%; top: 27%; transform: scale(1); }
+  76%  { transform: scale(0.78); }
+  86%  { transform: scale(1); }
+  100% { left: 62%; top: 27%; opacity: 1; }
+}
+
+/* BOTTOM — skin (Pele·ABCDE) guide */
+.dh-skin {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 185, 129, 0.16);
+  background: linear-gradient(180deg, rgba(236, 253, 245, 0.7), rgba(255, 255, 255, 0.96));
+  box-shadow: 0 16px 38px rgba(15, 118, 110, 0.07);
+}
+.dh-skin-head { display: flex; align-items: center; gap: 10px; }
+.dh-skin-kicker {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.22em; color: var(--dh-primary-deep);
+}
+.dh-skin-pill {
+  padding: 4px 10px; border-radius: 999px; background: var(--dh-primary-soft);
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--dh-primary-deep);
+}
+.dh-skin-body { flex: 1; min-height: 0; display: flex; gap: 16px; }
+.dh-skin-sub {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--dh-text-soft);
+}
+
+/* body map — real figure + sequenced region scan */
+.dh-skin-map { flex: 0 0 30%; display: flex; flex-direction: column; gap: 6px; min-height: 0; }
+/* figure-pos is absolute so the 2200px-tall SVG never inflates the §6.18
+   height:auto measure (which would shrink the whole slide). */
+.dh-skin-figure { position: relative; flex: 1; min-height: 0; }
+.dh-skin-figure-pos { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; }
+.dh-skin-figure-inner { position: relative; height: 100%; display: inline-block; }
+.dh-skin-svg { display: block; height: 100%; width: auto; object-fit: contain; }
+.dh-skin-dot {
+  position: absolute; width: 13px; height: 13px; border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--dh-primary); box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.22);
+  opacity: 0; animation: dh-skin-dot-seq 7s ease-in-out infinite;
+}
+.dh-skin-dot-1 { animation-delay: 0.2s; }
+.dh-skin-dot-2 { animation-delay: 0.9s; }
+.dh-skin-dot-3 { animation-delay: 1.6s; }
+.dh-skin-dot-4 { animation-delay: 2.3s; }
+.dh-skin-dot-5 { animation-delay: 3.0s; }
+.dh-skin-dot-6 { animation-delay: 3.7s; }
+.dh-skin-dot-7 { animation-delay: 4.4s; }
+@keyframes dh-skin-dot-seq {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+  4%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  14%  { opacity: 1; }
+  24%  { opacity: 0.22; transform: translate(-50%, -50%) scale(0.85); }
+  100% { opacity: 0.22; }
+}
+.dh-skin-note { margin: 0; font-size: 13px; line-height: 1.4; color: var(--dh-text); }
+
+/* abcde — lesion + criteria */
+.dh-skin-abcde { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 6px; }
+.dh-skin-abcde-row { flex: 1; min-height: 0; display: flex; gap: 14px; align-items: stretch; }
+.dh-skin-lesion { flex: 0 0 40%; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 0; }
+.dh-skin-lesion-svg { flex: 1; min-height: 0; width: auto; max-width: 100%; max-height: 26vh; aspect-ratio: 1 / 1; }
+.dh-skin-lesion-tag {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #7c3f00;
+  background: rgba(124, 63, 0, 0.08); padding: 3px 8px; border-radius: 8px;
+}
+.dh-skin-criteria { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+.dh-skin-crit {
+  display: flex; align-items: center; gap: 10px; padding: 7px 10px;
+  border-radius: 10px; background: rgba(236, 253, 245, 0.7); border: 1px solid rgba(16, 185, 129, 0.14);
+  opacity: 0; animation: dh-skin-crit-in 0.5s var(--ease-out, ease-out) both;
+}
+.dh-skin-crit-1 { animation-delay: 1.0s; }
+.dh-skin-crit-2 { animation-delay: 1.3s; }
+.dh-skin-crit-3 { animation-delay: 1.6s; }
+.dh-skin-crit-4 { animation-delay: 1.9s; }
+.dh-skin-crit-5 { animation-delay: 2.2s; }
+@keyframes dh-skin-crit-in { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
+.dh-skin-crit-k {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--dh-primary); color: #fff; font-weight: 800; font-size: 14px;
+}
+.dh-skin-crit-text { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; font-size: 12px; color: var(--dh-text-soft); }
+.dh-skin-crit-text strong { font-size: 13px; color: var(--dh-text); }
+
+/* lesion overlay animations (ABCDE made visible) */
+.dh-les-border { stroke-dasharray: 360; stroke-dashoffset: 360; animation: dh-les-draw 4.5s ease-in-out 1.2s infinite; }
+@keyframes dh-les-draw {
+  0% { stroke-dashoffset: 360; opacity: 0.9; }
+  45% { stroke-dashoffset: 0; opacity: 1; }
+  75% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.35; }
+}
+.dh-les-axis { animation: dh-les-axis-fade 4.5s ease 0.6s infinite; }
+@keyframes dh-les-axis-fade { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.85; } }
+
+/* legacy guide (unused after v2) — kept harmless */
 .dh-autoexam-guide {
   display: flex;
   flex-direction: column;
