@@ -4155,9 +4155,11 @@
 .dh-skin {
   flex: 1; min-height: 0;
   display: flex; flex-direction: column; gap: 9px;
-  /* extra bottom padding = guaranteed clearance so the rounded bottom border
-     never clips the last criterion / note (§6.0 zero-overlap, §6.17) */
-  padding: 12px 18px 20px;
+  /* The §6.18 fit fills the palco exactly, so the bottommost content (the note,
+     pinned to the stretched map column's base) always lands at the content-box
+     edge — only this padding-bottom separates it from the rounded border. Make
+     it generous so real-Chrome font/wrap variance can't punch through (§6.0/§6.17). */
+  padding: 12px 18px 28px;
   border-radius: 18px;
   border: 1px solid rgba(16, 185, 129, 0.16);
   background: linear-gradient(180deg, rgba(236, 253, 245, 0.7), rgba(255, 255, 255, 0.96));
@@ -4218,11 +4220,16 @@
   background: rgba(124, 63, 0, 0.08); padding: 3px 8px; border-radius: 8px;
 }
 .dh-skin-criteria { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 5px; justify-content: center; }
+/* single-line cards — short by construction so font/wrap variance can't push
+   the last criterion past the guide border (the recurring overlap, §6.0/§6.17) */
 .dh-skin-crit {
-  display: flex; align-items: center; gap: 10px; padding: 6px 10px;
-  border-radius: 10px; background: rgba(236, 253, 245, 0.7); border: 1px solid rgba(16, 185, 129, 0.14);
+  display: flex; align-items: center; gap: 9px; padding: 5px 10px;
+  border-radius: 9px; background: rgba(236, 253, 245, 0.7); border: 1px solid rgba(16, 185, 129, 0.14);
+  white-space: nowrap; min-width: 0;
   opacity: 0; animation: dh-skin-crit-in 0.5s var(--ease-out, ease-out) both;
 }
+.dh-skin-crit-name { flex: 0 0 auto; font-size: 13px; font-weight: 700; color: var(--dh-text); }
+.dh-skin-crit-desc { flex: 1; min-width: 0; font-size: 12px; color: var(--dh-text-soft); overflow: hidden; text-overflow: ellipsis; }
 .dh-skin-crit-1 { animation-delay: 1.0s; }
 .dh-skin-crit-2 { animation-delay: 1.3s; }
 .dh-skin-crit-3 { animation-delay: 1.6s; }
@@ -4234,8 +4241,6 @@
   display: inline-flex; align-items: center; justify-content: center;
   background: var(--dh-primary); color: #fff; font-weight: 800; font-size: 13px;
 }
-.dh-skin-crit-text { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; font-size: 12px; color: var(--dh-text-soft); }
-.dh-skin-crit-text strong { font-size: 13px; color: var(--dh-text); }
 
 /* lesion overlay animations (ABCDE made visible) */
 .dh-les-border { stroke-dasharray: 360; stroke-dashoffset: 360; animation: dh-les-draw 4.5s ease-in-out 1.2s infinite; }

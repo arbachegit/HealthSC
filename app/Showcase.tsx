@@ -1179,7 +1179,8 @@ function SkinGuide({ t }: { t: (typeof S8C)['pt-BR'] }) {
               {t.abcde.map((a, i) => (
                 <div key={a.k} className={`dh-skin-crit dh-skin-crit-${i + 1}`}>
                   <span className="dh-skin-crit-k">{a.k}</span>
-                  <span className="dh-skin-crit-text"><strong>{a.name}</strong>{a.desc}</span>
+                  <strong className="dh-skin-crit-name">{a.name}</strong>
+                  <span className="dh-skin-crit-desc">{a.desc}</span>
                 </div>
               ))}
             </div>

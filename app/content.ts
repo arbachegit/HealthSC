@@ -424,7 +424,7 @@ export const S8 = {
     ],
     guideKicker: 'guia ativo', guidePill: 'Pele · ABCDE', previewBadge: 'captura orientada', lesionLabel: 'lesão', lesion: '8 mm', lesionNote: 'borda irregular',
     steps: ['assimetria visível na metade direita', 'borda com serrilhado discreto', 'cor heterogênea em 2 tons', 'registrar foto e seguir para upload'],
-    bodyMapTitle: 'como examinar', bodyMapNote: 'Toda a pele, sob boa luz e com espelho — do couro cabeludo às plantas dos pés e entre os dedos.',
+    bodyMapTitle: 'como examinar', bodyMapNote: 'Toda a pele, com espelho — do couro cabeludo às solas dos pés.',
     bodyRegions: ['couro cabeludo', 'rosto e pescoço', 'tronco e mamas', 'braços e mãos', 'pernas', 'pés e entre dedos', 'costas no espelho'],
     abcdeTitle: 'regra ABCDE do melanoma',
     abcde: [
@@ -445,7 +445,7 @@ export const S8 = {
     ],
     guideKicker: 'guia ativo', guidePill: 'Pele · ABCDE', previewBadge: 'captura orientada', lesionLabel: 'lesão', lesion: '8 mm', lesionNote: 'bordo irregular',
     steps: ['assimetria visível na metade direita', 'bordo com serrilhado discreto', 'cor heterogénea em 2 tons', 'registar foto e seguir para o carregamento'],
-    bodyMapTitle: 'como examinar', bodyMapNote: 'Toda a pele, sob boa luz e com espelho — do couro cabeludo às plantas dos pés e entre os dedos.',
+    bodyMapTitle: 'como examinar', bodyMapNote: 'Toda a pele, com espelho — do couro cabeludo às plantas dos pés.',
     bodyRegions: ['couro cabeludo', 'rosto e pescoço', 'tronco e mamas', 'braços e mãos', 'pernas', 'pés e entre dedos', 'costas no espelho'],
     abcdeTitle: 'regra ABCDE do melanoma',
     abcde: [
@@ -466,7 +466,7 @@ export const S8 = {
     ],
     guideKicker: 'active guide', guidePill: 'Skin · ABCDE', previewBadge: 'guided capture', lesionLabel: 'lesion', lesion: '8 mm', lesionNote: 'irregular border',
     steps: ['visible asymmetry on the right half', 'subtly serrated border', 'heterogeneous color in 2 tones', 'capture photo and go to upload'],
-    bodyMapTitle: 'how to examine', bodyMapNote: 'All your skin, in good light with a mirror — scalp to soles and between the toes.',
+    bodyMapTitle: 'how to examine', bodyMapNote: 'All your skin, with a mirror — scalp to soles.',
     bodyRegions: ['scalp', 'face and neck', 'trunk and breasts', 'arms and hands', 'legs', 'feet and between toes', 'back in mirror'],
     abcdeTitle: 'melanoma ABCDE rule',
     abcde: [
