@@ -254,9 +254,11 @@ function FatBar({ label, prev, real, prevK, realK, pending }: { label: string; p
     <div className="dh-fat-bar">
       <div className="dh-fat-bar-pair">
         <span className="dh-fat-bar-col dh-fat-bar-col-prev" style={{ height: `${prev}%` }}>
+          <span className="dh-fat-bar-fill" />
           <span className="dh-fat-bar-num">{prevK}</span>
         </span>
         <span className={`dh-fat-bar-col dh-fat-bar-col-real ${pending ? 'dh-fat-bar-col-pending' : ''}`} style={{ height: `${real}%` }}>
+          {!pending && <span className="dh-fat-bar-fill" />}
           {!pending && <span className="dh-fat-bar-num">{realK}</span>}
           {pending && <span className="dh-fat-bar-pending-label">{u.previsto}</span>}
         </span>

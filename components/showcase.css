@@ -2685,18 +2685,25 @@
 }
 .dh-fat-bar-col {
   flex: 1;
-  border-radius: 6px 6px 0 0;
-  position: relative;
+  position: relative;          /* TRACK — height set by data; NOT scaled, so the number never distorts */
   display: flex;
   justify-content: center;
   min-height: 4px;
-  transition: height 0.4s;
 }
-.dh-fat-bar-col-prev { background: var(--dh-primary-soft); border: 1px solid var(--dh-primary); }
-.dh-fat-bar-col-real { background: linear-gradient(180deg, var(--dh-primary), var(--dh-primary-strong)); }
+/* The visible bar — only THIS scales (scaleY); the number lives in the track above it */
+.dh-fat-bar-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px 6px 0 0;
+  transform-origin: bottom center;
+  transform: scaleY(0);
+}
+.dh-fat-bar-col-prev .dh-fat-bar-fill { background: var(--dh-primary-soft); border: 1px solid var(--dh-primary); }
+.dh-fat-bar-col-real .dh-fat-bar-fill { background: linear-gradient(180deg, var(--dh-primary), var(--dh-primary-strong)); }
 .dh-fat-bar-col-pending {
   background: repeating-linear-gradient(45deg, var(--dh-amber-soft), var(--dh-amber-soft) 4px, #fff 4px, #fff 8px);
   border: 1px dashed var(--dh-amber);
+  border-radius: 6px 6px 0 0;
 }
 .dh-fat-bar-num {
   position: absolute;
@@ -5553,27 +5560,39 @@
    S14 — FATURAMENTO (bar chart grow + pending pulse + stat fade)
    ────────────────────────────────────────────────────────── */
 
-/* Bar grow from bottom */
+/* Bar grow from bottom — only the inner fill scales, so the number never distorts */
 @keyframes dh-fat-bar-grow {
   0%   { transform: scaleY(0); }
   100% { transform: scaleY(1); }
 }
 
-.dh-fat-bar-col-prev,
-.dh-fat-bar-col-real {
-  transform-origin: bottom;
-  animation: dh-fat-bar-grow 10s both;
+.dh-fat-bar-fill {
+  animation: dh-fat-bar-grow 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+/* The number fades in as its bar finishes filling (it sits in the un-scaled track) */
+.dh-fat-bar-num {
+  opacity: 0;
+  animation: dh-fat-num-in 0.35s ease both;
+}
+@keyframes dh-fat-num-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Stagger columns: each .dh-fat-bar is a column group with 2 cols inside .dh-fat-bar-pair */
-.dh-fat-bar:nth-child(1) .dh-fat-bar-col-prev { animation-delay: 0s; }
-.dh-fat-bar:nth-child(1) .dh-fat-bar-col-real { animation-delay: 0.2s; }
-.dh-fat-bar:nth-child(2) .dh-fat-bar-col-prev { animation-delay: 0.4s; }
-.dh-fat-bar:nth-child(2) .dh-fat-bar-col-real { animation-delay: 0.6s; }
-.dh-fat-bar:nth-child(3) .dh-fat-bar-col-prev { animation-delay: 0.8s; }
-.dh-fat-bar:nth-child(3) .dh-fat-bar-col-real { animation-delay: 1.0s; }
-.dh-fat-bar:nth-child(4) .dh-fat-bar-col-prev { animation-delay: 1.2s; }
-.dh-fat-bar:nth-child(4) .dh-fat-bar-col-real { animation-delay: 1.4s; }
+.dh-fat-bar:nth-child(1) .dh-fat-bar-col-prev .dh-fat-bar-fill { animation-delay: 0s; }
+.dh-fat-bar:nth-child(1) .dh-fat-bar-col-prev .dh-fat-bar-num { animation-delay: 0.55s; }
+.dh-fat-bar:nth-child(1) .dh-fat-bar-col-real .dh-fat-bar-fill { animation-delay: 0.2s; }
+.dh-fat-bar:nth-child(1) .dh-fat-bar-col-real .dh-fat-bar-num { animation-delay: 0.75s; }
+.dh-fat-bar:nth-child(2) .dh-fat-bar-col-prev .dh-fat-bar-fill { animation-delay: 0.4s; }
+.dh-fat-bar:nth-child(2) .dh-fat-bar-col-prev .dh-fat-bar-num { animation-delay: 0.95s; }
+.dh-fat-bar:nth-child(2) .dh-fat-bar-col-real .dh-fat-bar-fill { animation-delay: 0.6s; }
+.dh-fat-bar:nth-child(2) .dh-fat-bar-col-real .dh-fat-bar-num { animation-delay: 1.15s; }
+.dh-fat-bar:nth-child(3) .dh-fat-bar-col-prev .dh-fat-bar-fill { animation-delay: 0.8s; }
+.dh-fat-bar:nth-child(3) .dh-fat-bar-col-prev .dh-fat-bar-num { animation-delay: 1.35s; }
+.dh-fat-bar:nth-child(3) .dh-fat-bar-col-real .dh-fat-bar-fill { animation-delay: 1.0s; }
+.dh-fat-bar:nth-child(3) .dh-fat-bar-col-real .dh-fat-bar-num { animation-delay: 1.55s; }
+.dh-fat-bar:nth-child(4) .dh-fat-bar-col-prev .dh-fat-bar-fill { animation-delay: 1.2s; }
+.dh-fat-bar:nth-child(4) .dh-fat-bar-col-prev .dh-fat-bar-num { animation-delay: 1.75s; }
+.dh-fat-bar:nth-child(4) .dh-fat-bar-col-real .dh-fat-bar-fill { animation-delay: 1.4s; }
+.dh-fat-bar:nth-child(4) .dh-fat-bar-col-real .dh-fat-bar-num { animation-delay: 1.95s; }
 
 /* Pulsing dashed outline for pending bars */
 @keyframes dh-fat-pending-pulse {
