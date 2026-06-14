@@ -619,10 +619,10 @@ export const S12 = {
   'pt-BR': {
     stampKicker: 'laudo pronto', stampMeta: 'Token público · 15/05/2026 14:32', selo: 'LGPD-Saúde · ANS',
     soap: [
-      { letter: 'S', title: 'Subjetivo', text: 'Cefaleia pulsátil há 3 dias, piora à tarde, sensibilidade à luz. Dor 6/10.', reveal: 'dh-reveal-s' },
-      { letter: 'O', title: 'Objetivo', text: 'PA 128/82 · FC 74 · IMC 23.5 · hemograma normal · auto-relato 6/10.', reveal: 'dh-reveal-o' },
-      { letter: 'A', title: 'Avaliação', text: 'Cefaleia tensional + fadiga visual digital. DD: enxaqueca sem aura.', reveal: 'dh-reveal-a' },
-      { letter: 'P', title: 'Plano', text: 'Higiene visual (20-20-20). Reavaliar PA em 7 dias. Encaminhar se persistir.', reveal: 'dh-reveal-p' },
+      { letter: 'S', title: 'Subjetivo', text: 'Cefaleia pulsátil há 3 dias, piora à tarde após horas de tela. Sensibilidade à luz e tensão na nuca. Dor 6/10, sem náusea, febre ou aura. Sono irregular, ~5h por noite.', reveal: 'dh-reveal-s' },
+      { letter: 'O', title: 'Objetivo', text: 'PA 128/82 mmHg · FC 74 bpm · Tax 36,5 °C · IMC 23.5 · SpO2 98%. Hemograma e glicemia normais. Exame neurológico e fundoscopia sem alterações.', reveal: 'dh-reveal-o' },
+      { letter: 'A', title: 'Avaliação', text: 'Cefaleia tensional episódica + fadiga visual digital (CID G44.2). Diagnóstico diferencial: enxaqueca sem aura, afastada pela ausência de pródromo. Sem sinais de alerta.', reveal: 'dh-reveal-a' },
+      { letter: 'P', title: 'Plano', text: 'Higiene visual 20-20-20 e pausas a cada 50 min. Hidratação e correção postural. Analgesia simples se dor >7/10. Reavaliar PA e cefaleia em 7 dias; neurologia se persistir 2 semanas.', reveal: 'dh-reveal-p' },
     ],
     agendaTitle: 'Agenda organizada', cal: [{ label: '14h', full: true }, { label: '15h', full: true }, { label: '16h', full: false }, { label: '17h', full: true }, { label: '18h', full: false }],
     stockTitle: 'Estoque · auto-restock', stock: [{ label: 'Dipirona', pct: '74%', warn: false }, { label: 'Luvas P', pct: '22% ↻', warn: true, restock: true }],
@@ -631,10 +631,10 @@ export const S12 = {
   'pt-PT': {
     stampKicker: 'laudo pronto', stampMeta: 'Ligação pública · 15/05/2026 14:32', selo: 'RGPD · SNS',
     soap: [
-      { letter: 'S', title: 'Subjetivo', text: 'Cefaleia pulsátil há 3 dias, piora à tarde, sensibilidade à luz. Dor 6/10.', reveal: 'dh-reveal-s' },
-      { letter: 'O', title: 'Objetivo', text: 'TA 128/82 · FC 74 · IMC 23.5 · hemograma normal · autorrelato 6/10.', reveal: 'dh-reveal-o' },
-      { letter: 'A', title: 'Avaliação', text: 'Cefaleia de tensão + fadiga visual digital. DD: enxaqueca sem aura.', reveal: 'dh-reveal-a' },
-      { letter: 'P', title: 'Plano', text: 'Higiene visual (20-20-20). Reavaliar TA em 7 dias. Encaminhar se persistir.', reveal: 'dh-reveal-p' },
+      { letter: 'S', title: 'Subjetivo', text: 'Cefaleia pulsátil há 3 dias, agrava à tarde após horas de ecrã. Sensibilidade à luz e tensão na nuca. Dor 6/10, sem náusea, febre ou aura. Sono irregular, ~5h por noite.', reveal: 'dh-reveal-s' },
+      { letter: 'O', title: 'Objetivo', text: 'TA 128/82 mmHg · FC 74 bpm · Tax 36,5 °C · IMC 23.5 · SpO2 98%. Hemograma e glicemia normais. Exame neurológico e fundoscopia sem alterações.', reveal: 'dh-reveal-o' },
+      { letter: 'A', title: 'Avaliação', text: 'Cefaleia de tensão episódica + fadiga visual digital (CID G44.2). Diagnóstico diferencial: enxaqueca sem aura, afastada pela ausência de pródromo. Sem sinais de alerta.', reveal: 'dh-reveal-a' },
+      { letter: 'P', title: 'Plano', text: 'Higiene visual 20-20-20 e pausas a cada 50 min. Hidratação e correção postural. Analgesia simples se dor >7/10. Reavaliar TA e cefaleia em 7 dias; neurologia se persistir 2 semanas.', reveal: 'dh-reveal-p' },
     ],
     agendaTitle: 'Agenda organizada', cal: [{ label: '14h', full: true }, { label: '15h', full: true }, { label: '16h', full: false }, { label: '17h', full: true }, { label: '18h', full: false }],
     stockTitle: 'Stock · reposição automática', stock: [{ label: 'Paracetamol', pct: '74%', warn: false }, { label: 'Luvas P', pct: '22% ↻', warn: true, restock: true }],
@@ -643,10 +643,10 @@ export const S12 = {
   en: {
     stampKicker: 'report ready', stampMeta: 'Public token · 05/15/2026 2:32 p.m.', selo: 'HIPAA',
     soap: [
-      { letter: 'S', title: 'Subjective', text: 'Pulsating headache for 3 days, worse in the afternoon, light sensitivity. Pain 6/10.', reveal: 'dh-reveal-s' },
-      { letter: 'O', title: 'Objective', text: 'BP 128/82 · HR 74 · BMI 23.5 · normal CBC · self-report 6/10.', reveal: 'dh-reveal-o' },
-      { letter: 'A', title: 'Assessment', text: 'Tension headache + digital eye strain. DDx: migraine without aura.', reveal: 'dh-reveal-a' },
-      { letter: 'P', title: 'Plan', text: 'Visual hygiene (20-20-20). Recheck BP in 7 days. Refer if it persists.', reveal: 'dh-reveal-p' },
+      { letter: 'S', title: 'Subjective', text: 'Pulsating headache for 3 days, worse in the afternoon after screen hours. Light sensitivity and neck tension. Pain 6/10, no nausea, fever or aura. Irregular sleep, ~5h per night.', reveal: 'dh-reveal-s' },
+      { letter: 'O', title: 'Objective', text: 'BP 128/82 mmHg · HR 74 bpm · Temp 97.7 °F · BMI 23.5 · SpO2 98%. Normal CBC and glucose. Neurological exam and fundoscopy unremarkable.', reveal: 'dh-reveal-o' },
+      { letter: 'A', title: 'Assessment', text: 'Episodic tension headache + digital eye strain (ICD G44.2). Differential: migraine without aura, ruled out by absence of prodrome. No red-flag signs.', reveal: 'dh-reveal-a' },
+      { letter: 'P', title: 'Plan', text: 'Visual hygiene 20-20-20, breaks every 50 min. Hydration and posture correction. Simple analgesia if pain >7/10. Recheck BP and headache in 7 days; neurology if it persists 2 weeks.', reveal: 'dh-reveal-p' },
     ],
     agendaTitle: 'Schedule organized', cal: [{ label: '2pm', full: true }, { label: '3pm', full: true }, { label: '4pm', full: false }, { label: '5pm', full: true }, { label: '6pm', full: false }],
     stockTitle: 'Inventory · auto-restock', stock: [{ label: 'Acetaminophen', pct: '74%', warn: false }, { label: 'Gloves S', pct: '22% ↻', warn: true, restock: true }],

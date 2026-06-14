@@ -206,26 +206,29 @@ function MedCard({ nome, classe, selected, dose, freq }: { nome: string; classe:
   )
 }
 
-/* ── SoapWalkthrough: spotlights the 4 SOAP cards one at a time — each EXPANDS to
-   reveal its example, holds, then COLLAPSES as the next card takes over, looping
-   S→O→A→P. Gated on currentSlide so it replays fresh on entry (§7); timing via
-   performance.now + explicit state (§1/§9), never getAnimations heuristics. ── */
+/* ── SoapWalkthrough: opens the 4 SOAP cards ONE BY ONE and KEEPS them open so the
+   user can read each — S, then O, then A, then P, accumulating until all four are
+   readable. Starts only AFTER the bottom gestão panels finish their entrance
+   (SOAP_HOLD_MS). Gated on currentSlide so it replays fresh on entry (§7); timing
+   via performance.now + explicit state (§1/§9), never getAnimations heuristics. ── */
+const SOAP_HOLD_MS = 1900 // wait for the bottom panels (gestão) to open + animate first
+const SOAP_STEP_MS = 700 // gap between each card opening
 function SoapWalkthrough({ slideIndex, soap }: { slideIndex: number; soap: { letter: string; title: string; text: string }[] }) {
   const { currentSlide } = useSlide()
-  const [active, setActive] = useState(0)
+  const [openCount, setOpenCount] = useState(0)
   const startedRef = useRef(false)
   useEffect(() => {
-    if (currentSlide !== slideIndex) { startedRef.current = false; setActive(0); return }
+    if (currentSlide !== slideIndex) { startedRef.current = false; setOpenCount(0); return }
     if (startedRef.current) return
     startedRef.current = true
-    const STEP_MS = 2300
     const t0 = performance.now()
     let raf = 0
     let last = -1
     const tick = (now: number) => {
-      const i = Math.floor((now - t0) / STEP_MS) % soap.length
-      if (i !== last) { last = i; setActive(i) }
-      raf = requestAnimationFrame(tick)
+      const e = now - t0 - SOAP_HOLD_MS
+      const n = e < 0 ? 0 : Math.min(soap.length, 1 + Math.floor(e / SOAP_STEP_MS))
+      if (n !== last) { last = n; setOpenCount(n) }
+      if (n < soap.length) raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
@@ -233,7 +236,7 @@ function SoapWalkthrough({ slideIndex, soap }: { slideIndex: number; soap: { let
   return (
     <div className="dh-laudo-soap">
       {soap.map((s, i) => (
-        <div key={s.letter} className="dh-soap-row" data-active={i === active}>
+        <div key={s.letter} className="dh-soap-row" data-active={i < openCount}>
           <div className="dh-soap-letter">{s.letter}</div>
           <div className="dh-soap-body">
             <div className="dh-soap-title">{s.title}</div>
