@@ -1975,6 +1975,11 @@
   grid-template-columns: 1.15fr 0.85fr;
   gap: 16px;
   align-items: stretch;
+  /* §6.20 safety strip: a bottom padding the §6.18 fit INCLUDES in its measure,
+     so BOTH columns' bottommost elements (compose, last sidebar card) clear the
+     palco edge by this much after scaling — a flex:1 column otherwise pushes its
+     last card flush against the slide-content bottom and real Chrome clips it. */
+  padding-bottom: 26px;
 }
 .dh-chat-main {
   display: flex;
@@ -3937,6 +3942,9 @@
      explanation column stops at ~55% height. */
   flex: 1;
   min-height: 0;
+  /* §6.20 safety strip: the flex:1 sidebar pushes its last card flush against
+     the palco edge; reserve a bottom strip the §6.18 fit preserves after scaling. */
+  padding-bottom: 22px;
 }
 .dh-aura-stage-compact {
   grid-template-columns: minmax(0, 1.08fr) 268px;

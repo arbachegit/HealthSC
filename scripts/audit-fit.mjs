@@ -14,7 +14,7 @@ const VIEWPORTS = [
   { w: 1440, h: 800, kind: 'desktop' }, { w: 1280, h: 620, kind: 'desktop' }, { w: 1280, h: 560, kind: 'desktop' },
   { w: 390, h: 844, kind: 'mobile' }, { w: 390, h: 740, kind: 'mobile' }, { w: 390, h: 667, kind: 'mobile' },
 ]
-const GATE = { cut: 2, fillDesktop: 0.75, fillMobile: 0.70, scale: 0.70, minFontPx: 8, containMin: 18 }
+const GATE = { cut: 2, fillDesktop: 0.75, fillMobile: 0.70, scale: 0.70, minFontPx: 8, containMin: 18, edgeMin: 12 }
 
 // Roda DENTRO da página, no slide ativo. Mede contra .slide-stage (palco + moldura).
 const measure = () => {
@@ -78,12 +78,35 @@ const measure = () => {
   }
   if (!isFinite(contain)) contain = 999
 
+  // Palco-bottom clearance (§6.20): card bordado não pode encostar na base do PALCO
+  // (.slide-stage content-box). Coluna flex:1 empurra o último card pra borda; cut
+  // mede .slide-content (=palco) e contain mede texto-vs-própria-borda → cegos.
+  // Mede até a base BORDER-box do stage (borda do container branco): a moldura de
+  // 20px (§3.1) é o buffer; card na borda da moldura está OK (20px abaixo). Só falha
+  // card que invade a moldura rumo à borda branca. (Medir na borda interna da moldura
+  // flagaria o deck inteiro, pois o slide-content preenche até ali por design.)
+  const stageBottom = s.bottom
+  let edge = 999
+  for (const panel of slide.querySelectorAll('*')) {
+    const pe = getComputedStyle(panel)
+    if (pe.position === 'absolute' || pe.position === 'fixed') continue
+    const bw = parseFloat(pe.borderBottomWidth) || 0
+    const br = parseFloat(pe.borderBottomLeftRadius) || 0
+    if (bw <= 0 || br < 6) continue
+    if (pe.display === 'none' || pe.visibility === 'hidden' || parseFloat(pe.opacity) === 0) continue
+    const pr = panel.getBoundingClientRect()
+    if (pr.height < 60 || pr.width < 40) continue
+    edge = Math.min(edge, (stageBottom - pr.bottom) / (scale || 1))
+  }
+  if (!isFinite(edge)) edge = 999
+
   return {
     cut: Math.round(cut * 10) / 10,
     fillArea: Math.round(fillArea * 100) / 100,
     scale: Math.round(scale * 100) / 100,
     minFont: Math.round(minFont * 10) / 10,
     contain: Math.round(contain),
+    edge: Math.round(edge),
   }
 }
 
@@ -110,12 +133,13 @@ const run = async () => {
         const id = `${locale || 'default'} ${vp.w}x${vp.h} slide ${String(i + 1).padStart(2, '0')}`
         if (!m) { failures.push(`${id}: MEASURE FAILED (hierarquia §6.2.4 ausente?)`) }
         else {
-          rows.push(`${String(i + 1).padStart(2, '0')} cut=${m.cut} fill=${m.fillArea} scale=${m.scale} minFont=${m.minFont} contain=${m.contain}`)
+          rows.push(`${String(i + 1).padStart(2, '0')} cut=${m.cut} fill=${m.fillArea} scale=${m.scale} minFont=${m.minFont} contain=${m.contain} edge=${m.edge}`)
           if (m.cut > GATE.cut) failures.push(`${id}: CUT ${m.cut}px (gate ≤ ${GATE.cut}px)`)
           if (m.fillArea <= fillGate) failures.push(`${id}: FILL ${m.fillArea} (gate > ${fillGate})`)
           if (m.scale < GATE.scale) failures.push(`${id}: SCALE ${m.scale} (gate ≥ ${GATE.scale})`)
           if (m.minFont * m.scale < GATE.minFontPx) failures.push(`${id}: MINFONT ${m.minFont}×${m.scale} < ${GATE.minFontPx}px`)
           if (m.contain < GATE.containMin) failures.push(`${id}: CONTAIN ${m.contain}px clearance < ${GATE.containMin}px (texto encosta na borda de um painel interno — reserve faixa §6.19; clipa no Chrome real)`)
+          if (m.edge < GATE.edgeMin) failures.push(`${id}: EDGE ${m.edge}px clearance < ${GATE.edgeMin}px (card bordado encosta na base do palco — reserve padding-bottom no container do ato §6.20; clipa no Chrome real)`)
         }
         await page.keyboard.press('ArrowRight')
       }
