@@ -2525,6 +2525,7 @@
    CENA 13 — MARCAÇÃO DE AGENDA
    ═══════════════════════════════════════════════════════════════════ */
 .dh-agenda-grid {
+  position: relative;            /* anchor for the travelling patient token */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -2598,6 +2599,60 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--dh-text-soft);
+}
+
+/* ── Patient token: travels the grid looking for a free slot ── */
+.dh-agenda-token {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 12;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: var(--dh-primary-strong);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 8px 20px -6px rgba(16, 185, 129, 0.6);
+  transition: transform 0.72s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.dh-agenda-token-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; opacity: 0.92; }
+.dh-agenda-token-landed {
+  background: var(--dh-wa-green);
+  box-shadow: 0 10px 26px -6px rgba(22, 163, 74, 0.7);
+}
+/* Occupied slot bumps the token off (busy flash + shake) */
+.dh-agenda-slot[data-react="reject"] {
+  background: var(--dh-amber-soft);
+  color: var(--dh-amber-strong);
+  border: 1px solid var(--dh-amber);
+  animation: dh-slot-reject 0.5s ease;
+}
+@keyframes dh-slot-reject {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-3px); }
+  60% { transform: translateX(3px); }
+}
+/* The free slot accepts the patient — turns green */
+.dh-slot-taken {
+  background: var(--dh-primary-strong) !important;
+  color: #fff !important;
+  border: 1px solid var(--dh-primary-strong) !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.22);
+}
+/* Confirm bar: hidden until the patient lands (JS data-on) */
+.dh-agenda-confirm[data-on="false"] { opacity: 0; transform: translateY(8px); }
+.dh-agenda-confirm[data-on="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -5193,36 +5248,9 @@
   opacity: 1;
 }
 
-/* Slots: no individual animation by default */
-.dh-agenda-slot {
-  opacity: 1;
-}
-
-/* --- Fernando's card: pop animation with emphasis --- */
-.dh-slot-drop {
-  opacity: 0;
-  transform: scale(0.8);
-  animation:
-    dh-fernando-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both,
-    dh-drop-pulse 1.8s ease-in-out 0.9s infinite;
-}
-
-/* --- Free slot highlight (shows where Fernando is going) --- */
-.dh-agenda-row:nth-child(2) .dh-agenda-slot:nth-child(4),
-.dh-agenda-row:nth-child(3) .dh-agenda-slot:nth-child(4),
-.dh-agenda-row:nth-child(4) .dh-agenda-slot:nth-child(2) {
-  animation: dh-free-slot-highlight 1.2s ease-in-out 1.0s infinite;
-}
-
-/* --- Confirm bar + WhatsApp: fade in after Fernando settles --- */
-.dh-agenda-confirm {
-  opacity: 0;
-  animation: dh-confirm-fade-in 0.5s ease-out 1.2s both;
-}
-.dh-agenda-wa {
-  opacity: 0;
-  animation: dh-confirm-fade-in 0.4s ease-out 1.4s both;
-}
+/* Slots: no individual entrance animation — the patient-search (JS) drives the
+   reject/accept states; the confirm bar is gated by data-on. */
+.dh-agenda-slot { opacity: 1; }
 
 
 /* ═══════════════════════════════════════════════════════════════════

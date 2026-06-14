@@ -1499,6 +1499,106 @@ function RenderS12() {
   )
 }
 
+/* ── AgendaSearch: the patient token travels the grid TRYING slots — it lands on
+   each occupied slot (which flashes "busy" and shakes it off), skips it, and stops
+   on the first FREE slot, which turns green and confirms. Cell centers measured via
+   offsetLeft/Top (unscaled layout coords). Gated on currentSlide → replays on entry
+   (§7); timing via performance.now + explicit state (§1/§9). ── */
+const AG_MOVE_MS = 720
+const AG_TEST_MS = 600
+type AgRow = { turno: string; slots: { label: string; state: string }[] }
+function AgendaSearch({ slideIndex, head, rows, patient, confirm, meta }: { slideIndex: number; head: string[]; rows: AgRow[]; patient: string; confirm: string; meta: string }) {
+  const { currentSlide } = useSlide()
+  const gridRef = useRef<HTMLDivElement>(null)
+  const [token, setToken] = useState<{ x: number; y: number } | null>(null)
+  const [reject, setReject] = useState<string | null>(null)
+  const [landed, setLanded] = useState<string | null>(null)
+  const [confirmed, setConfirmed] = useState(false)
+  const startedRef = useRef(false)
+  // search path: occupied attempts, then the first FREE slot (row index, slot index)
+  const PATH = [
+    { r: 0, c: 0, full: true },
+    { r: 0, c: 3, full: true },
+    { r: 1, c: 0, full: true },
+    { r: 1, c: 3, full: false }, // first free → land
+  ]
+  const keyOf = (r: number, c: number) => `${r}-${c}`
+  useEffect(() => {
+    if (currentSlide !== slideIndex) {
+      startedRef.current = false
+      setToken(null); setReject(null); setLanded(null); setConfirmed(false)
+      return
+    }
+    if (startedRef.current) return
+    startedRef.current = true // start unconditionally; measure cells lazily (robust to layout timing)
+    const STEP = AG_MOVE_MS + AG_TEST_MS
+    const t0 = performance.now()
+    let raf = 0
+    let lastIdx = -1, lastReject = '', lastLanded = ''
+    const tick = (now: number) => {
+      const e = now - t0
+      const idx = Math.min(PATH.length - 1, Math.floor(e / STEP))
+      const inStep = e - idx * STEP
+      const pt = PATH[idx]
+      const key = keyOf(pt.r, pt.c)
+      if (idx !== lastIdx) {
+        lastIdx = idx
+        const grid = gridRef.current
+        const el = grid && grid.querySelector<HTMLElement>(`[data-cell="${key}"]`)
+        if (el) setToken({ x: el.offsetLeft + el.offsetWidth / 2, y: el.offsetTop + el.offsetHeight / 2 })
+      }
+      const inTest = inStep >= AG_MOVE_MS
+      const nextReject = inTest && pt.full ? key : ''
+      const nextLanded = inTest && !pt.full ? key : lastLanded // once landed, stays landed
+      if (nextReject !== lastReject) { lastReject = nextReject; setReject(nextReject || null) }
+      if (nextLanded !== lastLanded) { lastLanded = nextLanded; setLanded(nextLanded || null) }
+      if (idx === PATH.length - 1 && inStep >= STEP) { setConfirmed(true); return }
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [currentSlide, slideIndex])
+  return (
+    <>
+      <div className="dh-agenda-grid" ref={gridRef}>
+        <div className="dh-agenda-row dh-agenda-row-head">
+          {head.map((h) => (<span className="dh-agenda-cell-head" key={h}>{h}</span>))}
+        </div>
+        {rows.map((row, r) => (
+          <div className="dh-agenda-row" key={row.turno}>
+            <span className="dh-agenda-cell-head">{row.turno}</span>
+            {row.slots.map((s, c) => {
+              const key = keyOf(r, c)
+              const isLanded = landed === key
+              return (
+                <span
+                  key={key}
+                  data-cell={key}
+                  data-react={reject === key ? 'reject' : isLanded ? 'accept' : undefined}
+                  className={`dh-agenda-slot dh-slot-${s.state}${isLanded ? ' dh-slot-taken' : ''}`}
+                >
+                  {isLanded ? '' : s.label}
+                </span>
+              )
+            })}
+          </div>
+        ))}
+        <div
+          className={`dh-agenda-token${landed ? ' dh-agenda-token-landed' : ''}`}
+          style={token ? { transform: `translate(calc(${token.x}px - 50%), calc(${token.y}px - 50%))`, opacity: 1 } : undefined}
+          aria-hidden="true"
+        >
+          <span className="dh-agenda-token-dot" />{patient}
+        </div>
+      </div>
+      <div className="dh-agenda-confirm" data-on={confirmed}>
+        <span className="dh-agenda-wa">{confirm}</span>
+        <span className="dh-agenda-meta">{meta}</span>
+      </div>
+    </>
+  )
+}
+
 function RenderS13() {
   const c = captionFor(13)
   const t = S13C[useLang()]
@@ -1508,25 +1608,7 @@ function RenderS13() {
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-            <div className="dh-agenda-grid">
-              <div className="dh-agenda-row dh-agenda-row-head">
-                {t.head.map((h) => (
-                  <span className="dh-agenda-cell-head" key={h}>{h}</span>
-                ))}
-              </div>
-              {t.rows.map((row) => (
-                <div className="dh-agenda-row" key={row.turno}>
-                  <span className="dh-agenda-cell-head">{row.turno}</span>
-                  {row.slots.map((s, i) => (
-                    <span className={`dh-agenda-slot dh-slot-${s.state}`} key={`${row.turno}-${i}`}>{s.label}</span>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="dh-agenda-confirm">
-              <span className="dh-agenda-wa">{t.waConfirm}</span>
-              <span className="dh-agenda-meta">{t.waMeta}</span>
-            </div>
+            <AgendaSearch slideIndex={13} head={t.head} rows={t.rows} patient={t.patient} confirm={t.waConfirm} meta={t.waMeta} />
             <SourcesFooter />
           </div>
           <ExplainAside index={13} />

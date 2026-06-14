@@ -658,39 +658,43 @@ export const S12 = {
 type Slot = { label: string; state: 'full' | 'open' | 'drop' }
 type S13 = {
   kicker: string; title: string; subtitle: string
+  patient: string
   head: string[]; rows: { turno: string; slots: Slot[] }[]
   waConfirm: string; waMeta: string
 }
 export const S13 = {
   'pt-BR': {
-    kicker: 'agenda · semana corrente', title: 'Arraste o paciente para o slot.', subtitle: 'Confirmação automática via WhatsApp. Sem ligação, sem retrabalho.',
+    kicker: 'agenda · semana corrente', title: 'Fernando procura o primeiro horário livre.', subtitle: 'Para no primeiro horário livre e confirma por WhatsApp.',
+    patient: 'Fernando',
     head: ['Turno', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
     rows: [
       { turno: 'Manhã', slots: [{ label: 'M.Silva', state: 'full' }, { label: 'R.Souza', state: 'full' }, { label: 'livre', state: 'open' }, { label: 'A.Costa', state: 'full' }, { label: 'livre', state: 'open' }] },
-      { turno: 'Tarde', slots: [{ label: 'P.Lima', state: 'full' }, { label: 'Fernando ⇣', state: 'drop' }, { label: 'J.Alves', state: 'full' }, { label: 'livre', state: 'open' }, { label: 'B.Rocha', state: 'full' }] },
+      { turno: 'Tarde', slots: [{ label: 'P.Lima', state: 'full' }, { label: 'C.Nunes', state: 'full' }, { label: 'J.Alves', state: 'full' }, { label: 'livre', state: 'open' }, { label: 'B.Rocha', state: 'full' }] },
       { turno: 'Noite', slots: [{ label: 'livre', state: 'open' }, { label: 'L.Mendes', state: 'full' }, { label: 'livre', state: 'open' }, { label: 'T.Pinto', state: 'full' }, { label: 'livre', state: 'open' }] },
     ],
-    waConfirm: '✓ Confirmado por WhatsApp', waMeta: 'Fernando · Ter 14h00 · lembrete 24h antes',
+    waConfirm: '✓ Confirmado por WhatsApp', waMeta: 'Fernando · Qui tarde · lembrete 24h antes',
   },
   'pt-PT': {
-    kicker: 'agenda · semana corrente', title: 'Arraste o doente para o horário.', subtitle: 'Confirmação automática via WhatsApp. Sem telefonema, sem retrabalho.',
+    kicker: 'agenda · semana corrente', title: 'O Fernando procura o primeiro horário livre.', subtitle: 'Para no primeiro horário livre e confirma por WhatsApp.',
+    patient: 'Fernando',
     head: ['Turno', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
     rows: [
       { turno: 'Manhã', slots: [{ label: 'M.Silva', state: 'full' }, { label: 'R.Sousa', state: 'full' }, { label: 'livre', state: 'open' }, { label: 'A.Costa', state: 'full' }, { label: 'livre', state: 'open' }] },
-      { turno: 'Tarde', slots: [{ label: 'P.Lima', state: 'full' }, { label: 'Fernando ⇣', state: 'drop' }, { label: 'J.Alves', state: 'full' }, { label: 'livre', state: 'open' }, { label: 'B.Rocha', state: 'full' }] },
+      { turno: 'Tarde', slots: [{ label: 'P.Lima', state: 'full' }, { label: 'C.Nunes', state: 'full' }, { label: 'J.Alves', state: 'full' }, { label: 'livre', state: 'open' }, { label: 'B.Rocha', state: 'full' }] },
       { turno: 'Noite', slots: [{ label: 'livre', state: 'open' }, { label: 'L.Mendes', state: 'full' }, { label: 'livre', state: 'open' }, { label: 'T.Pinto', state: 'full' }, { label: 'livre', state: 'open' }] },
     ],
-    waConfirm: '✓ Confirmado por WhatsApp', waMeta: 'Fernando · Ter 14h00 · lembrete 24h antes',
+    waConfirm: '✓ Confirmado por WhatsApp', waMeta: 'Fernando · Qui tarde · lembrete 24h antes',
   },
   en: {
-    kicker: 'schedule · current week', title: 'Drag the patient to the slot.', subtitle: 'Automatic confirmation by text. No phone call, no rework.',
+    kicker: 'schedule · current week', title: 'Fernando looks for the first open slot.', subtitle: 'Stops at the first open slot and confirms by text.',
+    patient: 'Fernando',
     head: ['Shift', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
     rows: [
       { turno: 'Morning', slots: [{ label: 'M.Smith', state: 'full' }, { label: 'R.Jones', state: 'full' }, { label: 'free', state: 'open' }, { label: 'A.Brown', state: 'full' }, { label: 'free', state: 'open' }] },
-      { turno: 'Afternoon', slots: [{ label: 'P.Davis', state: 'full' }, { label: 'Fernando ⇣', state: 'drop' }, { label: 'J.Wilson', state: 'full' }, { label: 'free', state: 'open' }, { label: 'B.Taylor', state: 'full' }] },
+      { turno: 'Afternoon', slots: [{ label: 'P.Davis', state: 'full' }, { label: 'C.Nunes', state: 'full' }, { label: 'J.Wilson', state: 'full' }, { label: 'free', state: 'open' }, { label: 'B.Taylor', state: 'full' }] },
       { turno: 'Evening', slots: [{ label: 'free', state: 'open' }, { label: 'L.Moore', state: 'full' }, { label: 'free', state: 'open' }, { label: 'T.Clark', state: 'full' }, { label: 'free', state: 'open' }] },
     ],
-    waConfirm: '✓ Confirmed by text', waMeta: 'Fernando · Tue 2:00pm · reminder 24h ahead',
+    waConfirm: '✓ Confirmed by text', waMeta: 'Fernando · Thu afternoon · reminder 24h ahead',
   },
 } satisfies L10n<S13>
 
