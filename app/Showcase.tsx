@@ -766,6 +766,70 @@ function TypeText({ text, slideIndex, delay = 0, cps = 20 }: { text: string; sli
   )
 }
 
+/* ── ChatReveal: pop a static chat message in at `delay` (gated on currentSlide,
+   replays on slide enter). For the patient's own message + the quote. ── */
+function ChatReveal({ delay, slideIndex, children }: { delay: number; slideIndex: number; children: React.ReactNode }) {
+  const { currentSlide } = useSlide()
+  const [shown, setShown] = useState(false)
+  const startedRef = useRef(false)
+  useEffect(() => {
+    if (currentSlide !== slideIndex) { startedRef.current = false; setShown(false); return }
+    if (startedRef.current) return
+    startedRef.current = true
+    const id = window.setTimeout(() => setShown(true), delay)
+    return () => window.clearTimeout(id)
+  }, [currentSlide, slideIndex, delay])
+  return shown ? <>{children}</> : null
+}
+
+/* ── ChatAgentMsg: an AI bubble that appears as typing-dots, then types the text
+   progressively with a blinking caret that freezes on completion (rAF +
+   performance.now, §9). Gated on currentSlide so it replays on slide enter. ── */
+function ChatAgentMsg({ text, slideIndex, appearDelay, dotsMs = 650, cps = 33 }: { text: string; slideIndex: number; appearDelay: number; dotsMs?: number; cps?: number }) {
+  const { currentSlide } = useSlide()
+  const [phase, setPhase] = useState<'hidden' | 'dots' | 'typing'>('hidden')
+  const [n, setN] = useState(0)
+  const startedRef = useRef(false)
+  const done = n >= text.length
+  useEffect(() => {
+    if (currentSlide !== slideIndex) { startedRef.current = false; setPhase('hidden'); setN(0); return }
+    if (startedRef.current) return
+    startedRef.current = true
+    const msPerChar = 1000 / cps
+    let raf = 0
+    const t1 = window.setTimeout(() => setPhase('dots'), appearDelay)
+    const t2 = window.setTimeout(() => {
+      setPhase('typing')
+      const t0 = performance.now()
+      const tick = (now: number) => {
+        const next = Math.min(Math.floor((now - t0) / msPerChar), text.length)
+        setN(next)
+        if (next < text.length) raf = requestAnimationFrame(tick)
+      }
+      raf = requestAnimationFrame(tick)
+    }, appearDelay + dotsMs)
+    return () => { window.clearTimeout(t1); window.clearTimeout(t2); if (raf) cancelAnimationFrame(raf) }
+  }, [currentSlide, slideIndex, text, appearDelay, dotsMs, cps])
+
+  if (phase === 'hidden') return null
+  if (phase === 'dots') return (
+    <div className="dh-msg dh-msg-agent">
+      <div className="dh-msg-avatar">DH</div>
+      <div className="dh-msg-dots"><span /><span /><span /></div>
+    </div>
+  )
+  const typing = n > 0 && !done
+  return (
+    <div className="dh-msg dh-msg-agent">
+      <div className="dh-msg-avatar">DH</div>
+      <div className="dh-msg-bubble">
+        {text.slice(0, n)}
+        <span className={`dh-type-caret${typing ? '' : ' dh-type-caret-off'}`} aria-hidden="true">|</span>
+      </div>
+    </div>
+  )
+}
+
 /* ── StatCounter: generic animated counter for any slide (rAF + performance.now) ── */
 function StatCounter({ target, decimals = 0, slideIndex, delay = 400, duration = 2200 }: {
   target: number; decimals?: number; slideIndex: number; delay?: number; duration?: number
@@ -1292,27 +1356,22 @@ function RenderS11() {
               <div className="dh-chat-progress-pct">{t.pct}</div>
             </div>
             <div className="dh-chat-thread">
-              <div className="dh-msg dh-msg-agent">
-                <div className="dh-msg-avatar">DH</div>
-                <div className="dh-msg-bubble">{t.agent1}</div>
-              </div>
-              <div className="dh-msg-quote">{t.quote} <strong>&quot;{t.quoteText}&quot;</strong></div>
-              <div className="dh-msg dh-msg-user">
-                <div className="dh-msg-bubble dh-msg-bubble-user">{t.user1}</div>
-              </div>
-              <div className="dh-msg dh-msg-agent">
-                <div className="dh-msg-avatar">DH</div>
-                <div className="dh-msg-bubble">{t.agent2}</div>
-              </div>
-              <div className="dh-msg dh-msg-typing">
-                <span className="dh-msg-avatar">DH</span>
-                <div className="dh-msg-dots"><span /><span /><span /></div>
-              </div>
+              {/* AI responses type in real time (§ typewriter); patient msg + quote are static reveals */}
+              <ChatAgentMsg text={t.agent1} slideIndex={11} appearDelay={300} />
+              <ChatReveal slideIndex={11} delay={3200}>
+                <div className="dh-msg-quote">{t.quote} <strong>&quot;{t.quoteText}&quot;</strong></div>
+              </ChatReveal>
+              <ChatReveal slideIndex={11} delay={3700}>
+                <div className="dh-msg dh-msg-user">
+                  <div className="dh-msg-bubble dh-msg-bubble-user">{t.user1}</div>
+                </div>
+              </ChatReveal>
+              <ChatAgentMsg text={t.agent2} slideIndex={11} appearDelay={4300} />
             </div>
             <div className="dh-chat-compose">
               <span className="dh-chat-compose-label">{t.typingLabel}</span>
               <div className="dh-chat-compose-box">
-                <DhTw text={t.composeLine} className="dh-chat-compose-line" />
+                <span className="dh-chat-compose-line"><TypeText text={t.composeLine} slideIndex={11} delay={6600} cps={34} /></span>
               </div>
             </div>
           </div>
