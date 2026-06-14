@@ -2217,17 +2217,28 @@
 .dh-laudo-soap {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  grid-auto-rows: 1fr;          /* cells stretch equally → SOAP fills the vertical space (§6.1) */
+  gap: 10px;
+  flex: 1;                      /* grow to fill the window, pushing gestão to the bottom */
+  min-height: 0;
 }
 .dh-soap-row {
   display: flex;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   background: var(--dh-surface);
   border: 1px solid var(--dh-border);
-  border-radius: 10px;
-  opacity: 1;
-  transform: none;
+  border-radius: 12px;
+  align-items: center;          /* collapsed: letter + title centered */
+  overflow: hidden;
+  transition: background .45s ease, border-color .45s ease, box-shadow .45s ease, transform .45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dh-soap-row[data-active="true"] {
+  align-items: flex-start;      /* expanded: content to the top, example revealed below */
+  background: linear-gradient(140deg, #ffffff 0%, #ecfdf5 100%);
+  border-color: var(--dh-primary);
+  box-shadow: 0 14px 34px -12px rgba(16, 185, 129, 0.34);
+  transform: translateY(-2px);
 }
 .dh-soap-letter {
   flex-shrink: 0;
@@ -2247,14 +2258,24 @@
   font-size: 14px;
   font-weight: 800;
   letter-spacing: -0.01em;
-  margin-bottom: 2px;
   color: var(--dh-text);
+  transition: color .35s ease;
 }
+.dh-soap-row[data-active="true"] .dh-soap-title { color: var(--dh-primary-deep); }
 .dh-soap-text {
   font-size: 13px;
   color: var(--dh-text);
   line-height: 1.5;
   font-weight: 500;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height .45s cubic-bezier(0.16, 1, 0.3, 1), opacity .35s ease, margin-top .45s ease;
+}
+.dh-soap-row[data-active="true"] .dh-soap-text {
+  max-height: 6em;
+  opacity: 1;
+  margin-top: 5px;
 }
 
 /* ────────────────────────────────────────────────────────
@@ -2279,16 +2300,13 @@
   }
 }
 
-/* SOAP cards: staggered entrance with local slide timing */
-.dh-soap-row {
+/* SOAP grid: GROUP entrance (the per-card spotlight is JS-driven via data-active,
+   so per-card animation here would override the active transform). */
+.dh-laudo-soap {
   opacity: 0;
   transform: translateY(12px);
-  animation: dh-s12-soap-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: dh-s12-soap-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
 }
-.dh-reveal-s { animation-delay: 0.4s; }
-.dh-reveal-o { animation-delay: 0.7s; }
-.dh-reveal-a { animation-delay: 1.0s; }
-.dh-reveal-p { animation-delay: 1.3s; }
 
 @keyframes dh-s12-soap-in {
   from {
@@ -2302,10 +2320,14 @@
 }
 
 /* Gestão strip: entrance from bottom with staggered cards */
+/* Laudo window-body fills the palco; SOAP grows (flex:1), gestão sits at the bottom.
+   min-height:0 lets the flex chain cap to available height (§6.21/F29). */
+.dh-scene-12 .dh-window-body { min-height: 0; }
 .dh-gestao-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  flex: 0 0 auto;          /* fixed at the bottom — does not grow */
   opacity: 0;
   transform: translateY(20px);
   animation: dh-s12-gestao-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.8s both;
@@ -2407,6 +2429,12 @@
   height: 100%;
   background: linear-gradient(90deg, var(--dh-primary), var(--dh-primary-strong));
   border-radius: 3px;
+  transform-origin: left center;
+  animation: dh-stock-grow 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.5s both; /* bar fills on slide entry */
+}
+@keyframes dh-stock-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 .dh-stock-fill-warn {
   background: linear-gradient(90deg, var(--dh-amber), #d97706);

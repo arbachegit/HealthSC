@@ -206,14 +206,41 @@ function MedCard({ nome, classe, selected, dose, freq }: { nome: string; classe:
   )
 }
 
-function SoapCard({ letter, title, text, revealClass }: { letter: string; title: string; text: string; revealClass: string }) {
+/* ── SoapWalkthrough: spotlights the 4 SOAP cards one at a time — each EXPANDS to
+   reveal its example, holds, then COLLAPSES as the next card takes over, looping
+   S→O→A→P. Gated on currentSlide so it replays fresh on entry (§7); timing via
+   performance.now + explicit state (§1/§9), never getAnimations heuristics. ── */
+function SoapWalkthrough({ slideIndex, soap }: { slideIndex: number; soap: { letter: string; title: string; text: string }[] }) {
+  const { currentSlide } = useSlide()
+  const [active, setActive] = useState(0)
+  const startedRef = useRef(false)
+  useEffect(() => {
+    if (currentSlide !== slideIndex) { startedRef.current = false; setActive(0); return }
+    if (startedRef.current) return
+    startedRef.current = true
+    const STEP_MS = 2300
+    const t0 = performance.now()
+    let raf = 0
+    let last = -1
+    const tick = (now: number) => {
+      const i = Math.floor((now - t0) / STEP_MS) % soap.length
+      if (i !== last) { last = i; setActive(i) }
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [currentSlide, slideIndex, soap.length])
   return (
-    <div className={`dh-soap-row ${revealClass}`}>
-      <div className="dh-soap-letter">{letter}</div>
-      <div className="dh-soap-body">
-        <div className="dh-soap-title">{title}</div>
-        <div className="dh-soap-text">{text}</div>
-      </div>
+    <div className="dh-laudo-soap">
+      {soap.map((s, i) => (
+        <div key={s.letter} className="dh-soap-row" data-active={i === active}>
+          <div className="dh-soap-letter">{s.letter}</div>
+          <div className="dh-soap-body">
+            <div className="dh-soap-title">{s.title}</div>
+            <div className="dh-soap-text">{s.text}</div>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
@@ -1428,11 +1455,7 @@ function RenderS12() {
             {t.selo}
           </div>
         </div>
-        <div className="dh-laudo-soap">
-          {t.soap.map((s) => (
-            <SoapCard key={s.letter} letter={s.letter} title={s.title} text={s.text} revealClass={s.reveal} />
-          ))}
-        </div>
+        <SoapWalkthrough slideIndex={12} soap={t.soap} />
         <div className="dh-gestao-strip">
           <div className="dh-gestao-card">
             <div className="dh-gestao-kicker"><MedIcon name="calendar" size={15} className="dh-gestao-ico" />{t.agendaTitle}</div>
