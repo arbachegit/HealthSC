@@ -554,7 +554,7 @@ type S11 = {
   pct: string; quoteCite: string
   messages: { who: 'agent' | 'patient' | 'quote'; text: string }[]
   typingLabel: string; composeLine: string
-  sideKicker1: string; side1: string[]; sideKicker2: string; side2: string[]
+  sideKicker1: string; side1: string[]; sideKicker2: string; side2: string[]; micLabel: string
 }
 export const S11 = {
   'pt-BR': {
@@ -571,6 +571,7 @@ export const S11 = {
     typingLabel: 'Aura está digitando a próxima pergunta', composeLine: 'Você percebe alguma náusea, visão borrada ou necessidade de deitar quando a crise fica mais forte?',
     sideKicker1: 'insights em paralelo', side1: ['dor com padrão vespertino', 'fotossensibilidade relatada', 'trabalho em tela como possível gatilho'],
     sideKicker2: 'próximo bloco', side2: ['fechar intensidade + impacto no sono', 'decidir se pede exame complementar'],
+    micLabel: 'ouvindo e conduzindo a entrevista',
   },
   'pt-PT': {
     pct: '68%', quoteCite: 'citei do áudio:',
@@ -586,6 +587,7 @@ export const S11 = {
     typingLabel: 'A Aura está a escrever a próxima pergunta', composeLine: 'Nota alguma náusea, visão turva ou necessidade de se deitar quando a crise fica mais forte?',
     sideKicker1: 'insights em paralelo', side1: ['dor com padrão vespertino', 'fotossensibilidade relatada', 'trabalho ao ecrã como possível gatilho'],
     sideKicker2: 'próximo bloco', side2: ['fechar intensidade + impacto no sono', 'decidir se pede exame complementar'],
+    micLabel: 'a ouvir e a conduzir a entrevista',
   },
   en: {
     pct: '68%', quoteCite: 'quoted from the audio:',
@@ -601,6 +603,7 @@ export const S11 = {
     typingLabel: 'Aura is typing the next question', composeLine: 'Do you notice any nausea, blurred vision, or a need to lie down when the episode gets stronger?',
     sideKicker1: 'insights in parallel', side1: ['pain with an afternoon pattern', 'photosensitivity reported', 'screen work as a possible trigger'],
     sideKicker2: 'next block', side2: ['close intensity + sleep impact', 'decide whether to order further tests'],
+    micLabel: 'listening and steering the interview',
   },
 } satisfies L10n<S11>
 

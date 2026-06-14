@@ -1396,6 +1396,7 @@ function RenderS11() {
                 <div className="dh-chat-side-line" key={l}>{l}</div>
               ))}
             </div>
+            <AuraMic label={t.micLabel} />
             <div className="dh-chat-side-card dh-chat-side-card-soft">
               <span className="dh-chat-side-kicker">{t.sideKicker2}</span>
               {t.side2.map((l) => (
