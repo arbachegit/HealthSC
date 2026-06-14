@@ -81,10 +81,14 @@ const measure = () => {
   // Palco-bottom clearance (§6.20): card bordado não pode encostar na base do PALCO
   // (.slide-stage content-box). Coluna flex:1 empurra o último card pra borda; cut
   // mede .slide-content (=palco) e contain mede texto-vs-própria-borda → cegos.
-  // Mede até a base BORDER-box do stage (borda do container branco): a moldura de
-  // 20px (§3.1) é o buffer; card na borda da moldura está OK (20px abaixo). Só falha
-  // card que invade a moldura rumo à borda branca. (Medir na borda interna da moldura
-  // flagaria o deck inteiro, pois o slide-content preenche até ali por design.)
+  // Mede contra a base BORDER-box do stage (borda do container branco): a moldura
+  // de 20px (§3.1) é o buffer. NOTA: este gate NÃO vê clipping INTERNO (um card
+  // cortado por um container overflow:hidden DENTRO do palco, ex. .dh-window) — esse
+  // overflow:hidden é, na maioria dos slides, intencional (clipa decoração/animação),
+  // então um gate de runtime não distingue corte real de clip decorativo (testado:
+  // ambas heurísticas dão falso-positivo deck-wide). Prevenção é ESTRUTURAL (§6.21/F29):
+  // todo container flex de conteúdo precisa de min-height:0 pra não inflar além do pai
+  // e o §6.18 fit medir certo. Ver memory showcase-css-gotchas #5.
   const stageBottom = s.bottom
   let edge = 999
   for (const panel of slide.querySelectorAll('*')) {

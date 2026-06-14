@@ -4401,6 +4401,12 @@
   flex: 1;
   min-height: 0;
 }
+/* O .dh-window-body NÃO tinha min-height:0, então não conseguia encolher abaixo
+ * do seu min-content: o mic (flex:1) inflava o sidebar → grid → body além da
+ * janela (588 disp.), e o overflow:hidden da janela cortava o último card E
+ * mascarava o overflow do §6.18 fit. Com min-height:0, a cadeia flex limita-se
+ * à altura disponível e o mic preenche só a folga real — nada estoura a janela. */
+.dh-scene-11 .dh-window-body { min-height: 0; }
 .dh-chat-main,
 .dh-chat-side-card {
   border-radius: 20px;
