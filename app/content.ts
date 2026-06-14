@@ -551,31 +551,53 @@ export const S10 = {
 
 /* ───────────────────────── S11 · CHAT ───────────────────────── */
 type S11 = {
-  pct: string; agent1: string; quote: string; quoteText: string; user1: string; agent2: string
+  pct: string; quoteCite: string
+  messages: { who: 'agent' | 'patient' | 'quote'; text: string }[]
   typingLabel: string; composeLine: string
   sideKicker1: string; side1: string[]; sideKicker2: string; side2: string[]
 }
 export const S11 = {
   'pt-BR': {
-    pct: '68%', agent1: 'Quando essa dor aperta mais — manhã, tarde, noite? Tá tendo gatilho?',
-    quote: 'citei do áudio:', quoteText: 'piora muito à tarde quando o computador esquenta',
-    user1: 'Sempre depois do almoço. Umas 14h começa, fica forte até as 18.', agent2: 'Aham. E o sono — você tá conseguindo descansar? Quantas horas?',
+    pct: '68%', quoteCite: 'citei do áudio:',
+    messages: [
+      { who: 'agent', text: 'Quando essa dor aperta mais — manhã, tarde, noite?' },
+      { who: 'quote', text: 'piora muito à tarde quando o computador esquenta' },
+      { who: 'patient', text: 'Sempre depois do almoço. Umas 14h começa e vai até as 18.' },
+      { who: 'agent', text: 'E o sono? Está conseguindo descansar bem?' },
+      { who: 'patient', text: 'Durmo mal. Acordo 2 ou 3 vezes e custo a voltar.' },
+      { who: 'agent', text: 'Toma água ao longo do dia ou esquece quando foca no trabalho?' },
+      { who: 'patient', text: 'Esqueço total. Às vezes passo a manhã sem beber nada.' },
+    ],
     typingLabel: 'Aura está digitando a próxima pergunta', composeLine: 'Você percebe alguma náusea, visão borrada ou necessidade de deitar quando a crise fica mais forte?',
     sideKicker1: 'insights em paralelo', side1: ['dor com padrão vespertino', 'fotossensibilidade relatada', 'trabalho em tela como possível gatilho'],
     sideKicker2: 'próximo bloco', side2: ['fechar intensidade + impacto no sono', 'decidir se pede exame complementar'],
   },
   'pt-PT': {
-    pct: '68%', agent1: 'Quando é que essa dor aperta mais — manhã, tarde, noite? Há algum gatilho?',
-    quote: 'citei do áudio:', quoteText: 'piora muito à tarde quando o computador aquece',
-    user1: 'Sempre depois do almoço. Por volta das 14h começa, fica forte até às 18.', agent2: 'Certo. E o sono — está a conseguir descansar? Quantas horas?',
+    pct: '68%', quoteCite: 'citei do áudio:',
+    messages: [
+      { who: 'agent', text: 'Quando é que essa dor aperta mais — manhã, tarde, noite?' },
+      { who: 'quote', text: 'piora muito à tarde quando o computador aquece' },
+      { who: 'patient', text: 'Sempre depois do almoço. Por volta das 14h começa e vai até às 18.' },
+      { who: 'agent', text: 'E o sono? Está a conseguir descansar bem?' },
+      { who: 'patient', text: 'Durmo mal. Acordo 2 ou 3 vezes e custa-me voltar a adormecer.' },
+      { who: 'agent', text: 'Bebe água ao longo do dia ou esquece-se quando está focado no trabalho?' },
+      { who: 'patient', text: 'Esqueço-me por completo. Às vezes passo a manhã sem beber nada.' },
+    ],
     typingLabel: 'A Aura está a escrever a próxima pergunta', composeLine: 'Nota alguma náusea, visão turva ou necessidade de se deitar quando a crise fica mais forte?',
     sideKicker1: 'insights em paralelo', side1: ['dor com padrão vespertino', 'fotossensibilidade relatada', 'trabalho ao ecrã como possível gatilho'],
     sideKicker2: 'próximo bloco', side2: ['fechar intensidade + impacto no sono', 'decidir se pede exame complementar'],
   },
   en: {
-    pct: '68%', agent1: 'When does the pain peak — morning, afternoon, night? Any trigger?',
-    quote: 'quoted from the audio:', quoteText: 'it gets much worse in the afternoon when the computer heats up',
-    user1: 'Always after lunch. Around 2 p.m. it starts, strong until 6.', agent2: 'I see. And sleep — are you getting rest? How many hours?',
+    pct: '68%', quoteCite: 'quoted from the audio:',
+    messages: [
+      { who: 'agent', text: 'When does the pain peak — morning, afternoon, night?' },
+      { who: 'quote', text: 'it gets much worse in the afternoon when the computer heats up' },
+      { who: 'patient', text: 'Always after lunch. Around 2 p.m. it starts and runs until 6.' },
+      { who: 'agent', text: 'And sleep? Are you getting good rest?' },
+      { who: 'patient', text: 'I sleep badly. I wake up 2 or 3 times and struggle to fall back.' },
+      { who: 'agent', text: 'Do you drink water through the day or forget when you focus on work?' },
+      { who: 'patient', text: 'I forget completely. Sometimes I go all morning without drinking.' },
+    ],
     typingLabel: 'Aura is typing the next question', composeLine: 'Do you notice any nausea, blurred vision, or a need to lie down when the episode gets stronger?',
     sideKicker1: 'insights in parallel', side1: ['pain with an afternoon pattern', 'photosensitivity reported', 'screen work as a possible trigger'],
     sideKicker2: 'next block', side2: ['close intensity + sleep impact', 'decide whether to order further tests'],

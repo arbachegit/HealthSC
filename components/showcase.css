@@ -2050,6 +2050,9 @@
   gap: 10px;
   flex: 1;
   overflow: hidden;
+  /* bottom-anchored: as the conversation fills, the newest messages stay
+     visible and older ones scroll off the top (real chat behavior) */
+  justify-content: flex-end;
 }
 .dh-msg {
   display: flex;
