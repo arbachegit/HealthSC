@@ -4027,16 +4027,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 16px;
+  gap: 8px;
+  padding: 10px;
   border-radius: 18px;
   border: 1px solid rgba(16, 185, 129, 0.16);
   background: radial-gradient(ellipse 92% 70% at 50% 36%, rgba(16, 185, 129, 0.12), rgba(236, 253, 245, 0.45) 72%);
 }
 .dh-aura-mic-ring {
   position: relative;
-  width: 72px;
+  /* Círculo PERFEITO em qualquer tamanho: a altura é preferida 72px mas pode
+   * encolher (flex-shrink) num vão apertado, e aspect-ratio:1 faz a LARGURA
+   * SEMPRE acompanhar a altura → nunca vira oval (o bug era width:72 fixo +
+   * height encolhendo = 72×30). min-height impede o anel de sumir. */
   height: 72px;
+  width: auto;
+  aspect-ratio: 1 / 1;
+  flex: 0 1 auto;
+  min-height: 46px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--dh-primary) 0%, var(--dh-primary-strong) 100%);
   display: flex;
@@ -4055,7 +4062,7 @@
 }
 .dh-aura-mic-pulse-2 { animation-delay: -0.9s; }
 .dh-aura-mic-icon { width: 30px; height: 30px; position: relative; z-index: 2; }
-.dh-aura-mic-wave { display: flex; align-items: flex-end; gap: 3px; height: 36px; }
+.dh-aura-mic-wave { display: flex; align-items: flex-end; gap: 3px; height: 18px; }
 .dh-aura-mic-wave span {
   display: inline-block;
   width: 3px;
@@ -4072,6 +4079,13 @@
   letter-spacing: 0.22em;
   color: var(--dh-primary-deep);
   text-align: center;
+}
+/* Viewports muito curtos (≤580px alt): o mic fica apertado demais pro anel +
+ * onda + label. Esconde a onda (decorativa) pro anel ficar círculo sem estourar
+ * a caixa do mic; ring + label sobrevivem. */
+@media (max-height: 580px) {
+  .dh-scene-11 .dh-aura-mic-wave { display: none; }
+  .dh-scene-11 .dh-aura-mic-ring { min-height: 38px; }
 }
 
 /* ── Pills entering one-by-one on slide enter (§7 replay via suppression rule) ── */
@@ -4482,8 +4496,8 @@
 .dh-chat-side-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 16px;
+  gap: 7px;
+  padding: 12px 14px;
   box-shadow: 0 16px 38px rgba(15, 118, 110, 0.06);
   flex: 0 0 auto;
 }
