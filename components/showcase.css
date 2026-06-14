@@ -2047,12 +2047,10 @@
 .dh-chat-thread {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  flex: 1;
-  overflow: hidden;
-  /* bottom-anchored: as the conversation fills, the newest messages stay
-     visible and older ones scroll off the top (real chat behavior) */
-  justify-content: flex-end;
+  gap: 7px;
+  /* NO overflow:hidden (F18) and NO flex:1 — the thread sizes to its content so
+     the §6.18 fit measures the true height and scales the whole slide to fit.
+     overflow:hidden here masked the height from the fit → real-Chrome overflow. */
 }
 .dh-msg {
   display: flex;
@@ -2062,8 +2060,8 @@
 .dh-msg-user { justify-content: flex-end; }
 .dh-msg-avatar {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--dh-primary) 0%, var(--dh-primary-strong) 100%);
   display: inline-flex;
@@ -2075,12 +2073,12 @@
 }
 .dh-msg-bubble {
   max-width: 78%;
-  padding: 11px 15px;
+  padding: 8px 12px;
   background: var(--dh-bg2);
   border: 1px solid var(--dh-border);
   border-radius: 14px 14px 14px 4px;
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.38;
   color: var(--dh-text);
   font-weight: 500;
 }
