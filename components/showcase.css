@@ -3206,12 +3206,13 @@
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 2px;
+  align-items: center;       /* centra o número verticalmente no anel */
+  justify-content: center;   /* e horizontalmente */
+  gap: 1px;
+  line-height: 1;
 }
 .dh-fraud-score-val {
-  font-size: 42px;
+  font-size: 40px;
   font-weight: 900;
   color: var(--dh-danger-strong);
   line-height: 1;
@@ -3221,6 +3222,8 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--dh-muted);
+  align-self: flex-end;        /* desce o "/100" para a base do número */
+  padding-bottom: 0.32em;
 }
 .dh-fraud-score-label {
   font-family: var(--font-mono);
