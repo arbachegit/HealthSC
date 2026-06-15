@@ -3202,13 +3202,18 @@
 @keyframes dh-fraud-donut-fill {
   to { stroke-dashoffset: calc(326.726 * (1 - var(--score, 38) / 100)); }
 }
+/* centra um único grupo "38/100" (baseline) dead-center no anel */
 .dh-fraud-score-center {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;       /* centra o número verticalmente no anel */
-  justify-content: center;   /* e horizontalmente */
-  gap: 1px;
+  align-items: center;
+  justify-content: center;
+}
+.dh-fraud-score-num {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
   line-height: 1;
 }
 .dh-fraud-score-val {
@@ -3222,8 +3227,6 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--dh-muted);
-  align-self: flex-end;        /* desce o "/100" para a base do número */
-  padding-bottom: 0.32em;
 }
 .dh-fraud-score-label {
   font-family: var(--font-mono);

@@ -1839,8 +1839,10 @@ function RenderS18() {
                   <circle className="dh-fraud-donut-arc" cx="60" cy="60" r="52" />
                 </svg>
                 <div className="dh-fraud-score-center">
-                  <span className="dh-fraud-score-val">{t.scoreVal}</span>
-                  <span className="dh-fraud-score-unit">{t.scoreUnit}</span>
+                  <span className="dh-fraud-score-num">
+                    <span className="dh-fraud-score-val">{t.scoreVal}</span>
+                    <span className="dh-fraud-score-unit">{t.scoreUnit}</span>
+                  </span>
                 </div>
               </div>
               <div className="dh-fraud-score-label dh-fraud-score-bad">{t.scoreLabel}</div>
