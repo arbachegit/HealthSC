@@ -1945,8 +1945,8 @@ function RenderS21() {
               <span className="dh-diag-arrow">→</span>
               <div className="dh-diag-node">
                 <div className="dh-diag-node-k">{t.nCid}</div>
-                {t.cids.map((cid) => (
-                  <div className="dh-diag-cid" key={cid.code}><span>{cid.code}</span><span className={`dh-diag-prob dh-prob-${cid.tone}`}>{cid.prob}</span></div>
+                {t.cids.map((cid, i) => (
+                  <div className="dh-diag-cid" key={cid.code}><span>{cid.code}</span><span className={`dh-diag-prob dh-prob-${cid.tone}`}><CountUpValue value={cid.prob} slideIndex={21} delayMs={1500 + i * 160} durationMs={700} /></span></div>
                 ))}
               </div>
               <span className="dh-diag-arrow">→</span>
