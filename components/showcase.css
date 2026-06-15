@@ -172,8 +172,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 20px;
+  gap: 9px;
+  padding: 18px 20px 26px;
   border-radius: 20px;
   background: rgba(236, 253, 245, 0.95);
   border: 1px solid rgba(167, 243, 208, 0.92);
@@ -188,9 +188,9 @@
 }
 .dh-opening-story-line {
   display: block;
-  min-height: 1.8em;
+  min-height: 1.5em;
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.5;
   color: var(--dh-text);
 }
 .dh-opening-story-line-soft { color: var(--dh-text-soft); }
@@ -448,11 +448,11 @@
 }
 .dh-window-body {
   flex: 1;
-  padding: 26px 32px;
+  padding: 16px 24px;
   overflow: visible;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -1241,7 +1241,7 @@
 }
 .dh-aura-side-card {
   border-radius: 18px;
-  padding: 18px;
+  padding: 18px 18px 26px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1261,7 +1261,7 @@
   position: relative;
   padding-left: 14px;
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.42;
   color: var(--dh-text);
   font-weight: 600;
 }
@@ -2662,7 +2662,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  padding: 14px;
+  padding: 14px 14px 24px;
   background: var(--dh-bg2);
   border: 1px solid var(--dh-border);
   border-radius: 12px;
@@ -3661,16 +3661,26 @@
 .dh-matrix {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   background: var(--dh-bg2);
   border: 1px solid var(--dh-border);
   border-radius: 12px;
-  padding: 10px;
+  padding: 10px 10px 22px;
+  /* Fill the palco vertically: body rows share the free height (§6.1) */
+  flex: 1;
+  min-height: 0;
 }
 .dh-matrix-row {
   display: grid;
   grid-template-columns: 1.4fr repeat(4, 1fr);
   gap: 6px;
+}
+.dh-matrix-row:not(.dh-matrix-row-head) {
+  flex: 1;
+  min-height: 0;
+}
+.dh-matrix-row:not(.dh-matrix-row-head) > * {
+  min-height: 0;
 }
 .dh-matrix-row-head {
   border-bottom: 1px solid var(--dh-border);
@@ -6023,6 +6033,10 @@
 .dh-explain-visual > .dh-matrix {
   flex: 1 1 auto;
   min-height: 0;
+  /* Cap the focal's NATURAL height so SlideFrame's height:auto measurement
+     (§6.18) doesn't see a 700-800px intrinsic and over-shrink the whole slide
+     (§6.5 scale ≥ 0.7). flex:1 still lets it fill the column at render time. */
+  max-height: var(--dh-focal-cap, 360px);
 }
 /* Slide 03 — linhas do formulário distribuem-se pela altura disponível */
 .dh-explain-visual > .dh-form-grid { justify-content: space-evenly; }
@@ -6037,7 +6051,7 @@
   background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 20px 48px rgba(15, 118, 110, 0.08);
   border-radius: 18px;
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -6046,29 +6060,29 @@
 }
 /* Top block — data sources (fills the area above the explanation text) */
 .dh-explain-top {
-  padding-bottom: 14px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--dh-border);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 /* Middle block — kicker + bullet lines, grows to fill remaining space */
 .dh-explain-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
   justify-content: center;
 }
 /* Bottom block — key metrics (fills the area below the explanation text) */
 .dh-explain-bottom {
-  padding-top: 14px;
+  padding-top: 10px;
   border-top: 1px solid var(--dh-border);
-  margin-top: 14px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 /* Section label for top/bottom blocks */
 .dh-explain-section-label {
@@ -6083,13 +6097,13 @@
 .dh-explain-sources {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 5px;
 }
 .dh-source-badge {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 12px;
+  padding: 6px 10px;
   background: var(--dh-primary-soft);
   border: 1px solid var(--dh-border-strong);
   border-radius: 10px;
@@ -6133,8 +6147,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  padding: 10px 6px;
+  gap: 2px;
+  padding: 7px 6px;
   background: var(--dh-primary-soft);
   border: 1px solid var(--dh-border-strong);
   border-radius: 10px;
@@ -6155,17 +6169,17 @@
 }
 .dh-explain-kicker {
   font-family: var(--font-mono);
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   color: var(--dh-primary-deep);
 }
 .dh-explain-line {
   position: relative;
-  padding-left: 14px;
-  font-size: 28px;
-  line-height: 1.55;
+  padding-left: 13px;
+  font-size: 18px;
+  line-height: 1.4;
   color: var(--dh-text);
   font-weight: 600;
 }

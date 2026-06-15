@@ -1125,7 +1125,6 @@ export const EXPLAIN: ExplainMap = {
         'CPF cruza com dados públicos da Receita Federal em menos de 2 segundos.',
         'Endereço completado automaticamente via ViaCEP — o paciente só confirma.',
         'Pré-preenchimento reduz erros de digitação e agiliza a recepção.',
-        'Dados pessoais ficam criptografados e nunca são compartilhados com terceiros.',
       ],
       sourcesLabel: 'FONTES DE DADOS',
       sources: [
@@ -1145,7 +1144,6 @@ export const EXPLAIN: ExplainMap = {
         'O NIF cruza com registos públicos em menos de 2 segundos.',
         'A morada é completada automaticamente via CTT — o doente só confirma.',
         'O pré-preenchimento reduz erros de digitação e agiliza a recepção.',
-        'Os dados pessoais ficam cifrados e nunca são partilhados com terceiros.',
       ],
       sourcesLabel: 'FONTES DE DADOS',
       sources: [
@@ -1165,7 +1163,6 @@ export const EXPLAIN: ExplainMap = {
         'ID is cross-checked against public records in under 2 seconds.',
         'Address auto-completed via postal lookup — the patient just confirms.',
         'Prefill reduces typos and speeds up front-desk intake.',
-        'Personal data is encrypted and never shared with third parties.',
       ],
       sourcesLabel: 'DATA SOURCES',
       sources: [

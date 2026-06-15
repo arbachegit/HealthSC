@@ -1650,7 +1650,7 @@ function RenderS13() {
             <AgendaSearch slideIndex={14} head={t.head} rows={t.rows} patient={t.patient} confirm={t.waConfirm} meta={t.waMeta} />
             <SourcesFooter />
           </div>
-          <ExplainAside index={14} />
+          <ExplainAside index={13} />
         </div>
       </Scene>
       <SceneCaption index={14} title={c.title} desc={c.desc} />
@@ -1682,7 +1682,7 @@ function RenderS14() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={15} />
+          <ExplainAside index={14} />
         </div>
       </Scene>
       <SceneCaption index={15} title={c.title} desc={c.desc} />
@@ -1715,7 +1715,7 @@ function RenderS15() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={16} />
+          <ExplainAside index={15} />
         </div>
       </Scene>
       <SceneCaption index={16} title={c.title} desc={c.desc} />
@@ -1748,7 +1748,7 @@ function RenderS16() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={17} />
+          <ExplainAside index={16} />
         </div>
       </Scene>
       <SceneCaption index={17} title={c.title} desc={c.desc} />
@@ -1787,7 +1787,7 @@ function RenderS17() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={18} />
+          <ExplainAside index={17} />
         </div>
       </Scene>
       <SceneCaption index={18} title={c.title} desc={c.desc} />
@@ -1874,7 +1874,7 @@ function RenderS19() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={20} />
+          <ExplainAside index={19} />
         </div>
       </Scene>
       <SceneCaption index={20} title={c.title} desc={c.desc} />
@@ -1922,7 +1922,7 @@ function RenderS20() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={21} />
+          <ExplainAside index={20} />
         </div>
       </Scene>
       <SceneCaption index={21} title={c.title} desc={c.desc} />
@@ -2005,7 +2005,7 @@ function RenderS22() {
             </div>
             <SourcesFooter variant="medical" />
           </div>
-          <ExplainAside index={24} />
+          <ExplainAside index={23} />
         </div>
       </Scene>
       <SceneCaption index={24} title={c.title} desc={c.desc} />
