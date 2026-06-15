@@ -1803,40 +1803,46 @@ function RenderS18() {
       <Scene index={19} url="health.iconsai.ai/antifraude">
         <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
         <div className="dh-fraud-grid">
+          {/* ESQUERDA — o documento sob análise forense */}
           <div className="dh-fraud-doc">
             <div className="dh-fraud-doc-kicker">{t.docKicker}</div>
             <div className="dh-fraud-doc-title">{t.docTitle}</div>
-            <div className="dh-fraud-doc-row"><span>{t.rEmit}</span><span>{t.emitVal}</span></div>
-            <div className="dh-fraud-doc-row"><span>{t.rVal}</span><span className="dh-mono">{t.valVal}</span></div>
-            <div className="dh-fraud-doc-row"><span>{t.rDate}</span><span className="dh-mono">{t.dateVal}</span></div>
+            <div className="dh-fraud-doc-rows">
+              <div className="dh-fraud-doc-row"><span>{t.rEmit}</span><span>{t.emitVal}</span></div>
+              <div className="dh-fraud-doc-row"><span>{t.rVal}</span><span className="dh-mono">{t.valVal}</span></div>
+              <div className="dh-fraud-doc-row"><span>{t.rDate}</span><span className="dh-mono">{t.dateVal}</span></div>
+            </div>
             <div className="dh-fraud-doc-scan">
               {t.scan.map((s) => (
                 <span key={s}>{s}</span>
               ))}
             </div>
           </div>
+          {/* DIREITA — o veredito: score + por que a confiança caiu */}
           <div className="dh-fraud-score">
-            <div className="dh-fraud-score-kicker">{t.scoreKicker}</div>
-            <div className="dh-fraud-score-ring">
-              <span className="dh-fraud-score-val">{t.scoreVal}</span>
-              <span className="dh-fraud-score-unit">{t.scoreUnit}</span>
+            <div className="dh-fraud-verdict">
+              <div className="dh-fraud-score-kicker">{t.scoreKicker}</div>
+              <div className="dh-fraud-score-ring">
+                <span className="dh-fraud-score-val">{t.scoreVal}</span>
+                <span className="dh-fraud-score-unit">{t.scoreUnit}</span>
+              </div>
+              <div className="dh-fraud-score-label dh-fraud-score-bad">{t.scoreLabel}</div>
+              <div className="dh-fraud-score-copy">{t.scoreCopy}</div>
             </div>
-            <div className="dh-fraud-score-label dh-fraud-score-bad">{t.scoreLabel}</div>
-            <div className="dh-fraud-score-copy">{t.scoreCopy}</div>
+            <div className="dh-fraud-reasons">
+              <div className="dh-fraud-trust-kicker">{t.trustKicker}</div>
+              <div className="dh-fraud-issues">
+                {t.issues.map((iss) => (
+                  <div className="dh-fraud-issue" key={iss.text}><span className={`dh-fraud-issue-dot dh-fraud-issue-${iss.tone}`} /><span>{iss.text}</span></div>
+                ))}
+              </div>
+              <div className="dh-fraud-trust-row">
+                {t.trust.map((tr) => (
+                  <span className="dh-fraud-trust-chip" key={tr}>{tr}</span>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="dh-fraud-trust">
-          <div className="dh-fraud-trust-kicker">{t.trustKicker}</div>
-          <div className="dh-fraud-trust-row">
-            {t.trust.map((tr) => (
-              <span className="dh-fraud-trust-chip" key={tr}>{tr}</span>
-            ))}
-          </div>
-        </div>
-        <div className="dh-fraud-issues">
-          {t.issues.map((iss) => (
-            <div className="dh-fraud-issue" key={iss.text}><span className={`dh-fraud-issue-dot dh-fraud-issue-${iss.tone}`} /><span>{iss.text}</span></div>
-          ))}
         </div>
         <SourcesFooter />
       </Scene>
