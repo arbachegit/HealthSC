@@ -850,6 +850,7 @@ export const S17 = {
 type S18 = {
   kicker: string; title: string; subtitle: string
   docKicker: string; docTitle: string; rEmit: string; emitVal: string; rVal: string; valVal: string; rDate: string; dateVal: string
+  healthKicker: string; health: { k: string; v: string }[]
   scan: string[]; scoreKicker: string; scoreVal: string; scoreUnit: string; scoreLabel: string; scoreCopy: string
   trustKicker: string; trust: string[]; issues: { tone: 'bad' | 'warn'; text: string }[]
 }
@@ -857,6 +858,7 @@ export const S18 = {
   'pt-BR': {
     kicker: 'antifraude · IA forense', title: 'Recibo recebido. Validando...', subtitle: 'IconsAI Vision compara metadados, fonte, pixels e cruza com transações reais.',
     docKicker: 'DOCUMENTO', docTitle: 'recibo_consulta_2026-05-12.pdf', rEmit: 'Emitente', emitVal: 'Clínica Aurora', rVal: 'Valor', valVal: 'R$ 1.280,00', rDate: 'Data', dateVal: '2026-05-12',
+    healthKicker: 'Convênio', health: [{ k: 'Plano', v: 'Saúde Plena' }, { k: 'Carteirinha', v: '8821 4470 0192' }, { k: 'Procedimento', v: 'Consulta eletiva' }, { k: 'Código', v: 'TUSS 10101012' }],
     scan: ['OCR e pixels sincronizados', 'tabela TUSS consultada', 'NFS-e municipal não encontrada'],
     scoreKicker: 'SCORE DE CONFIANÇA', scoreVal: '38', scoreUnit: '/100', scoreLabel: 'Suspeita alta', scoreCopy: 'Reembolso automático bloqueado e revisão humana acionada em menos de 1 minuto.',
     trustKicker: 'por que a confiança caiu', trust: ['metadado divergente', 'valor 4x acima da tabela', 'sem NFS-e correspondente'],
@@ -869,6 +871,7 @@ export const S18 = {
   'pt-PT': {
     kicker: 'antifraude · IA forense', title: 'Recibo recebido. A validar...', subtitle: 'IconsAI Vision compara metadados, origem, pixéis e cruza com transações reais.',
     docKicker: 'DOCUMENTO', docTitle: 'recibo_consulta_2026-05-12.pdf', rEmit: 'Emitente', emitVal: 'Clínica Aurora', rVal: 'Valor', valVal: '€ 240,00', rDate: 'Data', dateVal: '2026-05-12',
+    healthKicker: 'Seguro de saúde', health: [{ k: 'Plano', v: 'Saúde Global' }, { k: 'Nº beneficiário', v: '8821 4470 0192' }, { k: 'Ato médico', v: 'Consulta' }, { k: 'Código', v: 'CDM 10101' }],
     scan: ['OCR e pixéis sincronizados', 'tabela de preços consultada', 'fatura não encontrada'],
     scoreKicker: 'PONTUAÇÃO DE CONFIANÇA', scoreVal: '38', scoreUnit: '/100', scoreLabel: 'Suspeita elevada', scoreCopy: 'Reembolso automático bloqueado e revisão humana acionada em menos de 1 minuto.',
     trustKicker: 'porque a confiança caiu', trust: ['metadado divergente', 'valor 4x acima da tabela', 'sem fatura correspondente'],
@@ -881,6 +884,7 @@ export const S18 = {
   en: {
     kicker: 'anti-fraud · forensic AI', title: 'Receipt received. Validating...', subtitle: 'IconsAI Vision compares metadata, source, and pixels, cross-checking real transactions.',
     docKicker: 'DOCUMENT', docTitle: 'visit_receipt_2026-05-12.pdf', rEmit: 'Issuer', emitVal: 'Aurora Clinic', rVal: 'Amount', valVal: '$ 272.00', rDate: 'Date', dateVal: '05/12/2026',
+    healthKicker: 'Health plan', health: [{ k: 'Plan', v: 'Aurora PPO' }, { k: 'Member ID', v: '8821 4470 0192' }, { k: 'Procedure', v: 'Office visit' }, { k: 'Code', v: 'CPT 99213' }],
     scan: ['OCR and pixels synced', 'CPT fee schedule checked', 'matching invoice not found'],
     scoreKicker: 'CONFIDENCE SCORE', scoreVal: '38', scoreUnit: '/100', scoreLabel: 'High suspicion', scoreCopy: 'Automatic reimbursement blocked and human review triggered in under 1 minute.',
     trustKicker: 'why confidence dropped', trust: ['mismatched metadata', 'amount 4x above schedule', 'no matching invoice'],

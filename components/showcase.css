@@ -3107,35 +3107,55 @@
   color: var(--dh-text);
   word-break: break-all;
 }
-/* linhas crescem para distribuir-se pela altura da coluna */
-.dh-fraud-doc-rows {
+/* duas sub-colunas: identidade do documento | dados do convênio.
+   o valor fica BESIDE do rótulo (grid auto 1fr), preenchendo a largura. */
+.dh-fraud-doc-cols {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: center;
 }
-.dh-fraud-doc-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 11px 0;
-  border-top: 1px dashed var(--dh-border);
+.dh-fraud-doc-group {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 13px 14px;
+  align-content: center;
+}
+.dh-fraud-doc-group-health {
+  border-left: 1px solid var(--dh-border);
+  padding-left: 22px;
+}
+.dh-fraud-doc-ghead {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--dh-muted);
+  margin-bottom: 2px;
+}
+.dh-fraud-doc-k {
+  font-size: 13px;
+  color: var(--dh-muted);
+  font-weight: 600;
+}
+.dh-fraud-doc-v {
   font-size: 14px;
   color: var(--dh-text);
-  font-weight: 500;
-}
-.dh-fraud-doc-row span:last-child {
   font-weight: 700;
 }
 /* ── DIREITA — veredito ── */
 .dh-fraud-score {
-  padding: 18px 20px;
+  padding: 16px 20px 24px;
   background: var(--dh-danger-soft);
   border: 1px solid #fca5a5;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   min-height: 100%;
 }
 .dh-fraud-verdict {
@@ -3143,7 +3163,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 10px;
+  gap: 7px;
 }
 .dh-fraud-score-kicker {
   font-family: var(--font-mono);
@@ -3153,28 +3173,52 @@
   letter-spacing: 0.2em;
   color: var(--dh-danger-strong);
 }
+/* anel = donut SVG com arco animado que preenche até o score (§7 replay) */
 .dh-fraud-score-ring {
-  width: 132px;
-  height: 132px;
-  border-radius: 50%;
-  border: 8px solid var(--dh-danger);
-  display: inline-flex;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  font-family: var(--font-mono);
+}
+.dh-fraud-donut {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.dh-fraud-donut-track {
+  fill: none;
+  stroke: rgba(220, 38, 38, 0.16);
+  stroke-width: 11;
+}
+.dh-fraud-donut-arc {
+  fill: none;
+  stroke: var(--dh-danger);
+  stroke-width: 11;
+  stroke-linecap: round;
+  stroke-dasharray: 326.726; /* 2π·52 */
+  stroke-dashoffset: 326.726; /* começa vazio */
+  animation: dh-fraud-donut-fill 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+@keyframes dh-fraud-donut-fill {
+  to { stroke-dashoffset: calc(326.726 * (1 - var(--score, 38) / 100)); }
+}
+.dh-fraud-score-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
   align-items: baseline;
   justify-content: center;
   gap: 2px;
-  background: #fff;
-  font-family: var(--font-mono);
 }
 .dh-fraud-score-val {
-  font-size: 36px;
+  font-size: 42px;
   font-weight: 900;
   color: var(--dh-danger-strong);
-  line-height: 1.18;
+  line-height: 1;
   letter-spacing: -0.02em;
-  padding-bottom: max(0.15em, 4px);
 }
 .dh-fraud-score-unit {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--dh-muted);
 }
@@ -3190,8 +3234,8 @@
 .dh-fraud-reasons {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-top: 14px;
+  gap: 7px;
+  padding-top: 11px;
   border-top: 1px solid rgba(220, 38, 38, 0.18);
   text-align: left;
 }
@@ -4701,29 +4745,6 @@
   text-align: center;
   box-shadow: 0 18px 40px rgba(220, 38, 38, 0.1);
 }
-.dh-fraud-score-ring {
-  position: relative;
-  overflow: hidden;
-}
-.dh-fraud-score-ring::before {
-  content: '';
-  position: absolute;
-  inset: -20px;
-  background: conic-gradient(from 90deg, rgba(220, 38, 38, 0.24), rgba(245, 158, 11, 0.16), rgba(220, 38, 38, 0.24));
-  animation: dh-fraud-spin 4.5s linear infinite;
-}
-.dh-fraud-score-ring::after {
-  content: '';
-  position: absolute;
-  inset: 12px;
-  border-radius: 999px;
-  background: #fff;
-}
-.dh-fraud-score-val,
-.dh-fraud-score-unit {
-  position: relative;
-  z-index: 1;
-}
 .dh-fraud-score-copy {
   font-size: 13px;
   line-height: 1.5;
@@ -4918,6 +4939,11 @@
   .dh-life-badge {
     opacity: 1 !important;
     transform: none !important;
+  }
+  /* donut do score: sem animação, mas mostra o estado final preenchido */
+  .dh-fraud-donut-arc {
+    animation: none !important;
+    stroke-dashoffset: calc(326.726 * (1 - var(--score, 38) / 100)) !important;
   }
   .dh-opening,
   .dh-scene,
@@ -6328,19 +6354,20 @@
   /* Slide 19 — Fraude: 1 coluna, scan/copy saem, 2 issues, anel menor */
   .dh-fraud-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 8px; }
   .dh-fraud-doc { padding: 12px 14px; gap: 8px; }
-  .dh-fraud-doc-rows { flex: none; }
-  .dh-fraud-doc-row { padding: 7px 0; }
+  /* mobile: 1 coluna, sem dead-space horizontal — convênio fica oculto p/ compactar */
+  .dh-fraud-doc-cols { grid-template-columns: 1fr; gap: 0; }
+  .dh-fraud-doc-group { gap: 9px 14px; }
+  .dh-fraud-doc-group-health { display: none; }
   .dh-fraud-doc-scan { display: none; }
   .dh-fraud-score { justify-content: flex-start; gap: 8px; padding: 12px 14px; }
   .dh-fraud-verdict { gap: 6px; }
   .dh-fraud-score-copy { display: none; }
-  .dh-fraud-doc-row + .dh-fraud-doc-row + .dh-fraud-doc-row { display: none; }
   .dh-fraud-reasons { padding-top: 10px; gap: 6px; }
   .dh-fraud-reasons .dh-fraud-trust-row { display: none; }
   .dh-fraud-issue { padding: 7px 10px; }
   .dh-fraud-issues .dh-fraud-issue:nth-child(n+3) { display: none; }
-  .dh-fraud-score-ring { width: 72px; height: 72px; }
-  .dh-fraud-score-val { font-size: 24px; }
+  .dh-fraud-score-ring { width: 96px; height: 96px; }
+  .dh-fraud-score-val { font-size: 27px; }
   .dh-fraud-score-unit { font-size: 12px; }
 
   /* Slide 21 — Prevenção: 2 stats */
@@ -6375,9 +6402,7 @@
   .dh-fraud-doc { padding: 12px 14px 22px; }
   .dh-fraud-issues { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
   .dh-fraud-issue { padding: 6px 10px; }
-  .dh-fraud-score-ring { width: 80px; height: 80px; }
-  /* trust: kicker + chips numa única linha horizontal (§6.3) */
-  .dh-fraud-trust { flex-direction: row; align-items: center; justify-content: center; padding: 10px 14px; gap: 12px; }
+  .dh-fraud-score-ring { width: 114px; height: 114px; }
 }
 
 /* ===== DESKTOP CURTO (≤700px de altura) — conteúdo natural ≤ ~490px =====
@@ -6463,12 +6488,11 @@
   .dh-wa-msg, .dh-wa-pix { padding: 8px 10px; }
   .dh-wa-ok { display: none; }
 
-  /* Slide 19 — Fraude */
+  /* Slide 19 — Fraude (desktop curto) */
   .dh-fraud-doc-scan { display: none; }
-  .dh-fraud-trust { display: none; }
   .dh-fraud-score-copy { display: none; }
   .dh-fraud-issues .dh-fraud-issue:nth-child(n+3) { display: none; }
-  .dh-fraud-score-ring { width: 72px; height: 72px; }
+  .dh-fraud-score-ring { width: 100px; height: 100px; }
 
   /* Slide 20 — NF: máx. 3 linhas + foot compacto */
   .dh-nf-table .dh-nf-tr:nth-child(n+5) { display: none; }

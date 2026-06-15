@@ -8,7 +8,7 @@
  * PALCO (entre header/footer) com scale-to-fit.
  */
 
-import { type CSSProperties, useState, useEffect, useRef, useCallback } from 'react'
+import { type CSSProperties, Fragment, useState, useEffect, useRef, useCallback } from 'react'
 import { SlideEngine, useLang, useSlide, type SlideDef } from './SlideEngine'
 import { MedIcon } from '@/components/MedIcon'
 import { BASE_PATH } from '@/components/config'
@@ -1798,6 +1798,7 @@ function RenderS17() {
 function RenderS18() {
   const c = captionFor(19)
   const t = S18C[useLang()]
+  const scoreNum = parseInt(t.scoreVal, 10) || 0
   return (
     <>
       <Scene index={19} url="health.iconsai.ai/antifraude">
@@ -1807,10 +1808,20 @@ function RenderS18() {
           <div className="dh-fraud-doc">
             <div className="dh-fraud-doc-kicker">{t.docKicker}</div>
             <div className="dh-fraud-doc-title">{t.docTitle}</div>
-            <div className="dh-fraud-doc-rows">
-              <div className="dh-fraud-doc-row"><span>{t.rEmit}</span><span>{t.emitVal}</span></div>
-              <div className="dh-fraud-doc-row"><span>{t.rVal}</span><span className="dh-mono">{t.valVal}</span></div>
-              <div className="dh-fraud-doc-row"><span>{t.rDate}</span><span className="dh-mono">{t.dateVal}</span></div>
+            <div className="dh-fraud-doc-cols">
+              <div className="dh-fraud-doc-group">
+                <span className="dh-fraud-doc-k">{t.rEmit}</span><span className="dh-fraud-doc-v">{t.emitVal}</span>
+                <span className="dh-fraud-doc-k">{t.rVal}</span><span className="dh-fraud-doc-v dh-mono">{t.valVal}</span>
+                <span className="dh-fraud-doc-k">{t.rDate}</span><span className="dh-fraud-doc-v dh-mono">{t.dateVal}</span>
+              </div>
+              <div className="dh-fraud-doc-group dh-fraud-doc-group-health">
+                <span className="dh-fraud-doc-ghead">{t.healthKicker}</span>
+                {t.health.map((h) => (
+                  <Fragment key={h.k}>
+                    <span className="dh-fraud-doc-k">{h.k}</span><span className="dh-fraud-doc-v dh-mono">{h.v}</span>
+                  </Fragment>
+                ))}
+              </div>
             </div>
             <div className="dh-fraud-doc-scan">
               {t.scan.map((s) => (
@@ -1822,9 +1833,15 @@ function RenderS18() {
           <div className="dh-fraud-score">
             <div className="dh-fraud-verdict">
               <div className="dh-fraud-score-kicker">{t.scoreKicker}</div>
-              <div className="dh-fraud-score-ring">
-                <span className="dh-fraud-score-val">{t.scoreVal}</span>
-                <span className="dh-fraud-score-unit">{t.scoreUnit}</span>
+              <div className="dh-fraud-score-ring" style={{ ['--score' as string]: scoreNum }}>
+                <svg className="dh-fraud-donut" viewBox="0 0 120 120" aria-hidden="true">
+                  <circle className="dh-fraud-donut-track" cx="60" cy="60" r="52" />
+                  <circle className="dh-fraud-donut-arc" cx="60" cy="60" r="52" />
+                </svg>
+                <div className="dh-fraud-score-center">
+                  <span className="dh-fraud-score-val">{t.scoreVal}</span>
+                  <span className="dh-fraud-score-unit">{t.scoreUnit}</span>
+                </div>
               </div>
               <div className="dh-fraud-score-label dh-fraud-score-bad">{t.scoreLabel}</div>
               <div className="dh-fraud-score-copy">{t.scoreCopy}</div>
