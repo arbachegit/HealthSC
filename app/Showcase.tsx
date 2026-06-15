@@ -2015,10 +2015,8 @@ function RenderS23() {
   return (
     <>
       <Scene index={23} url="health.iconsai.ai/navegacao">
-        <div className="dh-explain-stage">
-          <div className="dh-explain-visual">
-            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-            <div className="dh-flow">
+        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+        <div className="dh-flow">
               <svg viewBox="0 0 640 220" className="dh-flow-svg" preserveAspectRatio="xMidYMid meet">
                 <path d="M 90 110 C 160 60, 220 60, 290 60" className="dh-flow-edge dh-flow-edge-a" />
                 <path d="M 90 110 C 160 160, 220 160, 290 160" className="dh-flow-edge dh-flow-edge-b" />
@@ -2055,14 +2053,11 @@ function RenderS23() {
                 </g>
               </svg>
             </div>
-            <div className="dh-flow-legend">
-              <span className="dh-flow-leg dh-flow-leg-a">{t.legA}</span>
-              <span className="dh-flow-leg dh-flow-leg-b">{t.legB}</span>
-            </div>
-            <SourcesFooter variant="medical" />
-          </div>
-          <ExplainAside index={23} />
+        <div className="dh-flow-legend">
+          <span className="dh-flow-leg dh-flow-leg-a">{t.legA}</span>
+          <span className="dh-flow-leg dh-flow-leg-b">{t.legB}</span>
         </div>
+        <div className="dh-flow-foot"><SourcesFooter variant="medical" /></div>
       </Scene>
       <SceneCaption index={23} title={c.title} desc={c.desc} />
     </>
@@ -2075,27 +2070,24 @@ function RenderS24() {
   return (
     <>
       <Scene index={24} url="health.iconsai.ai/combinacao-tratamentos">
-        <div className="dh-explain-stage">
-          <div className="dh-explain-visual">
-            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-            <div className="dh-matrix">
-              <div className="dh-matrix-row dh-matrix-row-head">
-                <span className="dh-matrix-corner">{t.corner}</span>
-                {t.cols.map((col) => (
-                  <span className="dh-matrix-h" key={col}>{col}</span>
-                ))}
-              </div>
-              {t.rows.map((row) => (
-                <MatrixRow tratamento={row.tratamento} key={row.tratamento}>
-                  {row.cells.map((cell, i) => (
-                    <MatrixCell key={`${row.tratamento}-${i}`} prob={cell.prob} ic={cell.ic} tone={cell.tone} />
-                  ))}
-                </MatrixRow>
-              ))}
-            </div>
-            <SourcesFooter variant="medical" strong />
+        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+        <div className="dh-matrix">
+          <div className="dh-matrix-row dh-matrix-row-head">
+            <span className="dh-matrix-corner">{t.corner}</span>
+            {t.cols.map((col) => (
+              <span className="dh-matrix-h" key={col}>{col}</span>
+            ))}
           </div>
-          <ExplainAside index={24} />
+          {t.rows.map((row) => (
+            <MatrixRow tratamento={row.tratamento} key={row.tratamento}>
+              {row.cells.map((cell, i) => (
+                <MatrixCell key={`${row.tratamento}-${i}`} prob={cell.prob} ic={cell.ic} tone={cell.tone} />
+              ))}
+            </MatrixRow>
+          ))}
+        </div>
+        <div className="dh-matrix-foot">
+          <SourcesFooter variant="medical" strong />
         </div>
       </Scene>
       <SceneCaption index={24} title={c.title} desc={c.desc} />
