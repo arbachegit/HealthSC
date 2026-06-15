@@ -1932,34 +1932,43 @@ function RenderS21() {
   return (
     <>
       <Scene index={21} url="health.iconsai.ai/diagnostico">
-        <div className="dh-explain-stage">
-          <div className="dh-explain-visual">
-            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-            <div className="dh-diag-pipeline">
-              <div className="dh-diag-node">
-                <div className="dh-diag-node-k">{t.nSymptoms}</div>
-                {t.symptoms.map((s) => (
-                  <div className="dh-diag-chip" key={s}>{s}</div>
-                ))}
-              </div>
-              <span className="dh-diag-arrow">→</span>
-              <div className="dh-diag-node">
-                <div className="dh-diag-node-k">{t.nCid}</div>
-                {t.cids.map((cid, i) => (
-                  <div className="dh-diag-cid" key={cid.code}><span>{cid.code}</span><span className={`dh-diag-prob dh-prob-${cid.tone}`}><CountUpValue value={cid.prob} slideIndex={21} delayMs={1500 + i * 160} durationMs={700} /></span></div>
-                ))}
-              </div>
-              <span className="dh-diag-arrow">→</span>
-              <div className="dh-diag-node">
-                <div className="dh-diag-node-k">{t.nPlan}</div>
-                {t.plan.map((p) => (
-                  <div className={`dh-diag-action ${p.warn ? 'dh-diag-action-warn' : ''}`} key={p.text}>{p.text}</div>
-                ))}
-              </div>
+        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+        <div className="dh-diag-pipeline">
+          <div className="dh-diag-node">
+            <div className="dh-diag-node-k">{t.nSymptoms}</div>
+            <div className="dh-diag-items">
+              {t.symptoms.map((s) => (
+                <div className="dh-diag-chip" key={s}>{s}</div>
+              ))}
             </div>
-            <SourcesFooter variant="medical" />
           </div>
-          <ExplainAside index={21} />
+          <span className="dh-diag-arrow" aria-hidden="true">→</span>
+          <div className="dh-diag-node dh-diag-node-cid">
+            <div className="dh-diag-node-k">{t.nCid}</div>
+            <div className="dh-diag-items">
+              {t.cids.map((cid, i) => (
+                <div className="dh-diag-cid" key={cid.code}>
+                  <div className="dh-diag-cid-top">
+                    <span className="dh-diag-cid-code">{cid.code}</span>
+                    <span className={`dh-diag-prob dh-prob-${cid.tone}`}><CountUpValue value={cid.prob} slideIndex={21} delayMs={1600 + i * 180} durationMs={700} /></span>
+                  </div>
+                  <span className="dh-diag-cid-bar"><span className={`dh-diag-cid-fill dh-prob-${cid.tone}`} style={{ width: cid.prob }} /></span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <span className="dh-diag-arrow" aria-hidden="true">→</span>
+          <div className="dh-diag-node">
+            <div className="dh-diag-node-k">{t.nPlan}</div>
+            <div className="dh-diag-items">
+              {t.plan.map((p) => (
+                <div className={`dh-diag-action ${p.warn ? 'dh-diag-action-warn' : ''}`} key={p.text}>{p.text}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="dh-diag-foot">
+          <SourcesFooter variant="medical" />
         </div>
       </Scene>
       <SceneCaption index={21} title={c.title} desc={c.desc} />

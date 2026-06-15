@@ -3369,20 +3369,24 @@
    ═══════════════════════════════════════════════════════════════════ */
 .dh-diag-pipeline {
   display: grid;
-  grid-template-columns: 1fr auto 1.1fr auto 1.1fr;
-  gap: 12px;
+  grid-template-columns: 1fr auto 1.15fr auto 1.15fr;
+  gap: 14px;
   align-items: stretch;
+  flex: 1;            /* fills the window-body (laudo pattern) — no §6.18 shrink */
+  min-height: 0;
 }
 .dh-diag-node {
-  padding: 14px;
+  padding: 16px 16px 18px;
   background: var(--dh-surface);
   border: 1px solid var(--dh-border);
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   min-width: 0;
+  box-shadow: 0 12px 30px -16px rgba(15, 118, 110, 0.18);
 }
+.dh-diag-node-cid { background: linear-gradient(180deg, #ffffff, #f0fdf4); }
 .dh-diag-node-k {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -3390,14 +3394,22 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--dh-primary-deep);
-  margin-bottom: 4px;
+  flex: 0 0 auto;
+}
+.dh-diag-items {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;   /* distribute items to fill the node height */
+  gap: 8px;
 }
 .dh-diag-chip {
-  padding: 6px 10px;
+  padding: 9px 12px;
   background: var(--dh-primary-soft);
   border: 1px solid var(--dh-border-strong);
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--dh-primary-deep);
   white-space: nowrap;
@@ -3406,41 +3418,40 @@
 }
 .dh-diag-cid {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
+  flex-direction: column;
+  gap: 6px;
+  padding: 9px 12px;
   background: #fff;
   border: 1px solid var(--dh-border);
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--dh-text);
+  border-radius: 10px;
 }
-.dh-diag-cid > span:first-child {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-  flex: 1 1 0;
+.dh-diag-cid-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.dh-diag-cid-code {
+  font-size: 13px; font-weight: 700; color: var(--dh-text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
 }
+.dh-diag-cid-bar { display: block; height: 7px; border-radius: 4px; background: var(--dh-bg2); overflow: hidden; }
+.dh-diag-cid-fill { display: block; height: 100%; border-radius: 4px; transform-origin: left center; }
+.dh-diag-cid-fill.dh-prob-high { background: linear-gradient(90deg, var(--dh-primary), var(--dh-primary-strong)); }
+.dh-diag-cid-fill.dh-prob-mid  { background: var(--dh-amber); }
+.dh-diag-cid-fill.dh-prob-low  { background: var(--dh-muted); }
 .dh-diag-prob {
   flex-shrink: 0;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 4px;
+  padding: 2px 8px;
+  border-radius: 5px;
 }
 .dh-prob-high { background: var(--dh-primary-strong); color: #fff; }
 .dh-prob-mid  { background: var(--dh-amber-soft);   color: var(--dh-amber-strong); }
 .dh-prob-low  { background: var(--dh-bg2);          color: var(--dh-muted); }
 .dh-diag-action {
-  padding: 6px 10px;
+  padding: 9px 12px;
   background: var(--dh-bg2);
   border-left: 3px solid var(--dh-primary);
-  border-radius: 4px;
-  font-size: 12px;
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--dh-text);
 }
@@ -3451,10 +3462,19 @@
 }
 .dh-diag-arrow {
   align-self: center;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   color: var(--dh-primary);
 }
+.dh-diag-foot { flex: 0 0 auto; margin-top: 12px; }
+/* CID probability bars sweep in after the CID node appears */
+.dh-diag-cid-fill { transform: scaleX(0); animation: dh-diag-bar-fill 0.75s cubic-bezier(0.16,1,0.3,1) both; }
+@keyframes dh-diag-bar-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.dh-diag-node-cid .dh-diag-cid:nth-child(1) .dh-diag-cid-fill { animation-delay: 1.35s; }
+.dh-diag-node-cid .dh-diag-cid:nth-child(2) .dh-diag-cid-fill { animation-delay: 1.50s; }
+.dh-diag-node-cid .dh-diag-cid:nth-child(3) .dh-diag-cid-fill { animation-delay: 1.65s; }
+.dh-diag-node-cid .dh-diag-cid:nth-child(4) .dh-diag-cid-fill { animation-delay: 1.80s; }
+.dh-scene-21 .dh-window-body { min-height: 0; }
 
 /* ═══════════════════════════════════════════════════════════════════
    CENA 22 — EXPECTATIVA DE VIDA
@@ -5745,23 +5765,21 @@
 .dh-diag-pipeline > .dh-diag-arrow:nth-child(4) { animation-delay: 1.7s, 2.1s; }
 
 /* Children stagger in within each node */
-.dh-diag-node > .dh-diag-chip,
-.dh-diag-node > .dh-diag-cid,
-.dh-diag-node > .dh-diag-action {
+.dh-diag-items > * {
   opacity: 0;
   animation: dh-diag-child-in 0.4s ease both;
 }
-.dh-diag-pipeline > .dh-diag-node:nth-child(1) > *:nth-child(2) { animation-delay: 0.35s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(1) > *:nth-child(3) { animation-delay: 0.48s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(1) > *:nth-child(4) { animation-delay: 0.61s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(1) > *:nth-child(5) { animation-delay: 0.74s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(3) > *:nth-child(2) { animation-delay: 1.15s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(3) > *:nth-child(3) { animation-delay: 1.30s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(3) > *:nth-child(4) { animation-delay: 1.45s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(3) > *:nth-child(5) { animation-delay: 1.60s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(5) > *:nth-child(2) { animation-delay: 2.15s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(5) > *:nth-child(3) { animation-delay: 2.30s; }
-.dh-diag-pipeline > .dh-diag-node:nth-child(5) > *:nth-child(4) { animation-delay: 2.45s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(1) .dh-diag-items > *:nth-child(1) { animation-delay: 0.35s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(1) .dh-diag-items > *:nth-child(2) { animation-delay: 0.48s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(1) .dh-diag-items > *:nth-child(3) { animation-delay: 0.61s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(1) .dh-diag-items > *:nth-child(4) { animation-delay: 0.74s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(3) .dh-diag-items > *:nth-child(1) { animation-delay: 1.15s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(3) .dh-diag-items > *:nth-child(2) { animation-delay: 1.30s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(3) .dh-diag-items > *:nth-child(3) { animation-delay: 1.45s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(3) .dh-diag-items > *:nth-child(4) { animation-delay: 1.60s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(5) .dh-diag-items > *:nth-child(1) { animation-delay: 2.15s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(5) .dh-diag-items > *:nth-child(2) { animation-delay: 2.30s; }
+.dh-diag-pipeline > .dh-diag-node:nth-child(5) .dh-diag-items > *:nth-child(3) { animation-delay: 2.45s; }
 /* the top CID (high prob) gets a steady highlight ring once revealed */
 .dh-diag-pipeline > .dh-diag-node:nth-child(3) .dh-diag-cid:nth-child(2) {
   box-shadow: 0 0 0 1.5px var(--dh-primary), 0 8px 20px -8px rgba(16,185,129,0.4);
