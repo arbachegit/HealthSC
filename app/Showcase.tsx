@@ -49,19 +49,21 @@ const DH_NAV: DhNavScene[] = [
   { startMs: 109_000, step: '10', label: 'Remédios · RAG' },
   { startMs: 119_000, step: '11', label: 'Chat anamnese' },
   { startMs: 129_000, step: '12', label: 'Laudo SOAP' },
-  { startMs: 139_000, step: '13', label: 'Agenda' },
-  { startMs: 149_000, step: '14', label: 'Faturamento' },
-  { startMs: 159_000, step: '15', label: 'Almoxarifado' },
-  { startMs: 169_000, step: '16', label: 'Farmácia' },
-  { startMs: 179_000, step: '17', label: 'Cobrança PIX' },
-  { startMs: 189_000, step: '18', label: 'Antifraude' },
-  { startMs: 199_000, step: '19', label: 'NF automática' },
-  { startMs: 209_000, step: '20', label: 'Previsão receita' },
-  { startMs: 219_000, step: '21', label: 'Diagnóstico CID' },
-  { startMs: 229_000, step: '22', label: 'Expectativa vida' },
-  { startMs: 239_000, step: '23', label: 'Navegação paciente' },
-  { startMs: 249_000, step: '24', label: 'Combinação tratos' },
-  { startMs: 259_000, step: '25', label: 'Fecho' },
+  { startMs: 134_000, step: '13', label: 'Gestão de recursos' },
+  { startMs: 139_000, step: '14', label: 'Agenda' },
+  { startMs: 149_000, step: '15', label: 'Faturamento' },
+  { startMs: 159_000, step: '16', label: 'Almoxarifado' },
+  { startMs: 169_000, step: '17', label: 'Farmácia' },
+  { startMs: 179_000, step: '18', label: 'Cobrança PIX' },
+  { startMs: 189_000, step: '19', label: 'Antifraude' },
+  { startMs: 199_000, step: '20', label: 'NF automática' },
+  { startMs: 209_000, step: '21', label: 'Previsão receita' },
+  { startMs: 214_000, step: '22', label: 'Dashboard de Controle' },
+  { startMs: 219_000, step: '23', label: 'Diagnóstico CID' },
+  { startMs: 229_000, step: '24', label: 'Expectativa vida' },
+  { startMs: 239_000, step: '25', label: 'Navegação paciente' },
+  { startMs: 249_000, step: '26', label: 'Combinação tratos' },
+  { startMs: 259_000, step: '27', label: 'Fecho' },
 ]
 
 /* TermoId removed — checkboxes are now CSS-animated, not interactive */
@@ -408,6 +410,7 @@ const CAPTIONS_RAW = [
   'Remédios — RAG cruza transcript com catálogo de medicações',
   'Chat — entrevista estruturada com citação literal do áudio, bubbles emerald',
   'Laudo SOAP + Gestão clínica — agenda, estoque, resumo por áudio, selo LGPD/ANS',
+  'Gestão de recursos — operação da clínica: agenda, faturamento, estoque, farmácia, cobrança, antifraude, NF e previsão',
   'Marcação de agenda — slots semanais + drag paciente + confirmação WhatsApp',
   'Faturamento previsto — 4 semanas previsto vs realizado, ticket, cancelamentos',
   'Almoxarifado — estoque atual, mínimo, sugestão de compra, auto-restock',
@@ -416,6 +419,7 @@ const CAPTIONS_RAW = [
   'Antifraude de recibos — IA detecta inconsistências, score de confiança 0-100%',
   'NF automática — NFS-e municipal pós-atendimento, status SEFAZ em tempo real',
   'Previsão de receita — 12 meses, CAGR, sazonalidade, IC 80% sombreado',
+  'Dashboard de Controle — inteligência clínica: diagnóstico, expectativa de vida, navegação e combinação de tratamentos',
   'Diagnóstico assistido — Sintomas → CID-10 (prob.) → Plano de ação',
   'Expectativa de vida — score risco perda/mortalidade, busca ativa priorizada',
   'Navegação paciente — flow diagram + probabilidade desfecho por caminho',
@@ -1635,37 +1639,37 @@ function AgendaSearch({ slideIndex, head, rows, patient, confirm, meta }: { slid
 }
 
 function RenderS13() {
-  const c = captionFor(13)
+  const c = captionFor(14)
   const t = S13C[useLang()]
   return (
     <>
-      <Scene index={13} url="health.iconsai.ai/agenda">
+      <Scene index={14} url="health.iconsai.ai/agenda">
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-            <AgendaSearch slideIndex={13} head={t.head} rows={t.rows} patient={t.patient} confirm={t.waConfirm} meta={t.waMeta} />
+            <AgendaSearch slideIndex={14} head={t.head} rows={t.rows} patient={t.patient} confirm={t.waConfirm} meta={t.waMeta} />
             <SourcesFooter />
           </div>
-          <ExplainAside index={13} />
+          <ExplainAside index={14} />
         </div>
       </Scene>
-      <SceneCaption index={13} title={c.title} desc={c.desc} />
+      <SceneCaption index={14} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS14() {
-  const c = captionFor(14)
+  const c = captionFor(15)
   const t = S14C[useLang()]
   return (
     <>
-      <Scene index={14} url="health.iconsai.ai/faturamento">
+      <Scene index={15} url="health.iconsai.ai/faturamento">
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
             <div className="dh-fat-chart">
               {t.bars.map((b, i) => (
-                <FatBar key={b.label} label={b.label} prev={b.prev} real={b.real} prevK={b.prevK} realK={b.realK} pending={b.pending} idx={i} slideIndex={14} />
+                <FatBar key={b.label} label={b.label} prev={b.prev} real={b.real} prevK={b.prevK} realK={b.realK} pending={b.pending} idx={i} slideIndex={15} />
               ))}
             </div>
             <div className="dh-fat-stats">
@@ -1678,20 +1682,20 @@ function RenderS14() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={14} />
+          <ExplainAside index={15} />
         </div>
       </Scene>
-      <SceneCaption index={14} title={c.title} desc={c.desc} />
+      <SceneCaption index={15} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS15() {
-  const c = captionFor(15)
+  const c = captionFor(16)
   const t = S15C[useLang()]
   return (
     <>
-      <Scene index={15} url="health.iconsai.ai/almoxarifado">
+      <Scene index={16} url="health.iconsai.ai/almoxarifado">
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
@@ -1711,20 +1715,20 @@ function RenderS15() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={15} />
+          <ExplainAside index={16} />
         </div>
       </Scene>
-      <SceneCaption index={15} title={c.title} desc={c.desc} />
+      <SceneCaption index={16} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS16() {
-  const c = captionFor(16)
+  const c = captionFor(17)
   const t = S16C[useLang()]
   return (
     <>
-      <Scene index={16} url="health.iconsai.ai/farmacia">
+      <Scene index={17} url="health.iconsai.ai/farmacia">
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
@@ -1744,20 +1748,20 @@ function RenderS16() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={16} />
+          <ExplainAside index={17} />
         </div>
       </Scene>
-      <SceneCaption index={16} title={c.title} desc={c.desc} />
+      <SceneCaption index={17} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS17() {
-  const c = captionFor(17)
+  const c = captionFor(18)
   const t = S17C[useLang()]
   return (
     <>
-      <Scene index={17} url="health.iconsai.ai/cobranca">
+      <Scene index={18} url="health.iconsai.ai/cobranca">
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
@@ -1767,8 +1771,8 @@ function RenderS17() {
                 <div className="dh-wa-meta"><div className="dh-wa-name">{t.waName}</div><div className="dh-wa-online">{t.waOnline}</div></div>
               </div>
               <div className="dh-wa-thread">
-                <div className="dh-wa-msg"><TypeText text={t.msg1} slideIndex={17} delay={350} cps={46} /></div>
-                <div className="dh-wa-msg"><TypeText text={`${t.msg2pre}${t.msg2val}${t.msg2pos}`} slideIndex={17} delay={1700} cps={46} /></div>
+                <div className="dh-wa-msg"><TypeText text={t.msg1} slideIndex={18} delay={350} cps={46} /></div>
+                <div className="dh-wa-msg"><TypeText text={`${t.msg2pre}${t.msg2val}${t.msg2pos}`} slideIndex={18} delay={1700} cps={46} /></div>
                 <div className="dh-wa-pix">
                   <span className="dh-wa-pix-icon"><MedIcon name="bolt" size={18} /></span>
                   <div className="dh-wa-pix-body">
@@ -1778,25 +1782,25 @@ function RenderS17() {
                   <button className="dh-wa-pix-btn">{t.payBtn}</button>
                 </div>
                 <div className="dh-wa-msg dh-wa-msg-user">{t.userMsg}</div>
-                <div className="dh-wa-msg dh-wa-ok"><TypeText text={t.okMsg} slideIndex={17} delay={4500} cps={46} /></div>
+                <div className="dh-wa-msg dh-wa-ok"><TypeText text={t.okMsg} slideIndex={18} delay={4500} cps={46} /></div>
               </div>
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={17} />
+          <ExplainAside index={18} />
         </div>
       </Scene>
-      <SceneCaption index={17} title={c.title} desc={c.desc} />
+      <SceneCaption index={18} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS18() {
-  const c = captionFor(18)
+  const c = captionFor(19)
   const t = S18C[useLang()]
   return (
     <>
-      <Scene index={18} url="health.iconsai.ai/antifraude">
+      <Scene index={19} url="health.iconsai.ai/antifraude">
         <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
         <div className="dh-fraud-grid">
           <div className="dh-fraud-doc">
@@ -1836,17 +1840,17 @@ function RenderS18() {
         </div>
         <SourcesFooter />
       </Scene>
-      <SceneCaption index={18} title={c.title} desc={c.desc} />
+      <SceneCaption index={19} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS19() {
-  const c = captionFor(19)
+  const c = captionFor(20)
   const t = S19C[useLang()]
   return (
     <>
-      <Scene index={19} url="health.iconsai.ai/nf">
+      <Scene index={20} url="health.iconsai.ai/nf">
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
@@ -1870,20 +1874,20 @@ function RenderS19() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={19} />
+          <ExplainAside index={20} />
         </div>
       </Scene>
-      <SceneCaption index={19} title={c.title} desc={c.desc} />
+      <SceneCaption index={20} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS20() {
-  const c = captionFor(20)
+  const c = captionFor(21)
   const t = S20C[useLang()]
   return (
     <>
-      <Scene index={20} url="health.iconsai.ai/previsao-receita">
+      <Scene index={21} url="health.iconsai.ai/previsao-receita">
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
@@ -1918,20 +1922,20 @@ function RenderS20() {
             </div>
             <SourcesFooter />
           </div>
-          <ExplainAside index={20} />
+          <ExplainAside index={21} />
         </div>
       </Scene>
-      <SceneCaption index={20} title={c.title} desc={c.desc} />
+      <SceneCaption index={21} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS21() {
-  const c = captionFor(21)
+  const c = captionFor(23)
   const t = S21C[useLang()]
   return (
     <>
-      <Scene index={21} url="health.iconsai.ai/diagnostico">
+      <Scene index={23} url="health.iconsai.ai/diagnostico">
         <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
         <div className="dh-diag-pipeline">
           <div className="dh-diag-node">
@@ -1950,7 +1954,7 @@ function RenderS21() {
                 <div className="dh-diag-cid" key={cid.code}>
                   <div className="dh-diag-cid-top">
                     <span className="dh-diag-cid-code">{cid.code}</span>
-                    <span className={`dh-diag-prob dh-prob-${cid.tone}`}><CountUpValue value={cid.prob} slideIndex={21} delayMs={1600 + i * 180} durationMs={700} /></span>
+                    <span className={`dh-diag-prob dh-prob-${cid.tone}`}><CountUpValue value={cid.prob} slideIndex={23} delayMs={1600 + i * 180} durationMs={700} /></span>
                   </div>
                   <span className="dh-diag-cid-bar"><span className={`dh-diag-cid-fill dh-prob-${cid.tone}`} style={{ width: cid.prob }} /></span>
                 </div>
@@ -1971,17 +1975,17 @@ function RenderS21() {
           <SourcesFooter variant="medical" />
         </div>
       </Scene>
-      <SceneCaption index={21} title={c.title} desc={c.desc} />
+      <SceneCaption index={23} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS22() {
-  const c = captionFor(22)
+  const c = captionFor(24)
   const t = S22C[useLang()]
   return (
     <>
-      <Scene index={22} url="health.iconsai.ai/expectativa-vida">
+      <Scene index={24} url="health.iconsai.ai/expectativa-vida">
         <div className="dh-explain-stage">
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
@@ -2001,20 +2005,20 @@ function RenderS22() {
             </div>
             <SourcesFooter variant="medical" />
           </div>
-          <ExplainAside index={22} />
+          <ExplainAside index={24} />
         </div>
       </Scene>
-      <SceneCaption index={22} title={c.title} desc={c.desc} />
+      <SceneCaption index={24} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS23() {
-  const c = captionFor(23)
+  const c = captionFor(25)
   const t = S23C[useLang()]
   return (
     <>
-      <Scene index={23} url="health.iconsai.ai/navegacao">
+      <Scene index={25} url="health.iconsai.ai/navegacao">
         <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
         <div className="dh-flow">
               <svg viewBox="0 0 640 220" className="dh-flow-svg" preserveAspectRatio="xMidYMid meet">
@@ -2059,17 +2063,17 @@ function RenderS23() {
         </div>
         <div className="dh-flow-foot"><SourcesFooter variant="medical" /></div>
       </Scene>
-      <SceneCaption index={23} title={c.title} desc={c.desc} />
+      <SceneCaption index={25} title={c.title} desc={c.desc} />
     </>
   )
 }
 
 function RenderS24() {
-  const c = captionFor(24)
+  const c = captionFor(26)
   const t = S24C[useLang()]
   return (
     <>
-      <Scene index={24} url="health.iconsai.ai/combinacao-tratamentos">
+      <Scene index={26} url="health.iconsai.ai/combinacao-tratamentos">
         <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
         <div className="dh-matrix">
           <div className="dh-matrix-row dh-matrix-row-head">
@@ -2090,7 +2094,7 @@ function RenderS24() {
           <SourcesFooter variant="medical" strong />
         </div>
       </Scene>
-      <SceneCaption index={24} title={c.title} desc={c.desc} />
+      <SceneCaption index={26} title={c.title} desc={c.desc} />
     </>
   )
 }
@@ -2121,14 +2125,52 @@ function RenderFecho() {
 }
 
 /* ═════════════════════════════════════════════════════════════════════
+   SECTION DIVIDERS — bold editorial chapter openers (intro do que vem a seguir)
+   ═════════════════════════════════════════════════════════════════════ */
+const DIVIDERS = {
+  gestao: {
+    'pt-BR': { kicker: 'Operação da clínica', title: 'Gestão de recursos financeiros, humano e estoques', intro: 'A partir daqui, o DiscoveryHealth opera a clínica inteira — toda conectada ao mesmo paciente. O médico passa a ver, em sequência:', items: ['Agenda inteligente', 'Faturamento previsto', 'Almoxarifado', 'Farmácia', 'Cobrança PIX', 'Antifraude de recibos', 'Nota fiscal automática', 'Previsão de receita'] },
+    'pt-PT': { kicker: 'Operação da clínica', title: 'Gestão de recursos financeiros, humanos e de stocks', intro: 'A partir daqui, o DiscoveryHealth opera a clínica inteira — toda ligada ao mesmo doente. O médico passa a ver, em sequência:', items: ['Agenda inteligente', 'Faturação prevista', 'Armazém', 'Farmácia', 'Cobrança', 'Antifraude de recibos', 'Fatura automática', 'Previsão de receita'] },
+    en: { kicker: 'Clinic operations', title: 'Financial, human and inventory resource management', intro: 'From here, DiscoveryHealth runs the whole clinic — all connected to the same patient. The physician now sees, in sequence:', items: ['Smart schedule', 'Revenue forecast', 'Inventory', 'Pharmacy', 'Payment collection', 'Receipt anti-fraud', 'Automatic invoice', 'Revenue projection'] },
+  },
+  dashboard: {
+    'pt-BR': { kicker: 'Inteligência clínica', title: 'Dashboard de Controle', intro: 'A camada de decisão clínica do DiscoveryHealth — apoio à decisão, sempre com o médico no comando. A seguir:', items: ['Diagnóstico assistido CID-10', 'Expectativa de vida', 'Navegação do paciente', 'Combinação de tratamentos'] },
+    'pt-PT': { kicker: 'Inteligência clínica', title: 'Dashboard de Controlo', intro: 'A camada de decisão clínica do DiscoveryHealth — apoio à decisão, sempre com o médico no comando. A seguir:', items: ['Diagnóstico assistido CID-10', 'Esperança de vida', 'Navegação do doente', 'Combinação de tratamentos'] },
+    en: { kicker: 'Clinical intelligence', title: 'Control Dashboard', intro: "DiscoveryHealth's clinical decision layer — decision support, always with the physician in command. Next:", items: ['Assisted ICD-10 diagnosis', 'Life expectancy', 'Patient navigation', 'Treatment combinations'] },
+  },
+} as const
+
+function SectionDivider({ data }: { data: { kicker: string; title: string; intro: string; items: readonly string[] } }) {
+  return (
+    <div className="dh-divider">
+      <div className="dh-divider-head">
+        <span className="dh-divider-kicker">{data.kicker}</span>
+        <h2 className="dh-divider-title">{data.title}</h2>
+        <p className="dh-divider-intro">{data.intro}</p>
+      </div>
+      <div className="dh-divider-grid">
+        {data.items.map((it, i) => (
+          <div className="dh-divider-item" key={it} style={{ animationDelay: `${0.5 + i * 0.07}s` }}>
+            <span className="dh-divider-num">{String(i + 1).padStart(2, '0')}</span>
+            <span className="dh-divider-label">{it}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+function RenderGestao() { return <SectionDivider data={DIVIDERS.gestao[useLang()]} /> }
+function RenderDashboard() { return <SectionDivider data={DIVIDERS.dashboard[useLang()]} /> }
+
+/* ═════════════════════════════════════════════════════════════════════
    SCENES — composição pro shell
    ═════════════════════════════════════════════════════════════════════ */
 
 const RENDERERS: Array<() => React.ReactNode> = [
   RenderOpening,
   RenderS1, RenderS2, RenderS3, RenderS4, RenderS5, RenderS6, RenderS7, RenderS8,
-  RenderS9, RenderS10, RenderS11, RenderS12, RenderS13, RenderS14, RenderS15, RenderS16,
-  RenderS17, RenderS18, RenderS19, RenderS20, RenderS21, RenderS22, RenderS23, RenderS24,
+  RenderS9, RenderS10, RenderS11, RenderS12, RenderGestao, RenderS13, RenderS14, RenderS15, RenderS16,
+  RenderS17, RenderS18, RenderS19, RenderS20, RenderDashboard, RenderS21, RenderS22, RenderS23, RenderS24,
   RenderFecho,
 ]
 
