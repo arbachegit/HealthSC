@@ -3077,7 +3077,7 @@
   align-items: stretch;
 }
 .dh-fraud-doc {
-  padding: 14px 16px;
+  padding: 14px 16px 24px;
   background: var(--dh-surface);
   border: 1px solid var(--dh-border);
   border-radius: 12px;
@@ -3113,7 +3113,7 @@
   font-weight: 700;
 }
 .dh-fraud-score {
-  padding: 14px 16px;
+  padding: 14px 16px 24px;
   background: var(--dh-danger-soft);
   border: 1px solid #fca5a5;
   border-radius: 12px;
@@ -4620,16 +4620,16 @@
   align-items: stretch;
 }
 .dh-fraud-doc {
-  gap: 10px;
+  gap: 6px;
 }
 .dh-fraud-doc-scan {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 4px;
+  gap: 5px;
+  margin-top: 2px;
 }
 .dh-fraud-doc-scan span {
-  padding: 8px 10px;
+  padding: 6px 10px;
   border-radius: 10px;
   background: rgba(16, 185, 129, 0.06);
   font-size: 12px;
@@ -6295,7 +6295,7 @@
 
   /* Slide 19 — Fraude: issues lado a lado (§6.3), doc/anel compactos (nat 775 → ≤711) */
   .dh-fraud-grid { gap: 10px; }
-  .dh-fraud-doc { padding: 12px 14px; }
+  .dh-fraud-doc { padding: 12px 14px 22px; }
   .dh-fraud-issues { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
   .dh-fraud-issue { padding: 6px 10px; }
   .dh-fraud-score-ring { width: 80px; height: 80px; }
