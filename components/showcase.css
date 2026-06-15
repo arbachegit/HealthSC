@@ -3692,6 +3692,7 @@
   font-size: 12px;
   font-weight: 800;
   fill: var(--dh-primary-deep);
+  text-anchor: middle;
 }
 .dh-flow-node {
   fill: #fff;
@@ -6511,8 +6512,8 @@
   .dh-life-foot { display: none; }
   .dh-life-table .dh-life-tr:nth-child(n+5) { display: none; }
 
-  /* Slide 24 — Fluxo: legenda compacta */
-  .dh-flow-legend { gap: 8px; font-size: 12px; }
+  /* Slide 24 — Fluxo (desktop curto): legenda sai p/ o palco respirar (a aside já explica) */
+  .dh-flow-legend { display: none; }
 
   /* Slide 25 — Matrix: máx. 3 linhas */
   .dh-matrix .dh-matrix-row:nth-child(n+5) { display: none; }

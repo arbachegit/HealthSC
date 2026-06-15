@@ -2030,7 +2030,7 @@ function RenderS22() {
             </div>
             <SourcesFooter variant="medical" />
           </div>
-          <ExplainAside index={23} />
+          <ExplainAside index={22} />
         </div>
       </Scene>
       <SceneCaption index={24} title={c.title} desc={c.desc} />
@@ -2044,49 +2044,54 @@ function RenderS23() {
   return (
     <>
       <Scene index={25} url="health.iconsai.ai/navegacao">
-        <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
-        <div className="dh-flow">
-              <svg viewBox="0 0 640 220" className="dh-flow-svg" preserveAspectRatio="xMidYMid meet">
-                <path d="M 90 110 C 160 60, 220 60, 290 60" className="dh-flow-edge dh-flow-edge-a" />
-                <path d="M 90 110 C 160 160, 220 160, 290 160" className="dh-flow-edge dh-flow-edge-b" />
-                <path d="M 350 60 L 510 60" className="dh-flow-edge dh-flow-edge-a" />
-                <path d="M 350 160 L 510 160" className="dh-flow-edge dh-flow-edge-b" />
-                <text x="180" y="78" className="dh-flow-edge-label">{t.edgeA}</text>
-                <text x="180" y="190" className="dh-flow-edge-label">{t.edgeB}</text>
-                <text x="410" y="50" className="dh-flow-edge-label">{t.recovery}</text>
-                <text x="410" y="180" className="dh-flow-edge-label">{t.recovery}</text>
+        <div className="dh-explain-stage">
+          <div className="dh-explain-visual">
+            <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
+            <div className="dh-flow">
+              <svg viewBox="0 0 600 240" className="dh-flow-svg" preserveAspectRatio="xMidYMid meet">
+                <path d="M 132 110 C 190 80, 215 70, 240 64" className="dh-flow-edge dh-flow-edge-a" />
+                <path d="M 132 130 C 190 160, 215 170, 240 176" className="dh-flow-edge dh-flow-edge-b" />
+                <path d="M 360 64 L 468 64" className="dh-flow-edge dh-flow-edge-a" />
+                <path d="M 360 176 L 468 176" className="dh-flow-edge dh-flow-edge-b" />
+                <text x="186" y="72" className="dh-flow-edge-label">{t.edgeA}</text>
+                <text x="186" y="214" className="dh-flow-edge-label">{t.edgeB}</text>
+                <text x="414" y="52" className="dh-flow-edge-label">{t.recovery}</text>
+                <text x="414" y="164" className="dh-flow-edge-label">{t.recovery}</text>
                 <g>
-                  <circle cx="60" cy="110" r="28" className="dh-flow-node" />
-                  <text x="60" y="105" className="dh-flow-node-t">{t.nTriagem}</text>
-                  <text x="60" y="120" className="dh-flow-node-s">{t.nTriagemSub}</text>
+                  <rect x="12" y="96" width="120" height="48" rx="13" className="dh-flow-node" />
+                  <text x="72" y="116" className="dh-flow-node-t">{t.nTriagem}</text>
+                  <text x="72" y="133" className="dh-flow-node-s">{t.nTriagemSub}</text>
                 </g>
                 <g>
-                  <circle cx="320" cy="60" r="28" className="dh-flow-node dh-flow-node-a" />
-                  <text x="320" y="55" className="dh-flow-node-t">{t.nTratoA}</text>
-                  <text x="320" y="70" className="dh-flow-node-s">{t.nTratoASub}</text>
+                  <rect x="240" y="40" width="120" height="48" rx="13" className="dh-flow-node dh-flow-node-a" />
+                  <text x="300" y="60" className="dh-flow-node-t">{t.nTratoA}</text>
+                  <text x="300" y="77" className="dh-flow-node-s">{t.nTratoASub}</text>
                 </g>
                 <g>
-                  <circle cx="320" cy="160" r="28" className="dh-flow-node dh-flow-node-b" />
-                  <text x="320" y="155" className="dh-flow-node-t">{t.nTratoB}</text>
-                  <text x="320" y="170" className="dh-flow-node-s">{t.nTratoBSub}</text>
+                  <rect x="240" y="152" width="120" height="48" rx="13" className="dh-flow-node dh-flow-node-b" />
+                  <text x="300" y="172" className="dh-flow-node-t">{t.nTratoB}</text>
+                  <text x="300" y="189" className="dh-flow-node-s">{t.nTratoBSub}</text>
                 </g>
                 <g>
-                  <circle cx="540" cy="60" r="28" className="dh-flow-node dh-flow-node-out" />
-                  <text x="540" y="55" className="dh-flow-node-t">{t.nAlta}</text>
-                  <text x="540" y="70" className="dh-flow-node-s">67%</text>
+                  <rect x="468" y="40" width="120" height="48" rx="13" className="dh-flow-node dh-flow-node-out" />
+                  <text x="528" y="60" className="dh-flow-node-t">{t.nAlta}</text>
+                  <text x="528" y="77" className="dh-flow-node-s">67%</text>
                 </g>
                 <g>
-                  <circle cx="540" cy="160" r="28" className="dh-flow-node dh-flow-node-out" />
-                  <text x="540" y="155" className="dh-flow-node-t">{t.nAlta}</text>
-                  <text x="540" y="170" className="dh-flow-node-s">89%</text>
+                  <rect x="468" y="152" width="120" height="48" rx="13" className="dh-flow-node dh-flow-node-out" />
+                  <text x="528" y="172" className="dh-flow-node-t">{t.nAlta}</text>
+                  <text x="528" y="189" className="dh-flow-node-s">89%</text>
                 </g>
               </svg>
             </div>
-        <div className="dh-flow-legend">
-          <span className="dh-flow-leg dh-flow-leg-a">{t.legA}</span>
-          <span className="dh-flow-leg dh-flow-leg-b">{t.legB}</span>
+            <div className="dh-flow-legend">
+              <span className="dh-flow-leg dh-flow-leg-a">{t.legA}</span>
+              <span className="dh-flow-leg dh-flow-leg-b">{t.legB}</span>
+            </div>
+            <SourcesFooter variant="medical" />
+          </div>
+          <ExplainAside index={23} />
         </div>
-        <div className="dh-flow-foot"><SourcesFooter variant="medical" /></div>
       </Scene>
       <SceneCaption index={25} title={c.title} desc={c.desc} />
     </>
