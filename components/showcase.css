@@ -5303,22 +5303,22 @@
 
 /* --- msg2: second system message (delay 0.7s) --- */
 .dh-wa-thread > .dh-wa-msg:nth-child(2) {
-  animation: dh-wa-msg-in 0.5s ease-out 0.7s both;
+  animation: dh-wa-msg-in 0.5s ease-out 1.7s both;
 }
 
 /* --- msg3: PIX card (delay 1.1s) — scale-in with green glow --- */
 .dh-wa-thread > .dh-wa-pix {
-  animation: dh-wa-pix-in 0.6s ease-out 1.1s both;
+  animation: dh-wa-pix-in 0.6s ease-out 3.4s both;
 }
 
 /* --- msg4: user reply "Acabei de pagar" (delay 1.5s) — enter from right --- */
 .dh-wa-thread > .dh-wa-msg-user {
-  animation: dh-wa-msg-user-in 0.5s ease-out 1.5s both;
+  animation: dh-wa-msg-user-in 0.5s ease-out 4.0s both;
 }
 
 /* --- msg5: OK confirmation (delay 1.9s) — checkmark bounce --- */
 .dh-wa-thread > .dh-wa-ok {
-  animation: dh-wa-ok-in 0.5s ease-out 1.9s both;
+  animation: dh-wa-ok-in 0.5s ease-out 4.5s both;
 }
 
 

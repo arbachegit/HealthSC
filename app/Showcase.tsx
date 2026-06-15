@@ -248,18 +248,51 @@ function SoapWalkthrough({ slideIndex, soap }: { slideIndex: number; soap: { let
   )
 }
 
-function FatBar({ label, prev, real, prevK, realK, pending }: { label: string; prev: number; real: number; prevK: string; realK: string; pending?: boolean }) {
+/* ── CountUpValue: animates a numeric value one unit at a time from 0 to the target
+   parsed out of a formatted string (e.g. "R$ 62k" → counts 0→62, keeps the
+   "R$ " prefix and "k" suffix). Real-time counter-up; gated on currentSlide so it
+   replays on entry (§7); timing via performance.now (§1/§9). ── */
+function CountUpValue({ value, slideIndex, durationMs = 1100, delayMs = 0 }: { value: string; slideIndex: number; durationMs?: number; delayMs?: number }) {
+  const { currentSlide } = useSlide()
+  const m = value.match(/^(\D*)(\d[\d.,]*)(\D*)$/)
+  const target = m ? Math.round(parseFloat(m[2].replace(/\./g, '').replace(',', '.'))) : NaN
+  const [n, setN] = useState(0)
+  const startedRef = useRef(false)
+  useEffect(() => {
+    if (currentSlide !== slideIndex || !m || Number.isNaN(target)) { startedRef.current = false; setN(0); return }
+    if (startedRef.current) return
+    startedRef.current = true
+    const t0 = performance.now() + delayMs
+    let raf = 0
+    const tick = (now: number) => {
+      const e = now - t0
+      if (e < 0) { raf = requestAnimationFrame(tick); return }
+      const p = Math.min(1, e / durationMs)
+      const eased = 1 - Math.pow(1 - p, 2)
+      setN(Math.floor(eased * target))
+      if (p < 1) raf = requestAnimationFrame(tick)
+      else setN(target)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [currentSlide, slideIndex, value])
+  if (!m || Number.isNaN(target)) return <>{value}</>
+  return <>{m[1]}{n}{m[3]}</>
+}
+
+function FatBar({ label, prev, real, prevK, realK, pending, idx = 0, slideIndex }: { label: string; prev: number; real: number; prevK: string; realK: string; pending?: boolean; idx?: number; slideIndex: number }) {
   const u = UI[useLang()]
+  const base = 0.55 + idx * 0.4 // sync the count to when each bar finishes filling
   return (
     <div className="dh-fat-bar">
       <div className="dh-fat-bar-pair">
         <span className="dh-fat-bar-col dh-fat-bar-col-prev" style={{ height: `${prev}%` }}>
           <span className="dh-fat-bar-fill" />
-          <span className="dh-fat-bar-num">{prevK}</span>
+          <span className="dh-fat-bar-num"><CountUpValue value={prevK} slideIndex={slideIndex} delayMs={base * 1000} /></span>
         </span>
         <span className={`dh-fat-bar-col dh-fat-bar-col-real ${pending ? 'dh-fat-bar-col-pending' : ''}`} style={{ height: `${real}%` }}>
           {!pending && <span className="dh-fat-bar-fill" />}
-          {!pending && <span className="dh-fat-bar-num">{realK}</span>}
+          {!pending && <span className="dh-fat-bar-num"><CountUpValue value={realK} slideIndex={slideIndex} delayMs={(base + 0.2) * 1000} /></span>}
           {pending && <span className="dh-fat-bar-pending-label">{u.previsto}</span>}
         </span>
       </div>
@@ -1631,8 +1664,8 @@ function RenderS14() {
           <div className="dh-explain-visual">
             <SectionHeader kicker={t.kicker} title={t.title} subtitle={t.subtitle} />
             <div className="dh-fat-chart">
-              {t.bars.map((b) => (
-                <FatBar key={b.label} label={b.label} prev={b.prev} real={b.real} prevK={b.prevK} realK={b.realK} pending={b.pending} />
+              {t.bars.map((b, i) => (
+                <FatBar key={b.label} label={b.label} prev={b.prev} real={b.real} prevK={b.prevK} realK={b.realK} pending={b.pending} idx={i} slideIndex={14} />
               ))}
             </div>
             <div className="dh-fat-stats">
@@ -1734,8 +1767,8 @@ function RenderS17() {
                 <div className="dh-wa-meta"><div className="dh-wa-name">{t.waName}</div><div className="dh-wa-online">{t.waOnline}</div></div>
               </div>
               <div className="dh-wa-thread">
-                <div className="dh-wa-msg">{t.msg1}</div>
-                <div className="dh-wa-msg">{t.msg2pre}<strong>{t.msg2val}</strong>{t.msg2pos}</div>
+                <div className="dh-wa-msg"><TypeText text={t.msg1} slideIndex={17} delay={350} cps={46} /></div>
+                <div className="dh-wa-msg"><TypeText text={`${t.msg2pre}${t.msg2val}${t.msg2pos}`} slideIndex={17} delay={1700} cps={46} /></div>
                 <div className="dh-wa-pix">
                   <span className="dh-wa-pix-icon"><MedIcon name="bolt" size={18} /></span>
                   <div className="dh-wa-pix-body">
@@ -1745,7 +1778,7 @@ function RenderS17() {
                   <button className="dh-wa-pix-btn">{t.payBtn}</button>
                 </div>
                 <div className="dh-wa-msg dh-wa-msg-user">{t.userMsg}</div>
-                <div className="dh-wa-msg dh-wa-ok">{t.okMsg}</div>
+                <div className="dh-wa-msg dh-wa-ok"><TypeText text={t.okMsg} slideIndex={17} delay={4500} cps={46} /></div>
               </div>
             </div>
             <SourcesFooter />
