@@ -32,4 +32,4 @@ Pipeline 8-fases anti-deploy-fantasma: stamp `BUILD_ID` → `next build` → rsy
 
 Abertura tipográfica + 24 slides do fluxo clínico/operacional (termos LGPD, identificação, Aura, áudio-livre, fisiológico, auto-exames, upload de exames, medicações, chat-anamnese, laudo SOAP, agenda, faturamento, almoxarifado, farmácia, cobrança PIX, antifraude, NF-e, previsão de receita, diagnóstico CID-10, expectativa de vida, navegação do paciente, combinação de tratamentos).
 
-Narração tri-idioma (BR·PT·EN) com painel de leitura «Aa» — guiões em `narration/`; mp3 pré-gerados via `scripts/generate-narration.mjs` (etapa de áudio).
+Narração em quatro idiomas (BR·PT·EN·ES) com painel de leitura «Aa» — guiões em `narration/`; mp3 pré-gerados via `scripts/generate-narration.mjs` (etapa de áudio).

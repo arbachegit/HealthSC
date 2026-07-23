@@ -90,6 +90,26 @@ const DOC: Record<LangId, {
     tocImpact: "Impact & metrics — KPIs, anti-fraud & revenue",
     tocClosing: "Trust & reach",
   },
+  es: {
+    type: "PROPUESTA COMERCIAL",
+    overview: "Descripción general",
+    modules: "Módulos de flujo de trabajo",
+    flow: "Viaje del paciente",
+    clinical: "Flujo de trabajo clínico",
+    operational: "Flujo de trabajo operativo",
+    closing: "Confianza y alcance",
+    page: "página",
+    confidential: "Documento confidencial: distribución restringida. © 2026 IconosAI.",
+    toc: "Contenidos",
+    intelligence: "Inteligencia clínica",
+    impact: "Impacto y métricas",
+    tocCover: "Portada",
+    tocClinical: "Viaje clínico: 12 pasos orquestados por Aura",
+    tocOperational: "Viaje operativo: desde la programación hasta la facturación",
+    tocIntelligence: "Inteligencia clínica: informe SOAP, signos vitales y CIE-10",
+    tocImpact: "Impacto y métricas: KPI, antifraude e ingresos",
+    tocClosing: "Confianza y alcance",
+  },
 };
 
 const CLINICAL = {
@@ -134,6 +154,20 @@ const CLINICAL = {
     { n: "10", label: "Medication RAG" },
     { n: "11", label: "Anamnesis chat" },
     { n: "12", label: "SOAP report + ICD-10" },
+  ],
+  es: [
+    { n: "01", label: "Consentimiento HIPAA" },
+    { n: "02", label: "Identificación del paciente" },
+    { n: "03", label: "Confirmación de datos" },
+    { n: "04", label: "Aura – médico virtual" },
+    { n: "05", label: "audio gratis" },
+    { n: "06", label: "Preguntas sobre el aura" },
+    { n: "07", label: "Datos fisiológicos" },
+    { n: "08", label: "Autoexámenes guiados" },
+    { n: "09", label: "Subir examen" },
+    { n: "10", label: "TRAPO de medicación" },
+    { n: "11", label: "Charla de anamnesis" },
+    { n: "12", label: "Informe SOAP + CIE-10" },
   ],
 } satisfies Record<LangId, Array<{ n: string; label: string }>>;
 
@@ -180,6 +214,20 @@ const OPERATIONAL = {
     { n: "23", label: "Patient navigation" },
     { n: "24", label: "Treatment combinations" },
   ],
+  es: [
+    { n: "13", label: "Gestión de horarios" },
+    { n: "14", label: "Facturación" },
+    { n: "15", label: "inventario" },
+    { n: "16", label: "Farmacia · DEA" },
+    { n: "17", label: "colección zelle" },
+    { n: "18", label: "Puntuación antifraude" },
+    { n: "19", label: "Factura electrónica automática" },
+    { n: "20", label: "Previsión de ingresos" },
+    { n: "21", label: "Diagnóstico del DAI" },
+    { n: "22", label: "esperanza de vida" },
+    { n: "23", label: "Navegación del paciente" },
+    { n: "24", label: "Combinaciones de tratamientos" },
+  ],
 } satisfies Record<LangId, Array<{ n: string; label: string }>>;
 
 /* ═══ SOAP data (from content.ts S12) ═══ */
@@ -202,6 +250,12 @@ const SOAP: Record<LangId, { letter: string; title: string; text: string }[]> = 
     { letter: "A", title: "Assessment", text: "Tension headache + digital eye strain. DDx: migraine without aura." },
     { letter: "P", title: "Plan", text: "Visual hygiene (20-20-20). Recheck BP in 7 days. Refer if it persists." },
   ],
+  es: [
+    { letter: "S", title: "subjetivo", text: "Dolor de cabeza pulsátil durante 3 días, peor por la tarde, sensibilidad a la luz. Dolor 6/10." },
+    { letter: "oh", title: "Objetivo", text: "PA 128/82 · FC 74 · IMC 23,5 · hemograma normal · autoinforme 6/10." },
+    { letter: "un", title: "Evaluación", text: "Dolor de cabeza tensional + fatiga visual digital. DDx: migraña sin aura." },
+    { letter: "pag", title: "Planificar", text: "Higiene visual (20-20-20). Vuelva a controlar la presión arterial en 7 días. Consulte si persiste." },
+  ],
 };
 
 /* ═══ Vitals data (from content.ts S7) ═══ */
@@ -209,6 +263,7 @@ const VITALS: Record<LangId, [string, string, string][]> = {
   "pt-BR": [["Peso", "72", "kg"], ["Altura", "175", "cm"], ["PA", "128/82", "mmHg"], ["FC", "74", "bpm"], ["Glicemia", "94", "mg/dL"], ["IMC", "23.5", ""]],
   "pt-PT": [["Peso", "72", "kg"], ["Altura", "175", "cm"], ["TA", "128/82", "mmHg"], ["FC", "74", "bpm"], ["Glicemia", "94", "mg/dL"], ["IMC", "23.5", ""]],
   en: [["Weight", "159", "lb"], ["Height", "5'9\"", ""], ["BP", "128/82", "mmHg"], ["HR", "74", "bpm"], ["Glucose", "94", "mg/dL"], ["BMI", "23.5", ""]],
+  es: [["Peso", "159", "libra"], ["altura", "5'9\"", ""], ["PA", "128/82", "mmHg"], ["recursos humanos", "74", "bpm"], ["glucosa", "94", "mg/dL"], ["IMC", "23.5", ""]],
 };
 
 /* ═══ CID/ICD data (from content.ts S21) ═══ */
@@ -227,6 +282,11 @@ const CIDS: Record<LangId, { code: string; prob: string }[]> = {
     { code: "G44.2 · Tension headache", prob: "72%" },
     { code: "G43.0 · Migraine w/o aura", prob: "19%" },
     { code: "H53.5 · Eye strain", prob: "6%" },
+  ],
+  es: [
+    { code: "G44.2 · Cefalea tensional", prob: "72%" },
+    { code: "G43.0 · Migraña sin aura", prob: "19%" },
+    { code: "H53.5 · Fatiga ocular", prob: "6%" },
   ],
 };
 
@@ -293,6 +353,25 @@ const IMPACT: Record<LangId, {
     revenue: "$ 740k",
     revenueCagr: "+18.4%",
     revenueCi: "80% CI: ±7.2%",
+  },
+  es: {
+    kpiTitle: "KPI operativos",
+    fraudTitle: "Antifraude · IA forense",
+    revenueTitle: "Previsión de ingresos",
+    kpis: [
+      { k: "Módulos integrados", v: "7" },
+      { k: "Pasos por viaje", v: "24" },
+      { k: "Boleto promedio", v: "$ 68" },
+      { k: "Cancelaciones", v: "8.4%" },
+      { k: "Real / Pronóstico", v: "96.2%" },
+      { k: "Proyección mensual", v: "$ 62 mil" },
+    ],
+    fraudScore: "38/100",
+    fraudLabel: "Alta sospecha: reembolso bloqueado automáticamente",
+    fraudCopy: "IconsAI Vision compara metadatos, fuentes, píxeles y verifica transacciones reales. Revisión humana activada en < 1 min.",
+    revenue: "$ 740 mil",
+    revenueCagr: "+18.4%",
+    revenueCi: "IC del 80%: ±7,2%",
   },
 };
 

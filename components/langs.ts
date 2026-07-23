@@ -1,11 +1,12 @@
 /**
- * Idiomas do deck (skill /showcase §8.2). Ordem FIXA e OBRIGATÓRIA: BR · PT · EN.
+ * Idiomas do deck. Ordem de apresentação: BR · PT · EN · ES.
  * Fonte única do tipo LangId + lista, partilhada por SlideEngine, content e cenas.
  */
 export const LANGS = [
   { id: 'pt-BR', label: 'BR' },
   { id: 'pt-PT', label: 'PT' },
   { id: 'en', label: 'EN' },
+  { id: 'es', label: 'ES' },
 ] as const
 
 export type LangId = (typeof LANGS)[number]['id']

@@ -10,6 +10,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { NARRATION as BR } from '../narration/script.pt-BR.ts'
 import { NARRATION as PT } from '../narration/script.pt-PT.ts'
 import { NARRATION as EN } from '../narration/script.en.ts'
+import { NARRATION as ES } from '../narration/script.es.ts'
 
 const KEY = process.env.OPENAI_API_KEY
 if (!KEY) { console.error('Falta OPENAI_API_KEY no ambiente.'); process.exit(1) }
@@ -19,6 +20,7 @@ const DECKS = [
   { lang: 'pt-BR', map: BR, dir: 'voz: português do Brasil, jovem-adulta, calorosa e próxima' },
   { lang: 'pt-PT', map: PT, dir: 'voz: português de Portugal, jovem-adulta, calorosa e próxima' },
   { lang: 'en', map: EN, dir: 'voice: American English, young adult, warm and close' },
+  { lang: 'es', map: ES, dir: 'voz: espanhol neutro, jovem-adulta, calorosa e próxima' },
 ]
 const instructions = (dir) =>
   `${dir}. Personalidade: apresentador humano entusiasmado mas natural, como quem ` +

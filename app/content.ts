@@ -82,6 +82,29 @@ export const OPENING = {
     ],
     pills: ['Aura · virtual physician', 'SOAP report · ICD-10', 'HIPAA'],
   },
+  es: {
+    eyebrow: 'DISCOVERY HEALTH · SO CLÍNICO ICONSAI',
+    sub: 'Ingreso guiado, autoexámenes, triaje clínico, gestión financiera y prevención de fraude trabajando como un solo flujo.',
+    storyKicker: 'que pasa en minutos',
+    story1: 'Aura escucha al paciente, estructura los síntomas, solicita autoexámenes guiados y prepara un informe procesable.',
+    story2: 'Al mismo tiempo, la operación de la clínica organiza la programación, facturación, inventario, facturación y prevención de fraude.',
+    consoleTag: 'consulta en vivo',
+    consoleStatus: 'sesión activa',
+    patientMeta: 'dolor de cabeza pulsátil · fotosensibilidad · 3 días',
+    priorityK: 'prioridad',
+    priorityV: 'moderado',
+    rows: [
+      ['aura', 'ingesta contextualizada'],
+      ['operaciones', 'programación, inventario, facturación'],
+      ['Auditoría', 'HIPAA, factura electrónica, puntuación de fraude'],
+    ],
+    metrics: [
+      ['7', 'módulos en el flujo'],
+      ['1', 'viaje del paciente'],
+      ['24/7', 'orquestación continua'],
+    ],
+    pills: ['Aura · médico virtual', 'Informe SOAP · CIE-10', 'HIPAA'],
+  },
 } satisfies L10n<{
   eyebrow: string; sub: string; storyKicker: string; story1: string; story2: string
   consoleTag: string; consoleStatus: string; patientMeta: string; priorityK: string; priorityV: string
@@ -177,6 +200,31 @@ export const S1 = {
       { id: 'voz', titulo: '3 · Voice Biometrics', texto: 'Audio recording + acoustic features + prosody. Sensitive biometric identifier.', resumo: 'Sensitive document for specific consent to biometrics and processing of voice traits within the clinical flow.', base: 'HIPAA · biometric identifier', risco: 'alto', aceite: 'sensitive consent', kicker: 'SENSITIVE DATA · SPECIFIC CONSENT', sinais: ['voice biometrics', 'acoustic traits', 'assisted revocation'] },
     ],
   },
+  es: {
+    kicker: 'descubrimiento salud · términos legales', title: 'Antes de empezar.',
+    subtitle: 'Consentimiento explícito en tres documentos: requerido según HIPAA.',
+    panelKicker: 'documento en foco', metaBase: 'base legal', metaAceite: 'tipo de consentimiento', metaStatus: 'estado',
+    statusVal: 'listo para firmar', itemsLabel: 'elementos validados en el flujo',
+    footNote: 'haga clic en otro término para simular la revisión de incorporación clínica',
+    btnLater: 'Revisar más tarde', btnAccept: 'Acepto y quiero empezar →',
+    chatTitle: 'HIPAA · CIBERSEGURIDAD',
+    chatLines: [
+      '$ hipaa --verificar',
+      '> se requiere consentimiento explícito',
+      '> datos de salud: Regla de Privacidad',
+      '$ criptografía --estado',
+      '> cifrado de extremo a extremo activado',
+      '> llaves rotadas cada 24h',
+      '$ auditoría --verificar',
+      '> cero intercambio sin consentimiento',
+      '> Cumplimiento de HIPAA verificado',
+    ],
+    termos: [
+      { id: 'uso', titulo: '1 · Términos de uso', texto: 'Qué hace Discovery Health, qué no reemplaza en una visita presencial, suspensión por mal uso.', resumo: 'El paciente comprende el alcance del producto, los límites clínicos y cuándo un caso debe derivarse a atención humana.', base: 'términos de uso · incorporación', risco: 'baixo', aceite: 'aceptación simple', sinais: ['alcance de la plataforma', 'límites de responsabilidad', 'referencia en persona'] },
+      { id: 'privacidade', titulo: '2 · Política de Privacidad', texto: 'Qué datos, bases legales, retención y uso compartido con procesadores aprobados por IconsAI.', resumo: 'Explica el ciclo de vida de los datos, los procesadores involucrados y la retención operativa de la historia clínica.', base: 'Regla de privacidad HIPAA', risco: 'moderado', aceite: 'aceptación explícita', sinais: ['bases legales', 'retención', 'procesadores y subprocesadores'] },
+      { id: 'voz', titulo: '3 · Biometría de voz', texto: 'Grabación de audio + funciones acústicas + prosodia. Identificador biométrico sensible.', resumo: 'Documento sensible para el consentimiento específico a la biometría y procesamiento de rasgos de voz dentro del flujo clínico.', base: 'HIPAA · identificador biométrico', risco: 'alto', aceite: 'consentimiento sensible', kicker: 'DATOS SENSIBLES · CONSENTIMIENTO ESPECÍFICO', sinais: ['biometría de voz', 'rasgos acústicos', 'revocación asistida'] },
+    ],
+  },
 } satisfies L10n<S1>
 
 /* ───────────────────────── S2 · IDENTIFICAÇÃO ───────────────────────── */
@@ -207,6 +255,13 @@ export const S2 = {
     fName: 'How would you like to be called?', nameVal: 'Fernando', fAge: 'Age', fGender: 'Gender', genderVal: 'M',
     fId: 'SSN', idVal: '•••-••-6789', fZip: 'ZIP code', zipVal: '10010', zipHint: '✓ address filled — review and adjust if needed',
     fStreet: 'Street', streetVal: '5th Avenue', fNumber: 'Number', numberVal: '350',
+  },
+  es: {
+    title: 'Antes de empezar.', subtitle: 'Su identificación se compara con registros públicos: se mantiene segura y nunca se comparte.',
+    prefillKicker: 'datos precargados', prefillText: 'Encontré tus datos en registros públicos. Comprueba que todo está bien.',
+    fName: '¿Cómo te gustaría que te llamaran?', nameVal: 'Fernando', fAge: 'edad', fGender: 'Género', genderVal: 'm',
+    fId: 'número de seguro social', idVal: '•••-••-6789', fZip: 'código postal', zipVal: '10010', zipHint: '✓ dirección completa: revisar y ajustar si es necesario',
+    fStreet: 'calle', streetVal: '5ta avenida', fNumber: 'Número', numberVal: '350',
   },
 } satisfies L10n<S2>
 
@@ -253,6 +308,18 @@ export const S3 = {
     sideKicker: 'signals found',
     sideLines: ['address consistent with the ZIP provided', 'profile released for clinical prefill', 'audio can be linked to the chart'],
     btnYes: 'That\'s me →', btnNo: 'Not me',
+  },
+  es: {
+    kicker: 'confirmación · registros públicos', title: 'Encontré a alguien con esta identificación. ¿Eres tú?',
+    subtitle: 'El prellenado sólo se libera después de un gesto explícito por parte del paciente.',
+    loaderKicker: 'referencias cruzadas de registros públicos', loaderLabel: 'Cruzar registros médicos',
+    totalLabel: 'puntos de datos analizados',
+    steps: ['registros públicos · IRS', 'afiliaciones comerciales', 'Consentimiento HIPAA'],
+    nameK: 'nombre', ageK: 'edad aproximada', ageV: '38 años', linkK: 'afiliación comercial más reciente', linkV: 'IconosAI · Socio',
+    chips: ['Registros públicos ✓', 'Servicio Postal ✓', 'HIPAA · consentimiento válido'],
+    sideKicker: 'señales encontradas',
+    sideLines: ['dirección consistente con el código postal proporcionado', 'perfil liberado para precarga clínica', 'El audio se puede vincular al gráfico.'],
+    btnYes: 'Ese soy yo →', btnNo: 'Yo no',
   },
 } satisfies L10n<S3>
 
@@ -311,6 +378,22 @@ export const S4 = {
     sideKicker2: 'flow layers', chips: ['intake', 'medical evidence', 'SOAP report'],
     micLabel: 'active real-time listening',
   },
+  es: {
+    kicker: 'Aura · Médico Virtual', status: 'voz activa · escucha clínica empática',
+    lines: [
+      'Hola. Soy Aura, la médica virtual de IconsAI.',
+      'Escucharé atentamente, organizaré su cuenta y señalaré lo que pueda merecer atención médica más rápida.',
+      'Mientras usted habla, estructuro cada síntoma, comparo evidencia clínica e identifico señales de advertencia en tiempo real.',
+      'Al final, obtienes un resumen clínico claro para continuar con la atención sin perder el contexto.',
+      'Todo lo que comparte está protegido por cifrado de extremo a extremo y sigue los estándares de cumplimiento de HIPAA.',
+      'Cuanto más natural sea su relato, más agudo será mi razonamiento clínico: hable a su propio ritmo, sin necesidad de términos médicos.',
+      'Puede comenzar cuando esté listo; estoy aquí para escuchar.',
+    ],
+    sideKicker1: 'lo que ella hace mientras hablas',
+    side1: ['estructurando los principales síntomas', 'detectando señales de alerta en la cuenta', 'preparar preguntas de seguimiento', 'pruebas médicas cruzadas'],
+    sideKicker2: 'capas de flujo', chips: ['ingesta', 'evidencia medica', 'informe de jabón'],
+    micLabel: 'escucha activa en tiempo real',
+  },
 } satisfies L10n<S4>
 
 /* ───────────────────────── StepIndicator (compartilhado) ───────────────────────── */
@@ -318,6 +401,7 @@ export const STEPS = {
   'pt-BR': ['Você', 'O problema', 'Entrevista', 'Laudo'],
   'pt-PT': ['Si', 'O problema', 'Entrevista', 'Laudo'],
   en: ['You', 'The problem', 'Interview', 'Report'],
+  es: ['tu', 'el problema', 'Entrevista', 'Informe'],
 } satisfies L10n<string[]>
 
 /* ───────────────────────── S5 · ÁUDIO LIVRE ───────────────────────── */
@@ -326,6 +410,7 @@ export const S5 = {
   'pt-BR': { title: 'Fernando, conta o que está te incomodando.', subtitle: 'Em até 2 minutos, fale como sente. Não precisa usar termo técnico.', status: 'gravando · escutando você', timer: '00:47 / 02:00' },
   'pt-PT': { title: 'Fernando, conte o que o está a incomodar.', subtitle: 'Em até 2 minutos, fale como se sente. Não precisa de termo técnico.', status: 'a gravar · a ouvi-lo', timer: '00:47 / 02:00' },
   en: { title: 'Fernando, tell me what\'s bothering you.', subtitle: 'In up to 2 minutes, say how you feel. No medical terms needed.', status: 'recording · listening to you', timer: '00:47 / 02:00' },
+  es: { title: 'Fernando, dime qué te molesta.', subtitle: 'En hasta 2 minutos, di cómo te sientes. No se necesitan términos médicos.', status: 'grabando · escuchándote', timer: '00:47 / 02:00' },
 } satisfies L10n<S5>
 
 /* ───────────────────────── S6 · AURA PERGUNTA ───────────────────────── */
@@ -374,6 +459,19 @@ export const S6 = {
     sideKicker2: 'next objective', side2: ['measure functional impact and sleep', 'decide whether to raise clinical urgency', 'assess hydration pattern'],
     micLabel: 'listening and adapting',
   },
+  es: {
+    kicker: 'Aura · te escuché', status: 'pregunta adaptativa · contexto emocional preservado',
+    lines: [
+      'Lo tengo. Usted describe dolor de cabeza pulsátil desde hace 3 días, peor por la tarde y sensible a la luz.',
+      'Parece que te está desconcertando. Normalmente durante estos episodios ¿puedes seguir trabajando o necesitas parar todo y tumbarte?',
+      'Necesito comprender el impacto real en su vida diaria: eso cambia la clasificación de urgencia y el tipo de derivación.',
+      'También preguntaré sobre el sueño, la hidratación y el tiempo frente a la pantalla, ya que afectan significativamente el umbral del dolor.',
+    ],
+    chipsKicker: 'respuesta rápida', chips: ['sigo adelante, con dificultad', 'Necesito parar y acostarme', 'Depende de la intensidad'],
+    sideKicker1: 'señales extraídas', side1: ['dolor 6/10 que empeora por la tarde', 'fotosensibilidad presente', 'El tiempo prolongado frente a la pantalla es un probable desencadenante.', 'sin náuseas ni aura visual'],
+    sideKicker2: 'siguiente objetivo', side2: ['medir el impacto funcional y el sueño', 'decidir si plantear la urgencia clínica', 'evaluar el patrón de hidratación'],
+    micLabel: 'escuchando y adaptándose',
+  },
 } satisfies L10n<S6>
 
 /* ───────────────────────── S7 · FISIOLÓGICO ───────────────────────── */
@@ -400,6 +498,12 @@ export const S7 = {
     vitals: [['Weight', '159', 'lb'], ['Height', '5\'9"', ''], ['BP sys.', '128', 'mmHg'], ['BP dia.', '82', 'mmHg'], ['Heart rate', '74', 'bpm'], ['Glucose', '94', 'mg/dL']],
     tags: [{ tone: 'ok', text: 'BMI 23.5 · Normal weight' }, { tone: 'warn', text: 'BP 128/82 · Elevated' }, { tone: 'ok', text: 'HR 74 · Normal' }],
     painLabel: 'Pain now (0–10)', painValue: '6/10',
+  },
+  es: {
+    kicker: 'signos vitales', title: 'Confirma tus datos fisiológicos.', subtitle: 'Todo lo que puedas medir ayuda. ¿No lo tienes? Marque "No estoy seguro" y continúe.',
+    vitals: [['Peso', '159', 'libra'], ['altura', '5\'9"', ''], ['Sistema BP', '128', 'mmHg'], ['PA dia.', '82', 'mmHg'], ['frecuencia cardiaca', '74', 'bpm'], ['glucosa', '94', 'mg/dL']],
+    tags: [{ tone: 'ok', text: 'IMC 23,5 · Peso normal' }, { tone: 'warn', text: 'BP 128/82 · Elevado' }, { tone: 'ok', text: 'FC 74 · Normal' }],
+    painLabel: 'Dolor ahora (0–10)', painValue: '6/10',
   },
 } satisfies L10n<S7>
 
@@ -477,6 +581,27 @@ export const S8 = {
       { k: 'E', name: 'Evolving', desc: 'changes over time' },
     ],
   },
+  es: {
+    kicker: 'biblioteca · autoexámenes guiados', title: '¿Cuáles ahora?', subtitle: 'Selecciona los autoexámenes. Cada uno viene con una guía visual paso a paso.',
+    exams: [
+      { pict: 'breast', title: 'Pecho', guia: 'palpación circular', selected: true }, { pict: 'prostate', title: 'próstata', guia: 'examen guiado' },
+      { pict: 'skin', title: 'Piel', guia: 'melanoma ABCDE', selected: true }, { pict: 'tongue', title: 'lengua', guia: 'color, revestimiento, textura' },
+      { pict: 'pulse', title: 'Pulso', guia: '15s × 4 (radiales)', selected: true }, { pict: 'lung', title: 'SpO₂', guia: 'oxímetro de dedo' },
+      { pict: 'mouth', title: 'boca', guia: 'mucosas, encías, paladar' }, { pict: 'testicle', title: 'Testículo', guia: 'palpación post-ducha' },
+    ],
+    guideKicker: 'guía activa', guidePill: 'Piel · ABCDE', previewBadge: 'captura guiada', lesionLabel: 'lesión', lesion: '8 milímetros', lesionNote: 'frontera irregular',
+    steps: ['asimetría visible en la mitad derecha', 'borde sutilmente dentado', 'color heterogéneo en 2 tonos', 'capturar foto y ir a subir'],
+    bodyMapTitle: 'como examinar', bodyMapNote: 'Toda tu piel, con un espejo, desde el cuero cabelludo hasta las plantas de los pies.',
+    bodyRegions: ['cuero cabelludo', 'cara y cuello', 'tronco y senos', 'brazos y manos', 'piernas', 'pies y entre los dedos', 'de vuelta en el espejo'],
+    abcdeTitle: 'melanoma regla ABCDE',
+    abcde: [
+      { k: 'A', name: 'Asimetría', desc: 'las mitades difieren' },
+      { k: 'B', name: 'Borde', desc: 'irregular, con muescas' },
+      { k: 'C', name: 'Color', desc: 'más de un tono' },
+      { k: 're', name: 'Diámetro', desc: 'más de 6 mm' },
+      { k: 'mi', name: 'Evolucionando', desc: 'cambios con el tiempo' },
+    ],
+  },
 } satisfies L10n<S8>
 
 /* ───────────────────────── S9 · UPLOAD EXAMES ───────────────────────── */
@@ -512,6 +637,15 @@ export const S9 = {
       { name: 'brain_mri.jpg', meta: '3.2 MB · awaiting analysis', state: 'pending' },
     ],
   },
+  es: {
+    kicker: 'resultados de laboratorio/imágenes', title: '¿Aportó algún resultado?', subtitle: 'Cargue PDF, JPG o PNG de hasta 20 MB cada uno. Los leí para construir tu informe.',
+    dropText: 'Suelta aquí o elige archivos', dropHint: 'PDF, JPG, PNG · hasta 20 MB cada uno',
+    files: [
+      { name: 'cbc_2026-03.pdf', meta: '412 KB · ✓ analizado', state: 'ok' },
+      { name: 'colesterol_total.pdf', meta: '238 KB · leyendo el informe...', state: 'loading' },
+      { name: 'cerebro_mri.jpg', meta: '3,2 MB · pendiente de análisis', state: 'pending' },
+    ],
+  },
 } satisfies L10n<S9>
 
 /* ───────────────────────── S10 · REMÉDIOS ───────────────────────── */
@@ -545,6 +679,15 @@ export const S10 = {
       { nome: 'Losartan 50mg', classe: 'Antihypertensive · ARB', selected: true, dose: '1 tab', freq: 'once daily' },
       { nome: 'Sertraline 50mg', classe: 'Antidepressant · SSRI' },
       { nome: 'Omeprazole 20mg', classe: 'Proton-pump inhibitor' },
+    ],
+  },
+  es: {
+    kicker: 'medicamentos actuales', title: 'Fernando, revisa lo que llevas.', subtitle: 'Enumeré los medicamentos que coinciden con el audio que compartió conmigo.',
+    meds: [
+      { nome: 'Acetaminofén 500 mg', classe: 'Analgésico · Antipirético', selected: true, dose: '1 pestaña', freq: 'según sea necesario' },
+      { nome: 'Losartán 50 mg', classe: 'Antihipertensivo · BRA', selected: true, dose: '1 pestaña', freq: 'una vez al día' },
+      { nome: 'Sertralina 50 mg', classe: 'Antidepresivo · ISRS' },
+      { nome: 'Omeprazol 20 mg', classe: 'Inhibidor de la bomba de protones' },
     ],
   },
 } satisfies L10n<S10>
@@ -605,6 +748,22 @@ export const S11 = {
     sideKicker2: 'next block', side2: ['close intensity + sleep impact', 'decide whether to order further tests'],
     micLabel: 'listening and steering the interview',
   },
+  es: {
+    pct: '68%', quoteCite: 'citado del audio:',
+    messages: [
+      { who: 'agent', text: '¿Cuándo llega el dolor máximo: por la mañana, por la tarde o por la noche?' },
+      { who: 'quote', text: 'empeora mucho por la tarde cuando la computadora se calienta' },
+      { who: 'patient', text: 'Siempre después del almuerzo. Alrededor de las 2 p. m. Comienza y dura hasta las 6.' },
+      { who: 'agent', text: '¿Y dormir? ¿Estás descansando bien?' },
+      { who: 'patient', text: 'Duermo mal. Me despierto 2 o 3 veces y lucho por retroceder.' },
+      { who: 'agent', text: '¿Bebes agua durante el día o la olvidas cuando te concentras en el trabajo?' },
+      { who: 'patient', text: 'Lo olvido por completo. A veces paso toda la mañana sin beber.' },
+    ],
+    typingLabel: 'Aura está escribiendo la siguiente pregunta.', composeLine: '¿Notas náuseas, visión borrosa o necesidad de acostarte cuando el episodio se intensifica?',
+    sideKicker1: 'ideas en paralelo', side1: ['dolor con un patrón de tarde', 'fotosensibilidad reportada', 'El trabajo de pantalla como posible desencadenante.'],
+    sideKicker2: 'siguiente bloque', side2: ['intensidad cercana + impacto del sueño', 'decidir si solicitar más pruebas'],
+    micLabel: 'escuchar y dirigir la entrevista',
+  },
 } satisfies L10n<S11>
 
 /* ───────────────────────── S12 · LAUDO SOAP ───────────────────────── */
@@ -652,6 +811,18 @@ export const S12 = {
     stockTitle: 'Inventory · auto-restock', stock: [{ label: 'Acetaminophen', pct: '74%', warn: false }, { label: 'Gloves S', pct: '22% ↻', warn: true, restock: true }],
     audioTitle: 'Patient summary · audio', audioTime: '1:42',
   },
+  es: {
+    stampKicker: 'informe listo', stampMeta: 'Ficha pública · 15/05/2026 14:32', selo: 'HIPAA',
+    soap: [
+      { letter: 'S', title: 'subjetivo', text: 'Dolor de cabeza pulsátil durante 3 días, peor por la tarde después de horas de pantalla. Sensibilidad a la luz y tensión en el cuello. Dolor 6/10, sin náuseas, fiebre ni aura. Sueño irregular, ~5h por noche.', reveal: 'dh-revelar-s' },
+      { letter: 'oh', title: 'Objetivo', text: 'PA 128/82 mmHg · FC 74 lpm · Temperatura 97,7 °F · IMC 23,5 · SpO2 98%. Hemograma y glucosa normales. Examen neurológico y fundoscopia sin complicaciones.', reveal: 'dh-revelar-o' },
+      { letter: 'un', title: 'Evaluación', text: 'Cefalea tensional episódica + fatiga ocular digital (CIE G44.2). Diferencial: migraña sin aura, descartada por ausencia de pródromo. No hay señales de alerta.', reveal: 'dh-revelar-a' },
+      { letter: 'pag', title: 'Planificar', text: 'Higiene visual 20-20-20, descansos cada 50 min. Hidratación y corrección de postura. Analgesia simple si dolor >7/10. Vuelva a controlar la presión arterial y el dolor de cabeza en 7 días; neurología si persiste 2 semanas.', reveal: 'dh-revelar-p' },
+    ],
+    agendaTitle: 'Horario organizado', cal: [{ label: '2pm', full: true }, { label: '3 p.m.', full: true }, { label: '4pm', full: false }, { label: '5 p.m.', full: true }, { label: '6 p.m.', full: false }],
+    stockTitle: 'Inventario · reabastecimiento automático', stock: [{ label: 'acetaminofén', pct: '74%', warn: false }, { label: 'Guantes S', pct: '22% ↻', warn: true, restock: true }],
+    audioTitle: 'Resumen del paciente · audio', audioTime: '1:42',
+  },
 } satisfies L10n<S12>
 
 /* ───────────────────────── S13 · AGENDA ───────────────────────── */
@@ -696,6 +867,17 @@ export const S13 = {
     ],
     waConfirm: '✓ Confirmed by text', waMeta: 'Fernando · Thu afternoon · reminder 24h ahead',
   },
+  es: {
+    kicker: 'horario · semana actual', title: 'Fernando busca el primer hueco libre.', subtitle: 'Se detiene en el primer espacio abierto y confirma por mensaje de texto.',
+    patient: 'Fernando',
+    head: ['turno', 'lun', 'mar', 'mié', 'jueves', 'viernes'],
+    rows: [
+      { turno: 'mañana', slots: [{ label: 'M. Smith', state: 'full' }, { label: 'R.Jones', state: 'full' }, { label: 'gratis', state: 'open' }, { label: 'A. marrón', state: 'full' }, { label: 'gratis', state: 'open' }] },
+      { turno: 'tarde', slots: [{ label: 'P.Davis', state: 'full' }, { label: 'C.Nunes', state: 'full' }, { label: 'J. Wilson', state: 'full' }, { label: 'gratis', state: 'open' }, { label: 'B.Taylor', state: 'full' }] },
+      { turno: 'tarde', slots: [{ label: 'gratis', state: 'open' }, { label: 'L. Moore', state: 'full' }, { label: 'gratis', state: 'open' }, { label: 'T. Clark', state: 'full' }, { label: 'gratis', state: 'open' }] },
+    ],
+    waConfirm: '✓ Confirmado por mensaje de texto', waMeta: 'Fernando · Jueves por la tarde · Recordatorio con 24h de antelación',
+  },
 } satisfies L10n<S13>
 
 /* ───────────────────────── S14 · FATURAMENTO ───────────────────────── */
@@ -728,6 +910,14 @@ export const S14 = {
       { label: 'W3', prev: 68, real: 72, prevK: '$ 15k', realK: '$ 16k' }, { label: 'W4', prev: 84, real: 0, prevK: '$ 18k', realK: '—', pending: true },
     ],
     stats: [{ k: 'Avg ticket', v: '$ 68' }, { k: 'Cancellations', v: '8.4%', tone: 'warn' }, { k: 'Actual / Forecast', v: '96.2%' }, { k: 'Month projection', v: '$ 62k', tone: 'ok' }],
+  },
+  es: {
+    kicker: 'finanzas · próximas 4 semanas', title: 'Pronóstico versus real.', subtitle: 'Curva real cotejada con el cronograma confirmado. Detecta la brecha antes de fin de mes.',
+    bars: [
+      { label: 'W1', prev: 62, real: 58, prevK: '$14k', realK: '$13k' }, { label: 'W2', prev: 71, real: 69, prevK: '$16k', realK: '$15k' },
+      { label: 'W3', prev: 68, real: 72, prevK: '$15k', realK: '$16k' }, { label: 'W4', prev: 84, real: 0, prevK: '$18k', realK: '—', pending: true },
+    ],
+    stats: [{ k: 'Boleto promedio', v: '$ 68' }, { k: 'Cancelaciones', v: '8.4%', tone: 'warn' }, { k: 'Real / Pronóstico', v: '96.2%' }, { k: 'Proyección del mes', v: '$ 62 mil', tone: 'ok' }],
   },
 } satisfies L10n<S14>
 
@@ -768,6 +958,16 @@ export const S15 = {
       { item: 'N95 mask', atual: '9', min: '30', sug: '100', status: 'critical' },
     ],
     badge: 'Auto-restock active · 3 items on order', info: 'Default supplier · delivery in 2 business days',
+  },
+  es: {
+    kicker: 'inventario · suministros clínicos', title: 'Cuarto de suministros: por artículo.', subtitle: 'Rojo = por debajo del mínimo. Sugerencia de compra calculada a partir del uso promedio de las últimas 4 semanas.',
+    th: ['Artículo', 'Actual', 'Mínimo', 'sugerencia', 'Estado'],
+    rows: [
+      { item: 'Guantes S (caja 100)', atual: '22', min: '40', sug: '80', status: 'low' }, { item: 'Jeringa 10mL', atual: '184', min: '60', sug: '—', status: 'ok' },
+      { item: 'gasa esterilizada', atual: '38', min: '50', sug: '120', status: 'low' }, { item: 'Alcohol 70% 1L', atual: '62', min: '20', sug: '—', status: 'ok' },
+      { item: 'mascarilla n95', atual: '9', min: '30', sug: '100', status: 'critical' },
+    ],
+    badge: 'Reabastecimiento automático activo · 3 artículos en pedido', info: 'Proveedor predeterminado · entrega en 2 días hábiles',
   },
 } satisfies L10n<S15>
 
@@ -811,6 +1011,17 @@ export const S16 = {
     ],
     badgeWarn: '2 lots expiring in < 90 days', badgeOk: '✓ DEA reporting synced',
   },
+  es: {
+    kicker: 'farmacia · sustancias controladas', title: 'Seguimiento por lote, vencimiento y cronograma.', subtitle: 'Trazabilidad total para la DEA. Alertas 60 días antes del vencimiento.',
+    th: ['medicación', 'Horario', 'Lote / Fabricante.', 'Caducidad', 'En mano'],
+    rows: [
+      { nome: 'clonazepam 2 mg', classe: 'Anexo IV', lote: 'CL2026-09 · Teva', val: '09/15/2026', saldo: '48 pestaña', warn: true },
+      { nome: 'Morfina 10 mg', classe: 'Anexo II', lote: 'MF2026-11 · Pfizer', val: '11/20/2026', saldo: '12 amperios' },
+      { nome: 'Diazepam 10mg', classe: 'Anexo IV', lote: 'DZ2026-07 · Milán', val: '07/30/2026', saldo: '22 pestañas', warn: true, critical: true },
+      { nome: 'tramadol 50 mg', classe: 'Anexo IV', lote: 'TR2027-02 · Sandoz', val: '02/10/2027', saldo: '60 pestañas' },
+    ],
+    badgeWarn: '2 lotes que vencen en < 90 días', badgeOk: '✓ Informes de la DEA sincronizados',
+  },
 } satisfies L10n<S16>
 
 /* ───────────────────────── S17 · COBRANÇA ───────────────────────── */
@@ -843,6 +1054,14 @@ export const S17 = {
     msg2pre: 'The amount is ', msg2val: '$ 68.00', msg2pos: '. Want to pay now via Zelle? Receipt and invoice go out automatically.',
     payTitle: 'Pay via Zelle · $ 68.00', payMeta: 'QR code expires in 10 min · EIN 12-3456789', payBtn: 'Open →',
     userMsg: 'Just paid', okMsg: '✓ Received. Receipt and invoice emailed. See you tomorrow!',
+  },
+  es: {
+    kicker: 'facturación · automatizada', title: 'Mensajería con pago instantáneo.', subtitle: 'Secuencia humanizada: recordatorio D-3, D-1, D+0. Liquidado en segundos mediante pago instantáneo.',
+    waName: 'Descubrimiento de Salud · Clínica Aurora', waOnline: 'en línea · responde en segundos',
+    msg1: 'Hola Fernando Tu visita con la Dra. Marina está reservada para mañana a las 14 h.',
+    msg2pre: 'la cantidad es ', msg2val: '$ 68.00', msg2pos: '. ¿Quieres pagar ahora a través de Zelle? El recibo y la factura salen automáticamente.',
+    payTitle: 'Paga vía Zelle · $68.00', payMeta: 'El código QR caduca en 10 min · EIN 12-3456789', payBtn: 'Abrir →',
+    userMsg: 'Recién pagado', okMsg: '✓ Recibido. Recibo y factura enviados por correo electrónico. ¡Nos vemos mañana!',
   },
 } satisfies L10n<S17>
 
@@ -894,6 +1113,19 @@ export const S18 = {
       { tone: 'warn', text: 'EIN checks out, but no matching invoice was issued' },
     ],
   },
+  es: {
+    kicker: 'antifraude · IA forense', title: 'Recibo recibido. Validando...', subtitle: 'IconsAI Vision compara metadatos, fuentes y píxeles, verificando transacciones reales.',
+    docKicker: 'DOCUMENTO', docTitle: 'visita_recibo_2026-05-12.pdf', rEmit: 'Emisor', emitVal: 'Clínica Aurora', rVal: 'Cantidad', valVal: '$ 272.00', rDate: 'Fecha', dateVal: '05/12/2026',
+    healthKicker: 'plan de salud', health: [{ k: 'Planificar', v: 'Aurora PPO' }, { k: 'ID de miembro', v: '8821 4470 0192' }, { k: 'Procedimiento', v: 'Visita a la oficina' }, { k: 'Código', v: 'CPT 99213' }],
+    scan: ['OCR y píxeles sincronizados', 'Lista de tarifas de CPT verificada', 'factura coincidente no encontrada'],
+    scoreKicker: 'PUNTUACIÓN DE CONFIANZA', scoreVal: '38', scoreUnit: '/100', scoreLabel: 'Alta sospecha', scoreCopy: 'Reembolso automático bloqueado y revisión humana activada en menos de 1 minuto.',
+    trustKicker: 'por qué cayó la confianza', trust: ['metadatos no coincidentes', 'cantidad 4x por encima del cronograma', 'sin factura coincidente'],
+    issues: [
+      { tone: 'bad', text: 'La fecha se reescribió sobre el PDF original (análisis forense de píxeles)' },
+      { tone: 'bad', text: 'Monto $272 no coincide con el cronograma del procedimiento ($68)' },
+      { tone: 'warn', text: 'El EIN se verifica, pero no se emitió ninguna factura coincidente' },
+    ],
+  },
 } satisfies L10n<S18>
 
 /* ───────────────────────── S19 · NF ───────────────────────── */
@@ -943,6 +1175,19 @@ export const S19 = {
     okLabel: '✓ accepted', pendingLabel: '… queued',
     foot: [{ k: 'Issued today', v: '14' }, { k: 'Awaiting tax authority', v: '1', tone: 'warn' }, { k: 'Reporting webhook', v: '● live', tone: 'ok' }],
   },
+  es: {
+    kicker: 'impuestos · factura electrónica', title: 'Factura emitida automáticamente.', subtitle: 'Después de cada visita, el sistema emite la factura en el estándar local y devuelve XML + PDF.',
+    th: ['No.', 'Cliente', 'Cantidad', 'Emitido', 'Impuesto'],
+    rows: [
+      { num: '002.418', cliente: 'Fernando Arbache', valor: '$ 68.00', data: '15/05 14:42', status: 'ok' },
+      { num: '002.417', cliente: 'M. Smith', valor: '$ 60.00', data: '15/05 11:20 am', status: 'ok' },
+      { num: '002.416', cliente: 'R.Jones', valor: '$ 96.00', data: '15/05 10:08 am', status: 'ok' },
+      { num: '002.415', cliente: 'A. marrón', valor: '$ 68.00', data: '14/05 16:55', status: 'pending' },
+      { num: '002.414', cliente: 'P.Davis', valor: '$ 80.00', data: '14/05 14:30', status: 'ok' },
+    ],
+    okLabel: '✓ aceptado', pendingLabel: '… en cola',
+    foot: [{ k: 'Emitido hoy', v: '14' }, { k: 'A la espera de la autoridad fiscal', v: '1', tone: 'warn' }, { k: 'Webhook de informes', v: '● vivir', tone: 'ok' }],
+  },
 } satisfies L10n<S19>
 
 /* ───────────────────────── S20 · PREVISÃO RECEITA ───────────────────────── */
@@ -965,6 +1210,11 @@ export const S20 = {
     kicker: 'forecast · annual revenue', title: '12-month projection · confidence band.', subtitle: 'VAR model with seasonality and a holiday dummy. 80% CI shaded.',
     months: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'], nowLabel: 'TODAY',
     stats: [{ k: '12m CAGR', v: '+18.4%', tone: 'ok' }, { k: 'Seasonal peak', v: 'Mar–May' }, { k: '12m projection', v: '$ 740k' }, { k: '80% CI', v: '±7.2%' }],
+  },
+  es: {
+    kicker: 'previsión · ingresos anuales', title: 'Proyección a 12 meses · banda de confianza.', subtitle: 'Modelo VAR con estacionalidad y dummy de vacaciones. IC del 80% sombreado.',
+    months: ['junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre', 'enero', 'febrero', 'mar', 'abril', 'mayo'], nowLabel: 'HOY',
+    stats: [{ k: '12m CAGR', v: '+18.4%', tone: 'ok' }, { k: 'Pico estacional', v: 'Marzo-mayo' }, { k: 'proyección de 12m', v: '$ 740 mil' }, { k: 'IC del 80%', v: '±7.2%' }],
   },
 } satisfies L10n<S20>
 
@@ -993,6 +1243,12 @@ export const S21 = {
     nSymptoms: 'SYMPTOMS', symptoms: ['pulsating headache', 'photophobia', 'afternoon worsening', 'pain 6/10'], nCid: 'ICD-10 (PROB.)',
     cids: [{ code: 'G44.2 · Tension headache', prob: '72%', tone: 'high' }, { code: 'G43.0 · Migraine w/o aura', prob: '19%', tone: 'mid' }, { code: 'H53.5 · Eye strain', prob: '6%', tone: 'low' }, { code: 'Other', prob: '3%', tone: 'low' }],
     nPlan: 'SUGGESTED PLAN', plan: [{ text: 'Visual hygiene 20-20-20' }, { text: 'Hydration + regular sleep' }, { text: 'Recheck BP in 7 days' }, { text: 'Refer to neuro if > 14 days', warn: true }],
+  },
+  es: {
+    kicker: 'diagnóstico asistido · canalización de IA', title: 'Síntomas → CIE-10 → Plan.', subtitle: 'Probabilidades calibradas. La decisión clínica final es siempre del médico: la IA es apoyo.',
+    nSymptoms: 'SÍNTOMAS', symptoms: ['dolor de cabeza pulsante', 'fotofobia', 'empeoramiento de la tarde', 'dolor 6/10'], nCid: 'CIE-10 (PROB.)',
+    cids: [{ code: 'G44.2 · Cefalea tensional', prob: '72%', tone: 'high' }, { code: 'G43.0 · Migraña sin aura', prob: '19%', tone: 'mid' }, { code: 'H53.5 · Fatiga ocular', prob: '6%', tone: 'low' }, { code: 'Otro', prob: '3%', tone: 'low' }],
+    nPlan: 'PLAN SUGERIDO', plan: [{ text: 'Higiene visual 20-20-20' }, { text: 'Hidratación + sueño regular' }, { text: 'Vuelva a controlar la presión arterial en 7 días' }, { text: 'Referir a neuro si > 14 días', warn: true }],
   },
 } satisfies L10n<S21>
 
@@ -1039,6 +1295,18 @@ export const S22 = {
     ],
     badgeBad: '3 patients · active outreach today', badge: '⌀ Adjusted life expectancy: 78.4 years · 95% CI: ±2.1',
   },
+  es: {
+    kicker: 'riesgo poblacional · longitudinal', title: 'Pacientes en riesgo de perderse.', subtitle: 'Puntuación de 0 a 100 con comorbilidades, edad y adherencia. Rojo = intervención prioritaria.',
+    th: ['Paciente', 'edad', 'Comorbilidad.', 'adherencia', 'Puntuación de riesgo'],
+    rows: [
+      { nome: 'M. Smith', idade: '68', comorb: 'HTA, DM2, ERC', adesao: '62%', score: 84, level: 'high' },
+      { nome: 'R.Jones', idade: '54', comorb: 'HTA, dislipidemia', adesao: '88%', score: 42, level: 'mid' },
+      { nome: 'A. marrón', idade: '71', comorb: 'ICC, fibrilación auricular, DM2', adesao: '71%', score: 78, level: 'high' },
+      { nome: 'P.Davis', idade: '46', comorb: 'obesidad', adesao: '95%', score: 22, level: 'low' },
+      { nome: 'J. Wilson', idade: '62', comorb: 'EPOC, HTA', adesao: '58%', score: 71, level: 'high' },
+    ],
+    badgeBad: '3 pacientes · alcance activo hoy', badge: '⌀ Esperanza de vida ajustada: 78,4 años · IC 95%: ±2,1',
+  },
 } satisfies L10n<S22>
 
 /* ───────────────────────── S23 · NAVEGAÇÃO (MARKOV) ───────────────────────── */
@@ -1066,6 +1334,12 @@ export const S23 = {
     edgeA: 'path A · 67%', edgeB: 'path B · 89%', recovery: '↗ recovery',
     nTriagem: 'Triage', nTriagemSub: 'start', nTratoA: 'Tx A', nTratoASub: 'conservative', nTratoB: 'Tx B', nTratoBSub: 'intensive', nAlta: 'Discharge',
     legA: '● Path A · conservative · cost $ 800 · 67% recovery', legB: '● Path B · intensive · cost $ 2,250 · 89% recovery',
+  },
+  es: {
+    kicker: 'viaje del paciente · markov', title: 'Trayectoria prevista: ruta A frente a B.', subtitle: 'Cada nodo es un paso de tratamiento. Los bordes muestran la probabilidad de transición.',
+    edgeA: 'camino A · 67%', edgeB: 'camino B · 89%', recovery: '↗ recuperación',
+    nTriagem: 'Triaje', nTriagemSub: 'empezar', nTratoA: 'tx a', nTratoASub: 'conservador', nTratoB: 'Tx B', nTratoBSub: 'intensivo', nAlta: 'alta',
+    legA: '● Camino A · conservador · costo $ 800 · 67% de recuperación', legB: '● Camino B · intensivo · costo $ 2,250 · 89% de recuperación',
   },
 } satisfies L10n<S23>
 
@@ -1104,6 +1378,16 @@ export const S24 = {
       { tratamento: 'A + B', cells: [{ prob: '78%', ic: '±3.2', tone: 'ok-strong' }, { prob: '14%', ic: '±2.1', tone: 'low' }, { prob: '6%', ic: '±1.4', tone: 'low' }, { prob: '2%', ic: '±0.8', tone: 'low' }] },
       { tratamento: 'B · monotherapy', cells: [{ prob: '48%', ic: '±5.1', tone: 'mid' }, { prob: '32%', ic: '±3.8', tone: 'mid' }, { prob: '16%', ic: '±2.6', tone: 'warn' }, { prob: '4%', ic: '±1.2', tone: 'low' }] },
       { tratamento: 'A + B + C', cells: [{ prob: '84%', ic: '±2.8', tone: 'ok-strong' }, { prob: '9%', ic: '±1.6', tone: 'low' }, { prob: '3%', ic: '±1.0', tone: 'low' }, { prob: '4%', ic: '±1.2', tone: 'warn' }] },
+    ],
+  },
+  es: {
+    kicker: 'matriz de evidencia · metaanálisis', title: 'Combinaciones de tratamientos × resultado.', subtitle: 'Cada celda muestra probabilidad + intervalo de confianza del 95%: valores de demostración ilustrativos.',
+    corner: 'tratamiento ↓ / resultado →', cols: ['remisión', 'Mejora parcial', 'Sin efecto', 'Eventos adversos'],
+    rows: [
+      { tratamento: 'A · monoterapia', cells: [{ prob: '62%', ic: '±4.8', tone: 'ok' }, { prob: '24%', ic: '±3.1', tone: 'mid' }, { prob: '12%', ic: '±2.4', tone: 'low' }, { prob: '2%', ic: '±0.9', tone: 'low' }] },
+      { tratamento: 'A+B', cells: [{ prob: '78%', ic: '±3.2', tone: 'ok-strong' }, { prob: '14%', ic: '±2.1', tone: 'low' }, { prob: '6%', ic: '±1.4', tone: 'low' }, { prob: '2%', ic: '±0.8', tone: 'low' }] },
+      { tratamento: 'B · monoterapia', cells: [{ prob: '48%', ic: '±5.1', tone: 'mid' }, { prob: '32%', ic: '±3.8', tone: 'mid' }, { prob: '16%', ic: '±2.6', tone: 'warn' }, { prob: '4%', ic: '±1.2', tone: 'low' }] },
+      { tratamento: 'A+B+C', cells: [{ prob: '84%', ic: '±2.8', tone: 'ok-strong' }, { prob: '9%', ic: '±1.6', tone: 'low' }, { prob: '3%', ic: '±1.0', tone: 'low' }, { prob: '4%', ic: '±1.2', tone: 'warn' }] },
     ],
   },
 } satisfies L10n<S24>
@@ -1180,6 +1464,25 @@ export const EXPLAIN: ExplainMap = {
         { value: 'HIPAA', label: 'Compliant' },
       ],
     },
+    es: {
+      kicker: 'REGISTRO',
+      lines: [
+        'La identificación se coteja con los registros públicos en menos de 2 segundos.',
+        'Dirección autocompletada mediante búsqueda postal: el paciente simplemente la confirma.',
+        'Prefill reduce los errores tipográficos y acelera la recepción de mensajes en la recepción.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Registros públicos', field: 'SSN/ID estatal', icon: 'id' },
+        { name: 'API de USPS', field: 'Código postal', icon: 'map-pin' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: '< 2 segundos', label: 'Validación en tiempo real' },
+        { value: 'AES-256', label: 'Cifrado en reposo' },
+        { value: 'HIPAA', label: 'Cumple' },
+      ],
+    },
   },
   5: {
     'pt-BR': {
@@ -1240,6 +1543,26 @@ export const EXPLAIN: ExplainMap = {
         { value: '< 3 s', label: 'Full transcription' },
         { value: 'On-device', label: 'Local processing' },
         { value: 'HIPAA', label: 'Compliant' },
+      ],
+    },
+    es: {
+      kicker: 'CONSULTAR',
+      lines: [
+        'Escucha activa con IA: el paciente habla libremente durante hasta 2 minutos.',
+        'La forma de onda en tiempo real brinda información visual de que se está capturando audio.',
+        'No se necesita jerga médica: la IA estructura los síntomas después.',
+        'La grabación se procesa localmente, nunca se envía a servidores externos.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'IconosAI TTS', field: 'Transcripción de voz', icon: 'mic' },
+        { name: 'IconosAI PNL', field: 'Estructuración clínica', icon: 'zap' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: '< 3 segundos', label: 'Transcripción completa' },
+        { value: 'En el dispositivo', label: 'Procesamiento local' },
+        { value: 'HIPAA', label: 'Cumple' },
       ],
     },
   },
@@ -1304,6 +1627,26 @@ export const EXPLAIN: ExplainMap = {
         { value: 'Red flag', label: 'Instant alert' },
       ],
     },
+    es: {
+      kicker: 'SIGNOS VITALES',
+      lines: [
+        'PA, FC, glucosa, IMC y SpO2 tipificados o importados desde dispositivos.',
+        'Clasificación automática con banderas rojas en tiempo real.',
+        'Escala de dolor validada (0-10) integrada en el triaje clínico.',
+        'Los valores fuera de rango activan alertas visuales inmediatas.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Entrada clínica', field: 'Manual o dispositivo', icon: 'zap' },
+        { name: 'AMA · AJÁ', field: 'Rangos de referencia', icon: 'shield' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: '5 signos vitales', label: 'Por sesión' },
+        { value: '< 1 segundo', label: 'Validación automática' },
+        { value: 'bandera roja', label: 'Alerta instantánea' },
+      ],
+    },
   },
   9: {
     'pt-BR': {
@@ -1364,6 +1707,26 @@ export const EXPLAIN: ExplainMap = {
         { value: '20 MB', label: 'Per file' },
         { value: '< 5 s', label: 'OCR complete' },
         { value: 'HIPAA', label: 'Compliant' },
+      ],
+    },
+    es: {
+      kicker: 'RESULTADOS DE LABORATORIO',
+      lines: [
+        'Cargue PDF, JPG o PNG: hasta 20 MB por archivo.',
+        'IconsAI Vision extrae valores automáticamente del documento.',
+        'Progreso en tiempo real: carga, OCR e indexación se ejecutan en paralelo.',
+        'Los resultados fluyen hacia el informe SOAP sin tener que volver a escribirlos.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'IconosAI Vision', field: 'Informe de laboratorio OCR', icon: 'file' },
+        { name: 'Códigos CPT', field: 'Indexación de resultados', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: '20 megas', label: 'Por archivo' },
+        { value: '< 5 segundos', label: 'OCR completo' },
+        { value: 'HIPAA', label: 'Cumple' },
       ],
     },
   },
@@ -1428,6 +1791,26 @@ export const EXPLAIN: ExplainMap = {
         { value: 'HIPAA', label: 'Compliant' },
       ],
     },
+    es: {
+      kicker: 'MEDICAMENTOS',
+      lines: [
+        'RAG cruza la transcripción de audio con el catálogo de medicamentos.',
+        'El paciente comprueba lo que toma, sin necesidad de recordar los nombres exactos.',
+        'Alertas automáticas para interacciones medicamentosas conocidas.',
+        'Dosis y frecuencia registradas para su verificación en el informe final.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Libro naranja de la FDA', field: 'catalogo de medicamentos', icon: 'database' },
+        { name: 'Motor de trapo', field: 'Referencia cruzada de transcripción', icon: 'zap' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: '12k+', label: 'Medicamentos indexados' },
+        { value: 'tiempo real', label: 'Alertas de interacción' },
+        { value: 'HIPAA', label: 'Cumple' },
+      ],
+    },
   },
   13: {
     'pt-BR': {
@@ -1488,6 +1871,26 @@ export const EXPLAIN: ExplainMap = {
         { value: '< 30 s', label: 'Confirmation sent' },
         { value: '−40%', label: 'Reschedules' },
         { value: '3 shifts', label: 'AM · PM · evening' },
+      ],
+    },
+    es: {
+      kicker: 'HORARIO',
+      lines: [
+        'Vista semanal con espacios basados en turnos: arrastre para reservar.',
+        'Confirmación automática por mensaje de texto: sin llamada telefónica, sin reelaboración.',
+        'Ocupación visual instantánea: verde (abierto), amarillo (pendiente), completo.',
+        'Integración de facturación: la visita reservada ya se muestra en el pronóstico.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Horario Interno', field: 'Turnos y espacios', icon: 'calendar' },
+        { name: 'WhatsApp Negocios', field: 'Confirmaciones', icon: 'message' },
+      ],
+      metricsLabel: 'MÉTRICAS CLAVE',
+      metrics: [
+        { value: '< 30 segundos', label: 'Confirmación enviada' },
+        { value: '−40%', label: 'Reprogramaciones' },
+        { value: '3 turnos', label: 'AM · PM · tarde' },
       ],
     },
   },
@@ -1552,6 +1955,26 @@ export const EXPLAIN: ExplainMap = {
         { value: 'Alert', label: 'Before month-end' },
       ],
     },
+    es: {
+      kicker: 'FACTURACIÓN',
+      lines: [
+        'Previsión vs real para las próximas 4 semanas en barras comparativas.',
+        'Boleto promedio, cancelaciones y tasa de no presentación resaltados.',
+        'La curva real cotejada con el cronograma confirmado detecta brechas temprano.',
+        'Las alertas de variación se activan antes del cierre de fin de mes.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Horario confirmado', field: 'Base de proyección', icon: 'calendar' },
+        { name: 'Historia de 12 meses', field: 'Boleto promedio y serie', icon: 'chart' },
+      ],
+      metricsLabel: 'MÉTRICAS CLAVE',
+      metrics: [
+        { value: '± 8%', label: 'variación típica' },
+        { value: '4 semanas', label: 'Horizonte de previsión' },
+        { value: 'Alerta', label: 'antes de fin de mes' },
+      ],
+    },
   },
   15: {
     'pt-BR': {
@@ -1612,6 +2035,26 @@ export const EXPLAIN: ExplainMap = {
         { value: '−30%', label: 'Stockout reduction' },
         { value: 'Auto', label: 'Restock orders' },
         { value: '48h', label: 'Avg lead time' },
+      ],
+    },
+    es: {
+      kicker: 'INVENTARIO',
+      lines: [
+        'Ver por artículo: stock actual, mínimo, sugerencia de compra.',
+        'El uso promedio durante las últimas 4 semanas impulsa el reabastecimiento automático.',
+        'Rojo = por debajo del mínimo, con pedido sugerido al proveedor.',
+        'El reabastecimiento automático de artículos críticos no requiere intervención manual.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Historial de uso', field: 'últimas 4 semanas', icon: 'chart' },
+        { name: 'Proveedores', field: 'Catálogo y precios', icon: 'database' },
+      ],
+      metricsLabel: 'MÉTRICAS CLAVE',
+      metrics: [
+        { value: '−30%', label: 'Reducción del desabastecimiento' },
+        { value: 'Automático', label: 'Reabastecer pedidos' },
+        { value: '48h', label: 'Plazo de entrega promedio' },
       ],
     },
   },
@@ -1676,6 +2119,26 @@ export const EXPLAIN: ExplainMap = {
         { value: 'DEA', label: 'Compliant' },
       ],
     },
+    es: {
+      kicker: 'CONTROLADO',
+      lines: [
+        'Trazabilidad total por lote, caducidad y calendario de medicamentos.',
+        'Alerta automática 60 días antes de que caduque cada lote.',
+        'Cumplimiento de la DEA integrado en el flujo de trabajo de la farmacia.',
+        'Vista de equilibrio por sustancia: elementos críticos resaltados.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'DEA/FDA', field: 'Regulación de drogas', icon: 'shield' },
+        { name: 'Seguimiento de lotes', field: 'Vencimiento y saldo', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: '60 días', label: 'Alerta de caducidad' },
+        { value: '100%', label: 'Trazabilidad del lote' },
+        { value: 'DEA', label: 'Cumple' },
+      ],
+    },
   },
   17: {
     'pt-BR': {
@@ -1736,6 +2199,26 @@ export const EXPLAIN: ExplainMap = {
         { value: '< 10 s', label: 'Payment confirmed' },
         { value: '+35%', label: 'Delinquency reduction' },
         { value: 'D-3, D-1, D', label: 'Reminder sequence' },
+      ],
+    },
+    es: {
+      kicker: 'FACTURACIÓN',
+      lines: [
+        'Secuencia humanizada vía mensajería: recordatorio D-3, D-1, D+0.',
+        'Botón de pago instantáneo integrado: el paciente se liquida en segundos sin salir del chat.',
+        'La confirmación automática del pago cierra el ciclo financiero.',
+        'Reduce la morosidad sin avergonzar al paciente.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'WhatsApp Negocios', field: 'Canal de cobranza', icon: 'message' },
+        { name: 'ACH/Zelle', field: 'Liquidación de pagos', icon: 'id' },
+      ],
+      metricsLabel: 'MÉTRICAS CLAVE',
+      metrics: [
+        { value: '< 10 s', label: 'Pago confirmado' },
+        { value: '+35%', label: 'Reducción de morosidad' },
+        { value: 'D-3, D-1, D', label: 'Secuencia de recordatorio' },
       ],
     },
   },
@@ -1800,6 +2283,26 @@ export const EXPLAIN: ExplainMap = {
         { value: '100%', label: 'Status monitored' },
       ],
     },
+    es: {
+      kicker: 'FACTURAS',
+      lines: [
+        'Factura electrónica emitida automáticamente después de cada visita.',
+        'XML + PDF devuelto al paciente en tiempo real.',
+        'Se monitorea el estado de la autoridad tributaria: los rechazos se manejan sin intervención manual.',
+        'Totales mensuales consolidados para contabilidad y auditoría.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'IRS / presentación electrónica', field: 'Autoridad fiscal', icon: 'shield' },
+        { name: 'Registro del paciente', field: 'entidad de facturación', icon: 'id' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: '< 5 segundos', label: 'Emisión automática' },
+        { value: 'XML+PDF', label: 'Formatos entregados' },
+        { value: '100%', label: 'Estado monitoreado' },
+      ],
+    },
   },
   20: {
     'pt-BR': {
@@ -1860,6 +2363,26 @@ export const EXPLAIN: ExplainMap = {
         { value: '12 mo', label: 'Forecast horizon' },
         { value: 'IC 80%', label: 'Confidence band' },
         { value: 'CAGR', label: 'Annual growth' },
+      ],
+    },
+    es: {
+      kicker: 'INGRESOS',
+      lines: [
+        'Proyección a 12 meses mediante modelo VAR con estacionalidad y festivos.',
+        'Banda de confianza del 80% sombreada sobre la curva de pronóstico.',
+        'CAGR, pico estacional y proyección total resaltados como KPI.',
+        'La línea de corte "Hoy" separa lo real del pronóstico en el gráfico.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Modelo VAR', field: 'Serie de tiempo', icon: 'chart' },
+        { name: 'Calendario Nacional', field: 'Vacaciones y estacionalidad', icon: 'calendar' },
+      ],
+      metricsLabel: 'MÉTRICAS CLAVE',
+      metrics: [
+        { value: '12 meses', label: 'Horizonte de previsión' },
+        { value: 'CI 80%', label: 'banda de confianza' },
+        { value: 'CAGR', label: 'Crecimiento anual' },
       ],
     },
   },
@@ -1924,6 +2447,26 @@ export const EXPLAIN: ExplainMap = {
         { value: 'AMA · CMS', label: 'Compliant' },
       ],
     },
+    es: {
+      kicker: 'DIAGNÓSTICO',
+      lines: [
+        'Pipeline: síntomas → CIE-10 con probabilidades calibradas → plan.',
+        "Probabilidades calibradas: la decisión final es siempre del médico.",
+        'El plan sugerido incluye acciones inmediatas y desencadenantes de referencias.',
+        'Bandera roja automática cuando la presentación indica urgencia o reevaluación.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'CIE-10 / OMS', field: 'Clasificación estándar', icon: 'database' },
+        { name: 'PubMed + Cochrane', field: 'base de evidencia', icon: 'file' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: 'IC del 95%', label: 'Probabilidades calibradas' },
+        { value: 'bandera roja', label: 'Detectado automáticamente' },
+        { value: 'AMA·CMS', label: 'Cumple' },
+      ],
+    },
   },
   22: {
     'pt-BR': {
@@ -1984,6 +2527,26 @@ export const EXPLAIN: ExplainMap = {
         { value: '95% CI', label: 'Confidence interval' },
         { value: 'Score 0–100', label: 'Normalized' },
         { value: 'Active outreach', label: 'Critical cases' },
+      ],
+    },
+    es: {
+      kicker: 'RIESGO',
+      lines: [
+        'La puntuación de 0 a 100 combina comorbilidades, edad y tasa de adherencia.',
+        'Los pacientes marcados con bandera roja ingresan automáticamente a la extensión activa.',
+        'Esperanza de vida ajustada con intervalo de confianza del 95%.',
+        'La priorización objetiva reemplaza la clasificación subjetiva de riesgos.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Registro del paciente', field: 'Historia clínica', icon: 'file' },
+        { name: 'Tablas actuariales', field: 'esperanza de vida', icon: 'chart' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: 'IC del 95%', label: 'Intervalo de confianza' },
+        { value: 'Puntuación 0-100', label: 'Normalizado' },
+        { value: 'Alcance activo', label: 'Casos críticos' },
       ],
     },
   },
@@ -2048,6 +2611,26 @@ export const EXPLAIN: ExplainMap = {
         { value: 'Evidence', label: 'Meta-analysis based' },
       ],
     },
+    es: {
+      kicker: 'TRAYECTORIAS',
+      lines: [
+        'Diagrama de flujo con probabilidades de resultados por vía.',
+        'Triaje → tratamiento A o B → alta, con porcentajes en cada borde.',
+        'Tasa de recuperación para cada vía visible: compare la efectividad.',
+        'Visualización estilo Markov para decisiones clínicas basadas en evidencia.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'Modelo de Markov', field: 'Transiciones de estado', icon: 'chart' },
+        { name: 'Resultados históricos', field: 'Base de datos clínica', icon: 'database' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: '4 caminos', label: 'Caminos mapeados' },
+        { value: 'IC del 95%', label: 'Por borde de flujo' },
+        { value: 'evidencia', label: 'Basado en metanálisis' },
+      ],
+    },
   },
   24: {
     'pt-BR': {
@@ -2110,6 +2693,26 @@ export const EXPLAIN: ExplainMap = {
         { value: 'Grade A', label: 'Top evidence' },
       ],
     },
+    es: {
+      kicker: 'TRATAMIENTO',
+      lines: [
+        'Matriz de combinaciones terapéuticas × resultados clínicos.',
+        'Cada celda muestra probabilidad + intervalo de confianza del 95%.',
+        'Aspectos destacados visuales para combinaciones con evidencia de eficacia más sólida.',
+        'Basado en metanálisis de UpToDate, PubMed y Cochrane: valores ilustrativos.',
+      ],
+      sourcesLabel: 'FUENTES DE DATOS',
+      sources: [
+        { name: 'actualizado', field: 'Metanálisis clínicos', icon: 'file' },
+        { name: 'PubMed + Cochrane', field: 'evidencia de ECA', icon: 'file' },
+      ],
+      metricsLabel: 'GARANTÍAS',
+      metrics: [
+        { value: 'IC del 95%', label: 'Por celda de matriz' },
+        { value: '4 × 3', label: 'Combos × resultados' },
+        { value: 'Grado A', label: 'Principales pruebas' },
+      ],
+    },
   },
 }
 
@@ -2118,6 +2721,7 @@ export const FECHO = {
   'pt-BR': { thanks: 'Obrigado.', tagline: 'Inteligência clínica para a saúde moderna.' },
   'pt-PT': { thanks: 'Obrigado.', tagline: 'Inteligência clínica para a saúde moderna.' },
   en: { thanks: 'Thank you.', tagline: 'Clinical intelligence for modern healthcare.' },
+  es: { thanks: 'Gracias.', tagline: 'Inteligencia clínica para la atención sanitaria moderna.' },
 } satisfies L10n<{ thanks: string; tagline: string }>
 
 /* ───────────────────────── UI (microtextos de helpers compartilhados) ───────────────────────── */
@@ -2144,5 +2748,11 @@ export const UI = {
     stockOk: 'ok', stockLow: 'low · ordered', stockCritical: 'critical · auto-restock', ic95: '95% CI',
     sourcesDemo: 'Interactive demo · illustrative product data',
     sourcesMedical: 'Model evidence base: UpToDate · PubMed · Cochrane · AMA · CMS · illustrative values',
+  },
+  es: {
+    dose: 'dosis', freq: 'frecuencia', previsto: 'pronóstico',
+    stockOk: 'ok', stockLow: 'bajo · ordenado', stockCritical: 'crítico · reabastecimiento automático', ic95: 'IC del 95%',
+    sourcesDemo: 'Demostración interactiva · datos ilustrativos del producto',
+    sourcesMedical: 'Base de evidencia modelo: UpToDate · PubMed · Cochrane · AMA · CMS · valores ilustrativos',
   },
 } satisfies L10n<UIStrings>
